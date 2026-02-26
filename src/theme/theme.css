@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+@source "./components/**/*.{ts,tsx,js,jsx}";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --border: #333333;
+  --card: #141414;
+
+  --primary: #3b2d7c;
+  --on-primary: #ffffff;
+  --primary-foreground: #946fd1;
+
+  --secondary: #e6e6e6;
+  --on-secondary: #000000;
+  --secondary-foreground: #ffffff;
+
+  --muted: #5e5e5e;
+  --on-muted: #d1d1d1;
+  --muted-foreground: #919191;
+
+  --error: #972626;
+  --on-error: #ffffff;
+  --error-foreground: #d94141;
+
+  --success: #2d7e45;
+  --on-success: #ffffff;
+  --success-foreground: #47c26c;
+
+  --link: #3b82f6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-on-muted: var(--on-muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-error: var(--error);
+  --color-on-error: var(--on-error);
+  --color-error-foreground: var(--error-foreground);
+
+  --color-success: var(--success);
+  --color-on-success: var(--on-success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-link: var(--link);
+
+  --animate-validating: validating 1.5s ease-in-out infinite;
+
+  @keyframes validating {
+    0%,
+    100% {
+      border-color: var(--primary);
+    }
+    50% {
+      border-color: var(--primary-foreground);
+    }
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+* {
+  border-color: var(--border);
+}

@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
@@ -23,4 +26,5 @@ export default [
   {
     ignores: ["dist/", "coverage/"],
   },
+  ...storybook.configs["flat/recommended"],
 ] satisfies Linter.Config[];

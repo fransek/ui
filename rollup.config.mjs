@@ -1,4 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
+import postcss from "rollup-plugin-postcss";
 
 /** @type {() => import('rollup').RollupOptions} */
 const createConfig = (format, dir) => ({
@@ -15,7 +16,11 @@ const createConfig = (format, dir) => ({
         declarationDir: dir,
         emitDeclarationOnly: true,
       },
-      exclude: ["**/*.test.ts", "**/*.spec.ts"],
+      exclude: ["**/*.test.ts", "**/*.spec.ts", "src/stories/**/*"],
+    }),
+    postcss({
+      extract: true,
+      minimize: true,
     }),
   ],
 });
