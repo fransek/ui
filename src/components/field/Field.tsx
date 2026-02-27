@@ -53,12 +53,17 @@ export function Field({
       invalid={invalid}
       {...props}
     >
-      <BaseField.Label
-        className={cn("text-foreground text-sm font-semibold", labelClassName)}
-        {...labelProps}
-      >
-        {label}
-      </BaseField.Label>
+      {label && (
+        <BaseField.Label
+          className={cn(
+            "text-foreground text-sm font-semibold",
+            labelClassName,
+          )}
+          {...labelProps}
+        >
+          {label}
+        </BaseField.Label>
+      )}
       {children}
       <BaseField.Error
         className={cn("text-error-foreground text-sm", errorClassName)}
