@@ -13,19 +13,23 @@ export interface ButtonProps extends BaseButtonProps {
 export function Button({
   variant = "primary",
   size = "md",
+  children,
   className,
   ...props
 }: ButtonProps) {
   return (
     <BaseButton
-      {...props}
       className={cn(
-        "fransek-ui bg-primary text-on-primary py-2 px-3 rounded-lg cursor-pointer transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+        "fransek-ui bg-primary text-on-primary flex cursor-pointer items-center justify-center gap-2 rounded-lg px-3 py-2 transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-50",
         variantStyles[variant],
         sizeStyles[size],
         className,
       )}
-    />
+      focusableWhenDisabled
+      {...props}
+    >
+      {children}
+    </BaseButton>
   );
 }
 
@@ -41,7 +45,7 @@ const variantStyles = {
   outline:
     "bg-transparent border text-foreground hover:bg-muted/10 active:bg-muted/20",
   ghost: "bg-transparent text-foreground hover:bg-muted/10 active:bg-muted/20",
-  link: "bg-transparent text-link hover:underline underline-offset-4",
+  link: "bg-transparent text-link-foreground hover:underline underline-offset-4",
 };
 
 const sizeStyles = {

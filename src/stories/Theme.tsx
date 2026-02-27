@@ -1,0 +1,50 @@
+import React from "react";
+
+export function Theme() {
+  return (
+    <div className="bg-background text-foreground grid grid-cols-2 gap-4 p-4 lg:grid-cols-4">
+      <div className="bg-primary text-on-primary rounded-lg p-2 text-center">
+        primary
+      </div>
+      <div className="text-primary-foreground bg-card rounded-lg border p-2 text-center">
+        primary-foreground
+      </div>
+      <div className="bg-secondary text-on-secondary rounded-lg p-2 text-center">
+        secondary
+      </div>
+      <div className="text-secondary-foreground bg-card rounded-lg border p-2 text-center">
+        secondary-foreground
+      </div>
+      <div className="bg-muted text-on-muted rounded-lg p-2 text-center">
+        muted
+      </div>
+      <div className="text-muted-foreground bg-card rounded-lg border p-2 text-center">
+        muted-foreground
+      </div>
+      <div className="bg-error text-on-error rounded-lg p-2 text-center">
+        error
+      </div>
+      <div className="text-error-foreground bg-card rounded-lg border p-2 text-center">
+        error-foreground
+      </div>
+      <div className="bg-warning text-on-warning rounded-lg p-2 text-center">
+        warning
+      </div>
+      <div className="text-warning-foreground bg-card rounded-lg border p-2 text-center">
+        warning-foreground
+      </div>
+      <div className="bg-success text-on-success rounded-lg p-2 text-center">
+        success
+      </div>
+      <div className="text-success-foreground bg-card rounded-lg border p-2 text-center">
+        success-foreground
+      </div>
+      <div className="text-foreground bg-card rounded-lg border p-2 text-center">
+        card
+      </div>
+      <div className="text-link-foreground bg-card rounded-lg border p-2 text-center">
+        link-foreground
+      </div>
+    </div>
+  );
+}

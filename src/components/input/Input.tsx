@@ -35,7 +35,7 @@ export function Input({
     >
       <BaseInput
         className={cn(
-          "fransek-ui focus:border-foreground placeholder:text-muted-foreground w-full rounded-lg border p-2 transition-colors outline-none",
+          "fransek-ui focus:border-foreground placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors outline-none",
           {
             "animate-validating": isValidating,
             "border-error-foreground": invalid,

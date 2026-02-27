@@ -1,34 +1,72 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @source "./components/**/*.{ts,tsx,js,jsx}";
+@source "./stories/**/*.{ts,tsx,js,jsx}";
 
 :root {
+  --background: #f8f8f8;
+  --foreground: #141414;
+  --border: #cacaca;
+  --card: #eeeeee;
+
+  --primary: #6453ad;
+  --on-primary: #ffffff;
+  --primary-foreground: #493991;
+
+  --secondary: #141414;
+  --on-secondary: #f0f0f0;
+  --secondary-foreground: #141414;
+
+  --muted: #555555;
+  --on-muted: #d4d4d4;
+  --muted-foreground: #555555;
+
+  --error: #b63e3e;
+  --on-error: #ffffff;
+  --error-foreground: #ac3333;
+
+  --warning: #e7b62e;
+  --on-warning: #141414;
+  --warning-foreground: #9b4f0d;
+
+  --success: #307c47;
+  --on-success: #ffffff;
+  --success-foreground: #25693a;
+
+  --link-foreground: #3766b3;
+}
+
+.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
   --border: #333333;
   --card: #141414;
 
-  --primary: #3b2d7c;
+  --primary: #493991;
   --on-primary: #ffffff;
   --primary-foreground: #946fd1;
 
-  --secondary: #e6e6e6;
-  --on-secondary: #000000;
+  --secondary: #ededed;
+  --on-secondary: #0a0a0a;
   --secondary-foreground: #ffffff;
 
-  --muted: #5e5e5e;
-  --on-muted: #d1d1d1;
+  --muted: #555555;
+  --on-muted: #d4d4d4;
   --muted-foreground: #919191;
 
   --error: #972626;
   --on-error: #ffffff;
-  --error-foreground: #d94141;
+  --error-foreground: #dd4b4b;
+
+  --warning: #e7b62e;
+  --on-warning: #000000;
+  --warning-foreground: #e7b62e;
 
   --success: #2d7e45;
   --on-success: #ffffff;
   --success-foreground: #47c26c;
 
-  --link: #3b82f6;
+  --link-foreground: #3b82f6;
 }
 
 @theme inline {
@@ -53,11 +91,15 @@
   --color-on-error: var(--on-error);
   --color-error-foreground: var(--error-foreground);
 
+  --color-warning: var(--warning);
+  --color-on-warning: var(--on-warning);
+  --color-warning-foreground: var(--warning-foreground);
+
   --color-success: var(--success);
   --color-on-success: var(--on-success);
   --color-success-foreground: var(--success-foreground);
 
-  --color-link: var(--link);
+  --color-link-foreground: var(--link-foreground);
 
   --animate-validating: validating 1.5s ease-in-out infinite;
 
@@ -72,15 +114,17 @@
   }
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: "Noto Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
-}
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+  }
 
-* {
-  border-color: var(--border);
+  * {
+    border-color: var(--border);
+  }
 }
