@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { Input } from "../components/input/Input";
+import { Checkbox } from "../components/checkbox/Checkbox";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Example/Input",
-  component: Input,
+  title: "Example/Checkbox",
+  component: Checkbox,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
@@ -21,13 +21,12 @@ const meta = {
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
   args: {
-    label: "Username",
-    description: "Please enter your username.",
-    placeholder: "Enter username",
+    label: "Accept Terms and Conditions",
+    description: "Please accept the terms and conditions to proceed.",
     isValidating: false,
-    isValidatingMessage: "Checking availability...",
+    isValidatingMessage: "Validating...",
   },
-} satisfies Meta<typeof Input>;
+} satisfies Meta<typeof Checkbox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -39,12 +38,13 @@ export const Basic: Story = {
 
 export const Error: Story = {
   args: {
-    errorMessage: "This field is required.",
+    errorMessage: "You must accept the terms and conditions.",
   },
 };
 
 export const Validating: Story = {
   args: {
     isValidating: true,
+    defaultChecked: true,
   },
 };

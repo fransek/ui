@@ -14,6 +14,7 @@ const meta = {
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
+    label: { control: "text" },
     errorMessage: { control: "text" },
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
@@ -23,6 +24,7 @@ const meta = {
   args: {
     label: "Fruit",
     description: "Select your favorite fruit from the list.",
+    isValidating: false,
     isValidatingMessage: "Validating...",
     items: [
       { label: "Apple", value: "apple" },

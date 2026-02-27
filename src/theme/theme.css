@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @source "./components/**/*.{ts,tsx,js,jsx}";
-@source "./stories/**/*.{ts,tsx,js,jsx}";
 
 :root {
   --background: #f8f8f8;
   --foreground: #141414;
   --border: #cacaca;
   --card: #eeeeee;
+  --highlight: #3a3a3a;
 
   --primary: #6453ad;
   --on-primary: #ffffff;
@@ -41,6 +41,7 @@
   --foreground: #ededed;
   --border: #333333;
   --card: #141414;
+  --highlight: #ededed;
 
   --primary: #493991;
   --on-primary: #ffffff;
@@ -74,6 +75,7 @@
   --color-foreground: var(--foreground);
   --color-border: var(--border);
   --color-card: var(--card);
+  --color-highlight: var(--highlight);
 
   --color-primary: var(--primary);
   --color-on-primary: var(--on-primary);

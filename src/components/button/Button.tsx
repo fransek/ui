@@ -20,7 +20,7 @@ export function Button({
   return (
     <BaseButton
       className={cn(
-        "fransek-ui bg-primary text-on-primary flex cursor-pointer items-center justify-center gap-2 rounded-lg px-3 py-2 transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-50",
+        "font-inherit focus-visible:outline-highlight m-0 flex items-center justify-center gap-2 rounded-lg px-3 py-2 outline-0 select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60",
         variantStyles[variant],
         sizeStyles[size],
         className,

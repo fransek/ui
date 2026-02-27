@@ -41,11 +41,10 @@ export function Select<T>({
       <BaseSelect.Root items={items} {...props}>
         <BaseSelect.Trigger
           className={cn(
-            "bg-background hover:bg-card data-popup-open:bg-card focus-visible:outline-foreground flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors select-none focus-visible:outline focus-visible:-outline-offset-1",
-            {
-              "animate-validating": isValidating,
-              "border-error-foreground": invalid,
-            },
+            "bg-background hover:bg-card data-popup-open:bg-card focus-visible:outline-highlight flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors select-none focus-visible:outline focus-visible:-outline-offset-1",
+            invalid
+              ? "border-error-foreground"
+              : isValidating && "animate-validating",
             className,
           )}
         >
@@ -54,7 +53,7 @@ export function Select<T>({
             placeholder={placeholder}
           />
           <BaseSelect.Icon className="flex">
-            <ChevronsUpDown className="h-4 w-4" />
+            <ChevronsUpDown className="size-4" />
           </BaseSelect.Icon>
         </BaseSelect.Trigger>
         <BaseSelect.Portal>

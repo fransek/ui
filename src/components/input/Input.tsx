@@ -35,11 +35,10 @@ export function Input({
     >
       <BaseInput
         className={cn(
-          "fransek-ui focus:border-foreground placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors outline-none",
-          {
-            "animate-validating": isValidating,
-            "border-error-foreground": invalid,
-          },
+          "focus:border-highlight placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors outline-none",
+          invalid
+            ? "border-error-foreground"
+            : isValidating && "animate-validating",
           className,
         )}
         data-validating={isValidating || undefined}

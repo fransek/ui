@@ -11,7 +11,7 @@ import React from "react";
 import { cn } from "../../lib/utils";
 
 export interface BasicFieldProps {
-  label?: string;
+  label?: React.ReactNode;
   errorMessage?: React.ReactNode;
   isValidating?: boolean;
   isValidatingMessage?: React.ReactNode;
@@ -67,7 +67,7 @@ export function Field({
       >
         {errorMessage}
       </BaseField.Error>
-      {isValidating && isValidatingMessage && (
+      {isValidating && isValidatingMessage && !errorMessage && (
         <BaseField.Description
           className={cn(
             "text-primary-foreground text-sm",
