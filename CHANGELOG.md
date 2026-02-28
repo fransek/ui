@@ -4,6 +4,13 @@
 
 - **workflow:** added build step and switched to pnpm ([f8304c2](https://github.com/fransek/package-template/commit/f8304c24ea93083611b17e82d0519b4fe07d94a6))
 
+## [0.1.1](https://github.com/fransek/ui/compare/v0.1.0...v0.1.1) (2026-02-28)
+
+
+### Bug Fixes
+
+* theme import ([e40adc5](https://github.com/fransek/ui/commit/e40adc5a0485e4c9d34decaee22dc8f45c5d9523))
+
 ## [1.2.0](https://github.com/fransek/package-template/compare/v1.1.0...v1.2.0) (2026-02-24)
 
 
