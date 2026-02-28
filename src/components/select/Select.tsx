@@ -8,6 +8,7 @@ import {
   SelectPopupProps,
   SelectPortalProps,
   SelectPositionerProps,
+  SelectRootProps,
   SelectScrollDownArrowProps,
   SelectScrollUpArrowProps,
   SelectTriggerProps,
@@ -18,13 +19,16 @@ import React from "react";
 import { BasicFieldProps, cn } from "../../lib/utils";
 import { Field, FieldProps } from "../field/Field";
 
-export interface SelectProps<T> extends SelectTriggerProps, BasicFieldProps {
-  items?: ReadonlyArray<{
-    label: React.ReactNode;
-    value: T;
-  }>;
-  className?: string;
+export interface SelectProps<T>
+  extends
+    Omit<SelectTriggerProps, "value">,
+    SelectRootProps<T>,
+    BasicFieldProps {
   placeholder?: React.ReactNode;
+  triggerDisabled?: SelectTriggerProps["disabled"];
+  triggerId?: SelectTriggerProps["id"];
+  triggerName?: SelectTriggerProps["name"];
+  triggerValue?: SelectTriggerProps["value"];
   fieldProps?: FieldProps;
   triggerProps?: SelectTriggerProps;
   valueProps?: SelectValueProps;
@@ -52,6 +56,31 @@ export function Select<T>({
   fieldProps,
   items,
   placeholder,
+  actionsRef,
+  autoComplete,
+  defaultOpen,
+  defaultValue,
+  disabled,
+  highlightItemOnHover,
+  id,
+  inputRef,
+  isItemEqualToValue,
+  itemToStringLabel,
+  itemToStringValue,
+  modal,
+  multiple,
+  name,
+  onOpenChange,
+  onOpenChangeComplete,
+  onValueChange,
+  open,
+  readOnly,
+  required,
+  value,
+  triggerDisabled,
+  triggerId,
+  triggerName,
+  triggerValue,
   valueProps: { className: valueClassName, ...valueProps } = {},
   selectIconProps: { className: selectIconClassName, ...selectIconProps } = {},
   iconProps: { className: iconClassName, ...iconProps } = {},
@@ -85,13 +114,40 @@ export function Select<T>({
       description={description}
       {...fieldProps}
     >
-      <BaseSelect.Root items={items}>
+      <BaseSelect.Root
+        items={items}
+        actionsRef={actionsRef}
+        autoComplete={autoComplete}
+        defaultOpen={defaultOpen}
+        defaultValue={defaultValue}
+        disabled={disabled}
+        highlightItemOnHover={highlightItemOnHover}
+        id={id}
+        inputRef={inputRef}
+        isItemEqualToValue={isItemEqualToValue}
+        itemToStringLabel={itemToStringLabel}
+        itemToStringValue={itemToStringValue}
+        modal={modal}
+        multiple={multiple}
+        name={name}
+        onOpenChange={onOpenChange}
+        onOpenChangeComplete={onOpenChangeComplete}
+        onValueChange={onValueChange}
+        open={open}
+        readOnly={readOnly}
+        required={required}
+        value={value}
+      >
         <BaseSelect.Trigger
           className={cn(
             "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating bg-background hover:bg-card data-popup-open:bg-card focus-visible:border-highlight flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none",
             className,
           )}
           data-validating={isValidating ? "" : undefined}
+          disabled={triggerDisabled}
+          id={triggerId}
+          name={triggerName}
+          value={triggerValue}
           {...props}
         >
           <BaseSelect.Value
@@ -139,7 +195,7 @@ export function Select<T>({
                 {Array.isArray(items) &&
                   items.map(({ label, value }) => (
                     <BaseSelect.Item
-                      key={label}
+                      key={String(value)}
                       value={value}
                       className={cn(
                         "data-highlighted:before:bg-primary data-highlighted:text-on-primary grid cursor-default grid-cols-[0.75rem_1fr] items-center gap-2 py-2 pr-4 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:pr-12 group-data-[side=none]:text-base group-data-[side=none]:leading-4 data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-1 data-highlighted:before:inset-y-0 data-highlighted:before:z-[-1] data-highlighted:before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
