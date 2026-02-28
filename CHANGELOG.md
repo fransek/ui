@@ -4,6 +4,13 @@
 
 - **workflow:** added build step and switched to pnpm ([f8304c2](https://github.com/fransek/package-template/commit/f8304c24ea93083611b17e82d0519b4fe07d94a6))
 
+## [0.2.1](https://github.com/fransek/ui/compare/v0.2.0...v0.2.1) (2026-02-28)
+
+
+### Bug Fixes
+
+* **select:** extended props interface ([9dd4642](https://github.com/fransek/ui/commit/9dd4642b816112c76833a84742e084fe7dc25455))
+
 ## [0.2.0](https://github.com/fransek/ui/compare/v0.1.1...v0.2.0) (2026-02-28)
 
 
