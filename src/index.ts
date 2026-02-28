@@ -6,3 +6,4 @@ export * from "./components/input";
 export * from "./components/radio";
 export * from "./components/select";
 export * from "./lib/utils";
+import "./theme/theme.css";

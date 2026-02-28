@@ -1,4 +1,4 @@
-import "@fransek/ui/theme";
+import "@fransek/ui/theme.css";
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 
