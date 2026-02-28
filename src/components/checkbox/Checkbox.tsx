@@ -8,7 +8,12 @@ import { CheckIcon } from "lucide-react";
 import React from "react";
 import { cn } from "../../lib/utils";
 import { useCheckboxGroupContext } from "../checkbox-group/CheckboxGroup";
-import { BasicFieldProps, Field, FieldProps } from "../field/Field";
+import {
+  BasicFieldProps,
+  Field,
+  FieldProps,
+  useFieldContext,
+} from "../field/Field";
 
 interface CheckboxProps
   extends BaseCheckboxRootProps, Omit<BasicFieldProps, "label"> {
@@ -27,7 +32,7 @@ export function Checkbox({
   iconProps: { className: iconClassName, ...iconProps } = {},
   fieldProps,
   description,
-  isValidating,
+  isValidating: _isValidating,
   isValidatingMessage,
   errorMessage,
   ...props
@@ -36,6 +41,8 @@ export function Checkbox({
   const invalid = !!errorMessage;
 
   const isInCheckboxGroup = useCheckboxGroupContext();
+  const { isValidating: groupIsValidating } = useFieldContext();
+  const isValidating = isInCheckboxGroup ? groupIsValidating : _isValidating;
 
   const children = (
     <BaseField.Label
@@ -46,7 +53,6 @@ export function Checkbox({
       {...labelProps}
     >
       <BaseCheckbox.Root
-        {...props}
         className={cn(
           "data-checked:bg-primary data-checked:border-primary focus-visible:outline-highlight data-invalid:border-error data-checked:data-invalid:bg-error flex size-5 items-center justify-center rounded-sm border outline-offset-2 focus-visible:outline-2",
           invalid
@@ -55,6 +61,7 @@ export function Checkbox({
           className,
         )}
         aria-labelledby={labelId}
+        {...props}
       >
         <BaseCheckbox.Indicator
           className={cn(

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-
-import { Select } from "../components/select/Select";
+import React from "react";
+import { Radio, RadioGroup } from "../components/radio/Radio";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Example/Select",
-  component: Select,
+  title: "Example/RadioGroup",
+  component: RadioGroup,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
@@ -18,7 +18,6 @@ const meta = {
     errorMessage: { control: "text" },
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
-    placeholder: { control: "text" },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
   args: {
@@ -26,19 +25,19 @@ const meta = {
     description: "Select your favorite fruit from the list.",
     isValidating: false,
     isValidatingMessage: "Validating...",
-    items: [
-      { label: "Apple", value: "apple" },
-      { label: "Banana", value: "banana" },
-      { label: "Orange", value: "orange" },
-    ],
-    placeholder: "Select a fruit",
+    children: (
+      <>
+        <Radio value="apple" label="Apple" />
+        <Radio value="banana" label="Banana" />
+        <Radio value="orange" label="Orange" />
+      </>
+    ),
   },
-} satisfies Meta<typeof Select>;
+} satisfies Meta<typeof RadioGroup>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Basic: Story = {
   args: {},
 };

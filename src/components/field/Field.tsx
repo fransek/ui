@@ -48,49 +48,63 @@ export function Field({
   const invalid = !!errorMessage;
 
   return (
-    <BaseField.Root
-      className={cn("flex flex-col gap-1", className)}
-      invalid={invalid}
-      {...props}
-    >
-      {label && (
-        <BaseField.Label
-          className={cn(
-            "text-foreground text-sm font-semibold",
-            labelClassName,
-          )}
-          {...labelProps}
-        >
-          {label}
-        </BaseField.Label>
-      )}
-      {children}
-      <BaseField.Error
-        className={cn("text-error-foreground text-sm", errorClassName)}
-        match={invalid}
-        {...errorProps}
+    <FieldContext.Provider value={{ isValidating: !!isValidating }}>
+      <BaseField.Root
+        className={cn("flex flex-col gap-1", className)}
+        invalid={invalid}
+        data-validating={isValidating ? "" : undefined}
+        {...props}
       >
-        {errorMessage}
-      </BaseField.Error>
-      {isValidating && isValidatingMessage && !errorMessage && (
-        <BaseField.Description
-          className={cn(
-            "text-primary-foreground text-sm",
-            isValidatingMessageClassName,
-          )}
-          {...isValidatingMessageProps}
+        {label && (
+          <BaseField.Label
+            className={cn(
+              "text-foreground text-sm font-semibold",
+              labelClassName,
+            )}
+            {...labelProps}
+          >
+            {label}
+          </BaseField.Label>
+        )}
+        {children}
+        <BaseField.Error
+          className={cn("text-error-foreground text-sm", errorClassName)}
+          match={invalid}
+          {...errorProps}
         >
-          {isValidatingMessage}
-        </BaseField.Description>
-      )}
-      {description && (
-        <BaseField.Description
-          className={cn("text-muted-foreground text-sm", descriptionClassName)}
-          {...descriptionProps}
-        >
-          {description}
-        </BaseField.Description>
-      )}
-    </BaseField.Root>
+          {errorMessage}
+        </BaseField.Error>
+        {isValidating && isValidatingMessage && !errorMessage && (
+          <BaseField.Description
+            className={cn(
+              "text-primary-foreground text-sm",
+              isValidatingMessageClassName,
+            )}
+            {...isValidatingMessageProps}
+          >
+            {isValidatingMessage}
+          </BaseField.Description>
+        )}
+        {description && (
+          <BaseField.Description
+            className={cn(
+              "text-muted-foreground text-sm",
+              descriptionClassName,
+            )}
+            {...descriptionProps}
+          >
+            {description}
+          </BaseField.Description>
+        )}
+      </BaseField.Root>
+    </FieldContext.Provider>
   );
+}
+
+export const FieldContext = React.createContext({
+  isValidating: false,
+});
+
+export function useFieldContext() {
+  return React.useContext(FieldContext);
 }
