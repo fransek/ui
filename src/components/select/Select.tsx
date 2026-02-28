@@ -1,6 +1,5 @@
 import {
   Select as BaseSelect,
-  SelectRootProps as BaseSelectProps,
   SelectIconProps,
   SelectItemIndicatorProps,
   SelectItemProps,
@@ -19,7 +18,11 @@ import React from "react";
 import { BasicFieldProps, cn } from "../../lib/utils";
 import { Field, FieldProps } from "../field/Field";
 
-export interface SelectProps<T> extends BaseSelectProps<T>, BasicFieldProps {
+export interface SelectProps<T> extends SelectTriggerProps, BasicFieldProps {
+  items?: ReadonlyArray<{
+    label: React.ReactNode;
+    value: T;
+  }>;
   className?: string;
   placeholder?: React.ReactNode;
   fieldProps?: FieldProps;
@@ -49,7 +52,6 @@ export function Select<T>({
   fieldProps,
   items,
   placeholder,
-  triggerProps: { className: triggerClassName, ...triggerProps } = {},
   valueProps: { className: valueClassName, ...valueProps } = {},
   selectIconProps: { className: selectIconClassName, ...selectIconProps } = {},
   iconProps: { className: iconClassName, ...iconProps } = {},
@@ -83,15 +85,14 @@ export function Select<T>({
       description={description}
       {...fieldProps}
     >
-      <BaseSelect.Root items={items} {...props}>
+      <BaseSelect.Root items={items}>
         <BaseSelect.Trigger
           className={cn(
             "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating bg-background hover:bg-card data-popup-open:bg-card focus-visible:border-highlight flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none",
             className,
-            triggerClassName,
           )}
           data-validating={isValidating ? "" : undefined}
-          {...triggerProps}
+          {...props}
         >
           <BaseSelect.Value
             className={cn("data-placeholder:opacity-60", valueClassName)}
