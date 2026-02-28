@@ -4,6 +4,18 @@
 
 - **workflow:** added build step and switched to pnpm ([f8304c2](https://github.com/fransek/package-template/commit/f8304c24ea93083611b17e82d0519b4fe07d94a6))
 
+## [0.2.0](https://github.com/fransek/ui/compare/v0.1.1...v0.2.0) (2026-02-28)
+
+
+### Features
+
+* **input:** button prop ([a7e2dce](https://github.com/fransek/ui/commit/a7e2dce77d711b382fca264679d62551259e0f42))
+
+
+### Bug Fixes
+
+* **select:** prop interface ([abb318e](https://github.com/fransek/ui/commit/abb318e54c0cd7ba4f5e5490041c7354997d78c9))
+
 ## [0.1.1](https://github.com/fransek/ui/compare/v0.1.0...v0.1.1) (2026-02-28)
 
 
