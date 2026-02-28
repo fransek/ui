@@ -3,13 +3,20 @@ import {
   CheckboxGroup as BaseCheckboxGroup,
   CheckboxGroupProps as BaseCheckboxGroupProps,
 } from "@base-ui/react/checkbox-group";
-import { Fieldset } from "@base-ui/react/fieldset";
+import {
+  Fieldset,
+  FieldsetLegendProps,
+  FieldsetRootProps,
+} from "@base-ui/react/fieldset";
 import * as React from "react";
-import { BasicFieldProps, Field, FieldProps } from "../field/Field";
+import { BasicFieldProps, cn } from "../../lib/utils";
+import { Field, FieldProps } from "../field/Field";
 
 interface CheckboxGroupProps extends BaseCheckboxGroupProps, BasicFieldProps {
   children?: React.ReactNode;
   fieldProps?: FieldProps;
+  fieldsetProps?: FieldsetRootProps;
+  legendProps?: FieldsetLegendProps;
 }
 
 export function CheckboxGroup({
@@ -20,6 +27,9 @@ export function CheckboxGroup({
   errorMessage,
   description,
   fieldProps,
+  fieldsetProps: { className: fieldsetClassName, ...fieldsetProps } = {},
+  legendProps: { className: legendClassName, ...legendProps } = {},
+  ...props
 }: CheckboxGroupProps) {
   return (
     <CheckboxGroupContext.Provider value={true}>
@@ -31,10 +41,17 @@ export function CheckboxGroup({
         {...fieldProps}
       >
         <Fieldset.Root
-          render={<BaseCheckboxGroup />}
-          className="flex flex-col gap-1"
+          render={<BaseCheckboxGroup {...props} />}
+          className={cn("flex flex-col gap-1", fieldsetClassName)}
+          {...fieldsetProps}
         >
-          <Fieldset.Legend className="text-foreground text-sm font-semibold">
+          <Fieldset.Legend
+            className={cn(
+              "text-foreground text-sm font-semibold",
+              legendClassName,
+            )}
+            {...legendProps}
+          >
             {label}
           </Fieldset.Legend>
           {children}

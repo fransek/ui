@@ -1,24 +1,28 @@
 "use client";
 import { Fieldset } from "@base-ui/react/fieldset";
-import { Radio as BaseRadio, RadioRootProps } from "@base-ui/react/radio";
+import {
+  Radio as BaseRadio,
+  RadioIndicatorProps,
+  RadioRootProps,
+} from "@base-ui/react/radio";
 import {
   RadioGroup as BaseRadioGroup,
   RadioGroupProps as BaseRadioGroupProps,
 } from "@base-ui/react/radio-group";
 import * as React from "react";
-import { cn } from "../../lib/utils";
-import {
-  BasicFieldProps,
-  Field,
-  FieldProps,
-  useFieldContext,
-} from "../field/Field";
+import { BasicFieldProps, cn } from "../../lib/utils";
+import { Field, FieldProps, useFieldContext } from "../field/Field";
 
 interface RadioProps extends RadioRootProps {
   label?: React.ReactNode;
+  indicatorProps?: RadioIndicatorProps;
 }
 
-export function Radio({ label, ...props }: RadioProps) {
+export function Radio({
+  label,
+  indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
+  ...props
+}: RadioProps) {
   const id = React.useId();
   const { isValidating } = useFieldContext();
 
@@ -26,13 +30,19 @@ export function Radio({ label, ...props }: RadioProps) {
     <label className="flex items-center gap-2" id={id}>
       <BaseRadio.Root
         className={cn(
-          "focus-visible:outline-highlight data-checked:border-primary data-invalid:border-error flex size-5 items-center justify-center rounded-full border focus-visible:outline-2 focus-visible:outline-offset-2",
-          isValidating && "animate-validating",
+          "data-validating:not-data-invalid:animate-validating focus-visible:outline-highlight data-checked:border-primary-foreground data-invalid:border-error-foreground flex size-5 items-center justify-center rounded-full border focus-visible:outline-2 focus-visible:outline-offset-2",
         )}
         aria-labelledby={id}
+        data-validating={isValidating ? "" : undefined}
         {...props}
       >
-        <BaseRadio.Indicator className="before:bg-primary data-invalid:before:bg-error flex before:size-3 before:rounded-full data-unchecked:hidden" />
+        <BaseRadio.Indicator
+          className={cn(
+            "before:bg-primary data-invalid:before:bg-error flex before:size-3 before:rounded-full data-unchecked:hidden",
+            indicatorClassName,
+          )}
+          {...indicatorProps}
+        />
       </BaseRadio.Root>
       {label}
     </label>

@@ -6,14 +6,9 @@ import {
 import { Field as BaseField } from "@base-ui/react/field";
 import { CheckIcon } from "lucide-react";
 import React from "react";
-import { cn } from "../../lib/utils";
+import { BasicFieldProps, cn } from "../../lib/utils";
 import { useCheckboxGroupContext } from "../checkbox-group/CheckboxGroup";
-import {
-  BasicFieldProps,
-  Field,
-  FieldProps,
-  useFieldContext,
-} from "../field/Field";
+import { Field, FieldProps, useFieldContext } from "../field/Field";
 
 interface CheckboxProps
   extends BaseCheckboxRootProps, Omit<BasicFieldProps, "label"> {
@@ -27,19 +22,17 @@ interface CheckboxProps
 export function Checkbox({
   label,
   className,
-  labelProps: { className: labelClassName, ...labelProps } = {},
-  indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
-  iconProps: { className: iconClassName, ...iconProps } = {},
   fieldProps,
   description,
   isValidating: _isValidating,
   isValidatingMessage,
   errorMessage,
+  labelProps: { className: labelClassName, ...labelProps } = {},
+  indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
+  iconProps: { className: iconClassName, ...iconProps } = {},
   ...props
 }: CheckboxProps) {
   const labelId = React.useId();
-  const invalid = !!errorMessage;
-
   const isInCheckboxGroup = useCheckboxGroupContext();
   const { isValidating: groupIsValidating } = useFieldContext();
   const isValidating = isInCheckboxGroup ? groupIsValidating : _isValidating;
@@ -54,13 +47,11 @@ export function Checkbox({
     >
       <BaseCheckbox.Root
         className={cn(
-          "data-checked:bg-primary data-checked:border-primary focus-visible:outline-highlight data-invalid:border-error data-checked:data-invalid:bg-error flex size-5 items-center justify-center rounded-sm border outline-offset-2 focus-visible:outline-2",
-          invalid
-            ? "border-error-foreground data-checked:bg-error data-checked:border-error"
-            : isValidating && "animate-validating",
+          "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary focus-visible:outline-highlight flex size-5 items-center justify-center rounded-sm border outline-offset-2 focus-visible:outline-2",
           className,
         )}
         aria-labelledby={labelId}
+        data-validating={isValidating ? "" : undefined}
         {...props}
       >
         <BaseCheckbox.Indicator

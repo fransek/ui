@@ -5,8 +5,8 @@ import {
   InputProps as BaseInputProps,
 } from "@base-ui/react/input";
 import React from "react";
-import { cn } from "../../lib/utils";
-import { BasicFieldProps, Field, FieldProps } from "../field/Field";
+import { BasicFieldProps, cn } from "../../lib/utils";
+import { Field, FieldProps } from "../field/Field";
 
 export interface InputProps extends BaseInputProps, BasicFieldProps {
   fieldProps?: FieldProps;
@@ -22,8 +22,6 @@ export function Input({
   fieldProps,
   ...props
 }: InputProps) {
-  const invalid = !!errorMessage;
-
   return (
     <Field
       label={label}
@@ -35,13 +33,10 @@ export function Input({
     >
       <BaseInput
         className={cn(
-          "focus:border-highlight placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors outline-none",
-          invalid
-            ? "border-error-foreground"
-            : isValidating && "animate-validating",
+          "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating focus:border-highlight placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors outline-none",
           className,
         )}
-        data-validating={isValidating || undefined}
+        data-validating={isValidating ? "" : undefined}
         {...props}
       />
     </Field>

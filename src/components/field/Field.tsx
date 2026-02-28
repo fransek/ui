@@ -8,19 +8,11 @@ import {
   FieldLabelProps,
 } from "@base-ui/react/field";
 import React from "react";
-import { cn } from "../../lib/utils";
-
-export interface BasicFieldProps {
-  label?: React.ReactNode;
-  errorMessage?: React.ReactNode;
-  isValidating?: boolean;
-  isValidatingMessage?: React.ReactNode;
-  description?: React.ReactNode;
-}
+import { BasicFieldProps, cn } from "../../lib/utils";
 
 export interface FieldProps extends BaseFieldRootProps, BasicFieldProps {
   labelProps?: FieldLabelProps;
-  errorProps?: FieldErrorProps;
+  errorMessageProps?: FieldErrorProps;
   descriptionProps?: FieldDescriptionProps;
   isValidatingMessageProps?: FieldDescriptionProps;
 }
@@ -34,7 +26,10 @@ export function Field({
   description,
   children,
   labelProps: { className: labelClassName, ...labelProps } = {},
-  errorProps: { className: errorClassName, ...errorProps } = {},
+  errorMessageProps: {
+    className: errorMessageClassName,
+    ...errorMessageProps
+  } = {},
   descriptionProps: {
     className: descriptionClassName,
     ...descriptionProps
@@ -68,9 +63,9 @@ export function Field({
         )}
         {children}
         <BaseField.Error
-          className={cn("text-error-foreground text-sm", errorClassName)}
+          className={cn("text-error-foreground text-sm", errorMessageClassName)}
           match={invalid}
-          {...errorProps}
+          {...errorMessageProps}
         >
           {errorMessage}
         </BaseField.Error>
