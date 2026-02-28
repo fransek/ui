@@ -8,6 +8,7 @@ import { Field, FieldProps } from "../field/Field";
 
 export interface InputProps extends BaseInputProps, BasicFieldProps {
   fieldProps?: FieldProps;
+  button?: React.ReactNode;
 }
 
 export function Input({
@@ -18,6 +19,7 @@ export function Input({
   className,
   description,
   fieldProps,
+  button,
   ...props
 }: InputProps) {
   return (
@@ -29,14 +31,17 @@ export function Input({
       description={description}
       {...fieldProps}
     >
-      <BaseInput
-        className={cn(
-          "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating focus:border-highlight placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors outline-none",
-          className,
-        )}
-        data-validating={isValidating ? "" : undefined}
-        {...props}
-      />
+      <div className="flex items-stretch gap-2">
+        <BaseInput
+          className={cn(
+            "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating focus:border-highlight placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors outline-none",
+            className,
+          )}
+          data-validating={isValidating ? "" : undefined}
+          {...props}
+        />
+        {button}
+      </div>
     </Field>
   );
 }

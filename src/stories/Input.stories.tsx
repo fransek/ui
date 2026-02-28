@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import { Search } from "lucide-react";
+import React from "react";
+import { Button } from "../components/button/Button";
 import { Input } from "../components/input/Input";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -46,5 +49,18 @@ export const Error: Story = {
 export const Validating: Story = {
   args: {
     isValidating: true,
+  },
+};
+
+export const WithButton: Story = {
+  args: {
+    label: "Search components",
+    description: undefined,
+    placeholder: "Search...",
+    button: (
+      <Button aria-label="search" variant="outline">
+        <Search className="size-5" />
+      </Button>
+    ),
   },
 };
