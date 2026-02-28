@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Field as BaseField,
   FieldRootProps as BaseFieldRootProps,

@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Input as BaseInput,
   InputProps as BaseInputProps,

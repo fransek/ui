@@ -1,8 +1,8 @@
-import { Button } from "@fransek/ui";
+import { Button } from "@fransek/ui/button";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4">
       <Button variant="outline">Button</Button>
     </div>
   );

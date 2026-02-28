@@ -1,4 +1,3 @@
-"use client";
 import { Fieldset } from "@base-ui/react/fieldset";
 import {
   Radio as BaseRadio,

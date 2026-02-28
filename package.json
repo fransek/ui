@@ -1,19 +1,19 @@
 {
   "name": "@fransek/ui",
-  "version": "1.2.0",
+  "version": "0.1.0",
   "type": "module",
   "private": false,
   "author": "Frans Ekman <fransedvinekman@gmail.com>",
   "license": "MIT",
-  "description": "Package template for TypeScript packages",
+  "description": "A design system and component library built on top of Base UI",
   "keywords": [],
-  "homepage": "https://github.com/fransek/package-template#readme",
+  "homepage": "https://github.com/fransek/ui#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fransek/package-template"
+    "url": "git+https://github.com/fransek/ui"
   },
   "bugs": {
-    "url": "https://github.com/fransek/package-template/issues"
+    "url": "https://github.com/fransek/ui/issues"
   },
   "files": [
     "dist"
@@ -29,6 +29,10 @@
     "./theme": {
       "import": "./dist/esm/index.css",
       "require": "./dist/cjs/index.css"
+    },
+    "./*": {
+      "import": "./dist/esm/components/*/index.js",
+      "require": "./dist/cjs/components/*/index.js"
     }
   },
   "sideEffects": false,
@@ -95,6 +99,15 @@
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@base-ui/react": "^1.2.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^3.0.0",
+    "tailwindcss": "^4.0.0",
+    "lucide-react": "^0.575.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

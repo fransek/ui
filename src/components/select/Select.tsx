@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Select as BaseSelect,
   SelectRootProps as BaseSelectProps,

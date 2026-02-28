@@ -1,4 +1,3 @@
-"use client";
 import {
   CheckboxGroup as BaseCheckboxGroup,
   CheckboxGroupProps as BaseCheckboxGroupProps,
