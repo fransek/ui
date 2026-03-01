@@ -10,6 +10,7 @@ const createConfig = (format, dir) => ({
     "lucide-react",
     "clsx",
     "tailwind-merge",
+    "react-day-picker",
     /@base-ui\/react\/.*/,
   ],
   output: {

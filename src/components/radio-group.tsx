@@ -1,8 +1,8 @@
+import { Fieldset } from "@base-ui/react/fieldset";
 import {
   RadioGroup as BaseRadioGroup,
   RadioGroupProps as BaseRadioGroupProps,
-  Fieldset,
-} from "@base-ui/react";
+} from "@base-ui/react/radio-group";
 import * as React from "react";
 import { FieldAttributes } from "../lib/types";
 import { Field, FieldProps } from "./field";
