@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { Radio, RadioGroup } from "../components/radio/Radio";
+import { RadioGroup } from "../components/radio-group/RadioGroup";
+import { Radio } from "../components/radio/Radio";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

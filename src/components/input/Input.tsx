@@ -3,10 +3,11 @@ import {
   InputProps as BaseInputProps,
 } from "@base-ui/react/input";
 import React from "react";
-import { BasicFieldProps, cn } from "../../lib/utils";
+import { FieldAttributes } from "../../lib/types";
+import { cn } from "../../lib/utils";
 import { Field, FieldProps } from "../field/Field";
 
-export interface InputProps extends BaseInputProps, BasicFieldProps {
+export interface InputProps extends BaseInputProps, FieldAttributes {
   fieldProps?: FieldProps;
   button?: React.ReactNode;
 }

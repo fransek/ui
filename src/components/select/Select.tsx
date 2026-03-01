@@ -16,14 +16,15 @@ import {
 } from "@base-ui/react/select";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
-import { BasicFieldProps, cn } from "../../lib/utils";
+import { FieldAttributes } from "../../lib/types";
+import { cn } from "../../lib/utils";
 import { Field, FieldProps } from "../field/Field";
 
 export interface SelectProps<T>
   extends
     Omit<SelectTriggerProps, "value">,
     SelectRootProps<T>,
-    BasicFieldProps {
+    FieldAttributes {
   placeholder?: React.ReactNode;
   triggerDisabled?: SelectTriggerProps["disabled"];
   triggerId?: SelectTriggerProps["id"];

@@ -6,9 +6,10 @@ import {
   FieldLabelProps,
 } from "@base-ui/react/field";
 import React from "react";
-import { BasicFieldProps, cn } from "../../lib/utils";
+import { FieldAttributes } from "../../lib/types";
+import { cn } from "../../lib/utils";
 
-export interface FieldProps extends BaseFieldRootProps, BasicFieldProps {
+export interface FieldProps extends BaseFieldRootProps, FieldAttributes {
   labelProps?: FieldLabelProps;
   errorMessageProps?: FieldErrorProps;
   descriptionProps?: FieldDescriptionProps;

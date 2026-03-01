@@ -1,18 +1,13 @@
-import { Fieldset } from "@base-ui/react/fieldset";
 import {
   Radio as BaseRadio,
   RadioIndicatorProps,
   RadioRootProps,
 } from "@base-ui/react/radio";
-import {
-  RadioGroup as BaseRadioGroup,
-  RadioGroupProps as BaseRadioGroupProps,
-} from "@base-ui/react/radio-group";
 import * as React from "react";
-import { BasicFieldProps, cn } from "../../lib/utils";
-import { Field, FieldProps, useFieldContext } from "../field/Field";
+import { cn } from "../../lib/utils";
+import { useFieldContext } from "../field/Field";
 
-interface RadioProps extends RadioRootProps {
+export interface RadioProps extends RadioRootProps {
   label?: React.ReactNode;
   indicatorProps?: RadioIndicatorProps;
 }
@@ -47,40 +42,3 @@ export function Radio({
     </label>
   );
 }
-
-interface RadioGroupProps extends BaseRadioGroupProps, BasicFieldProps {
-  fieldProps?: FieldProps;
-}
-
-export function RadioGroup({
-  isValidating,
-  isValidatingMessage,
-  errorMessage,
-  description,
-  fieldProps,
-  label,
-  children,
-  ...props
-}: RadioGroupProps) {
-  return (
-    <Field
-      isValidating={isValidating}
-      isValidatingMessage={isValidatingMessage}
-      errorMessage={errorMessage}
-      description={description}
-      {...fieldProps}
-    >
-      <Fieldset.Root
-        render={<BaseRadioGroup {...props} />}
-        className="flex flex-col gap-1"
-      >
-        <Fieldset.Legend className="text-foreground text-sm font-semibold">
-          {label}
-        </Fieldset.Legend>
-        {children}
-      </Fieldset.Root>
-    </Field>
-  );
-}
-
-Radio.Group = RadioGroup;
