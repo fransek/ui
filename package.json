@@ -23,6 +23,7 @@
   "style": "dist/esm/theme.css",
   "exports": {
     ".": {
+      "style": "./dist/esm/theme.css",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
