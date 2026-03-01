@@ -4,6 +4,13 @@
 
 - **workflow:** added build step and switched to pnpm ([f8304c2](https://github.com/fransek/package-template/commit/f8304c24ea93083611b17e82d0519b4fe07d94a6))
 
+## [0.2.6](https://github.com/fransek/ui/compare/v0.2.5...v0.2.6) (2026-03-01)
+
+
+### Bug Fixes
+
+* radio group included in bundle ([696d0ca](https://github.com/fransek/ui/commit/696d0ca4536ff2702da56ea1c2275a72159d25d9))
+
 ## [0.2.5](https://github.com/fransek/ui/compare/v0.2.4...v0.2.5) (2026-03-01)
 
 
