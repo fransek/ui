@@ -4,6 +4,14 @@
 
 - **workflow:** added build step and switched to pnpm ([f8304c2](https://github.com/fransek/package-template/commit/f8304c24ea93083611b17e82d0519b4fe07d94a6))
 
+## [0.2.3](https://github.com/fransek/ui/compare/v0.2.2...v0.2.3) (2026-03-01)
+
+
+### Bug Fixes
+
+* **style:** added focus shadow inset to input and select ([3a553b2](https://github.com/fransek/ui/commit/3a553b2da4a2d233bf4c1017de1de19363d57a32))
+* **style:** removed font import ([cb8b060](https://github.com/fransek/ui/commit/cb8b06043649700c89b13d6a502d72eacaf2a07e))
+
 ## [0.2.2](https://github.com/fransek/ui/compare/v0.2.1...v0.2.2) (2026-03-01)
 
 
