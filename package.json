@@ -20,15 +20,15 @@
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "style": "dist/esm/index.css",
+  "style": "dist/esm/theme.css",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
     "./theme.css": {
-      "import": "./dist/esm/index.css",
-      "require": "./dist/cjs/index.css"
+      "import": "./dist/esm/theme.css",
+      "require": "./dist/cjs/theme.css"
     },
     "./*": {
       "import": "./dist/esm/components/*/index.js",

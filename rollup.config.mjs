@@ -27,7 +27,7 @@ const createConfig = (format, dir) => ({
       exclude: ["**/*.test.ts", "**/*.spec.ts", "src/stories/**/*"],
     }),
     postcss({
-      extract: true,
+      extract: "theme.css",
       minimize: true,
     }),
   ],
