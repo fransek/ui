@@ -1,3 +1,7 @@
 packages:
   - "@fransek/ui"
   - "apps/*"
+
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
