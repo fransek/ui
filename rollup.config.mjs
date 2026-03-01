@@ -4,6 +4,14 @@ import postcss from "rollup-plugin-postcss";
 /** @type {() => import('rollup').RollupOptions} */
 const createConfig = (format, dir) => ({
   input: "src/index.ts",
+  external: [
+    "react",
+    "react-dom",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge",
+    /@base-ui\/react\/.*/,
+  ],
   output: {
     dir,
     format,
