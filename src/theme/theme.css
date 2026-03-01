@@ -104,18 +104,39 @@
   --color-link-foreground: var(--link-foreground);
 
   --animate-validating: validating 1.5s ease-in-out infinite;
+  --animate-validating-message: validating-message 1.5s ease-in-out infinite;
 
   @keyframes validating {
     0%,
     100% {
       border-color: var(--primary);
-      box-shadow: 0 0 4px -4px
-        color-mix(in oklab, var(--primary-foreground) 10%, transparent);
+      box-shadow: none;
     }
     50% {
-      border-color: var(--primary-foreground);
+      border-color: color-mix(in oklab, var(--foreground) 40%, var(--primary));
       box-shadow: 0 0 4px 4px
-        color-mix(in oklab, var(--primary-foreground) 10%, transparent);
+        color-mix(in oklab, var(--primary) 15%, transparent);
+    }
+  }
+
+  @keyframes validating-message {
+    0%,
+    100% {
+      color: var(--primary-foreground);
+      text-shadow: none;
+    }
+    50% {
+      color: color-mix(
+        in oklab,
+        var(--foreground) 40%,
+        var(--primary-foreground)
+      );
+      text-shadow: color-mix(
+          in oklab,
+          var(--primary-foreground) 25%,
+          transparent
+        )
+        0px 0px 4px;
     }
   }
 }

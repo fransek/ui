@@ -70,7 +70,7 @@ export function Field({
         {isValidating && isValidatingMessage && !errorMessage && (
           <BaseField.Description
             className={cn(
-              "text-primary-foreground text-sm",
+              "text-primary-foreground animate-validating-message text-sm",
               isValidatingMessageClassName,
             )}
             {...isValidatingMessageProps}
