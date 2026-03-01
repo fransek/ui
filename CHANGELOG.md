@@ -4,6 +4,14 @@
 
 - **workflow:** added build step and switched to pnpm ([f8304c2](https://github.com/fransek/package-template/commit/f8304c24ea93083611b17e82d0519b4fe07d94a6))
 
+## [0.2.4](https://github.com/fransek/ui/compare/v0.2.3...v0.2.4) (2026-03-01)
+
+
+### Bug Fixes
+
+* **api:** exporting all prop interfaces ([646aed9](https://github.com/fransek/ui/commit/646aed906018571feb50d7829e79ceba1179e3ef))
+* **package:** added style export ([73c9766](https://github.com/fransek/ui/commit/73c97665845b60cb900f4d828840c0455ae048bd))
+
 ## [0.2.3](https://github.com/fransek/ui/compare/v0.2.2...v0.2.3) (2026-03-01)
 
 
