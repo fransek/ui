@@ -4,8 +4,8 @@ import {
   RadioRootProps,
 } from "@base-ui/react/radio";
 import * as React from "react";
-import { cn } from "../../lib/utils";
-import { useFieldContext } from "../field/Field";
+import { cn } from "../lib/utils";
+import { useFieldContext } from "./field";
 
 export interface RadioProps extends RadioRootProps {
   label?: React.ReactNode;

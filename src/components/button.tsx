@@ -3,7 +3,7 @@ import {
   ButtonProps as BaseButtonProps,
 } from "@base-ui/react/button";
 import React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 export interface ButtonProps extends BaseButtonProps {
   variant?: ButtonVariant;

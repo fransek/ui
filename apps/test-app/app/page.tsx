@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "@fransek/ui";
+import { Input } from "@fransek/ui/input";
 
 export default function Home() {
   return (

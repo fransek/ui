@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Search } from "lucide-react";
 import React from "react";
-import { Button } from "../components/button/Button";
-import { Input } from "../components/input/Input";
+import { Button } from "../components/button";
+import { Input } from "../components/input";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

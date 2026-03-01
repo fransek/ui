@@ -8,9 +8,9 @@ import {
   FieldsetRootProps,
 } from "@base-ui/react/fieldset";
 import * as React from "react";
-import { FieldAttributes } from "../../lib/types";
-import { cn } from "../../lib/utils";
-import { Field, FieldProps } from "../field/Field";
+import { FieldAttributes } from "../lib/types";
+import { cn } from "../lib/utils";
+import { Field, FieldProps } from "./field";
 
 export interface CheckboxGroupProps
   extends BaseCheckboxGroupProps, FieldAttributes {

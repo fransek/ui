@@ -3,9 +3,9 @@ import {
   InputProps as BaseInputProps,
 } from "@base-ui/react/input";
 import React from "react";
-import { FieldAttributes } from "../../lib/types";
-import { cn } from "../../lib/utils";
-import { Field, FieldProps } from "../field/Field";
+import { FieldAttributes } from "../lib/types";
+import { cn } from "../lib/utils";
+import { Field, FieldProps } from "./field";
 
 export interface InputProps extends BaseInputProps, FieldAttributes {
   fieldProps?: FieldProps;

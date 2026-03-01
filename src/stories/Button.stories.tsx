@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CircleCheckBig } from "lucide-react";
 import React from "react";
-import { Button } from "../components/button/Button";
+import { Button } from "../components/button";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

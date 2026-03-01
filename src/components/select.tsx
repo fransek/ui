@@ -16,9 +16,9 @@ import {
 } from "@base-ui/react/select";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
-import { FieldAttributes } from "../../lib/types";
-import { cn } from "../../lib/utils";
-import { Field, FieldProps } from "../field/Field";
+import { FieldAttributes } from "../lib/types";
+import { cn } from "../lib/utils";
+import { Field, FieldProps } from "./field";
 
 export interface SelectProps<T>
   extends

@@ -4,8 +4,8 @@ import {
   Fieldset,
 } from "@base-ui/react";
 import * as React from "react";
-import { FieldAttributes } from "../../lib/types";
-import { Field, FieldProps } from "../field/Field";
+import { FieldAttributes } from "../lib/types";
+import { Field, FieldProps } from "./field";
 
 export interface RadioGroupProps extends BaseRadioGroupProps, FieldAttributes {
   fieldProps?: FieldProps;

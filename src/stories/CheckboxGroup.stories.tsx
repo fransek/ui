@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import React from "react";
-import { CheckboxGroup } from "../components/checkbox-group/CheckboxGroup";
-import { Checkbox } from "../components/checkbox/Checkbox";
+import { Checkbox } from "../components/checkbox";
+import { CheckboxGroup } from "../components/checkbox-group";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

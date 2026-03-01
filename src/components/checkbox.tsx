@@ -6,10 +6,10 @@ import {
 import { Field as BaseField } from "@base-ui/react/field";
 import { CheckIcon } from "lucide-react";
 import React from "react";
-import { FieldAttributes } from "../../lib/types";
-import { cn } from "../../lib/utils";
-import { useCheckboxGroupContext } from "../checkbox-group/CheckboxGroup";
-import { Field, FieldProps, useFieldContext } from "../field/Field";
+import { FieldAttributes } from "../lib/types";
+import { cn } from "../lib/utils";
+import { useCheckboxGroupContext } from "./checkbox-group";
+import { Field, FieldProps, useFieldContext } from "./field";
 
 export interface CheckboxProps
   extends BaseCheckboxRootProps, Omit<FieldAttributes, "label"> {
