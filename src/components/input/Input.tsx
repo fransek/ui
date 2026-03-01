@@ -34,7 +34,7 @@ export function Input({
       <div className="flex items-stretch gap-2">
         <BaseInput
           className={cn(
-            "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating focus:border-highlight placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors outline-none",
+            "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating focus:border-highlight placeholder:text-muted-foreground focus:inset-shadow-muted/50 w-full min-w-40 rounded-lg border p-2 transition-colors outline-none focus:inset-shadow-sm",
             className,
           )}
           data-validating={isValidating ? "" : undefined}

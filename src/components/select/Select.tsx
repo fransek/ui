@@ -140,7 +140,7 @@ export function Select<T>({
       >
         <BaseSelect.Trigger
           className={cn(
-            "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating bg-background hover:bg-card data-popup-open:bg-card focus-visible:border-highlight flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none",
+            "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating hover:bg-card data-popup-open:bg-card focus-visible:border-highlight focus:inset-shadow-muted/50 flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none focus:inset-shadow-sm",
             className,
           )}
           data-validating={isValidating ? "" : undefined}
