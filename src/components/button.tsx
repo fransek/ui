@@ -19,12 +19,14 @@ export function Button({
 }: ButtonProps) {
   return (
     <BaseButton
-      className={cn(
-        "font-inherit focus-visible:outline-highlight m-0 flex items-center justify-center gap-2 rounded-lg px-3 py-2 outline-0 select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60",
-        variantStyles[variant],
-        sizeStyles[size],
-        className,
-      )}
+      className={(state) =>
+        buttonStyles({
+          variant,
+          size,
+          extend:
+            typeof className === "function" ? className(state) : className,
+        })
+      }
       focusableWhenDisabled
       {...props}
     >
@@ -34,7 +36,7 @@ export function Button({
 }
 
 const baseButtonStyles =
-  "font-inherit focus-visible:outline-highlight m-0 flex items-center justify-center gap-2 rounded-lg px-3 py-2 outline-0 select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60";
+  "transition-colors font-inherit focus-visible:outline-highlight m-0 flex items-center justify-center gap-2 rounded-lg px-3 py-2 outline-0 select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60";
 
 const variantStyles = {
   primary:
