@@ -69,12 +69,14 @@ export function DatePicker({
       <Popover.Root {...popoverProps}>
         <Popover.Trigger
           className={cn(
-            "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating hover:bg-card focus-visible:border-highlight focus:inset-shadow-muted/50 flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none focus:inset-shadow-sm",
+            "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating hover:bg-card focus-visible:border-highlight focus:inset-shadow-muted/50 flex min-w-[212px] items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none focus:inset-shadow-sm",
             !date && "text-muted-foreground",
             className,
           )}
           disabled={disabled || readOnly}
           aria-readonly={readOnly}
+          aria-invalid={!!errorMessage || undefined}
+          data-invalid={!!errorMessage ? "" : undefined}
           data-validating={isValidating ? "" : undefined}
         >
           {date ? format(date) : placeholder}
@@ -84,7 +86,7 @@ export function DatePicker({
           <Popover.Positioner className="z-10 outline-none" sideOffset={8}>
             <Popover.Popup
               className={cn(
-                "bg-background outline-border origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+                "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
               )}
             >
               <Calendar
