@@ -5,7 +5,7 @@ import { Checkbox } from "../components/checkbox";
 import { CheckboxGroup } from "../components/checkbox-group";
 
 const meta = {
-  title: "CheckboxGroup",
+  title: "Components/CheckboxGroup",
   component: CheckboxGroup,
   parameters: {
     layout: "centered",

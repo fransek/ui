@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "../components/button";
 
 const meta = {
-  title: "Button",
+  title: "Components/Button",
   component: Button,
   parameters: {
     layout: "centered",

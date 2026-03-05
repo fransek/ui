@@ -6,7 +6,7 @@ const endMonth = new Date();
 endMonth.setFullYear(startMonth.getFullYear() + 10);
 
 const meta = {
-  title: "Calendar",
+  title: "Components/Calendar",
   component: Calendar,
   parameters: {
     layout: "centered",
