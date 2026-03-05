@@ -4,6 +4,39 @@
 
 - radio group included in bundle ([696d0ca](https://github.com/fransek/ui/commit/696d0ca4536ff2702da56ea1c2275a72159d25d9))
 
+## [0.4.0](https://github.com/fransek/ui/compare/v0.3.0...v0.4.0) (2026-03-05)
+
+
+### Features
+
+* add DatePicker component ([#11](https://github.com/fransek/ui/issues/11)) ([70072b6](https://github.com/fransek/ui/commit/70072b6836c277eca8eba4f6b4fb1d1cf344a506))
+* button and input ([a716f9a](https://github.com/fransek/ui/commit/a716f9af2ae6cd335e9b0cdc4a5fa90194f1c86f))
+* calendar ([7f458c1](https://github.com/fransek/ui/commit/7f458c1b26968c38e9e06fbbebe9edf83d47a8b5))
+* checkbox ([aad616c](https://github.com/fransek/ui/commit/aad616cea35112bc29d764010ebfb18b07b6483e))
+* checkbox group ([69d69d0](https://github.com/fransek/ui/commit/69d69d0afdaf70c04c7dbf80c44d9a078a04aa8a))
+* **input:** button prop ([a7e2dce](https://github.com/fransek/ui/commit/a7e2dce77d711b382fca264679d62551259e0f42))
+* light theme and select ([dfdef22](https://github.com/fransek/ui/commit/dfdef22dee7726845661f111879292a84391f9de))
+* typography ([8f75cc6](https://github.com/fransek/ui/commit/8f75cc674708bb47ec7a670c1a5a59f4a58046df))
+
+
+### Bug Fixes
+
+* **api:** exporting all prop interfaces ([646aed9](https://github.com/fransek/ui/commit/646aed906018571feb50d7829e79ceba1179e3ef))
+* **button:** color transitions ([0040e0b](https://github.com/fransek/ui/commit/0040e0b95b5dcf0c47030828637e14d484717644))
+* **field:** animate validating message ([a8696c6](https://github.com/fransek/ui/commit/a8696c6ff1afb83c71a7b88970ee151e4a059e05))
+* import path resolution ([029a808](https://github.com/fransek/ui/commit/029a80817cea61b3eeb1080d1e1228ef364245d2))
+* oklch colors ([0cbd902](https://github.com/fransek/ui/commit/0cbd902587b32ed99e1208ecdfca707cb7b4e207))
+* **package:** added style export ([73c9766](https://github.com/fransek/ui/commit/73c97665845b60cb900f4d828840c0455ae048bd))
+* prepare for release ([753cc43](https://github.com/fransek/ui/commit/753cc43a57e3dbcf14f199822c66bb24bd39c563))
+* radio group included in bundle ([696d0ca](https://github.com/fransek/ui/commit/696d0ca4536ff2702da56ea1c2275a72159d25d9))
+* refactor and prop drilling ([7fb970e](https://github.com/fransek/ui/commit/7fb970ea3070e1c356119eafe67b40b3dd836bc0))
+* **select:** extended props interface ([9dd4642](https://github.com/fransek/ui/commit/9dd4642b816112c76833a84742e084fe7dc25455))
+* **select:** prop interface ([abb318e](https://github.com/fransek/ui/commit/abb318e54c0cd7ba4f5e5490041c7354997d78c9))
+* **style:** added focus shadow inset to input and select ([3a553b2](https://github.com/fransek/ui/commit/3a553b2da4a2d233bf4c1017de1de19363d57a32))
+* **style:** removed font import ([cb8b060](https://github.com/fransek/ui/commit/cb8b06043649700c89b13d6a502d72eacaf2a07e))
+* theme import ([e40adc5](https://github.com/fransek/ui/commit/e40adc5a0485e4c9d34decaee22dc8f45c5d9523))
+* validating and invalid styles ([5915d55](https://github.com/fransek/ui/commit/5915d55ea9fe88aa4276798136fa8e436cdb68cb))
+
 ## [0.2.5](https://github.com/fransek/ui/compare/v0.2.4...v0.2.5) (2026-03-01)
 
 ### Bug Fixes
