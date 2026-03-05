@@ -1,0 +1,45 @@
+@utility heading-1 {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--text-5xl--line-height);
+}
+@utility heading-2 {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--text-4xl--line-height);
+}
+@utility heading-3 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--text-3xl--line-height);
+}
+@utility heading-4 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--text-2xl--line-height);
+}
+@utility heading-5 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--text-xl--line-height);
+}
+@utility heading-6 {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--text-lg--line-height);
+}
+@utility ingress {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--text-base--line-height);
+}
+@utility body-1 {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--text-base--line-height);
+}
+@utility body-2 {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--text-sm--line-height);
+}

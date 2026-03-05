@@ -8,4 +8,4 @@ export * from "./components/radio-group";
 export * from "./components/select";
 export * from "./lib/types";
 export * from "./lib/utils";
-import "./theme/theme.css";
+import "./theme/index.css";

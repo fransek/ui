@@ -1,20 +1,16 @@
-@import "tailwindcss";
-@source "./components/**/*.{ts,tsx,js,jsx}";
-
-@function --shade(--color1, --color2, --percentage) {
-  result: color-mix(in oklab, var(--color1), var(--color2) var(--percentage));
-}
-
 :root {
   --background: oklch(98% 0 0);
   --foreground: oklch(19% 0 0);
-  --border: oklch(84% 0 0);
-  --card: oklch(95% 0 0);
-  --highlight: oklch(35% 0 0);
 
-  --primary: oklch(50% 0.15 290);
+  --card: oklch(94% 0 0);
+  --border: oklch(84% 0 0);
+  --body: oklch(30% 0.01 280);
+  --highlight: oklch(35% 0 0);
+  --link: oklch(52% 0.15 260);
+
+  --primary: oklch(50% 0.15 280);
   --on-primary: oklch(100% 0 0);
-  --primary-foreground: oklch(41% 0.15 290);
+  --primary-foreground: oklch(41% 0.15 280);
 
   --secondary: oklch(19% 0 0);
   --on-secondary: oklch(96% 0 0);
@@ -22,7 +18,7 @@
 
   --muted: oklch(45% 0 0);
   --on-muted: oklch(87% 0 0);
-  --muted-foreground: oklch(45% 0 0);
+  --muted-foreground: oklch(42% 0 0);
 
   --error: oklch(53% 0.15 25);
   --on-error: oklch(100% 0 0);
@@ -30,25 +26,30 @@
 
   --warning: oklch(82% 0.15 88);
   --on-warning: oklch(19% 0 0);
-  --warning-foreground: oklch(50% 0.15 88);
+  --warning-foreground: oklch(45% 0.15 88);
 
   --success: oklch(52% 0.15 150);
   --on-success: oklch(100% 0 0);
   --success-foreground: oklch(47% 0.15 150);
 
-  --link-foreground: oklch(52% 0.15 260);
+  --code: oklch(40% 0.07 280);
+  --on-code: oklch(100% 0 0);
+  --code-foreground: oklch(41% 0.15 280);
 }
 
 .dark {
   --background: oklch(14% 0 0);
   --foreground: oklch(95% 0 0);
-  --border: oklch(32% 0 0);
-  --card: oklch(19% 0 0);
-  --highlight: oklch(95% 0 0);
 
-  --primary: oklch(41% 0.15 290);
+  --card: oklch(19% 0 0);
+  --border: oklch(32% 0 0);
+  --body: oklch(80% 0 0);
+  --highlight: oklch(95% 0 0);
+  --link: oklch(62% 0.15 260);
+
+  --primary: oklch(41% 0.15 280);
   --on-primary: oklch(100% 0 0);
-  --primary-foreground: oklch(62% 0.15 290);
+  --primary-foreground: oklch(62% 0.15 280);
 
   --secondary: oklch(95% 0 0);
   --on-secondary: oklch(14% 0 0);
@@ -70,15 +71,20 @@
   --on-success: oklch(100% 0 0);
   --success-foreground: oklch(72% 0.15 150);
 
-  --link-foreground: oklch(62% 0.15 260);
+  --code: oklch(25% 0.05 280);
+  --on-code: oklch(100% 0 0);
+  --code-foreground: oklch(62% 0.15 280);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-border: var(--border);
+
   --color-card: var(--card);
+  --color-border: var(--border);
+  --color-body: var(--body);
   --color-highlight: var(--highlight);
+  --color-link: var(--link);
 
   --color-primary: var(--primary);
   --color-on-primary: var(--on-primary);
@@ -104,7 +110,9 @@
   --color-on-success: var(--on-success);
   --color-success-foreground: var(--success-foreground);
 
-  --color-link-foreground: var(--link-foreground);
+  --color-code: var(--code);
+  --color-on-code: var(--on-code);
+  --color-code-foreground: var(--code-foreground);
 
   --animate-validating: validating 1.5s ease-in-out infinite;
   --animate-validating-message: validating-message 1.5s ease-in-out infinite;
@@ -141,19 +149,5 @@
         )
         0px 0px 4px;
     }
-  }
-}
-
-@layer base {
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
-  }
-
-  * {
-    border-color: var(--border);
   }
 }

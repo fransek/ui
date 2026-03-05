@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @source "./stories/**/*.{ts,tsx,js,jsx}";
 
-body {
-  font-family: "Noto Sans", sans-serif;
+:root {
+  --font-sans: "Noto Sans", sans-serif;
+  --font-mono: "Noto Sans Mono", monospace;
 }

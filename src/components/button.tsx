@@ -36,7 +36,7 @@ export function Button({
 }
 
 const baseButtonStyles =
-  "transition-colors font-inherit focus-visible:outline-highlight m-0 flex items-center justify-center gap-2 rounded-lg px-3 py-2 outline-0 select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60";
+  "font-semibold transition-colors font-inherit focus-visible:outline-highlight m-0 flex items-center justify-center gap-2 rounded-lg px-3 py-2 outline-0 select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60";
 
 const variantStyles = {
   primary:
@@ -50,7 +50,7 @@ const variantStyles = {
   outline:
     "bg-transparent border text-foreground hover:bg-muted/10 active:bg-muted/20",
   ghost: "bg-transparent text-foreground hover:bg-muted/10 active:bg-muted/20",
-  link: "bg-transparent text-link-foreground hover:underline underline-offset-4",
+  link: "bg-transparent text-link not-hover:underline underline-offset-4",
 };
 
 const sizeStyles = {
