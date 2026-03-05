@@ -1,5 +1,6 @@
 "use client";
 
+import { Field as BaseField } from "@base-ui/react/field";
 import { Popover } from "@base-ui/react/popover";
 import { CalendarIcon } from "lucide-react";
 import React from "react";
@@ -67,21 +68,23 @@ export function DatePicker({
       {...fieldProps}
     >
       <Popover.Root {...popoverProps}>
-        <Popover.Trigger
-          className={cn(
-            "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating hover:bg-card focus-visible:border-highlight focus:inset-shadow-muted/50 flex min-w-[212px] items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none focus:inset-shadow-sm",
-            !date && "text-muted-foreground",
-            className,
-          )}
-          disabled={disabled || readOnly}
-          aria-readonly={readOnly}
-          aria-invalid={!!errorMessage || undefined}
-          data-invalid={!!errorMessage ? "" : undefined}
-          data-validating={isValidating ? "" : undefined}
-        >
-          {date ? format(date) : placeholder}
-          <CalendarIcon className="size-4 shrink-0 opacity-50" />
-        </Popover.Trigger>
+        <BaseField.Control
+          render={
+            <Popover.Trigger
+              className={cn(
+                "data-invalid:not-focus:border-error-foreground data-validating:not-data-invalid:animate-validating hover:bg-card focus-visible:border-highlight focus:inset-shadow-muted/50 flex min-w-[212px] items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none focus:inset-shadow-sm",
+                !date && "text-muted-foreground",
+                className,
+              )}
+              disabled={disabled || readOnly}
+              aria-readonly={readOnly}
+              data-validating={isValidating ? "" : undefined}
+            >
+              {date ? format(date) : placeholder}
+              <CalendarIcon className="size-4 shrink-0 opacity-50" />
+            </Popover.Trigger>
+          }
+        />
         <Popover.Portal>
           <Popover.Positioner className="z-10 outline-none" sideOffset={8}>
             <Popover.Popup
