@@ -3,21 +3,16 @@ import { CircleCheckBig } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Example/Button",
+  title: "Button",
   component: Button,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     disabled: { control: "boolean" },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
   args: {
     children: "Button",
   },
@@ -26,7 +21,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
     variant: "primary",
@@ -34,7 +28,35 @@ export const Primary: Story = {
   },
 };
 
-export const IconButton: Story = {
+export const Secondary: Story = {
+  args: {
+    variant: "secondary",
+    size: "md",
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    variant: "outline",
+    size: "md",
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    variant: "ghost",
+    size: "md",
+  },
+};
+
+export const Destructive: Story = {
+  args: {
+    variant: "error",
+    size: "md",
+  },
+};
+
+export const WithIcon: Story = {
   args: {
     variant: "success",
     size: "md",
@@ -44,5 +66,13 @@ export const IconButton: Story = {
         Icon
       </>
     ),
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    variant: "primary",
+    size: "md",
+    disabled: true,
   },
 };
