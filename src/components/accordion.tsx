@@ -1,7 +1,9 @@
 import {
   Accordion as BaseAccordion,
   AccordionItemProps as BaseAccordionItemProps,
+  AccordionPanelProps as BaseAccordionPanelProps,
   AccordionRootProps as BaseAccordionRootProps,
+  AccordionTriggerProps as BaseAccordionTriggerProps,
 } from "@base-ui/react/accordion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
@@ -13,22 +15,22 @@ export function Accordion({ className, ...props }: AccordionProps) {
   return <BaseAccordion.Root className={cn("w-full", className)} {...props} />;
 }
 
-export interface AccordionItemProps extends BaseAccordionItemProps {
-  trigger: React.ReactNode;
+export interface AccordionPanelProps extends BaseAccordionItemProps {
+  summary: React.ReactNode;
   iconProps?: React.ComponentPropsWithoutRef<"svg">;
-  triggerClassName?: string;
-  panelClassName?: string;
+  triggerProps?: Omit<BaseAccordionTriggerProps, "children">;
+  panelProps?: Omit<BaseAccordionPanelProps, "children">;
 }
 
-export function AccordionItem({
+export function AccordionPanel({
   children,
   className,
-  trigger,
+  summary,
   iconProps: { className: iconClassName, ...iconProps } = {},
-  triggerClassName,
-  panelClassName,
+  triggerProps: { className: triggerClassName, ...triggerProps } = {},
+  panelProps: { className: panelClassName, ...panelProps } = {},
   ...props
-}: AccordionItemProps) {
+}: AccordionPanelProps) {
   return (
     <BaseAccordion.Item className={cn("border-b", className)} {...props}>
       <BaseAccordion.Header className="flex w-full">
@@ -37,8 +39,9 @@ export function AccordionItem({
             "focus-visible:outline-highlight group flex flex-1 cursor-pointer items-center justify-between gap-2 py-4 text-left font-medium transition-all outline-none",
             triggerClassName,
           )}
+          {...triggerProps}
         >
-          {trigger}
+          {summary}
           <ChevronDown
             className={cn(
               "size-4 shrink-0 transition-transform duration-200 group-data-[panel-open]:rotate-180",
@@ -53,6 +56,7 @@ export function AccordionItem({
           "h-(--accordion-panel-height) overflow-hidden transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0",
           panelClassName,
         )}
+        {...panelProps}
       >
         <div className="pb-4 text-sm">{children}</div>
       </BaseAccordion.Panel>
