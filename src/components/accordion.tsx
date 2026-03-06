@@ -59,12 +59,12 @@ export function AccordionPanel({
       </BaseAccordion.Header>
       <BaseAccordion.Panel
         className={cn(
-          "h-(--accordion-panel-height) overflow-hidden pb-4 text-sm transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0",
+          "h-(--accordion-panel-height) overflow-hidden transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0",
           panelClassName,
         )}
         {...panelProps}
       >
-        {children}
+        <div className="pb-4 text-sm">{children}</div>
       </BaseAccordion.Panel>
     </BaseAccordion.Item>
   );
