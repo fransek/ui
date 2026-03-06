@@ -1,5 +1,6 @@
 import {
   Accordion as BaseAccordion,
+  AccordionHeaderProps as BaseAccordionHeaderProps,
   AccordionItemProps as BaseAccordionItemProps,
   AccordionPanelProps as BaseAccordionPanelProps,
   AccordionRootProps as BaseAccordionRootProps,
@@ -18,6 +19,7 @@ export function Accordion({ className, ...props }: AccordionProps) {
 export interface AccordionPanelProps extends BaseAccordionItemProps {
   summary: React.ReactNode;
   iconProps?: React.ComponentPropsWithoutRef<"svg">;
+  headerProps?: Omit<BaseAccordionHeaderProps, "children">;
   triggerProps?: Omit<BaseAccordionTriggerProps, "children">;
   panelProps?: Omit<BaseAccordionPanelProps, "children">;
 }
@@ -27,13 +29,17 @@ export function AccordionPanel({
   className,
   summary,
   iconProps: { className: iconClassName, ...iconProps } = {},
+  headerProps: { className: headerClassName, ...headerProps } = {},
   triggerProps: { className: triggerClassName, ...triggerProps } = {},
   panelProps: { className: panelClassName, ...panelProps } = {},
   ...props
 }: AccordionPanelProps) {
   return (
     <BaseAccordion.Item className={cn("border-b", className)} {...props}>
-      <BaseAccordion.Header className="flex w-full">
+      <BaseAccordion.Header
+        className={cn("flex w-full", headerClassName)}
+        {...headerProps}
+      >
         <BaseAccordion.Trigger
           className={cn(
             "focus-visible:outline-highlight group flex flex-1 cursor-pointer items-center justify-between gap-2 py-4 text-left font-medium transition-all outline-none",
@@ -53,12 +59,12 @@ export function AccordionPanel({
       </BaseAccordion.Header>
       <BaseAccordion.Panel
         className={cn(
-          "h-(--accordion-panel-height) overflow-hidden transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0",
+          "h-(--accordion-panel-height) overflow-hidden pb-4 text-sm transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0",
           panelClassName,
         )}
         {...panelProps}
       >
-        <div className="pb-4 text-sm">{children}</div>
+        {children}
       </BaseAccordion.Panel>
     </BaseAccordion.Item>
   );
