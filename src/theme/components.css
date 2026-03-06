@@ -31,7 +31,13 @@
       @apply body-1 text-body not-last:mb-2;
     }
     blockquote {
-      @apply text-foreground border-primary m-0 border-l-4 pl-4 italic not-last:mb-6 before:content-['"'] after:content-['"'];
+      @apply not-last:mb-6;
+      p {
+        @apply text-foreground border-primary m-0 border-l-4 pl-4 italic not-last:mb-6 before:content-['\201C'] after:content-['\201D'];
+      }
+      footer {
+        @apply text-body;
+      }
     }
     em {
       @apply text-foreground italic;
@@ -39,8 +45,14 @@
     strong {
       @apply text-foreground font-semibold;
     }
+    mark {
+      @apply text-on-primary bg-primary;
+    }
     a {
       @apply text-link decoration-1 underline-offset-4 not-hover:underline;
+    }
+    hr {
+      @apply border-primary not-last:mb-6;
     }
     code:where(:not(pre *)),
     kbd {
@@ -70,6 +82,30 @@
     }
     tr {
       @apply text-body not-last:border-b;
+    }
+    header {
+      @apply border-primary pb-4 not-last:mb-12 not-last:border-b;
+    }
+    section {
+      @apply border-primary pb-4 not-last:mb-12 not-last:border-b;
+    }
+    address {
+      @apply inline-block;
+    }
+    details {
+      @apply marker:text-primary-foreground not-last:mb-6;
+      summary {
+        @apply text-foreground cursor-pointer font-semibold;
+      }
+      p {
+        @apply text-body mt-2;
+      }
+    }
+    small {
+      @apply text-body text-sm not-last:mb-6;
+    }
+    nav {
+      @apply not-last:mb-6;
     }
     .ingress {
       @apply ingress text-foreground not-last:mb-6;
