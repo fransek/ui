@@ -11,6 +11,14 @@
 - **button:** color transitions ([0040e0b](https://github.com/fransek/ui/commit/0040e0b95b5dcf0c47030828637e14d484717644))
 - oklch colors ([0cbd902](https://github.com/fransek/ui/commit/0cbd902587b32ed99e1208ecdfca707cb7b4e207))
 
+## [0.3.1](https://github.com/fransek/ui/compare/v0.3.0...v0.3.1) (2026-03-06)
+
+
+### Bug Fixes
+
+* removed "use client" directives ([a319ea2](https://github.com/fransek/ui/commit/a319ea2a02923ee47914bf5353cc8a2eac2c8fcc))
+* resolved css imports ([e8aa879](https://github.com/fransek/ui/commit/e8aa8792624f652e85fa80df27e8366f9edc0475))
+
 ## [0.2.6](https://github.com/fransek/ui/compare/v0.2.5...v0.2.6) (2026-03-01)
 
 ### Bug Fixes
