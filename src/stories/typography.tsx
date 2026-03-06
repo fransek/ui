@@ -20,12 +20,10 @@ export function Typography() {
         <h2>Key Typography Concepts</h2>
 
         <p>
-          Good typography doesn't just make text look better—it{" "}
-          <mark>
-            <strong>enhances readability</strong>
-          </mark>{" "}
-          and guides the reader's eye to the most <em>important</em>{" "}
-          information. Let's explore some fundamental concepts.
+          Good typography doesn't just make text look better—it enhances{" "}
+          <mark>readability</mark> and guides the reader's eye to the most{" "}
+          <em>important</em> information. Let's explore some fundamental
+          concepts.
         </p>
 
         <h3>Typeface Selection</h3>
@@ -75,14 +73,68 @@ export function Typography() {
           </p>
         </details>
 
+        <h3>Typeface Comparison</h3>
+        <p>Here's a quick comparison of common typeface families:</p>
+        <table>
+          <caption>Popular Typeface Families and Their Characteristics</caption>
+          <thead>
+            <tr>
+              <th scope="col">Family</th>
+              <th scope="col">Category</th>
+              <th scope="col">Best Use Case</th>
+              <th scope="col">Readability</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Georgia</strong>
+              </td>
+              <td>Serif</td>
+              <td>Body text, Print</td>
+              <td>Excellent</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Helvetica</strong>
+              </td>
+              <td>Sans-serif</td>
+              <td>Headlines, UI</td>
+              <td>Very Good</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Times New Roman</strong>
+              </td>
+              <td>Serif</td>
+              <td>Formal documents</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Courier New</strong>
+              </td>
+              <td>Monospace</td>
+              <td>Code, Terminals</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Inter</strong>
+              </td>
+              <td>Sans-serif</td>
+              <td>Screen, Web</td>
+              <td>Excellent</td>
+            </tr>
+          </tbody>
+        </table>
+
         <blockquote>
           <p>
             Typography is to literature as musical performance is to
             composition; as interpretation.
           </p>
-          <footer>
-            — <address>Matthew Carter, Legendary Typographer</address>
-          </footer>
+          <footer>— Matthew Carter, Legendary Typographer</footer>
         </blockquote>
       </section>
 
@@ -98,7 +150,7 @@ body {
   font-family: 'Georgia', serif;
   line-height: 1.6;
   font-size: 16px;
-}`}</code>
+  }`}</code>
           </pre>
           <figcaption>Example CSS for readable body text</figcaption>
         </figure>

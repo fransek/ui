@@ -54,34 +54,46 @@
     hr {
       @apply border-primary not-last:mb-6;
     }
-    code:where(:not(pre *)),
+    code,
+    samp,
     kbd {
       @apply text-code-foreground bg-card rounded-lg px-2 py-1 font-mono text-sm font-semibold;
     }
     pre {
       @apply text-on-code bg-code overflow-x-auto rounded-lg p-4 font-mono not-last:mb-6;
+      code {
+        @apply bg-transparent p-0 text-inherit;
+      }
+    }
+    img {
+      @apply not-last:mb-6;
     }
     figure {
       @apply not-last:mb-6;
-    }
-    img {
-      @apply not-last:mb-6 in-[figure]:not-last:mb-2;
+      img,
+      pre,
+      blockquote {
+        @apply not-last:mb-2;
+      }
     }
     figcaption {
-      @apply text-body text-sm not-last:mb-6;
+      @apply text-body text-sm not-last:mb-2;
     }
     table {
       @apply w-full border-collapse not-last:mb-6;
-    }
-    th,
-    td {
-      @apply px-4 py-2 text-left;
-    }
-    th {
-      @apply text-foreground border-primary border-b font-semibold;
-    }
-    tr {
-      @apply text-body not-last:border-b;
+      caption {
+        @apply text-body mb-2 text-sm;
+      }
+      th,
+      td {
+        @apply px-4 py-2 text-left;
+      }
+      th {
+        @apply text-foreground border-primary border-b font-semibold;
+      }
+      tr {
+        @apply text-body not-last:border-b;
+      }
     }
     header {
       @apply border-primary pb-4 not-last:mb-12 not-last:border-b;
