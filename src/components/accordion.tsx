@@ -35,10 +35,10 @@ export function AccordionTrigger({
   ...props
 }: AccordionTriggerProps) {
   return (
-    <BaseAccordion.Header className="flex">
+    <BaseAccordion.Header className="flex w-full">
       <BaseAccordion.Trigger
         className={cn(
-          "focus-visible:outline-highlight group flex flex-1 cursor-pointer items-center justify-between py-4 text-left font-medium transition-all outline-none",
+          "focus-visible:outline-highlight group flex flex-1 cursor-pointer items-center justify-between gap-2 py-4 text-left font-medium transition-all outline-none",
           className,
         )}
         {...props}
