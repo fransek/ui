@@ -1,3 +1,9 @@
+# Changelog
+
+[npm history][1]
+
+[1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
+
 ## [0.3.0](https://github.com/fransek/ui/compare/v0.2.6...v0.3.0) (2026-03-06)
 
 
