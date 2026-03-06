@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.3.1](https://github.com/fransek/ui/compare/v0.3.0...v0.3.1) (2026-03-06)
+
+
+### Bug Fixes
+
+* removed "use client" directives ([a319ea2](https://github.com/fransek/ui/commit/a319ea2a02923ee47914bf5353cc8a2eac2c8fcc))
+* resolved css imports ([e8aa879](https://github.com/fransek/ui/commit/e8aa8792624f652e85fa80df27e8366f9edc0475))
+
 ## [0.3.0](https://github.com/fransek/ui/compare/v0.2.6...v0.3.0) (2026-03-06)
 
 
