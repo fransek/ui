@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.4.0](https://github.com/fransek/ui/compare/v0.3.2...v0.4.0) (2026-03-06)
+
+
+### Features
+
+* add Accordion component ([#22](https://github.com/fransek/ui/issues/22)) ([89ea31b](https://github.com/fransek/ui/commit/89ea31bc8615d8493bb20b7a9b7b7dda40010aa7))
+* extend DatePickerProps to include PopoverTriggerProps ([#21](https://github.com/fransek/ui/issues/21)) ([96a1ef0](https://github.com/fransek/ui/commit/96a1ef08a205b63477c39e1347991f9afc90bf31))
+
+
+### Bug Fixes
+
+* **package:** updated peer dependency list ([86cd437](https://github.com/fransek/ui/commit/86cd437b83eccf0f1c619d92349e6e8cfa8480e6))
+
 ## [0.3.2](https://github.com/fransek/ui/compare/v0.3.1...v0.3.2) (2026-03-06)
 
 
