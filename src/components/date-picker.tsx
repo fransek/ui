@@ -1,5 +1,5 @@
 import { Field as BaseField } from "@base-ui/react/field";
-import { Popover } from "@base-ui/react/popover";
+import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
 import { CalendarIcon } from "lucide-react";
 import React from "react";
 import { type DayPickerProps } from "react-day-picker";
@@ -11,6 +11,18 @@ import { Field, FieldProps } from "./field";
 export interface DatePickerProps
   extends
     Omit<DayPickerProps, "mode" | "selected" | "onSelect">,
+    Omit<
+      PopoverTriggerProps,
+      | "children"
+      | "className"
+      | "style"
+      | "onSelect"
+      | "hidden"
+      | "disabled"
+      | "role"
+      | "value"
+      | "defaultValue"
+    >,
     FieldAttributes {
   value?: Date;
   defaultValue?: Date;
@@ -41,6 +53,13 @@ export function DatePicker({
   name,
   className,
   popoverProps,
+  nativeButton,
+  handle,
+  payload,
+  openOnHover,
+  delay,
+  closeDelay,
+  render,
   ...calendarProps
 }: DatePickerProps) {
   const [internalDate, setInternalDate] = React.useState<Date | undefined>(
@@ -77,6 +96,13 @@ export function DatePicker({
               disabled={disabled || readOnly}
               aria-readonly={readOnly}
               data-validating={isValidating ? "" : undefined}
+              nativeButton={nativeButton}
+              handle={handle}
+              payload={payload}
+              openOnHover={openOnHover}
+              delay={delay}
+              closeDelay={closeDelay}
+              render={render}
             >
               {date ? format(date) : placeholder}
               <CalendarIcon className="size-4 shrink-0 opacity-50" />
