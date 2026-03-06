@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.3.2](https://github.com/fransek/ui/compare/v0.3.1...v0.3.2) (2026-03-06)
+
+
+### Bug Fixes
+
+* **bundle:** replaced postcss minification with cssnano plugin ([e185e1f](https://github.com/fransek/ui/commit/e185e1fa51a1b0d522d05dd68c54e4034a7fb30c))
+
 ## [0.3.1](https://github.com/fransek/ui/compare/v0.3.0...v0.3.1) (2026-03-06)
 
 
