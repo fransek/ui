@@ -4,6 +4,21 @@
 
 - radio group included in bundle ([696d0ca](https://github.com/fransek/ui/commit/696d0ca4536ff2702da56ea1c2275a72159d25d9))
 
+## [0.3.0](https://github.com/fransek/ui/compare/v0.2.6...v0.3.0) (2026-03-06)
+
+
+### Features
+
+* add DatePicker component ([#11](https://github.com/fransek/ui/issues/11)) ([70072b6](https://github.com/fransek/ui/commit/70072b6836c277eca8eba4f6b4fb1d1cf344a506))
+* calendar ([7f458c1](https://github.com/fransek/ui/commit/7f458c1b26968c38e9e06fbbebe9edf83d47a8b5))
+* typography ([8f75cc6](https://github.com/fransek/ui/commit/8f75cc674708bb47ec7a670c1a5a59f4a58046df))
+
+
+### Bug Fixes
+
+* **button:** color transitions ([0040e0b](https://github.com/fransek/ui/commit/0040e0b95b5dcf0c47030828637e14d484717644))
+* oklch colors ([0cbd902](https://github.com/fransek/ui/commit/0cbd902587b32ed99e1208ecdfca707cb7b4e207))
+
 ## [0.2.5](https://github.com/fransek/ui/compare/v0.2.4...v0.2.5) (2026-03-01)
 
 ### Bug Fixes
