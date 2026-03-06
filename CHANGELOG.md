@@ -1,5 +1,6 @@
 ## [0.3.0](https://github.com/fransek/ui/compare/v0.2.6...v0.3.0) (2026-03-06)
 
+
 ### Features
 
 - add DatePicker component ([#11](https://github.com/fransek/ui/issues/11)) ([70072b6](https://github.com/fransek/ui/commit/70072b6836c277eca8eba4f6b4fb1d1cf344a506))
@@ -13,17 +14,20 @@
 
 ## [0.2.6](https://github.com/fransek/ui/compare/v0.2.5...v0.2.6) (2026-03-01)
 
+
 ### Bug Fixes
 
 - radio group included in bundle ([696d0ca](https://github.com/fransek/ui/commit/696d0ca4536ff2702da56ea1c2275a72159d25d9))
 
 ## [0.2.5](https://github.com/fransek/ui/compare/v0.2.4...v0.2.5) (2026-03-01)
 
+
 ### Bug Fixes
 
 - import path resolution ([029a808](https://github.com/fransek/ui/commit/029a80817cea61b3eeb1080d1e1228ef364245d2))
 
 ## [0.2.4](https://github.com/fransek/ui/compare/v0.2.3...v0.2.4) (2026-03-01)
+
 
 ### Bug Fixes
 
@@ -32,6 +36,7 @@
 
 ## [0.2.3](https://github.com/fransek/ui/compare/v0.2.2...v0.2.3) (2026-03-01)
 
+
 ### Bug Fixes
 
 - **style:** added focus shadow inset to input and select ([3a553b2](https://github.com/fransek/ui/commit/3a553b2da4a2d233bf4c1017de1de19363d57a32))
@@ -39,17 +44,20 @@
 
 ## [0.2.2](https://github.com/fransek/ui/compare/v0.2.1...v0.2.2) (2026-03-01)
 
+
 ### Bug Fixes
 
 - **field:** animate validating message ([a8696c6](https://github.com/fransek/ui/commit/a8696c6ff1afb83c71a7b88970ee151e4a059e05))
 
 ## [0.2.1](https://github.com/fransek/ui/compare/v0.2.0...v0.2.1) (2026-02-28)
 
+
 ### Bug Fixes
 
 - **select:** extended props interface ([9dd4642](https://github.com/fransek/ui/commit/9dd4642b816112c76833a84742e084fe7dc25455))
 
 ## [0.2.0](https://github.com/fransek/ui/compare/v0.1.1...v0.2.0) (2026-02-28)
+
 
 ### Features
 
@@ -60,6 +68,7 @@
 - **select:** prop interface ([abb318e](https://github.com/fransek/ui/commit/abb318e54c0cd7ba4f5e5490041c7354997d78c9))
 
 ## [0.1.1](https://github.com/fransek/ui/compare/v0.1.0...v0.1.1) (2026-02-28)
+
 
 ### Bug Fixes
 
