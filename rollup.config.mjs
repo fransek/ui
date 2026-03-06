@@ -1,4 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
+import cssnano from "cssnano";
 import postcssImport from "postcss-import";
 import postcss from "rollup-plugin-postcss";
 
@@ -29,9 +30,8 @@ const createConfig = (format, dir) => ({
       exclude: ["**/*.test.ts", "**/*.spec.ts", "src/stories/**/*"],
     }),
     postcss({
-      plugins: [postcssImport()],
+      plugins: [postcssImport(), cssnano({ preset: "default" })],
       extract: "theme.css",
-      minimize: true,
     }),
   ],
 });
