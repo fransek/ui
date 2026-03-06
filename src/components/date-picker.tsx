@@ -1,5 +1,3 @@
-"use client";
-
 import { Field as BaseField } from "@base-ui/react/field";
 import { Popover } from "@base-ui/react/popover";
 import { CalendarIcon } from "lucide-react";
