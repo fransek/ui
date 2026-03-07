@@ -1,6 +1,6 @@
-import "@fransek/ui/theme.css";
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
+import "./globals.css";
 
 const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${notoSans.variable} ${notoSans.className} antialiased`}
+        className={`${notoSans.variable} ${notoSans.className} dark antialiased`}
       >
         {children}
       </body>
