@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { CircleCheckBig } from "lucide-react";
+import { CircleCheckBig, Trash } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 
@@ -60,13 +60,25 @@ export const WithIcon: Story = {
   args: {
     variant: "success",
     size: "md",
-    children: (
-      <>
-        <CircleCheckBig className="h-5 w-5" />
-        Icon
-      </>
-    ),
   },
+  render: (args) => (
+    <Button {...args}>
+      <CircleCheckBig className="h-5 w-5" />
+      Icon
+    </Button>
+  ),
+};
+
+export const IconButton: Story = {
+  args: {
+    variant: "outline",
+    size: "icon",
+  },
+  render: (args) => (
+    <Button {...args}>
+      <Trash className="size-5" />
+    </Button>
+  ),
 };
 
 export const Disabled: Story = {
