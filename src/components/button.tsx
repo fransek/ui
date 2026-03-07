@@ -36,13 +36,13 @@ export function Button({
 }
 
 const baseButtonStyles =
-  "font-semibold transition-colors font-inherit focus-visible:outline-highlight m-0 flex items-center justify-center gap-2 rounded-lg px-3 py-2 outline-0 select-none focus-visible:outline-2 focus-visible:outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60";
+  "font-semibold transition-colors font-inherit focus-visible:outline-highlight m-0 flex items-center justify-center gap-2 rounded-lg outline-0 select-none focus-visible:outline-2 focus-visible:-outline-offset-1 data-disabled:cursor-not-allowed data-disabled:opacity-60";
 
 const variantStyles = {
   primary:
     "bg-primary text-on-primary hover:bg-primary/90 active:bg-primary/80",
   secondary:
-    "bg-secondary text-on-secondary hover:bg-secondary/90 active:bg-secondary/80",
+    "bg-secondary text-on-secondary hover:bg-secondary/90 active:bg-secondary/80 focus-visible:outline-primary-foreground",
   muted: "bg-muted text-on-muted hover:bg-muted/90 active:bg-muted/80",
   error: "bg-error text-on-error hover:bg-error/90 active:bg-error/80",
   success:
@@ -54,9 +54,10 @@ const variantStyles = {
 };
 
 const sizeStyles = {
-  sm: "text-sm",
-  md: "text-base",
-  lg: "text-lg",
+  icon: "p-1.5",
+  sm: "text-xs min-w-16 px-2.5 py-1.5 font-normal",
+  md: "text-sm min-w-20 px-3 py-2",
+  lg: "text-base min-w-24 px-4 py-2",
 };
 
 export const buttonStyles = ({
