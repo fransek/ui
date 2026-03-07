@@ -31,16 +31,17 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    children: (
-      <>
-        {items.map(({ value, title, content }) => (
-          <AccordionPanel key={value} value={value} summary={title}>
-            {content}
-          </AccordionPanel>
-        ))}
-      </>
-    ),
+    className: "w-[400px]",
   },
+  render: (args) => (
+    <Accordion {...args}>
+      {items.map(({ value, title, content }) => (
+        <AccordionPanel key={value} value={value} summary={title}>
+          <p className="body-2 text-body">{content}</p>
+        </AccordionPanel>
+      ))}
+    </Accordion>
+  ),
 } satisfies Meta<typeof Accordion>;
 
 export default meta;
@@ -59,11 +60,5 @@ export const Multiple: Story = {
 export const DefaultOpen: Story = {
   args: {
     defaultValue: ["item-1"],
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
   },
 };

@@ -42,7 +42,8 @@ export function AccordionPanel({
       >
         <BaseAccordion.Trigger
           className={cn(
-            "focus-visible:outline-highlight group flex flex-1 cursor-pointer items-center justify-between gap-2 py-4 text-left font-medium transition-all outline-none",
+            "group hover:bg-card focus-visible:outline-highlight relative flex w-full items-center justify-between gap-4 px-3 py-2 text-left font-medium focus-visible:z-1 focus-visible:outline-2 focus-visible:-outline-offset-1",
+
             triggerClassName,
           )}
           {...triggerProps}
@@ -50,7 +51,7 @@ export function AccordionPanel({
           {summary}
           <ChevronDown
             className={cn(
-              "size-4 shrink-0 transition-transform duration-200 group-data-[panel-open]:rotate-180",
+              "size-4 shrink-0 transition-transform duration-200 group-data-panel-open:rotate-180",
               iconClassName,
             )}
             {...iconProps}
