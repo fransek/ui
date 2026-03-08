@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.5.0](https://github.com/fransek/ui/compare/v0.4.0...v0.5.0) (2026-03-08)
+
+
+### Features
+
+* **button:** added icon size option and changed visuals ([2019023](https://github.com/fransek/ui/commit/2019023150a42de0d4eae788029c4b94b05b9fb3))
+* **dialog:** component added ([2b7165d](https://github.com/fransek/ui/commit/2b7165d65006b9ea6b258b1170063caf75762db3))
+* **style:** added focus-outline utility and changed highlight color ([36f9ae3](https://github.com/fransek/ui/commit/36f9ae3be2f52b2ef28762c53610b073d0588ed5))
+* **typography:** added support for additional tags ([294dcfc](https://github.com/fransek/ui/commit/294dcfc0f252f4097f2e044a9608cc5b6bfc6954))
+* **typography:** added support for additional tags ([3deb584](https://github.com/fransek/ui/commit/3deb584d3c63c036be2f9cbdf45a016782992927))
+
+
+### Bug Fixes
+
+* **accordion:** added visuals for hover and focus ([48b1a03](https://github.com/fransek/ui/commit/48b1a03cf7d985d59f04611606e9cb397e7946c2))
+* **accordion:** fixed panel animation glitch ([#25](https://github.com/fransek/ui/issues/25)) ([fb9bbb5](https://github.com/fransek/ui/commit/fb9bbb5a4d69f8a9b79c7908bf6736673b93b415))
+* **calendar:** added focus outlines ([a61ea12](https://github.com/fransek/ui/commit/a61ea1266ff346ada3a4ff54308d24405a87aaec))
+* **calendar:** button style fix ([7409644](https://github.com/fransek/ui/commit/740964405de9236818013f7fe284ace329b8cc68))
+* **theme:** decreased secondary color contrast ([fd3fb6c](https://github.com/fransek/ui/commit/fd3fb6c9af02ed3ab3da9db67fe9818e0bc40553))
+
 ## [0.4.0](https://github.com/fransek/ui/compare/v0.3.2...v0.4.0) (2026-03-06)
 
 
