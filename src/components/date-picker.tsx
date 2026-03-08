@@ -62,6 +62,7 @@ export function DatePicker({
   render,
   ...calendarProps
 }: DatePickerProps) {
+  const { autoFocus = true, ...restCalendarProps } = calendarProps;
   const [internalDate, setInternalDate] = React.useState<Date | undefined>(
     defaultValue,
   );
@@ -120,7 +121,8 @@ export function DatePicker({
                 mode="single"
                 selected={date}
                 onSelect={handleSelect}
-                {...calendarProps}
+                autoFocus={autoFocus}
+                {...restCalendarProps}
               />
             </Popover.Popup>
           </Popover.Positioner>
