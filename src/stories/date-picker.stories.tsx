@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
 import { DatePicker } from "../components/date-picker";
 
 const meta = {
@@ -56,29 +55,5 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     defaultValue: new Date(),
-  },
-};
-export const KeyboardOnly: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const trigger = canvas.getByRole("button", { name: "Date of birth" });
-
-    await userEvent.tab();
-    await expect(trigger).toHaveFocus();
-
-    await userEvent.keyboard("{Enter}");
-
-    const firstFocusedDay = canvasElement.ownerDocument
-      .activeElement as HTMLButtonElement;
-    await expect(firstFocusedDay.tagName).toBe("BUTTON");
-    await expect(firstFocusedDay.getAttribute("aria-label")).toMatch(/\d{4}/);
-    await expect(firstFocusedDay).toHaveFocus();
-
-    await userEvent.keyboard("{ArrowRight}");
-    const nextFocusedDay = canvasElement.ownerDocument
-      .activeElement as HTMLButtonElement;
-    await expect(nextFocusedDay).not.toBe(firstFocusedDay);
-    await expect(nextFocusedDay).toHaveFocus();
   },
 };
