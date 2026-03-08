@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.6.0](https://github.com/fransek/ui/compare/v0.5.0...v0.6.0) (2026-03-08)
+
+
+### Features
+
+* **field:** re-exported all subcomponents of field from base-ui ([3159c22](https://github.com/fransek/ui/commit/3159c221652c7e509d94163911bb24bc502a6320))
+
+
+### Bug Fixes
+
+* **calendar:** keyboard accessibility ([#26](https://github.com/fransek/ui/issues/26)) ([e89e455](https://github.com/fransek/ui/commit/e89e4554e1e438dffc5b8460eab3c68188ec7b6f))
+* **dialog:** added close button aria-label ([b9a6588](https://github.com/fransek/ui/commit/b9a65882cdd351c137ac063b2cb5c976e7b193b6))
+
 ## [0.5.0](https://github.com/fransek/ui/compare/v0.4.0...v0.5.0) (2026-03-08)
 
 
