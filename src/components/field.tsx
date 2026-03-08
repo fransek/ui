@@ -11,6 +11,7 @@ import {
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
+import { InfoPopover } from "./info-popover";
 
 export interface FieldProps extends BaseFieldRootProps, FieldAttributes {
   labelProps?: BaseFieldLabelProps;
@@ -29,6 +30,7 @@ export function Field({
   labelProps,
   errorMessageProps,
   descriptionProps,
+  infoPopover,
   isValidatingMessageProps: {
     className: isValidatingMessageClassName,
     ...isValidatingMessageProps
@@ -44,7 +46,14 @@ export function Field({
         data-validating={isValidating ? "" : undefined}
         {...props}
       >
-        {label && <FieldLabel {...labelProps}>{label}</FieldLabel>}
+        {label && (
+          <div className="flex items-center gap-2">
+            <FieldLabel {...labelProps}>{label}</FieldLabel>
+            {infoPopover && (
+              <InfoPopover fieldLabel={label}>{infoPopover}</InfoPopover>
+            )}
+          </div>
+        )}
         {children}
         <FieldError match={invalid} {...errorMessageProps}>
           {errorMessage}

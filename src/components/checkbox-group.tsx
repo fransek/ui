@@ -11,6 +11,7 @@ import * as React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
 import { Field, FieldProps } from "./field";
+import { InfoPopover } from "./info-popover";
 
 export interface CheckboxGroupProps
   extends BaseCheckboxGroupProps, FieldAttributes {
@@ -28,6 +29,7 @@ export function CheckboxGroup({
   errorMessage,
   description,
   fieldProps,
+  infoPopover,
   fieldsetProps: { className: fieldsetClassName, ...fieldsetProps } = {},
   legendProps: { className: legendClassName, ...legendProps } = {},
   ...props
@@ -46,15 +48,22 @@ export function CheckboxGroup({
           className={cn("flex flex-col gap-1", fieldsetClassName)}
           {...fieldsetProps}
         >
-          <Fieldset.Legend
-            className={cn(
-              "text-foreground text-sm font-semibold",
-              legendClassName,
-            )}
-            {...legendProps}
-          >
-            {label}
-          </Fieldset.Legend>
+          {label && (
+            <div className="flex items-center gap-2">
+              <Fieldset.Legend
+                className={cn(
+                  "text-foreground text-sm font-semibold",
+                  legendClassName,
+                )}
+                {...legendProps}
+              >
+                {label}
+              </Fieldset.Legend>
+              {infoPopover && (
+                <InfoPopover fieldLabel={label}>{infoPopover}</InfoPopover>
+              )}
+            </div>
+          )}
           {children}
         </Fieldset.Root>
       </Field>

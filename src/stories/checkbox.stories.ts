@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Checkbox } from "../components/checkbox";
 
 const meta = {
-  title: "Components/Checkbox",
+  title: "Components/Fields/Checkbox",
   component: Checkbox,
   parameters: {
     layout: "centered",
@@ -14,12 +14,15 @@ const meta = {
     errorMessage: { control: "text" },
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
+    infoPopover: { control: "text" },
   },
   args: {
     label: "Accept Terms and Conditions",
     description: "Please accept the terms and conditions to proceed.",
     isValidating: false,
     isValidatingMessage: "Validating...",
+    infoPopover:
+      "By accepting, you agree to our terms and conditions. Please read them carefully.",
   },
 } satisfies Meta<typeof Checkbox>;
 

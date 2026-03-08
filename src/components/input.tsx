@@ -9,7 +9,8 @@ import { Field, FieldProps } from "./field";
 
 export interface InputProps extends BaseInputProps, FieldAttributes {
   fieldProps?: FieldProps;
-  button?: React.ReactNode;
+  leftSlot?: React.ReactNode;
+  rightSlot?: React.ReactNode;
 }
 
 export function Input({
@@ -19,8 +20,10 @@ export function Input({
   errorMessage,
   className,
   description,
+  infoPopover,
   fieldProps,
-  button,
+  leftSlot,
+  rightSlot,
   ...props
 }: InputProps) {
   return (
@@ -30,9 +33,11 @@ export function Input({
       isValidatingMessage={isValidatingMessage}
       errorMessage={errorMessage}
       description={description}
+      infoPopover={infoPopover}
       {...fieldProps}
     >
       <div className="flex items-stretch gap-2">
+        {leftSlot}
         <BaseInput
           className={cn(
             "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors",
@@ -41,7 +46,7 @@ export function Input({
           data-validating={isValidating ? "" : undefined}
           {...props}
         />
-        {button}
+        {rightSlot}
       </div>
     </Field>
   );

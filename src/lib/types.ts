@@ -6,4 +6,5 @@ export interface FieldAttributes {
   isValidating?: boolean;
   isValidatingMessage?: React.ReactNode;
   description?: React.ReactNode;
+  infoPopover?: React.ReactNode;
 }

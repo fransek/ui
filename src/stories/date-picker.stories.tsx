@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DatePicker } from "../components/date-picker";
 
 const meta = {
-  title: "Components/DatePicker",
+  title: "Components/Fields/DatePicker",
   component: DatePicker,
   parameters: {
     layout: "centered",
@@ -14,6 +14,7 @@ const meta = {
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
     placeholder: { control: "text" },
+    infoPopover: { control: "text" },
   },
   args: {
     label: "Date of birth",
@@ -21,6 +22,8 @@ const meta = {
     placeholder: "Pick a date",
     isValidating: false,
     isValidatingMessage: "Checking availability...",
+    infoPopover:
+      "Your date of birth is used to verify your age and provide a personalized experience. Please ensure it's accurate.",
   },
 } satisfies Meta<typeof DatePicker>;
 

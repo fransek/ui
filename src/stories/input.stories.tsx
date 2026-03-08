@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { Search } from "lucide-react";
+import { Info, Search } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 import { Input } from "../components/input";
+import { Popover } from "../components/popover";
 
 const meta = {
-  title: "Components/Input",
+  title: "Components/Fields/Input",
   component: Input,
   parameters: {
     layout: "centered",
@@ -17,6 +18,7 @@ const meta = {
     errorMessage: { control: "text" },
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
+    infoPopover: { control: "text" },
   },
   args: {
     label: "Username",
@@ -24,6 +26,8 @@ const meta = {
     placeholder: "Enter username",
     isValidating: false,
     isValidatingMessage: "Checking availability...",
+    infoPopover:
+      "Your username should be unique and contain 4-16 characters. It can include letters, numbers, and underscores.",
   },
 } satisfies Meta<typeof Input>;
 
@@ -51,7 +55,7 @@ export const WithButton: Story = {
     label: "Search components",
     description: undefined,
     placeholder: "Search...",
-    button: (
+    rightSlot: (
       <Button
         aria-label="search"
         variant="outline"
@@ -60,6 +64,25 @@ export const WithButton: Story = {
       >
         <Search className="size-5" />
       </Button>
+    ),
+  },
+};
+
+export const WithInfoPopover: Story = {
+  args: {
+    rightSlot: (
+      <Popover
+        trigger={
+          <Button size="icon" variant="ghost">
+            <Info className="size-4" />
+          </Button>
+        }
+      >
+        <p className="body-2 text-body">
+          Your username should be unique and contain 4-16 characters.
+          <br /> It can include letters, numbers, and underscores.
+        </p>
+      </Popover>
     ),
   },
 };

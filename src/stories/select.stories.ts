@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Select } from "../components/select";
 
 const meta = {
-  title: "Components/Select",
+  title: "Components/Fields/Select",
   component: Select,
   parameters: {
     layout: "centered",
@@ -15,12 +15,15 @@ const meta = {
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
     placeholder: { control: "text" },
+    infoPopover: { control: "text" },
   },
   args: {
     label: "Fruit",
     description: "Select your favorite fruit from the list.",
     isValidating: false,
     isValidatingMessage: "Validating...",
+    infoPopover:
+      "Fruits are a great source of vitamins and minerals. Choose wisely!",
     items: [
       { label: "Apple", value: "apple" },
       { label: "Banana", value: "banana" },

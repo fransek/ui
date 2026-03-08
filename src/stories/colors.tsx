@@ -2,8 +2,8 @@ import React from "react";
 
 export function Colors() {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="bg-background text-foreground grid grid-cols-2 gap-4 p-4 lg:grid-cols-4">
+    <div className="bg-background flex flex-col gap-6">
+      <div className="text-foreground grid grid-cols-2 gap-4 p-4 lg:grid-cols-4">
         <div className="bg-primary text-on-primary rounded-lg p-2">primary</div>
         <div className="text-primary-foreground bg-card border-primary-foreground rounded-lg border p-2">
           primary-foreground
@@ -31,7 +31,7 @@ export function Colors() {
           success-foreground
         </div>
       </div>
-      <div className="bg-background text-foreground grid w-fit grid-cols-2 gap-4 p-4">
+      <div className="text-foreground grid w-fit grid-cols-2 gap-4 p-4">
         <div>card</div>
         <div className="bg-card h-8 w-8 rounded-lg p-2" />
         <div>border</div>

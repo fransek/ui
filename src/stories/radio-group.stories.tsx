@@ -4,7 +4,7 @@ import { Radio } from "../components/radio";
 import { RadioGroup } from "../components/radio-group";
 
 const meta = {
-  title: "Components/RadioGroup",
+  title: "Components/Fields/RadioGroup",
   component: RadioGroup,
   parameters: {
     layout: "centered",
@@ -15,12 +15,15 @@ const meta = {
     errorMessage: { control: "text" },
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
+    infoPopover: { control: "text" },
   },
   args: {
     label: "Fruit",
     description: "Select your favorite fruit from the list.",
     isValidating: false,
     isValidatingMessage: "Validating...",
+    infoPopover:
+      "Fruits are a great source of vitamins and minerals. Choose wisely!",
   },
   render: (args) => (
     <RadioGroup {...args}>

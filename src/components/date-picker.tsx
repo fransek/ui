@@ -41,6 +41,7 @@ export function DatePicker({
   isValidatingMessage,
   errorMessage,
   description,
+  infoPopover,
   fieldProps,
   value,
   defaultValue,
@@ -87,6 +88,7 @@ export function DatePicker({
       isValidatingMessage={isValidatingMessage}
       errorMessage={errorMessage}
       description={description}
+      infoPopover={infoPopover}
       {...fieldProps}
     >
       <Popover.Root {...popoverProps}>

@@ -5,7 +5,7 @@ import { Checkbox } from "../components/checkbox";
 import { CheckboxGroup } from "../components/checkbox-group";
 
 const meta = {
-  title: "Components/CheckboxGroup",
+  title: "Components/Fields/CheckboxGroup",
   component: CheckboxGroup,
   parameters: {
     layout: "centered",
@@ -16,12 +16,15 @@ const meta = {
     errorMessage: { control: "text" },
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
+    infoPopover: { control: "text" },
   },
   args: {
     label: "Select your favorite fruits",
     description: "Please select your favorite fruits.",
     isValidating: false,
     isValidatingMessage: "Validating...",
+    infoPopover:
+      "Fruits are a great source of vitamins and minerals. Choose wisely!",
   },
   render: (args) => (
     <CheckboxGroup {...args}>

@@ -15,6 +15,7 @@ import {
   FieldProps,
   useFieldContext,
 } from "./field";
+import { InfoPopover } from "./info-popover";
 
 export interface CheckboxProps
   extends BaseCheckboxRootProps, Omit<FieldAttributes, "label"> {
@@ -33,6 +34,7 @@ export function Checkbox({
   isValidating: _isValidating,
   isValidatingMessage,
   errorMessage,
+  infoPopover,
   labelProps: { className: labelClassName, ...labelProps } = {},
   indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
   iconProps: { className: iconClassName, ...iconProps } = {},
@@ -44,34 +46,39 @@ export function Checkbox({
   const isValidating = isInCheckboxGroup ? groupIsValidating : _isValidating;
 
   const children = (
-    <FieldLabel
-      className={cn(
-        "text-foreground flex items-center gap-2 text-base font-normal",
-        labelClassName,
-      )}
-      {...labelProps}
-    >
-      <BaseCheckbox.Root
+    <div className="flex items-center gap-2">
+      <FieldLabel
         className={cn(
-          "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary outline-highlight focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border",
-          className,
+          "text-foreground flex items-center gap-2 text-base font-normal",
+          labelClassName,
         )}
-        aria-labelledby={labelId}
-        data-validating={isValidating ? "" : undefined}
-        {...props}
+        {...labelProps}
       >
-        <BaseCheckbox.Indicator
+        <BaseCheckbox.Root
           className={cn(
-            "text-on-primary data-invalid:border-error data-invalid:bg-error flex data-unchecked:hidden",
-            indicatorClassName,
+            "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary outline-highlight focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border",
+            className,
           )}
-          {...indicatorProps}
+          aria-labelledby={labelId}
+          data-validating={isValidating ? "" : undefined}
+          {...props}
         >
-          <CheckIcon className={cn("size-4", iconClassName)} {...iconProps} />
-        </BaseCheckbox.Indicator>
-      </BaseCheckbox.Root>
-      <span id={labelId}>{label}</span>
-    </FieldLabel>
+          <BaseCheckbox.Indicator
+            className={cn(
+              "text-on-primary data-invalid:border-error data-invalid:bg-error flex data-unchecked:hidden",
+              indicatorClassName,
+            )}
+            {...indicatorProps}
+          >
+            <CheckIcon className={cn("size-4", iconClassName)} {...iconProps} />
+          </BaseCheckbox.Indicator>
+        </BaseCheckbox.Root>
+        <span id={labelId}>{label}</span>
+      </FieldLabel>
+      {infoPopover && (
+        <InfoPopover fieldLabel={label}>{infoPopover}</InfoPopover>
+      )}
+    </div>
   );
 
   if (isInCheckboxGroup) {

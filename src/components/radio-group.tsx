@@ -6,6 +6,7 @@ import {
 import * as React from "react";
 import { FieldAttributes } from "../lib/types";
 import { Field, FieldProps } from "./field";
+import { InfoPopover } from "./info-popover";
 
 export interface RadioGroupProps extends BaseRadioGroupProps, FieldAttributes {
   fieldProps?: FieldProps;
@@ -16,6 +17,7 @@ export function RadioGroup({
   isValidatingMessage,
   errorMessage,
   description,
+  infoPopover,
   fieldProps,
   label,
   children,
@@ -33,9 +35,16 @@ export function RadioGroup({
         render={<BaseRadioGroup {...props} />}
         className="flex flex-col gap-1"
       >
-        <Fieldset.Legend className="text-foreground text-sm font-semibold">
-          {label}
-        </Fieldset.Legend>
+        {label && (
+          <div className="flex items-center gap-2">
+            <Fieldset.Legend className="text-foreground text-sm font-semibold">
+              {label}
+            </Fieldset.Legend>
+            {infoPopover && (
+              <InfoPopover fieldLabel={label}>{infoPopover}</InfoPopover>
+            )}
+          </div>
+        )}
         {children}
       </Fieldset.Root>
     </Field>

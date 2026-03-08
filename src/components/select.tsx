@@ -54,6 +54,7 @@ export function Select<T>({
   errorMessage,
   className,
   description,
+  infoPopover,
   fieldProps,
   items,
   placeholder,
@@ -113,6 +114,7 @@ export function Select<T>({
       isValidatingMessage={isValidatingMessage}
       errorMessage={errorMessage}
       description={description}
+      infoPopover={infoPopover}
       {...fieldProps}
     >
       <BaseSelect.Root
