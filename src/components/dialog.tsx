@@ -93,6 +93,7 @@ export function Dialog({
                       )}
                       variant="ghost"
                       size="icon"
+                      aria-label="Close"
                       {...closeButtonProps}
                     >
                       <X
