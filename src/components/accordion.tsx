@@ -42,7 +42,7 @@ export function AccordionPanel({
       >
         <BaseAccordion.Trigger
           className={cn(
-            "group hover:bg-card focus-visible:outline-highlight relative flex w-full items-center justify-between gap-4 px-3 py-2 text-left font-medium focus-visible:z-1 focus-visible:outline-2 focus-visible:-outline-offset-1",
+            "group hover:bg-card outline-highlight focus-visible:focus-outline relative flex w-full items-center justify-between gap-4 px-3 py-2 text-left font-medium focus-visible:z-1",
 
             triggerClassName,
           )}

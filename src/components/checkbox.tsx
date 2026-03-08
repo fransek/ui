@@ -48,7 +48,7 @@ export function Checkbox({
     >
       <BaseCheckbox.Root
         className={cn(
-          "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary focus-visible:outline-highlight flex size-5 items-center justify-center rounded-sm border outline-offset-2 focus-visible:outline-2",
+          "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary outline-highlight focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border",
           className,
         )}
         aria-labelledby={labelId}

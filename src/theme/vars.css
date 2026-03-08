@@ -5,7 +5,7 @@
   --card: oklch(94% 0 0);
   --border: oklch(84% 0 0);
   --body: oklch(30% 0.01 280);
-  --highlight: oklch(35% 0 0);
+  --highlight: oklch(40% 0.1 280);
   --link: oklch(52% 0.15 260);
 
   --primary: oklch(50% 0.15 280);
@@ -44,7 +44,7 @@
   --card: oklch(19% 0 0);
   --border: oklch(32% 0 0);
   --body: oklch(80% 0 0);
-  --highlight: oklch(95% 0 0);
+  --highlight: oklch(80% 0.1 280);
   --link: oklch(62% 0.15 260);
 
   --primary: oklch(41% 0.15 280);

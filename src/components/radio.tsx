@@ -24,7 +24,7 @@ export function Radio({
     <label className="flex items-center gap-2" id={id}>
       <BaseRadio.Root
         className={cn(
-          "data-validating:not-data-invalid:animate-validating focus-visible:outline-highlight data-checked:border-primary-foreground data-invalid:border-error-foreground flex size-5 items-center justify-center rounded-full border focus-visible:outline-2 focus-visible:outline-offset-2",
+          "data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline data-checked:border-primary-foreground data-invalid:border-error-foreground flex size-5 items-center justify-center rounded-full border",
         )}
         aria-labelledby={id}
         data-validating={isValidating ? "" : undefined}

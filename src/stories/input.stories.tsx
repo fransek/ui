@@ -52,7 +52,12 @@ export const WithButton: Story = {
     description: undefined,
     placeholder: "Search...",
     button: (
-      <Button aria-label="search" variant="outline">
+      <Button
+        aria-label="search"
+        variant="outline"
+        size="icon"
+        className="w-12"
+      >
         <Search className="size-5" />
       </Button>
     ),

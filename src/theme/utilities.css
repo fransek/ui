@@ -43,3 +43,8 @@
   font-weight: var(--font-weight-normal);
   line-height: var(--text-sm--line-height);
 }
+@utility focus-outline {
+  outline-offset: calc(-1px);
+  outline-style: solid;
+  outline-width: 2px;
+}
