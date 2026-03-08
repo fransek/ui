@@ -21,14 +21,14 @@ const meta = {
     description: "Select your favorite fruit from the list.",
     isValidating: false,
     isValidatingMessage: "Validating...",
-    children: (
-      <>
-        <Radio value="apple" label="Apple" />
-        <Radio value="banana" label="Banana" />
-        <Radio value="orange" label="Orange" />
-      </>
-    ),
   },
+  render: (args) => (
+    <RadioGroup {...args}>
+      <Radio value="apple" label="Apple" />
+      <Radio value="banana" label="Banana" />
+      <Radio value="orange" label="Orange" />
+    </RadioGroup>
+  ),
 } satisfies Meta<typeof RadioGroup>;
 
 export default meta;

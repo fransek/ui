@@ -22,14 +22,14 @@ const meta = {
     description: "Please select your favorite fruits.",
     isValidating: false,
     isValidatingMessage: "Validating...",
-    children: (
-      <>
-        <Checkbox label="Banana" value="banana" />
-        <Checkbox label="Apple" value="apple" />
-        <Checkbox label="Orange" value="orange" />
-      </>
-    ),
   },
+  render: (args) => (
+    <CheckboxGroup {...args}>
+      <Checkbox label="Banana" value="banana" />
+      <Checkbox label="Apple" value="apple" />
+      <Checkbox label="Orange" value="orange" />
+    </CheckboxGroup>
+  ),
 } satisfies Meta<typeof CheckboxGroup>;
 
 export default meta;
