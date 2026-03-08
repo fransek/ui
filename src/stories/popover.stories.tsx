@@ -36,6 +36,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {};
 
+export const WithArrow: Story = {
+  args: {
+    arrow: true,
+  },
+};
+
 export const Modal: Story = {
   args: {
     modal: true,
