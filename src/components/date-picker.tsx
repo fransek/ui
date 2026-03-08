@@ -47,7 +47,12 @@ export function DatePicker({
   defaultValue,
   onValueChange,
   placeholder = "Pick a date",
-  format = (date) => date.toLocaleDateString(),
+  format = (date) =>
+    date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }),
   disabled,
   readOnly,
   name,
@@ -60,7 +65,8 @@ export function DatePicker({
   delay,
   closeDelay,
   render,
-  ...calendarProps
+  autoFocus = true,
+  ...props
 }: DatePickerProps) {
   const [internalDate, setInternalDate] = React.useState<Date | undefined>(
     defaultValue,
@@ -112,6 +118,7 @@ export function DatePicker({
         <Popover.Portal>
           <Popover.Positioner className="z-10 outline-none" sideOffset={8}>
             <Popover.Popup
+              aria-label="Calendar"
               className={cn(
                 "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
               )}
@@ -120,7 +127,8 @@ export function DatePicker({
                 mode="single"
                 selected={date}
                 onSelect={handleSelect}
-                {...calendarProps}
+                autoFocus={autoFocus}
+                {...props}
               />
             </Popover.Popup>
           </Popover.Positioner>
