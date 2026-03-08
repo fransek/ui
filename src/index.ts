@@ -7,6 +7,7 @@ export * from "./components/date-picker";
 export * from "./components/dialog";
 export * from "./components/field";
 export * from "./components/input";
+export * from "./components/popover";
 export * from "./components/radio";
 export * from "./components/radio-group";
 export * from "./components/select";
