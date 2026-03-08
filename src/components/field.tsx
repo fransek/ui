@@ -1,19 +1,22 @@
 import {
   Field as BaseField,
+  FieldControlProps as BaseFieldControlProps,
+  FieldDescriptionProps as BaseFieldDescriptionProps,
+  FieldErrorProps as BaseFieldErrorProps,
+  FieldItemProps as BaseFieldItemProps,
+  FieldLabelProps as BaseFieldLabelProps,
   FieldRootProps as BaseFieldRootProps,
-  FieldDescriptionProps,
-  FieldErrorProps,
-  FieldLabelProps,
+  FieldValidityProps as BaseFieldValidityProps,
 } from "@base-ui/react/field";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
 
 export interface FieldProps extends BaseFieldRootProps, FieldAttributes {
-  labelProps?: FieldLabelProps;
-  errorMessageProps?: FieldErrorProps;
-  descriptionProps?: FieldDescriptionProps;
-  isValidatingMessageProps?: FieldDescriptionProps;
+  labelProps?: BaseFieldLabelProps;
+  errorMessageProps?: BaseFieldErrorProps;
+  descriptionProps?: BaseFieldDescriptionProps;
+  isValidatingMessageProps?: BaseFieldDescriptionProps;
 }
 
 export function Field({
@@ -21,18 +24,11 @@ export function Field({
   isValidating,
   isValidatingMessage,
   errorMessage,
-  className,
   description,
   children,
-  labelProps: { className: labelClassName, ...labelProps } = {},
-  errorMessageProps: {
-    className: errorMessageClassName,
-    ...errorMessageProps
-  } = {},
-  descriptionProps: {
-    className: descriptionClassName,
-    ...descriptionProps
-  } = {},
+  labelProps,
+  errorMessageProps,
+  descriptionProps,
   isValidatingMessageProps: {
     className: isValidatingMessageClassName,
     ...isValidatingMessageProps
@@ -43,57 +39,95 @@ export function Field({
 
   return (
     <FieldContext.Provider value={{ isValidating: !!isValidating }}>
-      <BaseField.Root
-        className={cn("flex flex-col gap-1", className)}
+      <FieldRoot
         invalid={invalid}
         data-validating={isValidating ? "" : undefined}
         {...props}
       >
-        {label && (
-          <BaseField.Label
-            className={cn(
-              "text-foreground text-sm font-semibold",
-              labelClassName,
-            )}
-            {...labelProps}
-          >
-            {label}
-          </BaseField.Label>
-        )}
+        {label && <FieldLabel {...labelProps}>{label}</FieldLabel>}
         {children}
-        <BaseField.Error
-          className={cn("text-error-foreground text-sm", errorMessageClassName)}
-          match={invalid}
-          {...errorMessageProps}
-        >
+        <FieldError match={invalid} {...errorMessageProps}>
           {errorMessage}
-        </BaseField.Error>
+        </FieldError>
         {isValidating && isValidatingMessage && !errorMessage && (
-          <BaseField.Description
+          <FieldDescription
             className={cn(
-              "text-primary-foreground animate-validating-message text-sm",
+              "text-primary-foreground animate-validating-message",
               isValidatingMessageClassName,
             )}
             {...isValidatingMessageProps}
           >
             {isValidatingMessage}
-          </BaseField.Description>
+          </FieldDescription>
         )}
         {description && (
-          <BaseField.Description
-            className={cn(
-              "text-muted-foreground text-sm",
-              descriptionClassName,
-            )}
-            {...descriptionProps}
-          >
+          <FieldDescription {...descriptionProps}>
             {description}
-          </BaseField.Description>
+          </FieldDescription>
         )}
-      </BaseField.Root>
+      </FieldRoot>
     </FieldContext.Provider>
   );
 }
+
+export type FieldControlProps = BaseFieldControlProps;
+
+export const FieldControl = BaseField.Control;
+
+export type FieldDescriptionProps = BaseFieldDescriptionProps;
+
+export function FieldDescription({
+  className,
+  ...props
+}: BaseFieldDescriptionProps) {
+  return (
+    <BaseField.Description
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props}
+    />
+  );
+}
+
+export type FieldErrorProps = BaseFieldErrorProps;
+
+export function FieldError({ className, ...props }: BaseFieldErrorProps) {
+  return (
+    <BaseField.Error
+      className={cn("text-error-foreground text-sm", className)}
+      {...props}
+    />
+  );
+}
+
+export type FieldItemProps = BaseFieldItemProps;
+
+export const FieldItem = BaseField.Item;
+
+export type FieldLabelProps = BaseFieldLabelProps;
+
+export function FieldLabel({ className, ...props }: BaseFieldLabelProps) {
+  return (
+    <BaseField.Label
+      className={cn("text-foreground text-sm font-semibold", className)}
+      {...props}
+    />
+  );
+}
+
+export type FieldRootProps = BaseFieldRootProps;
+
+export function FieldRoot({ className, ...props }: BaseFieldRootProps) {
+  return (
+    <BaseField.Root
+      className={cn("flex flex-col gap-1", className)}
+      {...props}
+    />
+  );
+}
+
+export type FieldValidityProps = BaseFieldValidityProps;
+
+export const FieldValidity = BaseField.Validity;
 
 export const FieldContext = React.createContext({
   isValidating: false,

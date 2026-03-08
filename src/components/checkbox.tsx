@@ -3,13 +3,18 @@ import {
   CheckboxRootProps as BaseCheckboxRootProps,
   CheckboxIndicatorProps,
 } from "@base-ui/react/checkbox";
-import { Field as BaseField } from "@base-ui/react/field";
 import { CheckIcon } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
 import { useCheckboxGroupContext } from "./checkbox-group";
-import { Field, FieldProps, useFieldContext } from "./field";
+import {
+  Field,
+  FieldItem,
+  FieldLabel,
+  FieldProps,
+  useFieldContext,
+} from "./field";
 
 export interface CheckboxProps
   extends BaseCheckboxRootProps, Omit<FieldAttributes, "label"> {
@@ -39,9 +44,9 @@ export function Checkbox({
   const isValidating = isInCheckboxGroup ? groupIsValidating : _isValidating;
 
   const children = (
-    <BaseField.Label
+    <FieldLabel
       className={cn(
-        "text-foreground flex items-center gap-2 text-base",
+        "text-foreground flex items-center gap-2 text-base font-normal",
         labelClassName,
       )}
       {...labelProps}
@@ -66,11 +71,11 @@ export function Checkbox({
         </BaseCheckbox.Indicator>
       </BaseCheckbox.Root>
       <span id={labelId}>{label}</span>
-    </BaseField.Label>
+    </FieldLabel>
   );
 
   if (isInCheckboxGroup) {
-    return <BaseField.Item>{children}</BaseField.Item>;
+    return <FieldItem>{children}</FieldItem>;
   }
 
   return (

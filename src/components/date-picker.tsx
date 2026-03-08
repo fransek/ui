@@ -1,4 +1,3 @@
-import { Field as BaseField } from "@base-ui/react/field";
 import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
 import { CalendarIcon } from "lucide-react";
 import React from "react";
@@ -6,7 +5,7 @@ import { type DayPickerProps } from "react-day-picker";
 import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
 import { Calendar } from "./calendar";
-import { Field, FieldProps } from "./field";
+import { Field, FieldControl, FieldProps } from "./field";
 
 export interface DatePickerProps
   extends
@@ -91,7 +90,7 @@ export function DatePicker({
       {...fieldProps}
     >
       <Popover.Root {...popoverProps}>
-        <BaseField.Control
+        <FieldControl
           render={
             <Popover.Trigger
               className={cn(
