@@ -71,7 +71,7 @@ function Calendar({
           defaultClassNames.dropdowns,
         ),
         dropdown_root: cn(
-          "relative cn-calendar-dropdown-root rounded-(--cell-radius)",
+          "relative cn-calendar-dropdown-root rounded outline-highlight focus-within:focus-outline",
           defaultClassNames.dropdown_root,
         ),
         dropdown: cn(
@@ -212,7 +212,7 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "data-[selected-single=true]:bg-primary data-[selected-single=true]:text-on-primary data-[range-middle=true]:bg-primary/50 data-[range-middle=true]:text-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-on-primary data-[range-end=true]:bg-primary data-[range-end=true]:text-on-primary group-data-[focused=true]/day:border-highlight group-data-[focused=true]/day:highlight relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 p-1 text-sm leading-none font-normal text-inherit group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) [&>span]:text-xs [&>span]:opacity-70",
+        "data-[selected-single=true]:bg-primary data-[selected-single=true]:text-on-primary data-[range-middle=true]:bg-primary/50 data-[range-middle=true]:text-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-on-primary data-[range-end=true]:bg-primary data-[range-end=true]:text-on-primary group-data-[focused=true]/day:border-highlight group-data-[focused=true]/day:focus-outline relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 p-1 text-sm leading-none font-normal text-inherit group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) [&>span]:text-xs [&>span]:opacity-70",
         defaultClassNames.day,
         className,
       )}
