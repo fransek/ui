@@ -5,6 +5,7 @@ import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
 import { Calendar } from "./calendar";
 import { Field, FieldControl, FieldProps } from "./field";
+import { Input } from "./input";
 
 export interface DatePickerProps
   extends
@@ -55,7 +56,6 @@ export function DatePicker({
   disabled,
   readOnly,
   name,
-  className,
   popoverProps,
   nativeButton,
   handle,
@@ -95,10 +95,6 @@ export function DatePicker({
         <FieldControl
           render={
             <Popover.Trigger
-              className={cn(
-                "outline-highlight focus-visible:focus-outline data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating hover:bg-card min-w-53 rounded-lg border p-2 text-base transition-colors",
-                className,
-              )}
               disabled={disabled || readOnly}
               aria-readonly={readOnly}
               data-validating={isValidating ? "" : undefined}
@@ -111,11 +107,12 @@ export function DatePicker({
               render={
                 render ??
                 (({ className: triggerClassName, ...triggerProps }) => (
-                  <input
+                  <Input
                     {...triggerProps}
                     className={cn(
-                      triggerClassName,
+                      "hover:bg-card cursor-default",
                       !date && "text-muted-foreground",
+                      triggerClassName,
                     )}
                     type="text"
                     role="combobox"

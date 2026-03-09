@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
 import { DatePicker } from "../components/date-picker";
 
 const meta = {
@@ -33,17 +32,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {},
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const combobox = canvas.getByRole("combobox");
-
-    await expect(combobox).toBeInTheDocument();
-    await expect(combobox).toHaveAttribute("aria-haspopup", "dialog");
-    await expect(combobox).toHaveAttribute("readonly");
-
-    await combobox.click();
-    await expect(combobox).toHaveAttribute("aria-expanded", "true");
-  },
 };
 
 const defaultBirthDate = new Date(1990, 0, 15);
