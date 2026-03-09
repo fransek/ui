@@ -25,6 +25,8 @@ const fruitItems = [
 ];
 
 function ExampleForm() {
+  const validationDelayMs = 600;
+  const submitDelayMs = 700;
   const [name, setName] = React.useState("");
   const [birthDate, setBirthDate] = React.useState<Date | undefined>();
   const [favoriteFruit, setFavoriteFruit] = React.useState<
@@ -39,6 +41,20 @@ function ExampleForm() {
   const [isNameValidating, setIsNameValidating] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitMessage, setSubmitMessage] = React.useState("");
+  const submitTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const isMountedRef = React.useRef(true);
+
+  React.useEffect(
+    () => () => {
+      isMountedRef.current = false;
+      if (submitTimeoutRef.current) {
+        clearTimeout(submitTimeoutRef.current);
+      }
+    },
+    [],
+  );
 
   function clearError(field: FieldName) {
     setErrors((currentErrors) => {
@@ -94,7 +110,10 @@ function ExampleForm() {
     }
 
     setIsNameValidating(true);
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    await new Promise((resolve) => setTimeout(resolve, validationDelayMs));
+    if (!isMountedRef.current) {
+      return;
+    }
     setIsNameValidating(false);
 
     if (name.trim().length < 3) {
@@ -120,10 +139,14 @@ function ExampleForm() {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
+    submitTimeoutRef.current = setTimeout(() => {
+      if (!isMountedRef.current) {
+        return;
+      }
       setIsSubmitting(false);
       setSubmitMessage("Form submitted successfully.");
-    }, 700);
+      submitTimeoutRef.current = null;
+    }, submitDelayMs);
   }
 
   function handleReset() {
@@ -136,6 +159,11 @@ function ExampleForm() {
     setErrors({});
     setSubmitMessage("");
     setIsNameValidating(false);
+    setIsSubmitting(false);
+    if (submitTimeoutRef.current) {
+      clearTimeout(submitTimeoutRef.current);
+      submitTimeoutRef.current = null;
+    }
   }
 
   return (
@@ -235,7 +263,7 @@ function ExampleForm() {
 }
 
 const meta = {
-  title: "Components/Fields/Form",
+  title: "Examples/Form",
   component: ExampleForm,
   parameters: {
     layout: "centered",
