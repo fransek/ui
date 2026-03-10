@@ -9,6 +9,8 @@ import { Field, FieldProps } from "./field";
 
 export interface InputProps extends BaseInputProps, FieldAttributes {
   fieldProps?: FieldProps;
+  leftAdornment?: React.ReactNode;
+  rightAdornment?: React.ReactNode;
   leftSlot?: React.ReactNode;
   rightSlot?: React.ReactNode;
 }
@@ -22,10 +24,15 @@ export function Input({
   description,
   infoPopover,
   fieldProps,
+  leftAdornment,
+  rightAdornment,
   leftSlot,
   rightSlot,
   ...props
 }: InputProps) {
+  const hasLeftAdornment = leftAdornment != null;
+  const hasRightAdornment = rightAdornment != null;
+
   return (
     <Field
       label={label}
@@ -38,14 +45,28 @@ export function Input({
     >
       <div className="flex items-stretch gap-2">
         {leftSlot}
-        <BaseInput
-          className={cn(
-            "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors",
-            className,
+        <div className="relative w-full">
+          {leftAdornment && (
+            <span className="text-muted-foreground absolute inset-y-0 left-0 z-10 flex items-center pl-3">
+              {leftAdornment}
+            </span>
           )}
-          data-validating={isValidating ? "" : undefined}
-          {...props}
-        />
+          <BaseInput
+            className={cn(
+              "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors",
+              hasLeftAdornment && "pl-10",
+              hasRightAdornment && "pr-10",
+              className,
+            )}
+            data-validating={isValidating ? "" : undefined}
+            {...props}
+          />
+          {rightAdornment && (
+            <span className="text-muted-foreground absolute inset-y-0 right-0 z-10 flex items-center pr-3">
+              {rightAdornment}
+            </span>
+          )}
+        </div>
         {rightSlot}
       </div>
     </Field>
