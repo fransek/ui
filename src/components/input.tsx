@@ -34,6 +34,8 @@ export function Input({
 }: InputProps) {
   const resolvedLeftAdornment = leftAdornment ?? leftSlot;
   const resolvedRightAdornment = rightAdornment ?? rightSlot;
+  const hasLeftAdornment = resolvedLeftAdornment != null;
+  const hasRightAdornment = resolvedRightAdornment != null;
 
   return (
     <Field
@@ -45,17 +47,27 @@ export function Input({
       infoPopover={infoPopover}
       {...fieldProps}
     >
-      <div className="flex items-stretch gap-2">
-        {resolvedLeftAdornment}
+      <div className="relative w-full">
+        {resolvedLeftAdornment ? (
+          <span className="text-muted-foreground absolute inset-y-0 left-0 z-10 flex items-center pl-3">
+            {resolvedLeftAdornment}
+          </span>
+        ) : null}
         <BaseInput
           className={cn(
             "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors",
+            hasLeftAdornment && "pl-10",
+            hasRightAdornment && "pr-10",
             className,
           )}
           data-validating={isValidating ? "" : undefined}
           {...props}
         />
-        {resolvedRightAdornment}
+        {resolvedRightAdornment ? (
+          <span className="text-muted-foreground absolute inset-y-0 right-0 z-10 flex items-center pr-3">
+            {resolvedRightAdornment}
+          </span>
+        ) : null}
       </div>
     </Field>
   );
