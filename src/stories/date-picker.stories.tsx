@@ -34,7 +34,7 @@ export const Basic: Story = {
   args: {},
 };
 
-const defaultBirthDate = new Date(1990, 0, 15);
+const defaultBirthDate = "01/15/1990";
 
 export const WithDefaultValue: Story = {
   args: {
@@ -57,7 +57,7 @@ export const Validating: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-    defaultValue: new Date(),
+    defaultValue: "03/10/2026",
   },
 };
 
@@ -70,9 +70,7 @@ export const WithCustomFormat: Story = {
 export const Controlled: Story = {
   args: {},
   render: (args) => {
-    const [date, setDate] = React.useState<Date | undefined>(
-      new Date(1995, 4, 20),
-    );
+    const [date, setDate] = React.useState("05/20/1995");
     return (
       <DatePicker
         {...args}
