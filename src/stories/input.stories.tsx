@@ -55,7 +55,7 @@ export const WithButton: Story = {
     label: "Search components",
     description: undefined,
     placeholder: "Search...",
-    rightSlot: (
+    rightAdornment: (
       <Button
         aria-label="search"
         variant="outline"
@@ -70,7 +70,7 @@ export const WithButton: Story = {
 
 export const WithInfoPopover: Story = {
   args: {
-    rightSlot: (
+    rightAdornment: (
       <Popover
         trigger={
           <Button size="icon" variant="ghost">
@@ -83,6 +83,20 @@ export const WithInfoPopover: Story = {
           <br /> It can include letters, numbers, and underscores.
         </p>
       </Popover>
+    ),
+  },
+};
+
+export const WithLeftAndRightAdornments: Story = {
+  args: {
+    label: "Search",
+    description: undefined,
+    placeholder: "Search components",
+    leftAdornment: (
+      <Search className="text-muted-foreground size-5 self-center" />
+    ),
+    rightAdornment: (
+      <Info className="text-muted-foreground size-5 self-center" />
     ),
   },
 };
