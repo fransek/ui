@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
 import { DatePicker } from "../components/date-picker";
 
 const meta = {
@@ -32,6 +33,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {},
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText("Date of birth");
+    const openCalendarButton = canvas.getByRole("button", {
+      name: "Open calendar",
+    });
+
+    await expect(input).not.toHaveAttribute("readonly");
+    await userEvent.clear(input);
+    await userEvent.type(input, "2000-01-15");
+    await expect(input).toHaveValue("2000-01-15");
+    await userEvent.click(openCalendarButton);
+    await expect(openCalendarButton).toHaveAttribute("aria-expanded", "true");
+  },
 };
 
 const defaultBirthDate = new Date(1990, 0, 15);
