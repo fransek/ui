@@ -46,11 +46,11 @@ export function Input({
       <div className="flex items-stretch gap-2">
         {leftSlot}
         <div className="relative w-full">
-          {leftAdornment ? (
+          {leftAdornment && (
             <span className="text-muted-foreground absolute inset-y-0 left-0 z-10 flex items-center pl-3">
               {leftAdornment}
             </span>
-          ) : null}
+          )}
           <BaseInput
             className={cn(
               "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors",
@@ -61,11 +61,11 @@ export function Input({
             data-validating={isValidating ? "" : undefined}
             {...props}
           />
-          {rightAdornment ? (
+          {rightAdornment && (
             <span className="text-muted-foreground absolute inset-y-0 right-0 z-10 flex items-center pr-3">
               {rightAdornment}
             </span>
-          ) : null}
+          )}
         </div>
         {rightSlot}
       </div>
