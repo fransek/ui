@@ -14,9 +14,7 @@ import React from "react";
 import { cn } from "../lib/utils";
 import { Button } from "./button";
 
-export interface DialogProps
-  extends DialogRootProps, Omit<DialogTriggerProps, "children" | "render"> {
-  trigger?: DialogTriggerProps["render"];
+export interface DialogProps extends DialogRootProps {
   portalProps?: DialogPortalProps;
   backdropProps?: DialogBackdropProps;
   popupProps?: DialogPopupProps;
@@ -26,7 +24,6 @@ export interface DialogProps
 }
 
 export function Dialog({
-  trigger,
   actionsRef,
   children,
   defaultOpen,
@@ -50,7 +47,6 @@ export function Dialog({
     className: closeButtonIconClassName,
     ...closeButtonIconProps
   } = {},
-  ...props
 }: DialogProps) {
   return (
     <BaseDialog.Root
@@ -67,7 +63,12 @@ export function Dialog({
     >
       {(renderProps) => (
         <>
-          <BaseDialog.Trigger render={trigger} {...props} />
+          {typeof children !== "function" &&
+            React.Children.map(children, (child) =>
+              React.isValidElement(child) && child.type === DialogTrigger
+                ? child
+                : null,
+            )}
           <BaseDialog.Portal {...portalProps}>
             <BaseDialog.Backdrop
               className={cn(
@@ -110,13 +111,21 @@ export function Dialog({
               )}
               {typeof children === "function"
                 ? children(renderProps)
-                : children}
+                : React.Children.map(children, (child) =>
+                    React.isValidElement(child) && child.type === DialogTrigger
+                      ? null
+                      : child,
+                  )}
             </BaseDialog.Popup>
           </BaseDialog.Portal>
         </>
       )}
     </BaseDialog.Root>
   );
+}
+
+export function DialogTrigger(props: DialogTriggerProps) {
+  return <BaseDialog.Trigger {...props} />;
 }
 
 export function DialogTitle({ className, ...props }: DialogTitleProps) {

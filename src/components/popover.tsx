@@ -13,9 +13,7 @@ import {
 import React from "react";
 import { cn } from "../lib/utils";
 
-export interface PopoverProps
-  extends PopoverRootProps, Omit<PopoverTriggerProps, "children" | "render"> {
-  trigger?: PopoverTriggerProps["render"];
+export interface PopoverProps extends PopoverRootProps {
   arrow?: boolean;
   portalProps?: PopoverPortalProps;
   positionerProps?: PopoverPositionerProps;
@@ -25,7 +23,6 @@ export interface PopoverProps
 }
 
 export function Popover({
-  trigger,
   arrow,
   actionsRef,
   children,
@@ -42,8 +39,6 @@ export function Popover({
   popupProps: { className: popupClassName, ...popupProps } = {},
   arrowProps: { className: arrowClassName, ...arrowProps } = {},
   arrowSvgProps,
-  className,
-  ...props
 }: PopoverProps) {
   return (
     <BasePopover.Root
@@ -59,11 +54,12 @@ export function Popover({
     >
       {(renderProps) => (
         <>
-          <BasePopover.Trigger
-            render={trigger}
-            className={className}
-            {...props}
-          />
+          {typeof children !== "function" &&
+            React.Children.map(children, (child) =>
+              React.isValidElement(child) && child.type === PopoverTrigger
+                ? child
+                : null,
+            )}
           <BasePopover.Portal {...portalProps}>
             <BasePopover.Positioner
               className={cn("z-10 outline-none", positionerClassName)}
@@ -90,7 +86,12 @@ export function Popover({
                 )}
                 {typeof children === "function"
                   ? children(renderProps)
-                  : children}
+                  : React.Children.map(children, (child) =>
+                      React.isValidElement(child) &&
+                      child.type === PopoverTrigger
+                        ? null
+                        : child,
+                    )}
               </BasePopover.Popup>
             </BasePopover.Positioner>
           </BasePopover.Portal>
@@ -98,6 +99,10 @@ export function Popover({
       )}
     </BasePopover.Root>
   );
+}
+
+export function PopoverTrigger(props: PopoverTriggerProps) {
+  return <BasePopover.Trigger {...props} />;
 }
 
 export function PopoverTitle({ className, ...props }: PopoverTitleProps) {

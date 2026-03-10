@@ -2,7 +2,7 @@ import { Info } from "lucide-react";
 import React from "react";
 import { cn } from "../lib/utils";
 import { Button, ButtonProps } from "./button";
-import { Popover, PopoverProps } from "./popover";
+import { Popover, PopoverProps, PopoverTrigger } from "./popover";
 
 export interface InfoPopoverProps extends PopoverProps {
   children: React.ReactNode;
@@ -23,26 +23,7 @@ export function InfoPopover({
 }: InfoPopoverProps) {
   return (
     <Popover
-      openOnHover
       arrow
-      trigger={
-        <Button
-          aria-label={
-            typeof fieldLabel === "string"
-              ? `Show information about ${fieldLabel}`
-              : "Show information"
-          }
-          variant="ghost"
-          size="icon"
-          className={cn("-m-1 p-1", buttonClassName)}
-          {...buttonProps}
-        >
-          <Info
-            className={cn("text-muted-foreground size-4", infoIconClassName)}
-            {...infoIconProps}
-          />
-        </Button>
-      }
       popupProps={{
         "aria-label":
           typeof fieldLabel === "string"
@@ -66,6 +47,27 @@ export function InfoPopover({
       }}
       {...props}
     >
+      <PopoverTrigger
+        openOnHover
+        render={
+          <Button
+            aria-label={
+              typeof fieldLabel === "string"
+                ? `Show information about ${fieldLabel}`
+                : "Show information"
+            }
+            variant="ghost"
+            size="icon"
+            className={cn("-m-1 p-1", buttonClassName)}
+            {...buttonProps}
+          >
+            <Info
+              className={cn("text-muted-foreground size-4", infoIconClassName)}
+              {...infoIconProps}
+            />
+          </Button>
+        }
+      />
       {children}
     </Popover>
   );

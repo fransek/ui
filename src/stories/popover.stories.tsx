@@ -6,15 +6,16 @@ import {
   PopoverClose,
   PopoverDescription,
   PopoverTitle,
+  PopoverTrigger,
 } from "../components/popover";
 
 const meta = {
   title: "Components/Popover",
   render: (args) => (
-    <Popover
-      {...args}
-      trigger={<Button variant="outline">Open Popover</Button>}
-    >
+    <Popover {...args}>
+      <PopoverTrigger
+        render={<Button variant="outline">Open Popover</Button>}
+      />
       <PopoverTitle className="mb-2">Popover content</PopoverTitle>
       <PopoverDescription className="mb-4">
         This popover can contain contextual information or actions.

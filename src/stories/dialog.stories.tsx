@@ -6,12 +6,14 @@ import {
   DialogClose,
   DialogDescription,
   DialogTitle,
+  DialogTrigger,
 } from "../components/dialog";
 
 const meta = {
   title: "Components/Dialog",
   render: (args) => (
-    <Dialog {...args} trigger={<Button variant="outline">Open Dialog</Button>}>
+    <Dialog {...args}>
+      <DialogTrigger render={<Button variant="outline">Open Dialog</Button>} />
       <DialogTitle className="mb-2">Are you sure?</DialogTitle>
       <DialogDescription>This action cannot be undone.</DialogDescription>
       <div className="flex justify-end gap-4">

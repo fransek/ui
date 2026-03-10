@@ -4,7 +4,7 @@ import { Info, Search } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 import { Input } from "../components/input";
-import { Popover } from "../components/popover";
+import { Popover, PopoverTrigger } from "../components/popover";
 
 const meta = {
   title: "Components/Fields/Input",
@@ -71,13 +71,14 @@ export const WithButton: Story = {
 export const WithInfoPopover: Story = {
   args: {
     rightSlot: (
-      <Popover
-        trigger={
-          <Button size="icon" variant="ghost">
-            <Info className="size-4" />
-          </Button>
-        }
-      >
+      <Popover>
+        <PopoverTrigger
+          render={
+            <Button size="icon" variant="ghost">
+              <Info className="size-4" />
+            </Button>
+          }
+        />
         <p className="body-2 text-body">
           Your username should be unique and contain 4-16 characters.
           <br /> It can include letters, numbers, and underscores.
