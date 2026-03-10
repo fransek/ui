@@ -1,10 +1,13 @@
 import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
-import React from "react";
+import { formatDate, isValid, parse } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import React, { useRef, useState } from "react";
 import { type DayPickerProps } from "react-day-picker";
 import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
+import { Button } from "./button";
 import { Calendar } from "./calendar";
-import { Field, FieldControl, FieldProps } from "./field";
+import { FieldProps } from "./field";
 import { Input } from "./input";
 
 export interface DatePickerProps
@@ -27,12 +30,12 @@ export interface DatePickerProps
   defaultValue?: Date;
   onValueChange?: (date: Date | undefined) => void;
   placeholder?: string;
-  format?: (date: Date) => string;
   disabled?: boolean;
   readOnly?: boolean;
   name?: string;
   fieldProps?: FieldProps;
   popoverProps?: Omit<Popover.Root.Props, "children">;
+  format?: string;
 }
 
 export function DatePicker({
@@ -46,113 +49,115 @@ export function DatePicker({
   value,
   defaultValue,
   onValueChange,
-  placeholder = "Pick a date",
-  format = (date) =>
-    date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }),
   disabled,
   readOnly,
-  name,
   popoverProps,
-  nativeButton,
   handle,
   payload,
   openOnHover,
   delay,
   closeDelay,
-  render,
   autoFocus = true,
+  format = "MM/dd/yyyy",
+  placeholder = format.toLowerCase(),
   ...props
 }: DatePickerProps) {
-  const [internalDate, setInternalDate] = React.useState<Date | undefined>(
+  const [internalDate, setInternalDate] = useState<Date | undefined>(
     defaultValue,
   );
+  const inputRef = useRef<HTMLInputElement>(null);
   const isControlled = value !== undefined;
   const date = isControlled ? value : internalDate;
-  const hasCustomTriggerRender = render !== undefined;
+  const now = new Date();
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [input, setInput] = useState(date ? formatDate(date, format) : "");
 
-  function handleSelect(selected: Date | undefined) {
+  function updateInternalDate(newDate: Date | undefined) {
     if (!isControlled) {
-      setInternalDate(selected);
+      setInternalDate(newDate);
     }
-    onValueChange?.(selected);
   }
 
+  function handleSelect(selected: Date | undefined) {
+    updateInternalDate(selected);
+    onValueChange?.(selected);
+    setInput(selected ? formatDate(selected, format) : "");
+  }
+
+  const handleValueChange = (value: string) => {
+    setInput(value);
+    const selected = parse(value, format, now);
+    if (isValid(selected)) {
+      updateInternalDate(selected);
+      onValueChange?.(selected);
+    } else {
+      updateInternalDate(undefined);
+      onValueChange?.(undefined);
+    }
+  };
+
   return (
-    <Field
+    <Input
       label={label}
       isValidating={isValidating}
       isValidatingMessage={isValidatingMessage}
       errorMessage={errorMessage}
       description={description}
       infoPopover={infoPopover}
-      {...fieldProps}
-    >
-      <Popover.Root {...popoverProps}>
-        <FieldControl
-          render={
-            <Popover.Trigger
-              disabled={disabled || readOnly}
-              aria-readonly={readOnly}
-              data-validating={isValidating ? "" : undefined}
-              nativeButton={hasCustomTriggerRender ? nativeButton : false}
-              handle={handle}
-              payload={payload}
-              openOnHover={openOnHover}
-              delay={delay}
-              closeDelay={closeDelay}
-              render={
-                render ??
-                (({ className: triggerClassName, ...triggerProps }) => (
-                  <Input
-                    {...triggerProps}
-                    className={cn(
-                      "hover:bg-card cursor-default",
-                      !date && "text-muted-foreground",
-                      triggerClassName,
-                    )}
-                    type="text"
-                    role="combobox"
-                    aria-haspopup="dialog"
-                    value={date ? format(date) : ""}
-                    placeholder={placeholder}
-                    readOnly
-                  />
-                ))
-              }
-            />
-          }
-        />
-        <Popover.Portal>
-          <Popover.Positioner className="z-10 outline-none" sideOffset={8}>
-            <Popover.Popup
-              aria-label="Calendar"
-              className={cn(
-                "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
-              )}
-            >
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={handleSelect}
-                autoFocus={autoFocus}
-                {...props}
-              />
-            </Popover.Popup>
-          </Popover.Positioner>
-        </Popover.Portal>
-        {name && (
-          <input
-            type="hidden"
-            name={name}
-            value={date ? date.toISOString() : ""}
-            readOnly
+      disabled={disabled}
+      readOnly={readOnly}
+      ref={inputRef}
+      className={cn("hover:bg-card")}
+      onValueChange={handleValueChange}
+      value={input}
+      placeholder={placeholder}
+      fieldProps={fieldProps}
+      rightAdornment={
+        <Popover.Root
+          open={calendarOpen}
+          onOpenChange={setCalendarOpen}
+          {...popoverProps}
+        >
+          <Popover.Trigger
+            disabled={disabled || readOnly}
+            aria-readonly={readOnly}
+            data-validating={isValidating ? "" : undefined}
+            handle={handle}
+            payload={payload}
+            openOnHover={openOnHover}
+            delay={delay}
+            closeDelay={closeDelay}
+            render={
+              <Button size="icon" variant="ghost" aria-label="Select date">
+                <CalendarIcon className="size-4" />
+              </Button>
+            }
           />
-        )}
-      </Popover.Root>
-    </Field>
+          <Popover.Portal>
+            <Popover.Positioner
+              className="z-10 outline-none"
+              sideOffset={8}
+              anchor={inputRef}
+            >
+              <Popover.Popup
+                aria-label="Calendar"
+                className={cn(
+                  "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+                )}
+              >
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={handleSelect}
+                  autoFocus={autoFocus}
+                  defaultMonth={isValid(date) ? date : now}
+                  {...props}
+                />
+              </Popover.Popup>
+            </Popover.Positioner>
+          </Popover.Portal>
+        </Popover.Root>
+      }
+    />
   );
 }

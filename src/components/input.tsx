@@ -47,7 +47,7 @@ export function Input({
         {leftSlot}
         <div className="relative w-full">
           {leftAdornment && (
-            <span className="text-muted-foreground absolute inset-y-0 left-0 z-10 flex items-center pl-3">
+            <span className="text-muted-foreground absolute inset-y-0 left-0 z-10 flex items-center pl-2">
               {leftAdornment}
             </span>
           )}
@@ -62,7 +62,7 @@ export function Input({
             {...props}
           />
           {rightAdornment && (
-            <span className="text-muted-foreground absolute inset-y-0 right-0 z-10 flex items-center pr-3">
+            <span className="text-muted-foreground absolute inset-y-0 right-0 z-10 flex items-center pr-2">
               {rightAdornment}
             </span>
           )}

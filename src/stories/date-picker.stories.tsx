@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { DatePicker } from "../components/date-picker";
 
 const meta = {
@@ -19,7 +20,6 @@ const meta = {
   args: {
     label: "Date of birth",
     description: "Please select your date of birth.",
-    placeholder: "Pick a date",
     isValidating: false,
     isValidatingMessage: "Checking availability...",
     infoPopover:
@@ -58,5 +58,27 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     defaultValue: new Date(),
+  },
+};
+
+export const WithCustomFormat: Story = {
+  args: {
+    format: "yyyy-MM-dd",
+  },
+};
+
+export const Controlled: Story = {
+  args: {},
+  render: (args) => {
+    const [date, setDate] = React.useState<Date | undefined>(
+      new Date(1995, 4, 20),
+    );
+    return (
+      <DatePicker
+        {...args}
+        value={date}
+        onValueChange={(newDate) => setDate(newDate)}
+      />
+    );
   },
 };
