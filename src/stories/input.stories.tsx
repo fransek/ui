@@ -55,7 +55,7 @@ export const WithButton: Story = {
     label: "Search components",
     description: undefined,
     placeholder: "Search...",
-    rightAdornment: (
+    rightSlot: (
       <Button
         aria-label="search"
         variant="outline"
