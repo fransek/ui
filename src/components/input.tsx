@@ -11,7 +11,9 @@ export interface InputProps extends BaseInputProps, FieldAttributes {
   fieldProps?: FieldProps;
   leftAdornment?: React.ReactNode;
   rightAdornment?: React.ReactNode;
+  /** @deprecated Use leftAdornment instead. */
   leftSlot?: React.ReactNode;
+  /** @deprecated Use rightAdornment instead. */
   rightSlot?: React.ReactNode;
 }
 
