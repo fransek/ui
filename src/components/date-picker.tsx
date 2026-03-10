@@ -26,9 +26,9 @@ export interface DatePickerProps
       | "defaultValue"
     >,
     FieldAttributes {
-  value?: Date;
-  defaultValue?: Date;
-  onValueChange?: (date: Date | undefined) => void;
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
@@ -62,38 +62,30 @@ export function DatePicker({
   placeholder = format.toLowerCase(),
   ...props
 }: DatePickerProps) {
-  const [internalDate, setInternalDate] = useState<Date | undefined>(
-    defaultValue,
-  );
+  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
   const inputRef = useRef<HTMLInputElement>(null);
   const isControlled = value !== undefined;
-  const date = isControlled ? value : internalDate;
+  const inputValue = isControlled ? value : internalValue;
   const now = new Date();
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [input, setInput] = useState(date ? formatDate(date, format) : "");
+  const parsedDate = parse(inputValue, format, now);
+  const date = isValid(parsedDate) ? parsedDate : undefined;
 
-  function updateInternalDate(newDate: Date | undefined) {
+  function updateInternalValue(newValue: string) {
     if (!isControlled) {
-      setInternalDate(newDate);
+      setInternalValue(newValue);
     }
   }
 
   function handleSelect(selected: Date | undefined) {
-    updateInternalDate(selected);
-    onValueChange?.(selected);
-    setInput(selected ? formatDate(selected, format) : "");
+    const newValue = selected ? formatDate(selected, format) : "";
+    updateInternalValue(newValue);
+    onValueChange?.(newValue);
   }
 
-  const handleValueChange = (value: string) => {
-    setInput(value);
-    const selected = parse(value, format, now);
-    if (isValid(selected)) {
-      updateInternalDate(selected);
-      onValueChange?.(selected);
-    } else {
-      updateInternalDate(undefined);
-      onValueChange?.(undefined);
-    }
+  const handleValueChange = (newValue: string) => {
+    updateInternalValue(newValue);
+    onValueChange?.(newValue);
   };
 
   return (
@@ -109,7 +101,7 @@ export function DatePicker({
       ref={inputRef}
       className={cn("hover:bg-card")}
       onValueChange={handleValueChange}
-      value={input}
+      value={inputValue}
       placeholder={placeholder}
       fieldProps={fieldProps}
       rightAdornment={
