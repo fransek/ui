@@ -1,5 +1,5 @@
 import {
-  Radio as BaseRadio,
+  Radio as BaseUIRadio,
   RadioIndicatorProps,
   RadioRootProps,
 } from "@base-ui/react/radio";
@@ -24,7 +24,7 @@ export function Radio(props: RadioProps) {
 
   return (
     <label className="flex items-center gap-2" id={id}>
-      <BaseRadio.Root
+      <BaseUIRadio.Root
         className={cnBaseUI(
           "data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline data-checked:border-primary-foreground data-invalid:border-error-foreground flex size-5 items-center justify-center rounded-full border",
         )}
@@ -32,14 +32,14 @@ export function Radio(props: RadioProps) {
         data-validating={isValidating ? "" : undefined}
         {...restProps}
       >
-        <BaseRadio.Indicator
+        <BaseUIRadio.Indicator
           className={cnBaseUI(
             "before:bg-primary data-invalid:before:bg-error flex before:size-3 before:rounded-full data-unchecked:hidden",
             indicatorClassName,
           )}
           {...indicatorProps}
         />
-      </BaseRadio.Root>
+      </BaseUIRadio.Root>
       {label}
     </label>
   );

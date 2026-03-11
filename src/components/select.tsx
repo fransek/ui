@@ -1,5 +1,5 @@
 import {
-  Select as BaseSelect,
+  Select as BaseUISelect,
   SelectIconProps,
   SelectItemIndicatorProps,
   SelectItemProps,
@@ -127,7 +127,7 @@ export function Select<T>(props: SelectProps<T>) {
       invalid={invalid}
       {...fieldProps}
     >
-      <BaseSelect.Root
+      <BaseUISelect.Root
         items={items}
         actionsRef={actionsRef}
         autoComplete={autoComplete}
@@ -151,7 +151,7 @@ export function Select<T>(props: SelectProps<T>) {
         required={required}
         value={value}
       >
-        <BaseSelect.Trigger
+        <BaseUISelect.Trigger
           className={cnBaseUI(
             "outline-highlight focus-visible:focus-outline data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating hover:bg-card data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none",
             className,
@@ -163,12 +163,12 @@ export function Select<T>(props: SelectProps<T>) {
           value={triggerValue}
           {...restProps}
         >
-          <BaseSelect.Value
+          <BaseUISelect.Value
             className={cnBaseUI("data-placeholder:opacity-60", valueClassName)}
             placeholder={placeholder}
             {...valueProps}
           />
-          <BaseSelect.Icon
+          <BaseUISelect.Icon
             className={cnBaseUI("flex", selectIconClassName)}
             {...selectIconProps}
           >
@@ -176,10 +176,10 @@ export function Select<T>(props: SelectProps<T>) {
               className={cn("size-4", iconClassName)}
               {...iconProps}
             />
-          </BaseSelect.Icon>
-        </BaseSelect.Trigger>
-        <BaseSelect.Portal {...portalProps}>
-          <BaseSelect.Positioner
+          </BaseUISelect.Icon>
+        </BaseUISelect.Trigger>
+        <BaseUISelect.Portal {...portalProps}>
+          <BaseUISelect.Positioner
             className={cnBaseUI(
               "z-10 outline-none select-none",
               positionerClassName,
@@ -187,21 +187,21 @@ export function Select<T>(props: SelectProps<T>) {
             sideOffset={8}
             {...positionerProps}
           >
-            <BaseSelect.Popup
+            <BaseUISelect.Popup
               className={cnBaseUI(
                 "group bg-background outline-border min-w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
                 popupClassName,
               )}
               {...popupProps}
             >
-              <BaseSelect.ScrollUpArrow
+              <BaseUISelect.ScrollUpArrow
                 className={cnBaseUI(
                   "bg-background top-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-top-full",
                   scrollUpArrowClassName,
                 )}
                 {...scrollUpArrowProps}
               />
-              <BaseSelect.List
+              <BaseUISelect.List
                 className={cnBaseUI(
                   "relative max-h-(--available-height) scroll-py-6 overflow-y-auto py-1",
                   listClassName,
@@ -210,7 +210,7 @@ export function Select<T>(props: SelectProps<T>) {
               >
                 {Array.isArray(items) &&
                   items.map(({ label, value }) => (
-                    <BaseSelect.Item
+                    <BaseUISelect.Item
                       key={String(value)}
                       value={value}
                       className={cnBaseUI(
@@ -219,7 +219,7 @@ export function Select<T>(props: SelectProps<T>) {
                       )}
                       {...itemProps}
                     >
-                      <BaseSelect.ItemIndicator
+                      <BaseUISelect.ItemIndicator
                         className={cnBaseUI(
                           "col-start-1",
                           itemIndicatorClassName,
@@ -230,27 +230,27 @@ export function Select<T>(props: SelectProps<T>) {
                           className={cn("size-3", checkIconClassName)}
                           {...checkIconProps}
                         />
-                      </BaseSelect.ItemIndicator>
-                      <BaseSelect.ItemText
+                      </BaseUISelect.ItemIndicator>
+                      <BaseUISelect.ItemText
                         className={cnBaseUI("col-start-2", itemTextClassName)}
                         {...itemTextProps}
                       >
                         {label}
-                      </BaseSelect.ItemText>
-                    </BaseSelect.Item>
+                      </BaseUISelect.ItemText>
+                    </BaseUISelect.Item>
                   ))}
-              </BaseSelect.List>
-              <BaseSelect.ScrollDownArrow
+              </BaseUISelect.List>
+              <BaseUISelect.ScrollDownArrow
                 className={cnBaseUI(
                   "bg-background bottom-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-bottom-full",
                   scrollDownArrowClassName,
                 )}
                 {...scrollDownArrowProps}
               />
-            </BaseSelect.Popup>
-          </BaseSelect.Positioner>
-        </BaseSelect.Portal>
-      </BaseSelect.Root>
+            </BaseUISelect.Popup>
+          </BaseUISelect.Positioner>
+        </BaseUISelect.Portal>
+      </BaseUISelect.Root>
     </Field>
   );
 }

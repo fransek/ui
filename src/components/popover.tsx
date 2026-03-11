@@ -1,5 +1,5 @@
 import {
-  Popover as BasePopover,
+  Popover as BaseUIPopover,
   PopoverArrowProps,
   PopoverCloseProps,
   PopoverDescriptionProps,
@@ -51,7 +51,7 @@ export function Popover(props: PopoverProps) {
   } = props;
 
   return (
-    <BasePopover.Root
+    <BaseUIPopover.Root
       actionsRef={actionsRef}
       defaultOpen={defaultOpen}
       defaultTriggerId={defaultTriggerId}
@@ -64,18 +64,18 @@ export function Popover(props: PopoverProps) {
     >
       {(renderProps) => (
         <>
-          <BasePopover.Trigger
+          <BaseUIPopover.Trigger
             render={trigger}
             className={className}
             {...restProps}
           />
-          <BasePopover.Portal {...portalProps}>
-            <BasePopover.Positioner
+          <BaseUIPopover.Portal {...portalProps}>
+            <BaseUIPopover.Positioner
               className={cnBaseUI("z-10 outline-none", positionerClassName)}
               sideOffset={8}
               {...positionerProps}
             >
-              <BasePopover.Popup
+              <BaseUIPopover.Popup
                 className={cnBaseUI(
                   "bg-background outline-border max-w-[calc(100vw-3rem)] min-w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding p-4 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
                   popupClassName,
@@ -83,7 +83,7 @@ export function Popover(props: PopoverProps) {
                 {...popupProps}
               >
                 {arrow && (
-                  <BasePopover.Arrow
+                  <BaseUIPopover.Arrow
                     className={cnBaseUI(
                       "data-[side=bottom]:-top-2 data-[side=left]:-right-3.25 data-[side=left]:rotate-90 data-[side=right]:-left-3.25 data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
                       arrowClassName,
@@ -91,24 +91,24 @@ export function Popover(props: PopoverProps) {
                     {...arrowProps}
                   >
                     <ArrowSvg {...arrowSvgProps} />
-                  </BasePopover.Arrow>
+                  </BaseUIPopover.Arrow>
                 )}
                 {typeof children === "function"
                   ? children(renderProps)
                   : children}
-              </BasePopover.Popup>
-            </BasePopover.Positioner>
-          </BasePopover.Portal>
+              </BaseUIPopover.Popup>
+            </BaseUIPopover.Positioner>
+          </BaseUIPopover.Portal>
         </>
       )}
-    </BasePopover.Root>
+    </BaseUIPopover.Root>
   );
 }
 
 export function PopoverTitle(props: PopoverTitleProps) {
   const { className, ...restProps } = props;
   return (
-    <BasePopover.Title
+    <BaseUIPopover.Title
       className={cnBaseUI("heading-6", className)}
       {...restProps}
     />
@@ -118,7 +118,7 @@ export function PopoverTitle(props: PopoverTitleProps) {
 export function PopoverDescription(props: PopoverDescriptionProps) {
   const { className, ...restProps } = props;
   return (
-    <BasePopover.Description
+    <BaseUIPopover.Description
       className={cnBaseUI("text-body body-2", className)}
       {...restProps}
     />
@@ -126,7 +126,7 @@ export function PopoverDescription(props: PopoverDescriptionProps) {
 }
 
 export function PopoverClose(props: PopoverCloseProps) {
-  return <BasePopover.Close {...props} />;
+  return <BaseUIPopover.Close {...props} />;
 }
 
 interface ArrowSvgProps extends React.ComponentProps<"svg"> {

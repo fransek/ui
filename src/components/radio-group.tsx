@@ -1,14 +1,15 @@
 import { Fieldset } from "@base-ui/react/fieldset";
 import {
-  RadioGroup as BaseRadioGroup,
-  RadioGroupProps as BaseRadioGroupProps,
+  RadioGroup as BaseUIRadioGroup,
+  RadioGroupProps as BaseUIRadioGroupProps,
 } from "@base-ui/react/radio-group";
 import * as React from "react";
 import { FieldAttributes } from "../lib/types";
 import { Field, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
-export interface RadioGroupProps extends BaseRadioGroupProps, FieldAttributes {
+export interface RadioGroupProps
+  extends BaseUIRadioGroupProps, FieldAttributes {
   fieldProps?: FieldProps;
 }
 
@@ -36,7 +37,7 @@ export function RadioGroup(props: RadioGroupProps) {
       {...fieldProps}
     >
       <Fieldset.Root
-        render={<BaseRadioGroup {...restProps} />}
+        render={<BaseUIRadioGroup {...restProps} />}
         className="flex flex-col gap-1"
       >
         {label && (

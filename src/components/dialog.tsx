@@ -1,5 +1,5 @@
 import {
-  Dialog as BaseDialog,
+  Dialog as BaseUIDialog,
   DialogBackdropProps,
   DialogCloseProps,
   DialogDescriptionProps,
@@ -55,7 +55,7 @@ export function Dialog(props: DialogProps) {
   } = props;
 
   return (
-    <BaseDialog.Root
+    <BaseUIDialog.Root
       actionsRef={actionsRef}
       defaultOpen={defaultOpen}
       defaultTriggerId={defaultTriggerId}
@@ -69,16 +69,16 @@ export function Dialog(props: DialogProps) {
     >
       {(renderProps) => (
         <>
-          <BaseDialog.Trigger render={trigger} {...restProps} />
-          <BaseDialog.Portal {...portalProps}>
-            <BaseDialog.Backdrop
+          <BaseUIDialog.Trigger render={trigger} {...restProps} />
+          <BaseUIDialog.Portal {...portalProps}>
+            <BaseUIDialog.Backdrop
               className={cnBaseUI(
                 "fixed inset-0 min-h-dvh bg-black opacity-20 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
                 backdropClassName,
               )}
               {...backdropProps}
             />
-            <BaseDialog.Popup
+            <BaseUIDialog.Popup
               className={cnBaseUI(
                 "bg-background text-foreground fixed top-1/2 left-1/2 -mt-8 w-96 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border p-4 transition-all duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
                 popupClassName,
@@ -113,18 +113,18 @@ export function Dialog(props: DialogProps) {
               {typeof children === "function"
                 ? children(renderProps)
                 : children}
-            </BaseDialog.Popup>
-          </BaseDialog.Portal>
+            </BaseUIDialog.Popup>
+          </BaseUIDialog.Portal>
         </>
       )}
-    </BaseDialog.Root>
+    </BaseUIDialog.Root>
   );
 }
 
 export function DialogTitle(props: DialogTitleProps) {
   const { className, ...restProps } = props;
   return (
-    <BaseDialog.Title
+    <BaseUIDialog.Title
       className={cnBaseUI("heading-6", className)}
       {...restProps}
     />
@@ -134,7 +134,7 @@ export function DialogTitle(props: DialogTitleProps) {
 export function DialogDescription(props: DialogDescriptionProps) {
   const { className, ...restProps } = props;
   return (
-    <BaseDialog.Description
+    <BaseUIDialog.Description
       className={cnBaseUI("text-body body-2 mb-6", className)}
       {...restProps}
     />
@@ -142,5 +142,5 @@ export function DialogDescription(props: DialogDescriptionProps) {
 }
 
 export function DialogClose(props: DialogCloseProps) {
-  return <BaseDialog.Close {...props} />;
+  return <BaseUIDialog.Close {...props} />;
 }

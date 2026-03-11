@@ -1,6 +1,6 @@
 import {
-  CheckboxGroup as BaseCheckboxGroup,
-  CheckboxGroupProps as BaseCheckboxGroupProps,
+  CheckboxGroup as BaseUICheckboxGroup,
+  CheckboxGroupProps as BaseUICheckboxGroupProps,
 } from "@base-ui/react/checkbox-group";
 import {
   Fieldset,
@@ -14,7 +14,7 @@ import { Field, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
 export interface CheckboxGroupProps
-  extends BaseCheckboxGroupProps, FieldAttributes {
+  extends BaseUICheckboxGroupProps, FieldAttributes {
   children?: React.ReactNode;
   fieldProps?: FieldProps;
   fieldsetProps?: FieldsetRootProps;
@@ -47,7 +47,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         {...fieldProps}
       >
         <Fieldset.Root
-          render={<BaseCheckboxGroup {...restProps} />}
+          render={<BaseUICheckboxGroup {...restProps} />}
           className={cnBaseUI("flex flex-col gap-1", fieldsetClassName)}
           {...fieldsetProps}
         >

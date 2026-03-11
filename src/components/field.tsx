@@ -1,23 +1,23 @@
 import {
-  Field as BaseField,
-  FieldControlProps as BaseFieldControlProps,
-  FieldDescriptionProps as BaseFieldDescriptionProps,
-  FieldErrorProps as BaseFieldErrorProps,
-  FieldItemProps as BaseFieldItemProps,
-  FieldLabelProps as BaseFieldLabelProps,
-  FieldRootProps as BaseFieldRootProps,
-  FieldValidityProps as BaseFieldValidityProps,
+  Field as BaseUIField,
+  FieldControlProps as BaseUIFieldControlProps,
+  FieldDescriptionProps as BaseUIFieldDescriptionProps,
+  FieldErrorProps as BaseUIFieldErrorProps,
+  FieldItemProps as BaseUIFieldItemProps,
+  FieldLabelProps as BaseUIFieldLabelProps,
+  FieldRootProps as BaseUIFieldRootProps,
+  FieldValidityProps as BaseUIFieldValidityProps,
 } from "@base-ui/react/field";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cnBaseUI } from "../lib/utils";
 import { InfoPopover } from "./info-popover";
 
-export interface FieldProps extends BaseFieldRootProps, FieldAttributes {
-  labelProps?: BaseFieldLabelProps;
-  errorMessageProps?: BaseFieldErrorProps;
-  descriptionProps?: BaseFieldDescriptionProps;
-  isValidatingMessageProps?: BaseFieldDescriptionProps;
+export interface FieldProps extends BaseUIFieldRootProps, FieldAttributes {
+  labelProps?: BaseUIFieldLabelProps;
+  errorMessageProps?: BaseUIFieldErrorProps;
+  descriptionProps?: BaseUIFieldDescriptionProps;
+  isValidatingMessageProps?: BaseUIFieldDescriptionProps;
 }
 
 export function Field(props: FieldProps) {
@@ -80,65 +80,65 @@ export function Field(props: FieldProps) {
   );
 }
 
-export type FieldControlProps = BaseFieldControlProps;
+export type FieldControlProps = BaseUIFieldControlProps;
 
-export const FieldControl = BaseField.Control;
+export const FieldControl = BaseUIField.Control;
 
-export type FieldDescriptionProps = BaseFieldDescriptionProps;
+export type FieldDescriptionProps = BaseUIFieldDescriptionProps;
 
-export function FieldDescription(props: BaseFieldDescriptionProps) {
+export function FieldDescription(props: BaseUIFieldDescriptionProps) {
   const { className, ...restProps } = props;
   return (
-    <BaseField.Description
+    <BaseUIField.Description
       className={cnBaseUI("text-muted-foreground text-sm", className)}
       {...restProps}
     />
   );
 }
 
-export type FieldErrorProps = BaseFieldErrorProps;
+export type FieldErrorProps = BaseUIFieldErrorProps;
 
-export function FieldError(props: BaseFieldErrorProps) {
+export function FieldError(props: BaseUIFieldErrorProps) {
   const { className, ...restProps } = props;
   return (
-    <BaseField.Error
+    <BaseUIField.Error
       className={cnBaseUI("text-error-foreground contents text-sm", className)}
       {...restProps}
     />
   );
 }
 
-export type FieldItemProps = BaseFieldItemProps;
+export type FieldItemProps = BaseUIFieldItemProps;
 
-export const FieldItem = BaseField.Item;
+export const FieldItem = BaseUIField.Item;
 
-export type FieldLabelProps = BaseFieldLabelProps;
+export type FieldLabelProps = BaseUIFieldLabelProps;
 
-export function FieldLabel(props: BaseFieldLabelProps) {
+export function FieldLabel(props: BaseUIFieldLabelProps) {
   const { className, ...restProps } = props;
   return (
-    <BaseField.Label
+    <BaseUIField.Label
       className={cnBaseUI("text-foreground text-sm font-semibold", className)}
       {...restProps}
     />
   );
 }
 
-export type FieldRootProps = BaseFieldRootProps;
+export type FieldRootProps = BaseUIFieldRootProps;
 
-export function FieldRoot(props: BaseFieldRootProps) {
+export function FieldRoot(props: BaseUIFieldRootProps) {
   const { className, ...restProps } = props;
   return (
-    <BaseField.Root
+    <BaseUIField.Root
       className={cnBaseUI("flex flex-col gap-1", className)}
       {...restProps}
     />
   );
 }
 
-export type FieldValidityProps = BaseFieldValidityProps;
+export type FieldValidityProps = BaseUIFieldValidityProps;
 
-export const FieldValidity = BaseField.Validity;
+export const FieldValidity = BaseUIField.Validity;
 
 export const FieldContext = React.createContext({
   isValidating: false,

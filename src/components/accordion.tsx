@@ -1,33 +1,33 @@
 import {
-  Accordion as BaseAccordion,
-  AccordionHeaderProps as BaseAccordionHeaderProps,
-  AccordionItemProps as BaseAccordionItemProps,
-  AccordionPanelProps as BaseAccordionPanelProps,
-  AccordionRootProps as BaseAccordionRootProps,
-  AccordionTriggerProps as BaseAccordionTriggerProps,
+  Accordion as BaseUIAccordion,
+  AccordionHeaderProps as BaseUIAccordionHeaderProps,
+  AccordionItemProps as BaseUIAccordionItemProps,
+  AccordionPanelProps as BaseUIAccordionPanelProps,
+  AccordionRootProps as BaseUIAccordionRootProps,
+  AccordionTriggerProps as BaseUIAccordionTriggerProps,
 } from "@base-ui/react/accordion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 import { cn, cnBaseUI } from "../lib/utils";
 
-export type AccordionProps = BaseAccordionRootProps;
+export type AccordionProps = BaseUIAccordionRootProps;
 
 export function Accordion(props: AccordionProps) {
   const { className, ...restProps } = props;
   return (
-    <BaseAccordion.Root
+    <BaseUIAccordion.Root
       className={cnBaseUI("w-full", className)}
       {...restProps}
     />
   );
 }
 
-export interface AccordionPanelProps extends BaseAccordionItemProps {
+export interface AccordionPanelProps extends BaseUIAccordionItemProps {
   summary: React.ReactNode;
   iconProps?: React.ComponentPropsWithoutRef<"svg">;
-  headerProps?: Omit<BaseAccordionHeaderProps, "children">;
-  triggerProps?: Omit<BaseAccordionTriggerProps, "children">;
-  panelProps?: Omit<BaseAccordionPanelProps, "children">;
+  headerProps?: Omit<BaseUIAccordionHeaderProps, "children">;
+  triggerProps?: Omit<BaseUIAccordionTriggerProps, "children">;
+  panelProps?: Omit<BaseUIAccordionPanelProps, "children">;
 }
 
 export function AccordionPanel(props: AccordionPanelProps) {
@@ -43,15 +43,15 @@ export function AccordionPanel(props: AccordionPanelProps) {
   } = props;
 
   return (
-    <BaseAccordion.Item
+    <BaseUIAccordion.Item
       className={cnBaseUI("border-b", className)}
       {...restProps}
     >
-      <BaseAccordion.Header
+      <BaseUIAccordion.Header
         className={cnBaseUI("flex w-full", headerClassName)}
         {...headerProps}
       >
-        <BaseAccordion.Trigger
+        <BaseUIAccordion.Trigger
           className={cnBaseUI(
             "group hover:bg-card outline-highlight focus-visible:focus-outline relative flex w-full items-center justify-between gap-4 px-3 py-2 text-left font-medium focus-visible:z-1",
             triggerClassName,
@@ -66,9 +66,9 @@ export function AccordionPanel(props: AccordionPanelProps) {
             )}
             {...iconProps}
           />
-        </BaseAccordion.Trigger>
-      </BaseAccordion.Header>
-      <BaseAccordion.Panel
+        </BaseUIAccordion.Trigger>
+      </BaseUIAccordion.Header>
+      <BaseUIAccordion.Panel
         className={cnBaseUI(
           "h-(--accordion-panel-height) overflow-hidden transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0",
           panelClassName,
@@ -76,7 +76,7 @@ export function AccordionPanel(props: AccordionPanelProps) {
         {...panelProps}
       >
         <div className="pb-4 text-sm">{children}</div>
-      </BaseAccordion.Panel>
-    </BaseAccordion.Item>
+      </BaseUIAccordion.Panel>
+    </BaseUIAccordion.Item>
   );
 }

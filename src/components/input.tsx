@@ -1,13 +1,13 @@
 import {
-  Input as BaseInput,
-  InputProps as BaseInputProps,
+  Input as BaseUIInput,
+  InputProps as BaseUIInputProps,
 } from "@base-ui/react/input";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cnBaseUI } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 
-export interface InputProps extends BaseInputProps, FieldAttributes {
+export interface InputProps extends BaseUIInputProps, FieldAttributes {
   fieldProps?: FieldProps;
   leftAdornment?: React.ReactNode;
   rightAdornment?: React.ReactNode;
@@ -55,7 +55,7 @@ export function Input(props: InputProps) {
               {leftAdornment}
             </span>
           )}
-          <BaseInput
+          <BaseUIInput
             className={cnBaseUI(
               "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors",
               hasLeftAdornment && "pl-10",

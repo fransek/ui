@@ -1,11 +1,11 @@
 import {
-  Button as BaseButton,
-  ButtonProps as BaseButtonProps,
+  Button as BaseUIButton,
+  ButtonProps as BaseUIButtonProps,
 } from "@base-ui/react/button";
 import React from "react";
 import { cn } from "../lib/utils";
 
-export interface ButtonProps extends BaseButtonProps {
+export interface ButtonProps extends BaseUIButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
 }
@@ -16,11 +16,12 @@ export function Button(props: ButtonProps) {
     size = "md",
     children,
     className,
+    focusableWhenDisabled = true,
     ...restProps
   } = props;
 
   return (
-    <BaseButton
+    <BaseUIButton
       className={(state) =>
         buttonStyles({
           variant,
@@ -29,11 +30,11 @@ export function Button(props: ButtonProps) {
             typeof className === "function" ? className(state) : className,
         })
       }
-      focusableWhenDisabled
+      focusableWhenDisabled={focusableWhenDisabled}
       {...restProps}
     >
       {children}
-    </BaseButton>
+    </BaseUIButton>
   );
 }
 

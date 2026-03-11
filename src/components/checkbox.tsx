@@ -1,6 +1,6 @@
 import {
-  Checkbox as BaseCheckbox,
-  CheckboxRootProps as BaseCheckboxRootProps,
+  Checkbox as BaseUICheckbox,
+  CheckboxRootProps as BaseUICheckboxRootProps,
   CheckboxIndicatorProps,
 } from "@base-ui/react/checkbox";
 import { CheckIcon } from "lucide-react";
@@ -18,7 +18,7 @@ import {
 import { InfoPopover } from "./info-popover";
 
 export interface CheckboxProps
-  extends BaseCheckboxRootProps, Omit<FieldAttributes, "label"> {
+  extends BaseUICheckboxRootProps, Omit<FieldAttributes, "label"> {
   label?: React.ReactNode;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
   indicatorProps?: CheckboxIndicatorProps;
@@ -57,7 +57,7 @@ export function Checkbox(props: CheckboxProps) {
         )}
         {...labelProps}
       >
-        <BaseCheckbox.Root
+        <BaseUICheckbox.Root
           className={cnBaseUI(
             "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary outline-highlight focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border",
             className,
@@ -66,7 +66,7 @@ export function Checkbox(props: CheckboxProps) {
           data-validating={isValidating ? "" : undefined}
           {...restProps}
         >
-          <BaseCheckbox.Indicator
+          <BaseUICheckbox.Indicator
             className={cnBaseUI(
               "text-on-primary data-invalid:border-error data-invalid:bg-error flex data-unchecked:hidden",
               indicatorClassName,
@@ -74,8 +74,8 @@ export function Checkbox(props: CheckboxProps) {
             {...indicatorProps}
           >
             <CheckIcon className={cn("size-4", iconClassName)} {...iconProps} />
-          </BaseCheckbox.Indicator>
-        </BaseCheckbox.Root>
+          </BaseUICheckbox.Indicator>
+        </BaseUICheckbox.Root>
         <span id={labelId}>{label}</span>
       </FieldLabel>
       {infoPopover && (
