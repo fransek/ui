@@ -8,56 +8,23 @@ import { cn } from "../lib/utils";
 import { Button } from "./button";
 import { Calendar } from "./calendar";
 import { FieldProps } from "./field";
-import { Input } from "./input";
+import { Input, InputProps } from "./input";
 
-export interface DatePickerProps
-  extends
-    Omit<DayPickerProps, "mode" | "selected" | "onSelect">,
-    Omit<
-      PopoverTriggerProps,
-      | "children"
-      | "className"
-      | "style"
-      | "onSelect"
-      | "hidden"
-      | "disabled"
-      | "role"
-      | "value"
-      | "defaultValue"
-    >,
-    FieldAttributes {
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
-  placeholder?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  name?: string;
-  fieldProps?: FieldProps;
+export interface DatePickerProps extends InputProps {
+  calendarProps: DayPickerProps;
+  triggerProps?: PopoverTriggerProps;
   popoverProps?: Omit<Popover.Root.Props, "children">;
   format?: string;
 }
 
 export function DatePicker({
-  label,
-  isValidating,
-  isValidatingMessage,
-  errorMessage,
-  description,
-  infoPopover,
-  fieldProps,
+  calendarProps,
+  triggerProps,
+  popoverProps,
+  className,
   value,
   defaultValue,
   onValueChange,
-  disabled,
-  readOnly,
-  popoverProps,
-  handle,
-  payload,
-  openOnHover,
-  delay,
-  closeDelay,
-  autoFocus = true,
   format = "MM/dd/yyyy",
   placeholder = format.toLowerCase(),
   ...props
@@ -90,20 +57,11 @@ export function DatePicker({
 
   return (
     <Input
-      label={label}
-      isValidating={isValidating}
-      isValidatingMessage={isValidatingMessage}
-      errorMessage={errorMessage}
-      description={description}
-      infoPopover={infoPopover}
-      disabled={disabled}
-      readOnly={readOnly}
       ref={inputRef}
-      className={cn("hover:bg-card")}
+      className={cn("hover:bg-card", className)}
       onValueChange={handleValueChange}
       value={inputValue}
       placeholder={placeholder}
-      fieldProps={fieldProps}
       rightAdornment={
         <Popover.Root
           open={calendarOpen}
@@ -124,6 +82,7 @@ export function DatePicker({
                 <CalendarIcon className="size-4" />
               </Button>
             }
+            {...triggerProps}
           />
           <Popover.Portal>
             <Popover.Positioner
@@ -141,15 +100,16 @@ export function DatePicker({
                   mode="single"
                   selected={date}
                   onSelect={handleSelect}
-                  autoFocus={autoFocus}
+                  autoFocus={true}
                   defaultMonth={isValid(date) ? date : now}
-                  {...props}
+                  {...calendarProps}
                 />
               </Popover.Popup>
             </Popover.Positioner>
           </Popover.Portal>
         </Popover.Root>
       }
+      {...props}
     />
   );
 }
