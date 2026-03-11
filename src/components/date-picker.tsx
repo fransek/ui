@@ -53,23 +53,80 @@ export function DatePicker({
   function createChangeEventDetails(
     event: Event,
   ): DatePickerChangeEventDetails {
+    let isCanceled = false;
+    let isPropagationAllowed = false;
+
     return {
       reason: "none",
       event,
-      cancel: () => {},
-      allowPropagation: () => {},
-      isCanceled: false,
-      isPropagationAllowed: false,
+      cancel: () => {
+        isCanceled = true;
+      },
+      allowPropagation: () => {
+        isPropagationAllowed = true;
+      },
+      get isCanceled() {
+        return isCanceled;
+      },
+      get isPropagationAllowed() {
+        return isPropagationAllowed;
+      },
       trigger: inputRef.current ?? undefined,
+    };
+  }
+
+  function createOnChangeEvent(
+    event: Event,
+  ): DatePickerOnChangeEvent | undefined {
+    const target = inputRef.current;
+
+    if (!target) {
+      return undefined;
+    }
+
+    let baseUIHandlerPrevented = false;
+
+    return {
+      nativeEvent: event,
+      currentTarget: target,
+      target,
+      bubbles: event.bubbles,
+      cancelable: event.cancelable,
+      defaultPrevented: event.defaultPrevented,
+      eventPhase: event.eventPhase,
+      isTrusted: event.isTrusted,
+      preventDefault: () => {
+        event.preventDefault();
+      },
+      isDefaultPrevented: () => event.defaultPrevented,
+      stopPropagation: () => {
+        event.stopPropagation();
+      },
+      isPropagationStopped: () => event.cancelBubble,
+      persist: () => {},
+      timeStamp: event.timeStamp,
+      type: event.type,
+      preventBaseUIHandler: () => {
+        baseUIHandlerPrevented = true;
+      },
+      get baseUIHandlerPrevented() {
+        return baseUIHandlerPrevented;
+      },
     };
   }
 
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
     updateInternalValue(newValue);
-    const changeEvent = new Event("change");
+    const changeEvent = new Event("change", {
+      bubbles: true,
+      cancelable: true,
+    });
     onValueChange?.(newValue, createChangeEventDetails(changeEvent));
-    onChange?.(changeEvent as unknown as DatePickerOnChangeEvent);
+    const onChangeEvent = createOnChangeEvent(changeEvent);
+    if (onChangeEvent) {
+      onChange?.(onChangeEvent);
+    }
   }
 
   return (
