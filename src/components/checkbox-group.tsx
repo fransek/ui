@@ -18,7 +18,7 @@ export interface CheckboxGroupProps
   children?: React.ReactNode;
   fieldProps?: FieldProps;
   fieldsetProps?: FieldsetRootProps;
-  legendProps?: FieldsetLegendProps;
+  fieldsetLegendProps?: FieldsetLegendProps;
 }
 
 export function CheckboxGroup(props: CheckboxGroupProps) {
@@ -33,7 +33,10 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
     fieldProps,
     infoPopover,
     fieldsetProps: { className: fieldsetClassName, ...fieldsetProps } = {},
-    legendProps: { className: legendClassName, ...legendProps } = {},
+    fieldsetLegendProps: {
+      className: fieldsetLegendClassName,
+      ...legendProps
+    } = {},
     ...restProps
   } = props;
   return (
@@ -56,7 +59,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
               <Fieldset.Legend
                 className={cnBaseUI(
                   "text-foreground text-sm font-semibold",
-                  legendClassName,
+                  fieldsetLegendClassName,
                 )}
                 {...legendProps}
               >

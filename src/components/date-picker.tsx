@@ -9,7 +9,7 @@ import { Input, InputProps } from "./input";
 
 export interface DatePickerProps extends InputProps {
   calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect">;
-  triggerProps?: PopoverTriggerProps;
+  popoverTriggerProps?: PopoverTriggerProps;
   popoverProps?: Omit<Popover.Root.Props, "children">;
   format?: string;
 }
@@ -17,7 +17,7 @@ export interface DatePickerProps extends InputProps {
 export function DatePicker(props: DatePickerProps) {
   const {
     calendarProps,
-    triggerProps,
+    popoverTriggerProps,
     popoverProps,
     className,
     value,
@@ -78,7 +78,7 @@ export function DatePicker(props: DatePickerProps) {
                 <CalendarIcon className="size-4" />
               </Button>
             }
-            {...triggerProps}
+            {...popoverTriggerProps}
           />
           <Popover.Portal>
             <Popover.Positioner
