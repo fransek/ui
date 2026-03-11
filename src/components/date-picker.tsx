@@ -31,6 +31,7 @@ export function DatePicker({
   value,
   defaultValue,
   onValueChange,
+  rightAdornment,
   disabled,
   readOnly,
   popoverProps,
@@ -89,50 +90,52 @@ export function DatePicker({
       placeholder={placeholder}
       {...props}
       rightAdornment={
-        <Popover.Root
-          open={calendarOpen}
-          onOpenChange={setCalendarOpen}
-          {...popoverProps}
-        >
-          <Popover.Trigger
-            disabled={disabled || readOnly}
-            aria-readonly={readOnly}
-            data-validating={isValidating ? "" : undefined}
-            handle={handle}
-            payload={payload}
-            openOnHover={openOnHover}
-            delay={delay}
-            closeDelay={closeDelay}
-            render={
-              <Button size="icon" variant="ghost" aria-label="Select date">
-                <CalendarIcon className="size-4" />
-              </Button>
-            }
-          />
-          <Popover.Portal>
-            <Popover.Positioner
-              className="z-10 outline-none"
-              sideOffset={8}
-              anchor={inputRef}
-            >
-              <Popover.Popup
-                aria-label="Calendar"
-                className={cn(
-                  "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
-                )}
+        rightAdornment ?? (
+          <Popover.Root
+            open={calendarOpen}
+            onOpenChange={setCalendarOpen}
+            {...popoverProps}
+          >
+            <Popover.Trigger
+              disabled={disabled || readOnly}
+              aria-readonly={readOnly}
+              data-validating={isValidating ? "" : undefined}
+              handle={handle}
+              payload={payload}
+              openOnHover={openOnHover}
+              delay={delay}
+              closeDelay={closeDelay}
+              render={
+                <Button size="icon" variant="ghost" aria-label="Select date">
+                  <CalendarIcon className="size-4" />
+                </Button>
+              }
+            />
+            <Popover.Portal>
+              <Popover.Positioner
+                className="z-10 outline-none"
+                sideOffset={8}
+                anchor={inputRef}
               >
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={handleSelect}
-                  autoFocus={autoFocus}
-                  defaultMonth={isValid(date) ? date : now}
-                  {...calendarProps}
-                />
-              </Popover.Popup>
-            </Popover.Positioner>
-          </Popover.Portal>
-        </Popover.Root>
+                <Popover.Popup
+                  aria-label="Calendar"
+                  className={cn(
+                    "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+                  )}
+                >
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={handleSelect}
+                    autoFocus={autoFocus}
+                    defaultMonth={isValid(date) ? date : now}
+                    {...calendarProps}
+                  />
+                </Popover.Popup>
+              </Popover.Positioner>
+            </Popover.Portal>
+          </Popover.Root>
+        )
       }
     />
   );
