@@ -2,39 +2,22 @@ import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
 import { formatDate, isValid, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
-import { type DayPickerProps } from "react-day-picker";
-import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
 import { Button } from "./button";
-import { Calendar } from "./calendar";
-import { FieldProps } from "./field";
-import { Input } from "./input";
+import { Calendar, type CalendarProps } from "./calendar";
+import { Input, type InputProps } from "./input";
 
-export interface DatePickerProps
-  extends
-    Omit<DayPickerProps, "mode" | "selected" | "onSelect">,
-    Omit<
-      PopoverTriggerProps,
-      | "children"
-      | "className"
-      | "style"
-      | "onSelect"
-      | "hidden"
-      | "disabled"
-      | "role"
-      | "value"
-      | "defaultValue"
-    >,
-    FieldAttributes {
+export interface DatePickerProps extends InputProps {
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
-  placeholder?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  name?: string;
-  fieldProps?: FieldProps;
+  handle?: PopoverTriggerProps["handle"];
+  payload?: PopoverTriggerProps["payload"];
+  openOnHover?: PopoverTriggerProps["openOnHover"];
+  delay?: PopoverTriggerProps["delay"];
+  closeDelay?: PopoverTriggerProps["closeDelay"];
   popoverProps?: Omit<Popover.Root.Props, "children">;
+  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect">;
   format?: string;
 }
 
@@ -45,7 +28,6 @@ export function DatePicker({
   errorMessage,
   description,
   infoPopover,
-  fieldProps,
   value,
   defaultValue,
   onValueChange,
@@ -60,6 +42,8 @@ export function DatePicker({
   autoFocus = true,
   format = "MM/dd/yyyy",
   placeholder = format.toLowerCase(),
+  calendarProps,
+  className,
   ...props
 }: DatePickerProps) {
   const [internalValue, setInternalValue] = useState(defaultValue ?? "");
@@ -99,11 +83,11 @@ export function DatePicker({
       disabled={disabled}
       readOnly={readOnly}
       ref={inputRef}
-      className={cn("hover:bg-card")}
+      className={cn("hover:bg-card", className)}
       onValueChange={handleValueChange}
       value={inputValue}
       placeholder={placeholder}
-      fieldProps={fieldProps}
+      {...props}
       rightAdornment={
         <Popover.Root
           open={calendarOpen}
@@ -143,7 +127,7 @@ export function DatePicker({
                   onSelect={handleSelect}
                   autoFocus={autoFocus}
                   defaultMonth={isValid(date) ? date : now}
-                  {...props}
+                  {...calendarProps}
                 />
               </Popover.Popup>
             </Popover.Positioner>

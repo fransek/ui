@@ -67,6 +67,16 @@ export const WithCustomFormat: Story = {
   },
 };
 
+export const WithCalendarProps: Story = {
+  args: {
+    calendarProps: {
+      captionLayout: "dropdown",
+      startMonth: new Date(1990, 0, 1),
+      endMonth: new Date(2030, 11, 31),
+    },
+  },
+};
+
 export const Controlled: Story = {
   args: {},
   render: (args) => {
