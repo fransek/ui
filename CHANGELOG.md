@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.7.0](https://github.com/fransek/ui/compare/v0.6.0...v0.7.0) (2026-03-11)
+
+
+### Features
+
+* **fields:** added `invalid` prop ([38d813d](https://github.com/fransek/ui/commit/38d813deed0374f998f5621673d930b2e9f881aa))
+* **input:** added left and right adornment slots ([#34](https://github.com/fransek/ui/issues/34)) ([73e6ebf](https://github.com/fransek/ui/commit/73e6ebfca2400deb13f7b0667c20e71e944c796f))
+
+
+### Bug Fixes
+
+* base UI className functions now working ([8bdc17e](https://github.com/fransek/ui/commit/8bdc17ed70ea40b29825da09b0f072acd0487620))
+* changed some prop names for consistency ([03322fa](https://github.com/fransek/ui/commit/03322fa9c640c2c0435dea2c7bf4f4377f92c063))
+* **date-picker:** allow keyboard input ([#37](https://github.com/fransek/ui/issues/37)) ([0113332](https://github.com/fransek/ui/commit/01133321fb78a67ee5f8ebbdaaf857397363a000))
+* **package:** updated peer dependencies ([f6133c1](https://github.com/fransek/ui/commit/f6133c151c1fd6694596c4ad705cf350419281f5))
+
 ## [0.6.0](https://github.com/fransek/ui/compare/v0.5.0...v0.6.0) (2026-03-09)
 
 
