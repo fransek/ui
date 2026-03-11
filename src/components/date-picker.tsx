@@ -27,44 +27,30 @@ export function DatePicker({
   placeholder = format.toLowerCase(),
   ...props
 }: DatePickerProps) {
-  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
   const inputRef = useRef<HTMLInputElement>(null);
-  const isControlled = value !== undefined;
-  const inputValue = isControlled ? value : internalValue;
   const now = new Date();
-  const [calendarOpen, setCalendarOpen] = useState(false);
-  const parsedDate = parse(inputValue.toString(), format, now);
-  const date = isValid(parsedDate) ? parsedDate : undefined;
-
-  function updateInternalValue(newValue: string) {
-    if (!isControlled) {
-      setInternalValue(newValue);
-    }
-  }
+  const [date, setDate] = useState<Date | undefined>(
+    parseDateString(value ?? defaultValue, format, now),
+  );
 
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
-    updateInternalValue(newValue);
-    onValueChange?.(newValue); // TODO: create an event details object and pass it to onValueChange
-    // TODO: handle onChange from InputProps
+    setInputValue(inputRef.current, newValue);
   }
 
   return (
     <Input
       ref={inputRef}
-      className={cn("hover:bg-card", className)}
       onValueChange={(newValue, e) => {
-        updateInternalValue(newValue.toString());
+        setDate(parseDateString(newValue, format, now));
         onValueChange?.(newValue, e);
       }}
-      value={inputValue}
+      value={value}
+      defaultValue={defaultValue}
+      className={cn("hover:bg-card", className)}
       placeholder={placeholder}
       rightAdornment={
-        <Popover.Root
-          open={calendarOpen}
-          onOpenChange={setCalendarOpen}
-          {...popoverProps}
-        >
+        <Popover.Root {...popoverProps}>
           <Popover.Trigger
             render={
               <Button size="icon" variant="ghost" aria-label="Select date">
@@ -101,4 +87,28 @@ export function DatePicker({
       {...props}
     />
   );
+}
+
+export function setInputValue(input: HTMLInputElement | null, value: string) {
+  if (!input) return;
+
+  const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+    HTMLInputElement.prototype,
+    "value",
+  )?.set;
+
+  nativeInputValueSetter?.call(input, value);
+
+  const event = new Event("input", { bubbles: true });
+  input.dispatchEvent(event);
+}
+
+export function parseDateString(
+  dateStr: string | number | readonly string[] | undefined,
+  formatStr: string,
+  referenceDate: Date,
+) {
+  if (!dateStr) return undefined;
+  const parsedDate = parse(dateStr.toString(), formatStr, referenceDate);
+  return isValid(parsedDate) ? parsedDate : undefined;
 }
