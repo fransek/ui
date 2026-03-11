@@ -9,7 +9,7 @@ import { Calendar } from "./calendar";
 import { Input, InputProps } from "./input";
 
 export interface DatePickerProps extends InputProps {
-  calendarProps: DayPickerProps;
+  calendarProps?: Omit<DayPickerProps, "mode" | "selected" | "onSelect">;
   triggerProps?: PopoverTriggerProps;
   popoverProps?: Omit<Popover.Root.Props, "children">;
   format?: string;
@@ -33,7 +33,7 @@ export function DatePicker({
   const inputValue = isControlled ? value : internalValue;
   const now = new Date();
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const parsedDate = parse(inputValue, format, now);
+  const parsedDate = parse(inputValue.toString(), format, now);
   const date = isValid(parsedDate) ? parsedDate : undefined;
 
   function updateInternalValue(newValue: string) {
@@ -45,7 +45,8 @@ export function DatePicker({
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
     updateInternalValue(newValue);
-    onValueChange?.(newValue);
+    onValueChange?.(newValue); // TODO: create an event details object and pass it to onValueChange
+    // TODO: handle onChange from InputProps
   }
 
   return (
