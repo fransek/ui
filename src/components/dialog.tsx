@@ -11,7 +11,7 @@ import {
 } from "@base-ui/react/dialog";
 import { X } from "lucide-react";
 import React from "react";
-import { cn } from "../lib/utils";
+import { cn, cnBaseUI } from "../lib/utils";
 import { Button } from "./button";
 
 export interface DialogProps
@@ -70,14 +70,14 @@ export function Dialog({
           <BaseDialog.Trigger render={trigger} {...props} />
           <BaseDialog.Portal {...portalProps}>
             <BaseDialog.Backdrop
-              className={cn(
+              className={cnBaseUI(
                 "fixed inset-0 min-h-dvh bg-black opacity-20 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
                 backdropClassName,
               )}
               {...backdropProps}
             />
             <BaseDialog.Popup
-              className={cn(
+              className={cnBaseUI(
                 "bg-background text-foreground fixed top-1/2 left-1/2 -mt-8 w-96 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border p-4 transition-all duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
                 popupClassName,
               )}
@@ -87,7 +87,7 @@ export function Dialog({
                 <DialogClose
                   render={
                     <Button
-                      className={cn(
+                      className={cnBaseUI(
                         "fixed top-2 right-2",
                         closeButtonClassName,
                       )}
@@ -120,7 +120,9 @@ export function Dialog({
 }
 
 export function DialogTitle({ className, ...props }: DialogTitleProps) {
-  return <BaseDialog.Title className={cn("heading-6", className)} {...props} />;
+  return (
+    <BaseDialog.Title className={cnBaseUI("heading-6", className)} {...props} />
+  );
 }
 
 export function DialogDescription({
@@ -129,7 +131,7 @@ export function DialogDescription({
 }: DialogDescriptionProps) {
   return (
     <BaseDialog.Description
-      className={cn("text-body body-2 mb-6", className)}
+      className={cnBaseUI("text-body body-2 mb-6", className)}
       {...props}
     />
   );

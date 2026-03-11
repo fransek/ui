@@ -9,7 +9,7 @@ import {
 } from "@base-ui/react/fieldset";
 import * as React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cn } from "../lib/utils";
+import { cnBaseUI } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
@@ -47,13 +47,13 @@ export function CheckboxGroup({
       >
         <Fieldset.Root
           render={<BaseCheckboxGroup {...props} />}
-          className={cn("flex flex-col gap-1", fieldsetClassName)}
+          className={cnBaseUI("flex flex-col gap-1", fieldsetClassName)}
           {...fieldsetProps}
         >
           {label && (
             <div className="flex items-center gap-2">
               <Fieldset.Legend
-                className={cn(
+                className={cnBaseUI(
                   "text-foreground text-sm font-semibold",
                   legendClassName,
                 )}

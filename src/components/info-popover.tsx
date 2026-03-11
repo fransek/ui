@@ -1,6 +1,6 @@
 import { Info } from "lucide-react";
 import React from "react";
-import { cn } from "../lib/utils";
+import { cn, cnBaseUI } from "../lib/utils";
 import { Button, ButtonProps } from "./button";
 import { Popover, PopoverProps } from "./popover";
 
@@ -34,7 +34,7 @@ export function InfoPopover({
           }
           variant="ghost"
           size="icon"
-          className={cn("-m-1 p-1", buttonClassName)}
+          className={cnBaseUI("-m-1 p-1", buttonClassName)}
           {...buttonProps}
         >
           <Info
@@ -48,7 +48,7 @@ export function InfoPopover({
           typeof fieldLabel === "string"
             ? `Information about ${fieldLabel}`
             : "Information",
-        className: cn(
+        className: cnBaseUI(
           "body-2 bg-secondary text-on-secondary px-3 py-2 text-center max-w-[min(300px,calc(100vw-3rem))]",
           popupClassName,
         ),

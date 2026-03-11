@@ -10,7 +10,7 @@ import {
 } from "@base-ui/react/field";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cn } from "../lib/utils";
+import { cnBaseUI } from "../lib/utils";
 import { InfoPopover } from "./info-popover";
 
 export interface FieldProps extends BaseFieldRootProps, FieldAttributes {
@@ -59,7 +59,7 @@ export function Field({
         </FieldError>
         {isValidating && isValidatingMessage && !errorMessage && (
           <FieldDescription
-            className={cn(
+            className={cnBaseUI(
               "text-primary-foreground animate-validating-message",
               isValidatingMessageClassName,
             )}
@@ -90,7 +90,7 @@ export function FieldDescription({
 }: BaseFieldDescriptionProps) {
   return (
     <BaseField.Description
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cnBaseUI("text-muted-foreground text-sm", className)}
       {...props}
     />
   );
@@ -101,7 +101,7 @@ export type FieldErrorProps = BaseFieldErrorProps;
 export function FieldError({ className, ...props }: BaseFieldErrorProps) {
   return (
     <BaseField.Error
-      className={cn("text-error-foreground contents text-sm", className)}
+      className={cnBaseUI("text-error-foreground contents text-sm", className)}
       {...props}
     />
   );
@@ -116,7 +116,7 @@ export type FieldLabelProps = BaseFieldLabelProps;
 export function FieldLabel({ className, ...props }: BaseFieldLabelProps) {
   return (
     <BaseField.Label
-      className={cn("text-foreground text-sm font-semibold", className)}
+      className={cnBaseUI("text-foreground text-sm font-semibold", className)}
       {...props}
     />
   );
@@ -127,7 +127,7 @@ export type FieldRootProps = BaseFieldRootProps;
 export function FieldRoot({ className, ...props }: BaseFieldRootProps) {
   return (
     <BaseField.Root
-      className={cn("flex flex-col gap-1", className)}
+      className={cnBaseUI("flex flex-col gap-1", className)}
       {...props}
     />
   );

@@ -3,7 +3,7 @@ import { formatDate, isValid, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { type DayPickerProps } from "react-day-picker";
-import { cn } from "../lib/utils";
+import { cnBaseUI } from "../lib/utils";
 import { Button } from "./button";
 import { Calendar } from "./calendar";
 import { Input, InputProps } from "./input";
@@ -56,7 +56,10 @@ export function DatePicker({
       }}
       value={value}
       defaultValue={defaultValue}
-      className={cn("hover:bg-card disabled:text-muted-foreground", className)}
+      className={cnBaseUI(
+        "hover:bg-card disabled:text-muted-foreground",
+        className,
+      )}
       placeholder={placeholder}
       disabled={disabled}
       readOnly={readOnly}
@@ -84,7 +87,7 @@ export function DatePicker({
             >
               <Popover.Popup
                 aria-label="Calendar"
-                className={cn(
+                className={cnBaseUI(
                   "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
                 )}
               >

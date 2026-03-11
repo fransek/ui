@@ -8,12 +8,14 @@ import {
 } from "@base-ui/react/accordion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
-import { cn } from "../lib/utils";
+import { cn, cnBaseUI } from "../lib/utils";
 
 export type AccordionProps = BaseAccordionRootProps;
 
 export function Accordion({ className, ...props }: AccordionProps) {
-  return <BaseAccordion.Root className={cn("w-full", className)} {...props} />;
+  return (
+    <BaseAccordion.Root className={cnBaseUI("w-full", className)} {...props} />
+  );
 }
 
 export interface AccordionPanelProps extends BaseAccordionItemProps {
@@ -24,26 +26,30 @@ export interface AccordionPanelProps extends BaseAccordionItemProps {
   panelProps?: Omit<BaseAccordionPanelProps, "children">;
 }
 
-export function AccordionPanel({
-  children,
-  className,
-  summary,
-  iconProps: { className: iconClassName, ...iconProps } = {},
-  headerProps: { className: headerClassName, ...headerProps } = {},
-  triggerProps: { className: triggerClassName, ...triggerProps } = {},
-  panelProps: { className: panelClassName, ...panelProps } = {},
-  ...props
-}: AccordionPanelProps) {
+export function AccordionPanel(props: AccordionPanelProps) {
+  const {
+    children,
+    className,
+    summary,
+    iconProps: { className: iconClassName, ...iconProps } = {},
+    headerProps: { className: headerClassName, ...headerProps } = {},
+    triggerProps: { className: triggerClassName, ...triggerProps } = {},
+    panelProps: { className: panelClassName, ...panelProps } = {},
+    ...restProps
+  } = props;
+
   return (
-    <BaseAccordion.Item className={cn("border-b", className)} {...props}>
+    <BaseAccordion.Item
+      className={cnBaseUI("border-b", className)}
+      {...restProps}
+    >
       <BaseAccordion.Header
-        className={cn("flex w-full", headerClassName)}
+        className={cnBaseUI("flex w-full", headerClassName)}
         {...headerProps}
       >
         <BaseAccordion.Trigger
-          className={cn(
+          className={cnBaseUI(
             "group hover:bg-card outline-highlight focus-visible:focus-outline relative flex w-full items-center justify-between gap-4 px-3 py-2 text-left font-medium focus-visible:z-1",
-
             triggerClassName,
           )}
           {...triggerProps}
@@ -59,7 +65,7 @@ export function AccordionPanel({
         </BaseAccordion.Trigger>
       </BaseAccordion.Header>
       <BaseAccordion.Panel
-        className={cn(
+        className={cnBaseUI(
           "h-(--accordion-panel-height) overflow-hidden transition-[height] duration-300 ease-out data-ending-style:h-0 data-starting-style:h-0",
           panelClassName,
         )}

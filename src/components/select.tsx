@@ -17,7 +17,7 @@ import {
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cn } from "../lib/utils";
+import { cn, cnBaseUI } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 
 export interface SelectProps<T>
@@ -144,7 +144,7 @@ export function Select<T>({
         value={value}
       >
         <BaseSelect.Trigger
-          className={cn(
+          className={cnBaseUI(
             "outline-highlight focus-visible:focus-outline data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating hover:bg-card data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base transition-colors outline-none select-none",
             className,
           )}
@@ -156,12 +156,12 @@ export function Select<T>({
           {...props}
         >
           <BaseSelect.Value
-            className={cn("data-placeholder:opacity-60", valueClassName)}
+            className={cnBaseUI("data-placeholder:opacity-60", valueClassName)}
             placeholder={placeholder}
             {...valueProps}
           />
           <BaseSelect.Icon
-            className={cn("flex", selectIconClassName)}
+            className={cnBaseUI("flex", selectIconClassName)}
             {...selectIconProps}
           >
             <ChevronsUpDown
@@ -172,26 +172,29 @@ export function Select<T>({
         </BaseSelect.Trigger>
         <BaseSelect.Portal {...portalProps}>
           <BaseSelect.Positioner
-            className={cn("z-10 outline-none select-none", positionerClassName)}
+            className={cnBaseUI(
+              "z-10 outline-none select-none",
+              positionerClassName,
+            )}
             sideOffset={8}
             {...positionerProps}
           >
             <BaseSelect.Popup
-              className={cn(
+              className={cnBaseUI(
                 "group bg-background outline-border min-w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
                 popupClassName,
               )}
               {...popupProps}
             >
               <BaseSelect.ScrollUpArrow
-                className={cn(
+                className={cnBaseUI(
                   "bg-background top-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-top-full",
                   scrollUpArrowClassName,
                 )}
                 {...scrollUpArrowProps}
               />
               <BaseSelect.List
-                className={cn(
+                className={cnBaseUI(
                   "relative max-h-(--available-height) scroll-py-6 overflow-y-auto py-1",
                   listClassName,
                 )}
@@ -202,14 +205,17 @@ export function Select<T>({
                     <BaseSelect.Item
                       key={String(value)}
                       value={value}
-                      className={cn(
+                      className={cnBaseUI(
                         "data-highlighted:before:bg-primary data-highlighted:text-on-primary grid cursor-default grid-cols-[0.75rem_1fr] items-center gap-2 py-2 pr-4 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:pr-12 group-data-[side=none]:text-base group-data-[side=none]:leading-4 data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-1 data-highlighted:before:inset-y-0 data-highlighted:before:z-[-1] data-highlighted:before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
                         itemClassName,
                       )}
                       {...itemProps}
                     >
                       <BaseSelect.ItemIndicator
-                        className={cn("col-start-1", itemIndicatorClassName)}
+                        className={cnBaseUI(
+                          "col-start-1",
+                          itemIndicatorClassName,
+                        )}
                         {...itemIndicatorProps}
                       >
                         <Check
@@ -218,7 +224,7 @@ export function Select<T>({
                         />
                       </BaseSelect.ItemIndicator>
                       <BaseSelect.ItemText
-                        className={cn("col-start-2", itemTextClassName)}
+                        className={cnBaseUI("col-start-2", itemTextClassName)}
                         {...itemTextProps}
                       >
                         {label}
@@ -227,7 +233,7 @@ export function Select<T>({
                   ))}
               </BaseSelect.List>
               <BaseSelect.ScrollDownArrow
-                className={cn(
+                className={cnBaseUI(
                   "bg-background bottom-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-bottom-full",
                   scrollDownArrowClassName,
                 )}

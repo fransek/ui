@@ -6,7 +6,7 @@ import {
 import { CheckIcon } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cn } from "../lib/utils";
+import { cn, cnBaseUI } from "../lib/utils";
 import { useCheckboxGroupContext } from "./checkbox-group";
 import {
   Field,
@@ -49,14 +49,14 @@ export function Checkbox({
   const children = (
     <div className="flex items-center gap-2">
       <FieldLabel
-        className={cn(
+        className={cnBaseUI(
           "text-foreground flex items-center gap-2 text-base font-normal",
           labelClassName,
         )}
         {...labelProps}
       >
         <BaseCheckbox.Root
-          className={cn(
+          className={cnBaseUI(
             "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary outline-highlight focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border",
             className,
           )}
@@ -65,7 +65,7 @@ export function Checkbox({
           {...props}
         >
           <BaseCheckbox.Indicator
-            className={cn(
+            className={cnBaseUI(
               "text-on-primary data-invalid:border-error data-invalid:bg-error flex data-unchecked:hidden",
               indicatorClassName,
             )}

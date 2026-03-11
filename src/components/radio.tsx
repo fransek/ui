@@ -4,7 +4,7 @@ import {
   RadioRootProps,
 } from "@base-ui/react/radio";
 import * as React from "react";
-import { cn } from "../lib/utils";
+import { cnBaseUI } from "../lib/utils";
 import { useFieldContext } from "./field";
 
 export interface RadioProps extends RadioRootProps {
@@ -23,7 +23,7 @@ export function Radio({
   return (
     <label className="flex items-center gap-2" id={id}>
       <BaseRadio.Root
-        className={cn(
+        className={cnBaseUI(
           "data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline data-checked:border-primary-foreground data-invalid:border-error-foreground flex size-5 items-center justify-center rounded-full border",
         )}
         aria-labelledby={id}
@@ -31,7 +31,7 @@ export function Radio({
         {...props}
       >
         <BaseRadio.Indicator
-          className={cn(
+          className={cnBaseUI(
             "before:bg-primary data-invalid:before:bg-error flex before:size-3 before:rounded-full data-unchecked:hidden",
             indicatorClassName,
           )}

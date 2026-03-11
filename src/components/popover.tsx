@@ -11,7 +11,7 @@ import {
   PopoverTriggerProps,
 } from "@base-ui/react/popover";
 import React from "react";
-import { cn } from "../lib/utils";
+import { cn, cnBaseUI } from "../lib/utils";
 
 export interface PopoverProps
   extends PopoverRootProps, Omit<PopoverTriggerProps, "children" | "render"> {
@@ -66,12 +66,12 @@ export function Popover({
           />
           <BasePopover.Portal {...portalProps}>
             <BasePopover.Positioner
-              className={cn("z-10 outline-none", positionerClassName)}
+              className={cnBaseUI("z-10 outline-none", positionerClassName)}
               sideOffset={8}
               {...positionerProps}
             >
               <BasePopover.Popup
-                className={cn(
+                className={cnBaseUI(
                   "bg-background outline-border max-w-[calc(100vw-3rem)] min-w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding p-4 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
                   popupClassName,
                 )}
@@ -79,7 +79,7 @@ export function Popover({
               >
                 {arrow && (
                   <BasePopover.Arrow
-                    className={cn(
+                    className={cnBaseUI(
                       "data-[side=bottom]:-top-2 data-[side=left]:-right-3.25 data-[side=left]:rotate-90 data-[side=right]:-left-3.25 data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
                       arrowClassName,
                     )}
@@ -102,7 +102,10 @@ export function Popover({
 
 export function PopoverTitle({ className, ...props }: PopoverTitleProps) {
   return (
-    <BasePopover.Title className={cn("heading-6", className)} {...props} />
+    <BasePopover.Title
+      className={cnBaseUI("heading-6", className)}
+      {...props}
+    />
   );
 }
 
@@ -112,7 +115,7 @@ export function PopoverDescription({
 }: PopoverDescriptionProps) {
   return (
     <BasePopover.Description
-      className={cn("text-body body-2", className)}
+      className={cnBaseUI("text-body body-2", className)}
       {...props}
     />
   );
