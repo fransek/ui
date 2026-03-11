@@ -3,11 +3,9 @@ import { formatDate, isValid, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { type DayPickerProps } from "react-day-picker";
-import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
 import { Button } from "./button";
 import { Calendar } from "./calendar";
-import { FieldProps } from "./field";
 import { Input, InputProps } from "./input";
 
 export interface DatePickerProps extends InputProps {
@@ -50,16 +48,14 @@ export function DatePicker({
     onValueChange?.(newValue);
   }
 
-  const handleValueChange = (newValue: string) => {
-    updateInternalValue(newValue);
-    onValueChange?.(newValue);
-  };
-
   return (
     <Input
       ref={inputRef}
       className={cn("hover:bg-card", className)}
-      onValueChange={handleValueChange}
+      onValueChange={(newValue, e) => {
+        updateInternalValue(newValue.toString());
+        onValueChange?.(newValue, e);
+      }}
       value={inputValue}
       placeholder={placeholder}
       rightAdornment={
@@ -69,14 +65,6 @@ export function DatePicker({
           {...popoverProps}
         >
           <Popover.Trigger
-            disabled={disabled || readOnly}
-            aria-readonly={readOnly}
-            data-validating={isValidating ? "" : undefined}
-            handle={handle}
-            payload={payload}
-            openOnHover={openOnHover}
-            delay={delay}
-            closeDelay={closeDelay}
             render={
               <Button size="icon" variant="ghost" aria-label="Select date">
                 <CalendarIcon className="size-4" />
@@ -100,8 +88,8 @@ export function DatePicker({
                   mode="single"
                   selected={date}
                   onSelect={handleSelect}
-                  autoFocus={true}
                   defaultMonth={isValid(date) ? date : now}
+                  autoFocus
                   {...calendarProps}
                 />
               </Popover.Popup>
