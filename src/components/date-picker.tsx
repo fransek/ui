@@ -24,16 +24,20 @@ export function DatePicker({
   defaultValue,
   onValueChange,
   format = "MM/dd/yyyy",
-  placeholder = format.toLowerCase(),
+  placeholder = format.toUpperCase(),
   disabled,
   readOnly,
   ...props
 }: DatePickerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const now = new Date();
-  const [date, setDate] = useState<Date | undefined>(
+  const [internalDate, setInternalDate] = useState<Date | undefined>(
     parseDateString(value ?? defaultValue, format, now),
   );
+  const isControlled = value !== undefined;
+  const date = isControlled
+    ? parseDateString(value, format, now)
+    : internalDate;
 
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
@@ -44,7 +48,9 @@ export function DatePicker({
     <Input
       ref={inputRef}
       onValueChange={(newValue, e) => {
-        setDate(parseDateString(newValue, format, now));
+        if (isControlled) {
+          setInternalDate(parseDateString(newValue, format, now));
+        }
         onValueChange?.(newValue, e);
       }}
       value={value}
@@ -98,7 +104,7 @@ export function DatePicker({
   );
 }
 
-export function setInputValue(input: HTMLInputElement | null, value: string) {
+function setInputValue(input: HTMLInputElement | null, value: string) {
   if (!input) return;
 
   const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
@@ -112,7 +118,7 @@ export function setInputValue(input: HTMLInputElement | null, value: string) {
   input.dispatchEvent(event);
 }
 
-export function parseDateString(
+function parseDateString(
   dateStr: string | number | readonly string[] | undefined,
   formatStr: string,
   referenceDate: Date,
