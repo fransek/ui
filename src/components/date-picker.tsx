@@ -48,7 +48,7 @@ export function DatePicker({
     <Input
       ref={inputRef}
       onValueChange={(newValue, e) => {
-        if (isControlled) {
+        if (!isControlled) {
           setInternalDate(parseDateString(newValue, format, now));
         }
         onValueChange?.(newValue, e);
