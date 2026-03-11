@@ -1,158 +1,129 @@
 import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
-import React from "react";
+import { formatDate, isValid, parse } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import React, { useRef, useState } from "react";
 import { type DayPickerProps } from "react-day-picker";
-import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
+import { Button } from "./button";
 import { Calendar } from "./calendar";
-import { Field, FieldControl, FieldProps } from "./field";
-import { Input } from "./input";
+import { Input, InputProps } from "./input";
 
-export interface DatePickerProps
-  extends
-    Omit<DayPickerProps, "mode" | "selected" | "onSelect">,
-    Omit<
-      PopoverTriggerProps,
-      | "children"
-      | "className"
-      | "style"
-      | "onSelect"
-      | "hidden"
-      | "disabled"
-      | "role"
-      | "value"
-      | "defaultValue"
-    >,
-    FieldAttributes {
-  value?: Date;
-  defaultValue?: Date;
-  onValueChange?: (date: Date | undefined) => void;
-  placeholder?: string;
-  format?: (date: Date) => string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  name?: string;
-  fieldProps?: FieldProps;
+export interface DatePickerProps extends InputProps {
+  calendarProps?: Omit<DayPickerProps, "mode" | "selected" | "onSelect">;
+  triggerProps?: PopoverTriggerProps;
   popoverProps?: Omit<Popover.Root.Props, "children">;
+  format?: string;
 }
 
 export function DatePicker({
-  label,
-  isValidating,
-  isValidatingMessage,
-  errorMessage,
-  description,
-  infoPopover,
-  fieldProps,
+  calendarProps,
+  triggerProps,
+  popoverProps,
+  className,
   value,
   defaultValue,
   onValueChange,
-  placeholder = "Pick a date",
-  format = (date) =>
-    date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }),
+  format = "MM/dd/yyyy",
+  placeholder = format.toUpperCase(),
   disabled,
   readOnly,
-  name,
-  popoverProps,
-  nativeButton,
-  handle,
-  payload,
-  openOnHover,
-  delay,
-  closeDelay,
-  render,
-  autoFocus = true,
   ...props
 }: DatePickerProps) {
-  const [internalDate, setInternalDate] = React.useState<Date | undefined>(
-    defaultValue,
+  const inputRef = useRef<HTMLInputElement>(null);
+  const now = new Date();
+  const [internalDate, setInternalDate] = useState<Date | undefined>(
+    parseDateString(value ?? defaultValue, format, now),
   );
   const isControlled = value !== undefined;
-  const date = isControlled ? value : internalDate;
-  const hasCustomTriggerRender = render !== undefined;
+  const date = isControlled
+    ? parseDateString(value, format, now)
+    : internalDate;
 
   function handleSelect(selected: Date | undefined) {
-    if (!isControlled) {
-      setInternalDate(selected);
-    }
-    onValueChange?.(selected);
+    const newValue = selected ? formatDate(selected, format) : "";
+    setInputValue(inputRef.current, newValue);
   }
 
   return (
-    <Field
-      label={label}
-      isValidating={isValidating}
-      isValidatingMessage={isValidatingMessage}
-      errorMessage={errorMessage}
-      description={description}
-      infoPopover={infoPopover}
-      {...fieldProps}
-    >
-      <Popover.Root {...popoverProps}>
-        <FieldControl
-          render={
-            <Popover.Trigger
-              disabled={disabled || readOnly}
-              aria-readonly={readOnly}
-              data-validating={isValidating ? "" : undefined}
-              nativeButton={hasCustomTriggerRender ? nativeButton : false}
-              handle={handle}
-              payload={payload}
-              openOnHover={openOnHover}
-              delay={delay}
-              closeDelay={closeDelay}
-              render={
-                render ??
-                (({ className: triggerClassName, ...triggerProps }) => (
-                  <Input
-                    {...triggerProps}
-                    className={cn(
-                      "hover:bg-card cursor-default",
-                      !date && "text-muted-foreground",
-                      triggerClassName,
-                    )}
-                    type="text"
-                    role="combobox"
-                    aria-haspopup="dialog"
-                    value={date ? format(date) : ""}
-                    placeholder={placeholder}
-                    readOnly
-                  />
-                ))
-              }
-            />
-          }
-        />
-        <Popover.Portal>
-          <Popover.Positioner className="z-10 outline-none" sideOffset={8}>
-            <Popover.Popup
-              aria-label="Calendar"
-              className={cn(
-                "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
-              )}
-            >
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={handleSelect}
-                autoFocus={autoFocus}
-                {...props}
-              />
-            </Popover.Popup>
-          </Popover.Positioner>
-        </Popover.Portal>
-        {name && (
-          <input
-            type="hidden"
-            name={name}
-            value={date ? date.toISOString() : ""}
-            readOnly
+    <Input
+      ref={inputRef}
+      onValueChange={(newValue, e) => {
+        if (!isControlled) {
+          setInternalDate(parseDateString(newValue, format, now));
+        }
+        onValueChange?.(newValue, e);
+      }}
+      value={value}
+      defaultValue={defaultValue}
+      className={cn("hover:bg-card disabled:text-muted-foreground", className)}
+      placeholder={placeholder}
+      disabled={disabled}
+      readOnly={readOnly}
+      rightAdornment={
+        <Popover.Root {...popoverProps}>
+          <Popover.Trigger
+            render={
+              <Button
+                size="icon"
+                variant="ghost"
+                aria-label="Select date"
+                disabled={disabled || readOnly}
+              >
+                <CalendarIcon className="size-4" />
+              </Button>
+            }
+            {...triggerProps}
           />
-        )}
-      </Popover.Root>
-    </Field>
+          <Popover.Portal>
+            <Popover.Positioner
+              className="z-10 outline-none"
+              sideOffset={8}
+              anchor={inputRef}
+            >
+              <Popover.Popup
+                aria-label="Calendar"
+                className={cn(
+                  "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+                )}
+              >
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={handleSelect}
+                  defaultMonth={isValid(date) ? date : now}
+                  autoFocus
+                  {...calendarProps}
+                />
+              </Popover.Popup>
+            </Popover.Positioner>
+          </Popover.Portal>
+        </Popover.Root>
+      }
+      {...props}
+    />
   );
+}
+
+function setInputValue(input: HTMLInputElement | null, value: string) {
+  if (!input) return;
+
+  const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+    HTMLInputElement.prototype,
+    "value",
+  )?.set;
+
+  nativeInputValueSetter?.call(input, value);
+
+  const event = new Event("input", { bubbles: true });
+  input.dispatchEvent(event);
+}
+
+function parseDateString(
+  dateStr: string | number | readonly string[] | undefined,
+  formatStr: string,
+  referenceDate: Date,
+) {
+  if (!dateStr) return undefined;
+  const parsedDate = parse(dateStr.toString(), formatStr, referenceDate);
+  return isValid(parsedDate) ? parsedDate : undefined;
 }
