@@ -14,6 +14,8 @@ const createConfig = (format, dir) => ({
     "tailwind-merge",
     "react-day-picker",
     /@base-ui\/react\/.*/,
+    "react-day-picker",
+    "date-fns",
   ],
   output: {
     dir,
