@@ -15,6 +15,13 @@ export interface DatePickerProps extends InputProps {
   format?: string;
 }
 
+type DatePickerChangeEventDetails = Parameters<
+  NonNullable<DatePickerProps["onValueChange"]>
+>[1];
+type DatePickerOnChangeEvent = Parameters<
+  NonNullable<DatePickerProps["onChange"]>
+>[0];
+
 export function DatePicker({
   calendarProps,
   triggerProps,
@@ -22,6 +29,7 @@ export function DatePicker({
   className,
   value,
   defaultValue,
+  onChange,
   onValueChange,
   format = "MM/dd/yyyy",
   placeholder = format.toLowerCase(),
@@ -42,17 +50,33 @@ export function DatePicker({
     }
   }
 
+  function createChangeEventDetails(
+    event: Event,
+  ): DatePickerChangeEventDetails {
+    return {
+      reason: "none",
+      event,
+      cancel: () => {},
+      allowPropagation: () => {},
+      isCanceled: false,
+      isPropagationAllowed: false,
+      trigger: inputRef.current ?? undefined,
+    };
+  }
+
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
     updateInternalValue(newValue);
-    onValueChange?.(newValue); // TODO: create an event details object and pass it to onValueChange
-    // TODO: handle onChange from InputProps
+    const changeEvent = new Event("change");
+    onValueChange?.(newValue, createChangeEventDetails(changeEvent));
+    onChange?.(changeEvent as unknown as DatePickerOnChangeEvent);
   }
 
   return (
     <Input
       ref={inputRef}
       className={cn("hover:bg-card", className)}
+      onChange={onChange}
       onValueChange={(newValue, e) => {
         updateInternalValue(newValue.toString());
         onValueChange?.(newValue, e);
