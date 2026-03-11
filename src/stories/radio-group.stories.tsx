@@ -16,6 +16,7 @@ const meta = {
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
     infoPopover: { control: "text" },
+    invalid: { control: "boolean" },
   },
   args: {
     label: "Fruit",

@@ -34,6 +34,7 @@ export function Checkbox({
   isValidating: _isValidating,
   isValidatingMessage,
   errorMessage,
+  invalid,
   infoPopover,
   labelProps: { className: labelClassName, ...labelProps } = {},
   indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
@@ -91,6 +92,7 @@ export function Checkbox({
       isValidatingMessage={isValidatingMessage}
       errorMessage={errorMessage}
       description={description}
+      invalid={invalid}
       {...fieldProps}
     >
       {children}

@@ -16,6 +16,7 @@ const meta = {
     description: { control: "text" },
     placeholder: { control: "text" },
     infoPopover: { control: "text" },
+    invalid: { control: "boolean" },
   },
   args: {
     label: "Date of birth",

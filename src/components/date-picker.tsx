@@ -27,6 +27,7 @@ export function DatePicker({
   placeholder = format.toUpperCase(),
   disabled,
   readOnly,
+  invalid,
   ...props
 }: DatePickerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -59,6 +60,7 @@ export function DatePicker({
       placeholder={placeholder}
       disabled={disabled}
       readOnly={readOnly}
+      invalid={invalid}
       rightAdornment={
         <Popover.Root {...popoverProps}>
           <Popover.Trigger

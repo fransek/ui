@@ -25,6 +25,7 @@ export function Field({
   isValidating,
   isValidatingMessage,
   errorMessage,
+  invalid = !!errorMessage,
   description,
   children,
   labelProps,
@@ -37,8 +38,6 @@ export function Field({
   } = {},
   ...props
 }: FieldProps) {
-  const invalid = !!errorMessage;
-
   return (
     <FieldContext.Provider value={{ isValidating: !!isValidating }}>
       <FieldRoot
@@ -102,7 +101,7 @@ export type FieldErrorProps = BaseFieldErrorProps;
 export function FieldError({ className, ...props }: BaseFieldErrorProps) {
   return (
     <BaseField.Error
-      className={cn("text-error-foreground text-sm", className)}
+      className={cn("text-error-foreground contents text-sm", className)}
       {...props}
     />
   );

@@ -21,6 +21,7 @@ export function RadioGroup({
   fieldProps,
   label,
   children,
+  invalid,
   ...props
 }: RadioGroupProps) {
   return (
@@ -29,6 +30,7 @@ export function RadioGroup({
       isValidatingMessage={isValidatingMessage}
       errorMessage={errorMessage}
       description={description}
+      invalid={invalid}
       {...fieldProps}
     >
       <Fieldset.Root

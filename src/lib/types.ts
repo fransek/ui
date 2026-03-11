@@ -2,6 +2,7 @@ import React from "react";
 
 export interface FieldAttributes {
   label?: React.ReactNode;
+  invalid?: boolean;
   errorMessage?: React.ReactNode;
   isValidating?: boolean;
   isValidatingMessage?: React.ReactNode;

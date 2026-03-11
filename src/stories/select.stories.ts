@@ -14,8 +14,9 @@ const meta = {
     errorMessage: { control: "text" },
     isValidatingMessage: { control: "text" },
     description: { control: "text" },
-    placeholder: { control: "text" },
     infoPopover: { control: "text" },
+    invalid: { control: "boolean" },
+    placeholder: { control: "text" },
   },
   args: {
     label: "Fruit",

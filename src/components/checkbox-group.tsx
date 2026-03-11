@@ -27,6 +27,7 @@ export function CheckboxGroup({
   isValidating,
   isValidatingMessage,
   errorMessage,
+  invalid,
   description,
   fieldProps,
   infoPopover,
@@ -41,6 +42,7 @@ export function CheckboxGroup({
         isValidatingMessage={isValidatingMessage}
         errorMessage={errorMessage}
         description={description}
+        invalid={invalid}
         {...fieldProps}
       >
         <Fieldset.Root

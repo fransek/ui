@@ -28,6 +28,7 @@ export function Input({
   rightAdornment,
   leftSlot,
   rightSlot,
+  invalid,
   ...props
 }: InputProps) {
   const hasLeftAdornment = leftAdornment != null;
@@ -41,6 +42,7 @@ export function Input({
       errorMessage={errorMessage}
       description={description}
       infoPopover={infoPopover}
+      invalid={invalid}
       {...fieldProps}
     >
       <div className="flex items-stretch gap-2">
