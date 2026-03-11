@@ -8,8 +8,8 @@ import { Calendar, type CalendarProps } from "./calendar";
 import { Input, type InputProps } from "./input";
 
 type DatePickerOnValueChange = NonNullable<InputProps["onValueChange"]>;
-type DatePickerOnValue = Parameters<DatePickerOnValueChange>[0];
-type DatePickerOnValueDetails = Parameters<DatePickerOnValueChange>[1];
+type DatePickerValue = Parameters<DatePickerOnValueChange>[0];
+type DatePickerEventDetails = Parameters<DatePickerOnValueChange>[1];
 
 export interface DatePickerProps extends InputProps {
   triggerProps?: Omit<
@@ -53,38 +53,48 @@ export function DatePicker({
     String(defaultValue ?? ""),
   );
   const inputRef = useRef<HTMLInputElement>(null);
+  const calendarChangeEventRef = useRef(new Event("change"));
+  const calendarChangeReason = "none";
   const isControlled = value !== undefined;
-  const inputValue = isControlled ? value : internalValue;
-  const inputValueAsString =
-    typeof inputValue === "string" ? inputValue : String(inputValue ?? "");
+  const inputValue = String((isControlled ? value : internalValue) ?? "");
   const now = new Date();
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const parsedDate = parse(inputValueAsString, format, now);
+  const parsedDate = parse(inputValue, format, now);
   const date = isValid(parsedDate) ? parsedDate : undefined;
 
-  function updateInternalValue(newValue: DatePickerOnValue) {
+  function updateInternalValue(newValue: DatePickerValue) {
     if (!isControlled) {
       setInternalValue(String(newValue));
     }
   }
 
+  function createCalendarChangeDetails(): DatePickerEventDetails {
+    const details = {
+      reason: calendarChangeReason,
+      event: calendarChangeEventRef.current,
+      isCanceled: false,
+      isPropagationAllowed: false,
+      trigger: inputRef.current,
+      cancel: () => {
+        details.isCanceled = true;
+      },
+      allowPropagation: () => {
+        details.isPropagationAllowed = true;
+      },
+    } as DatePickerEventDetails;
+
+    return details;
+  }
+
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
     updateInternalValue(newValue);
-    onValueChange?.(newValue, {
-      reason: "none",
-      event: new Event("change"),
-      cancel: () => {},
-      allowPropagation: () => {},
-      isCanceled: false,
-      isPropagationAllowed: true,
-      trigger: inputRef.current,
-    } as DatePickerOnValueDetails);
+    onValueChange?.(newValue, createCalendarChangeDetails());
   }
 
   const handleValueChange = (
-    newValue: DatePickerOnValue,
-    eventDetails: DatePickerOnValueDetails,
+    newValue: DatePickerValue,
+    eventDetails: DatePickerEventDetails,
   ) => {
     updateInternalValue(newValue);
     onValueChange?.(newValue, eventDetails);
