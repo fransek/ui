@@ -15,6 +15,13 @@ export interface DatePickerProps extends InputProps {
   format?: string;
 }
 
+type DatePickerChangeEventDetails = Parameters<
+  NonNullable<DatePickerProps["onValueChange"]>
+>[1];
+type DatePickerOnChangeEvent = Parameters<
+  NonNullable<DatePickerProps["onChange"]>
+>[0];
+
 export function DatePicker({
   calendarProps,
   triggerProps,
@@ -22,6 +29,7 @@ export function DatePicker({
   className,
   value,
   defaultValue,
+  onChange,
   onValueChange,
   format = "MM/dd/yyyy",
   placeholder = format.toLowerCase(),
@@ -42,17 +50,90 @@ export function DatePicker({
     }
   }
 
+  function createChangeEventDetails(
+    event: Event,
+  ): DatePickerChangeEventDetails {
+    let isCanceled = false;
+    let isPropagationAllowed = false;
+
+    return {
+      reason: "none",
+      event,
+      cancel: () => {
+        isCanceled = true;
+      },
+      allowPropagation: () => {
+        isPropagationAllowed = true;
+      },
+      get isCanceled() {
+        return isCanceled;
+      },
+      get isPropagationAllowed() {
+        return isPropagationAllowed;
+      },
+      trigger: inputRef.current ?? undefined,
+    };
+  }
+
+  function createOnChangeEvent(
+    event: Event,
+  ): DatePickerOnChangeEvent | undefined {
+    const target = inputRef.current;
+
+    if (!target) {
+      return undefined;
+    }
+
+    let baseUIHandlerPrevented = false;
+
+    return {
+      nativeEvent: event,
+      currentTarget: target,
+      target,
+      bubbles: event.bubbles,
+      cancelable: event.cancelable,
+      defaultPrevented: event.defaultPrevented,
+      eventPhase: event.eventPhase,
+      isTrusted: event.isTrusted,
+      preventDefault: () => {
+        event.preventDefault();
+      },
+      isDefaultPrevented: () => event.defaultPrevented,
+      stopPropagation: () => {
+        event.stopPropagation();
+      },
+      isPropagationStopped: () => event.cancelBubble,
+      persist: () => {},
+      timeStamp: event.timeStamp,
+      type: event.type,
+      preventBaseUIHandler: () => {
+        baseUIHandlerPrevented = true;
+      },
+      get baseUIHandlerPrevented() {
+        return baseUIHandlerPrevented;
+      },
+    };
+  }
+
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
     updateInternalValue(newValue);
-    onValueChange?.(newValue); // TODO: create an event details object and pass it to onValueChange
-    // TODO: handle onChange from InputProps
+    const changeEvent = new Event("change", {
+      bubbles: true,
+      cancelable: true,
+    });
+    onValueChange?.(newValue, createChangeEventDetails(changeEvent));
+    const onChangeEvent = createOnChangeEvent(changeEvent);
+    if (onChangeEvent) {
+      onChange?.(onChangeEvent);
+    }
   }
 
   return (
     <Input
       ref={inputRef}
       className={cn("hover:bg-card", className)}
+      onChange={onChange}
       onValueChange={(newValue, e) => {
         updateInternalValue(newValue.toString());
         onValueChange?.(newValue, e);
