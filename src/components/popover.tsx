@@ -24,27 +24,32 @@ export interface PopoverProps
   arrowSvgProps?: ArrowSvgProps;
 }
 
-export function Popover({
-  trigger,
-  arrow,
-  actionsRef,
-  children,
-  defaultOpen,
-  defaultTriggerId,
-  handle,
-  modal,
-  onOpenChange,
-  onOpenChangeComplete,
-  open,
-  triggerId,
-  portalProps,
-  positionerProps: { className: positionerClassName, ...positionerProps } = {},
-  popupProps: { className: popupClassName, ...popupProps } = {},
-  arrowProps: { className: arrowClassName, ...arrowProps } = {},
-  arrowSvgProps,
-  className,
-  ...props
-}: PopoverProps) {
+export function Popover(props: PopoverProps) {
+  const {
+    trigger,
+    arrow,
+    actionsRef,
+    children,
+    defaultOpen,
+    defaultTriggerId,
+    handle,
+    modal,
+    onOpenChange,
+    onOpenChangeComplete,
+    open,
+    triggerId,
+    portalProps,
+    positionerProps: {
+      className: positionerClassName,
+      ...positionerProps
+    } = {},
+    popupProps: { className: popupClassName, ...popupProps } = {},
+    arrowProps: { className: arrowClassName, ...arrowProps } = {},
+    arrowSvgProps,
+    className,
+    ...restProps
+  } = props;
+
   return (
     <BasePopover.Root
       actionsRef={actionsRef}
@@ -62,7 +67,7 @@ export function Popover({
           <BasePopover.Trigger
             render={trigger}
             className={className}
-            {...props}
+            {...restProps}
           />
           <BasePopover.Portal {...portalProps}>
             <BasePopover.Positioner
@@ -100,23 +105,22 @@ export function Popover({
   );
 }
 
-export function PopoverTitle({ className, ...props }: PopoverTitleProps) {
+export function PopoverTitle(props: PopoverTitleProps) {
+  const { className, ...restProps } = props;
   return (
     <BasePopover.Title
       className={cnBaseUI("heading-6", className)}
-      {...props}
+      {...restProps}
     />
   );
 }
 
-export function PopoverDescription({
-  className,
-  ...props
-}: PopoverDescriptionProps) {
+export function PopoverDescription(props: PopoverDescriptionProps) {
+  const { className, ...restProps } = props;
   return (
     <BasePopover.Description
       className={cnBaseUI("text-body body-2", className)}
-      {...props}
+      {...restProps}
     />
   );
 }
@@ -130,16 +134,18 @@ interface ArrowSvgProps extends React.ComponentProps<"svg"> {
   borderPathProps?: React.ComponentProps<"path">;
 }
 
-export function ArrowSvg({
-  backgroundPathProps: {
-    className: backgroundClassName,
-    ...backgroundPathProps
-  } = {},
-  borderPathProps: { className: borderClassName, ...borderPathProps } = {},
-  ...props
-}: ArrowSvgProps) {
+export function ArrowSvg(props: ArrowSvgProps) {
+  const {
+    backgroundPathProps: {
+      className: backgroundClassName,
+      ...backgroundPathProps
+    } = {},
+    borderPathProps: { className: borderClassName, ...borderPathProps } = {},
+    ...restProps
+  } = props;
+
   return (
-    <svg width="20" height="10" viewBox="0 0 20 10" fill="none" {...props}>
+    <svg width="20" height="10" viewBox="0 0 20 10" fill="none" {...restProps}>
       <path
         d="M9.66437 2.60207L4.80758 6.97318C4.07308 7.63423 3.11989 8 2.13172 8H0V10H20V8H18.5349C17.5468 8 16.5936 7.63423 15.8591 6.97318L11.0023 2.60207C10.622 2.2598 10.0447 2.25979 9.66437 2.60207Z"
         className={cn("fill-background", backgroundClassName)}

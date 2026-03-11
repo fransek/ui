@@ -12,18 +12,20 @@ export interface RadioGroupProps extends BaseRadioGroupProps, FieldAttributes {
   fieldProps?: FieldProps;
 }
 
-export function RadioGroup({
-  isValidating,
-  isValidatingMessage,
-  errorMessage,
-  description,
-  infoPopover,
-  fieldProps,
-  label,
-  children,
-  invalid,
-  ...props
-}: RadioGroupProps) {
+export function RadioGroup(props: RadioGroupProps) {
+  const {
+    isValidating,
+    isValidatingMessage,
+    errorMessage,
+    description,
+    infoPopover,
+    fieldProps,
+    label,
+    children,
+    invalid,
+    ...restProps
+  } = props;
+
   return (
     <Field
       isValidating={isValidating}
@@ -34,7 +36,7 @@ export function RadioGroup({
       {...fieldProps}
     >
       <Fieldset.Root
-        render={<BaseRadioGroup {...props} />}
+        render={<BaseRadioGroup {...restProps} />}
         className="flex flex-col gap-1"
       >
         {label && (

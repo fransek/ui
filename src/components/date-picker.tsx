@@ -2,34 +2,35 @@ import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
 import { formatDate, isValid, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
-import { type DayPickerProps } from "react-day-picker";
 import { cnBaseUI } from "../lib/utils";
 import { Button } from "./button";
-import { Calendar } from "./calendar";
+import { Calendar, CalendarProps } from "./calendar";
 import { Input, InputProps } from "./input";
 
 export interface DatePickerProps extends InputProps {
-  calendarProps?: Omit<DayPickerProps, "mode" | "selected" | "onSelect">;
+  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect">;
   triggerProps?: PopoverTriggerProps;
   popoverProps?: Omit<Popover.Root.Props, "children">;
   format?: string;
 }
 
-export function DatePicker({
-  calendarProps,
-  triggerProps,
-  popoverProps,
-  className,
-  value,
-  defaultValue,
-  onValueChange,
-  format = "MM/dd/yyyy",
-  placeholder = format.toUpperCase(),
-  disabled,
-  readOnly,
-  invalid,
-  ...props
-}: DatePickerProps) {
+export function DatePicker(props: DatePickerProps) {
+  const {
+    calendarProps,
+    triggerProps,
+    popoverProps,
+    className,
+    value,
+    defaultValue,
+    onValueChange,
+    format = "MM/dd/yyyy",
+    placeholder = format.toUpperCase(),
+    disabled,
+    readOnly,
+    invalid,
+    ...restProps
+  } = props;
+
   const inputRef = useRef<HTMLInputElement>(null);
   const now = new Date();
   const [internalDate, setInternalDate] = useState<Date | undefined>(
@@ -104,7 +105,7 @@ export function DatePicker({
           </Popover.Portal>
         </Popover.Root>
       }
-      {...props}
+      {...restProps}
     />
   );
 }

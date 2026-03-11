@@ -11,16 +11,18 @@ export interface InfoPopoverProps extends PopoverProps {
   infoIconProps?: React.ComponentProps<typeof Info>;
 }
 
-export function InfoPopover({
-  children,
-  fieldLabel,
-  popupProps: { className: popupClassName, ...popupProps } = {},
-  positionerProps,
-  arrowSvgProps: { className: arrowSvgClassName, ...arrowSvgProps } = {},
-  buttonProps: { className: buttonClassName, ...buttonProps } = {},
-  infoIconProps: { className: infoIconClassName, ...infoIconProps } = {},
-  ...props
-}: InfoPopoverProps) {
+export function InfoPopover(props: InfoPopoverProps) {
+  const {
+    children,
+    fieldLabel,
+    popupProps: { className: popupClassName, ...popupProps } = {},
+    positionerProps,
+    arrowSvgProps: { className: arrowSvgClassName, ...arrowSvgProps } = {},
+    buttonProps: { className: buttonClassName, ...buttonProps } = {},
+    infoIconProps: { className: infoIconClassName, ...infoIconProps } = {},
+    ...restProps
+  } = props;
+
   return (
     <Popover
       openOnHover
@@ -64,7 +66,7 @@ export function InfoPopover({
         },
         ...arrowSvgProps,
       }}
-      {...props}
+      {...restProps}
     >
       {children}
     </Popover>

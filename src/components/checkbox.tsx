@@ -26,21 +26,23 @@ export interface CheckboxProps
   fieldProps?: FieldProps;
 }
 
-export function Checkbox({
-  label,
-  className,
-  fieldProps,
-  description,
-  isValidating: _isValidating,
-  isValidatingMessage,
-  errorMessage,
-  invalid,
-  infoPopover,
-  labelProps: { className: labelClassName, ...labelProps } = {},
-  indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
-  iconProps: { className: iconClassName, ...iconProps } = {},
-  ...props
-}: CheckboxProps) {
+export function Checkbox(props: CheckboxProps) {
+  const {
+    label,
+    className,
+    fieldProps,
+    description,
+    isValidating: _isValidating,
+    isValidatingMessage,
+    errorMessage,
+    invalid,
+    infoPopover,
+    labelProps: { className: labelClassName, ...labelProps } = {},
+    indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
+    iconProps: { className: iconClassName, ...iconProps } = {},
+    ...restProps
+  } = props;
+
   const labelId = React.useId();
   const isInCheckboxGroup = useCheckboxGroupContext();
   const { isValidating: groupIsValidating } = useFieldContext();
@@ -62,7 +64,7 @@ export function Checkbox({
           )}
           aria-labelledby={labelId}
           data-validating={isValidating ? "" : undefined}
-          {...props}
+          {...restProps}
         >
           <BaseCheckbox.Indicator
             className={cnBaseUI(

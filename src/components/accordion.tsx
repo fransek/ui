@@ -12,9 +12,13 @@ import { cn, cnBaseUI } from "../lib/utils";
 
 export type AccordionProps = BaseAccordionRootProps;
 
-export function Accordion({ className, ...props }: AccordionProps) {
+export function Accordion(props: AccordionProps) {
+  const { className, ...restProps } = props;
   return (
-    <BaseAccordion.Root className={cnBaseUI("w-full", className)} {...props} />
+    <BaseAccordion.Root
+      className={cnBaseUI("w-full", className)}
+      {...restProps}
+    />
   );
 }
 

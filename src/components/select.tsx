@@ -47,67 +47,75 @@ export interface SelectProps<T>
   scrollDownArrowProps?: SelectScrollDownArrowProps;
 }
 
-export function Select<T>({
-  label,
-  isValidating,
-  isValidatingMessage,
-  errorMessage,
-  invalid,
-  className,
-  description,
-  infoPopover,
-  fieldProps,
-  items,
-  placeholder,
-  actionsRef,
-  autoComplete,
-  defaultOpen,
-  defaultValue,
-  disabled,
-  highlightItemOnHover,
-  id,
-  inputRef,
-  isItemEqualToValue,
-  itemToStringLabel,
-  itemToStringValue,
-  modal,
-  multiple,
-  name,
-  onOpenChange,
-  onOpenChangeComplete,
-  onValueChange,
-  open,
-  readOnly,
-  required,
-  value,
-  triggerDisabled,
-  triggerId,
-  triggerName,
-  triggerValue,
-  valueProps: { className: valueClassName, ...valueProps } = {},
-  selectIconProps: { className: selectIconClassName, ...selectIconProps } = {},
-  iconProps: { className: iconClassName, ...iconProps } = {},
-  portalProps,
-  positionerProps: { className: positionerClassName, ...positionerProps } = {},
-  popupProps: { className: popupClassName, ...popupProps } = {},
-  scrollUpArrowProps: {
-    className: scrollUpArrowClassName,
-    ...scrollUpArrowProps
-  } = {},
-  listProps: { className: listClassName, ...listProps } = {},
-  itemProps: { className: itemClassName, ...itemProps } = {},
-  itemIndicatorProps: {
-    className: itemIndicatorClassName,
-    ...itemIndicatorProps
-  } = {},
-  checkIconProps: { className: checkIconClassName, ...checkIconProps } = {},
-  itemTextProps: { className: itemTextClassName, ...itemTextProps } = {},
-  scrollDownArrowProps: {
-    className: scrollDownArrowClassName,
-    ...scrollDownArrowProps
-  } = {},
-  ...props
-}: SelectProps<T>) {
+export function Select<T>(props: SelectProps<T>) {
+  const {
+    label,
+    isValidating,
+    isValidatingMessage,
+    errorMessage,
+    invalid,
+    className,
+    description,
+    infoPopover,
+    fieldProps,
+    items,
+    placeholder,
+    actionsRef,
+    autoComplete,
+    defaultOpen,
+    defaultValue,
+    disabled,
+    highlightItemOnHover,
+    id,
+    inputRef,
+    isItemEqualToValue,
+    itemToStringLabel,
+    itemToStringValue,
+    modal,
+    multiple,
+    name,
+    onOpenChange,
+    onOpenChangeComplete,
+    onValueChange,
+    open,
+    readOnly,
+    required,
+    value,
+    triggerDisabled,
+    triggerId,
+    triggerName,
+    triggerValue,
+    valueProps: { className: valueClassName, ...valueProps } = {},
+    selectIconProps: {
+      className: selectIconClassName,
+      ...selectIconProps
+    } = {},
+    iconProps: { className: iconClassName, ...iconProps } = {},
+    portalProps,
+    positionerProps: {
+      className: positionerClassName,
+      ...positionerProps
+    } = {},
+    popupProps: { className: popupClassName, ...popupProps } = {},
+    scrollUpArrowProps: {
+      className: scrollUpArrowClassName,
+      ...scrollUpArrowProps
+    } = {},
+    listProps: { className: listClassName, ...listProps } = {},
+    itemProps: { className: itemClassName, ...itemProps } = {},
+    itemIndicatorProps: {
+      className: itemIndicatorClassName,
+      ...itemIndicatorProps
+    } = {},
+    checkIconProps: { className: checkIconClassName, ...checkIconProps } = {},
+    itemTextProps: { className: itemTextClassName, ...itemTextProps } = {},
+    scrollDownArrowProps: {
+      className: scrollDownArrowClassName,
+      ...scrollDownArrowProps
+    } = {},
+    ...restProps
+  } = props;
+
   return (
     <Field
       label={label}
@@ -153,7 +161,7 @@ export function Select<T>({
           id={triggerId}
           name={triggerName}
           value={triggerValue}
-          {...props}
+          {...restProps}
         >
           <BaseSelect.Value
             className={cnBaseUI("data-placeholder:opacity-60", valueClassName)}

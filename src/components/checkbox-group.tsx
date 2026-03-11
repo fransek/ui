@@ -21,20 +21,21 @@ export interface CheckboxGroupProps
   legendProps?: FieldsetLegendProps;
 }
 
-export function CheckboxGroup({
-  children,
-  label,
-  isValidating,
-  isValidatingMessage,
-  errorMessage,
-  invalid,
-  description,
-  fieldProps,
-  infoPopover,
-  fieldsetProps: { className: fieldsetClassName, ...fieldsetProps } = {},
-  legendProps: { className: legendClassName, ...legendProps } = {},
-  ...props
-}: CheckboxGroupProps) {
+export function CheckboxGroup(props: CheckboxGroupProps) {
+  const {
+    children,
+    label,
+    isValidating,
+    isValidatingMessage,
+    errorMessage,
+    invalid,
+    description,
+    fieldProps,
+    infoPopover,
+    fieldsetProps: { className: fieldsetClassName, ...fieldsetProps } = {},
+    legendProps: { className: legendClassName, ...legendProps } = {},
+    ...restProps
+  } = props;
   return (
     <CheckboxGroupContext.Provider value={true}>
       <Field
@@ -46,7 +47,7 @@ export function CheckboxGroup({
         {...fieldProps}
       >
         <Fieldset.Root
-          render={<BaseCheckboxGroup {...props} />}
+          render={<BaseCheckboxGroup {...restProps} />}
           className={cnBaseUI("flex flex-col gap-1", fieldsetClassName)}
           {...fieldsetProps}
         >

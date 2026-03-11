@@ -15,22 +15,24 @@ export interface InputProps extends BaseInputProps, FieldAttributes {
   rightSlot?: React.ReactNode;
 }
 
-export function Input({
-  label,
-  isValidating,
-  isValidatingMessage,
-  errorMessage,
-  className,
-  description,
-  infoPopover,
-  fieldProps,
-  leftAdornment,
-  rightAdornment,
-  leftSlot,
-  rightSlot,
-  invalid,
-  ...props
-}: InputProps) {
+export function Input(props: InputProps) {
+  const {
+    label,
+    isValidating,
+    isValidatingMessage,
+    errorMessage,
+    className,
+    description,
+    infoPopover,
+    fieldProps,
+    leftAdornment,
+    rightAdornment,
+    leftSlot,
+    rightSlot,
+    invalid,
+    ...restProps
+  } = props;
+
   const hasLeftAdornment = leftAdornment != null;
   const hasRightAdornment = rightAdornment != null;
 
@@ -61,7 +63,7 @@ export function Input({
               className,
             )}
             data-validating={isValidating ? "" : undefined}
-            {...props}
+            {...restProps}
           />
           {rightAdornment && (
             <span className="text-muted-foreground absolute inset-y-0 right-0 z-10 flex items-center pr-2">

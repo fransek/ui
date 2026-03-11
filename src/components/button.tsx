@@ -10,13 +10,15 @@ export interface ButtonProps extends BaseButtonProps {
   size?: ButtonSize;
 }
 
-export function Button({
-  variant = "primary",
-  size = "md",
-  children,
-  className,
-  ...props
-}: ButtonProps) {
+export function Button(props: ButtonProps) {
+  const {
+    variant = "primary",
+    size = "md",
+    children,
+    className,
+    ...restProps
+  } = props;
+
   return (
     <BaseButton
       className={(state) =>
@@ -28,7 +30,7 @@ export function Button({
         })
       }
       focusableWhenDisabled
-      {...props}
+      {...restProps}
     >
       {children}
     </BaseButton>

@@ -20,30 +20,32 @@ export interface FieldProps extends BaseFieldRootProps, FieldAttributes {
   isValidatingMessageProps?: BaseFieldDescriptionProps;
 }
 
-export function Field({
-  label,
-  isValidating,
-  isValidatingMessage,
-  errorMessage,
-  invalid = !!errorMessage,
-  description,
-  children,
-  labelProps,
-  errorMessageProps,
-  descriptionProps,
-  infoPopover,
-  isValidatingMessageProps: {
-    className: isValidatingMessageClassName,
-    ...isValidatingMessageProps
-  } = {},
-  ...props
-}: FieldProps) {
+export function Field(props: FieldProps) {
+  const {
+    label,
+    isValidating,
+    isValidatingMessage,
+    errorMessage,
+    invalid = !!errorMessage,
+    description,
+    children,
+    labelProps,
+    errorMessageProps,
+    descriptionProps,
+    infoPopover,
+    isValidatingMessageProps: {
+      className: isValidatingMessageClassName,
+      ...isValidatingMessageProps
+    } = {},
+    ...restProps
+  } = props;
+
   return (
     <FieldContext.Provider value={{ isValidating: !!isValidating }}>
       <FieldRoot
         invalid={invalid}
         data-validating={isValidating ? "" : undefined}
-        {...props}
+        {...restProps}
       >
         {label && (
           <div className="flex items-center gap-2">
@@ -84,25 +86,24 @@ export const FieldControl = BaseField.Control;
 
 export type FieldDescriptionProps = BaseFieldDescriptionProps;
 
-export function FieldDescription({
-  className,
-  ...props
-}: BaseFieldDescriptionProps) {
+export function FieldDescription(props: BaseFieldDescriptionProps) {
+  const { className, ...restProps } = props;
   return (
     <BaseField.Description
       className={cnBaseUI("text-muted-foreground text-sm", className)}
-      {...props}
+      {...restProps}
     />
   );
 }
 
 export type FieldErrorProps = BaseFieldErrorProps;
 
-export function FieldError({ className, ...props }: BaseFieldErrorProps) {
+export function FieldError(props: BaseFieldErrorProps) {
+  const { className, ...restProps } = props;
   return (
     <BaseField.Error
       className={cnBaseUI("text-error-foreground contents text-sm", className)}
-      {...props}
+      {...restProps}
     />
   );
 }
@@ -113,22 +114,24 @@ export const FieldItem = BaseField.Item;
 
 export type FieldLabelProps = BaseFieldLabelProps;
 
-export function FieldLabel({ className, ...props }: BaseFieldLabelProps) {
+export function FieldLabel(props: BaseFieldLabelProps) {
+  const { className, ...restProps } = props;
   return (
     <BaseField.Label
       className={cnBaseUI("text-foreground text-sm font-semibold", className)}
-      {...props}
+      {...restProps}
     />
   );
 }
 
 export type FieldRootProps = BaseFieldRootProps;
 
-export function FieldRoot({ className, ...props }: BaseFieldRootProps) {
+export function FieldRoot(props: BaseFieldRootProps) {
+  const { className, ...restProps } = props;
   return (
     <BaseField.Root
       className={cnBaseUI("flex flex-col gap-1", className)}
-      {...props}
+      {...restProps}
     />
   );
 }

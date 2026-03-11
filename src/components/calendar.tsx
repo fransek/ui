@@ -13,16 +13,20 @@ import {
 import { cn } from "../lib/utils";
 import { Button, buttonStyles } from "./button";
 
-function Calendar({
-  className,
-  classNames,
-  showOutsideDays = true,
-  captionLayout = "label",
-  locale,
-  formatters,
-  components,
-  ...props
-}: React.ComponentProps<typeof DayPicker>) {
+export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+
+function Calendar(props: CalendarProps) {
+  const {
+    className,
+    classNames,
+    showOutsideDays = true,
+    captionLayout = "label",
+    locale,
+    formatters,
+    components,
+    ...restProps
+  } = props;
+
   const defaultClassNames = getDefaultClassNames();
 
   return (
@@ -102,7 +106,7 @@ function Calendar({
         ),
         day: cn(
           "relative w-full rounded-(--cell-radius) h-full p-0 text-center [&:last-child[data-selected=true]_button]:rounded-r-(--cell-radius) group/day aspect-square select-none",
-          props.showWeekNumber
+          restProps.showWeekNumber
             ? "[&:nth-child(2)[data-selected=true]_button]:rounded-l-(--cell-radius)"
             : "[&:first-child[data-selected=true]_button]:rounded-l-(--cell-radius)",
           defaultClassNames.day,
@@ -179,18 +183,15 @@ function Calendar({
         },
         ...components,
       }}
-      {...props}
+      {...restProps}
     />
   );
 }
 
-function CalendarDayButton({
-  className,
-  day,
-  modifiers,
-  locale,
-  ...props
-}: React.ComponentProps<typeof DayButton> & { locale?: Partial<Locale> }) {
+function CalendarDayButton(
+  props: React.ComponentProps<typeof DayButton> & { locale?: Partial<Locale> },
+) {
+  const { className, day, modifiers, locale, ...restProps } = props;
   const defaultClassNames = getDefaultClassNames();
 
   const ref = React.useRef<HTMLButtonElement>(null);
@@ -217,7 +218,7 @@ function CalendarDayButton({
         defaultClassNames.day,
         className,
       )}
-      {...props}
+      {...restProps}
     />
   );
 }

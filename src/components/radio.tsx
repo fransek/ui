@@ -12,11 +12,13 @@ export interface RadioProps extends RadioRootProps {
   indicatorProps?: RadioIndicatorProps;
 }
 
-export function Radio({
-  label,
-  indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
-  ...props
-}: RadioProps) {
+export function Radio(props: RadioProps) {
+  const {
+    label,
+    indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
+    ...restProps
+  } = props;
+
   const id = React.useId();
   const { isValidating } = useFieldContext();
 
@@ -28,7 +30,7 @@ export function Radio({
         )}
         aria-labelledby={id}
         data-validating={isValidating ? "" : undefined}
-        {...props}
+        {...restProps}
       >
         <BaseRadio.Indicator
           className={cnBaseUI(

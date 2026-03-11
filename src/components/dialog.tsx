@@ -25,33 +25,35 @@ export interface DialogProps
   closeButtonIconProps?: React.ComponentProps<typeof X>;
 }
 
-export function Dialog({
-  trigger,
-  actionsRef,
-  children,
-  defaultOpen,
-  defaultTriggerId,
-  disablePointerDismissal,
-  handle,
-  modal,
-  onOpenChange,
-  onOpenChangeComplete,
-  open,
-  triggerId,
-  portalProps,
-  backdropProps: { className: backdropClassName, ...backdropProps } = {},
-  popupProps: { className: popupClassName, ...popupProps } = {},
-  closeProps,
-  closeButtonProps: {
-    className: closeButtonClassName,
-    ...closeButtonProps
-  } = {},
-  closeButtonIconProps: {
-    className: closeButtonIconClassName,
-    ...closeButtonIconProps
-  } = {},
-  ...props
-}: DialogProps) {
+export function Dialog(props: DialogProps) {
+  const {
+    trigger,
+    actionsRef,
+    children,
+    defaultOpen,
+    defaultTriggerId,
+    disablePointerDismissal,
+    handle,
+    modal,
+    onOpenChange,
+    onOpenChangeComplete,
+    open,
+    triggerId,
+    portalProps,
+    backdropProps: { className: backdropClassName, ...backdropProps } = {},
+    popupProps: { className: popupClassName, ...popupProps } = {},
+    closeProps,
+    closeButtonProps: {
+      className: closeButtonClassName,
+      ...closeButtonProps
+    } = {},
+    closeButtonIconProps: {
+      className: closeButtonIconClassName,
+      ...closeButtonIconProps
+    } = {},
+    ...restProps
+  } = props;
+
   return (
     <BaseDialog.Root
       actionsRef={actionsRef}
@@ -67,7 +69,7 @@ export function Dialog({
     >
       {(renderProps) => (
         <>
-          <BaseDialog.Trigger render={trigger} {...props} />
+          <BaseDialog.Trigger render={trigger} {...restProps} />
           <BaseDialog.Portal {...portalProps}>
             <BaseDialog.Backdrop
               className={cnBaseUI(
@@ -119,20 +121,22 @@ export function Dialog({
   );
 }
 
-export function DialogTitle({ className, ...props }: DialogTitleProps) {
+export function DialogTitle(props: DialogTitleProps) {
+  const { className, ...restProps } = props;
   return (
-    <BaseDialog.Title className={cnBaseUI("heading-6", className)} {...props} />
+    <BaseDialog.Title
+      className={cnBaseUI("heading-6", className)}
+      {...restProps}
+    />
   );
 }
 
-export function DialogDescription({
-  className,
-  ...props
-}: DialogDescriptionProps) {
+export function DialogDescription(props: DialogDescriptionProps) {
+  const { className, ...restProps } = props;
   return (
     <BaseDialog.Description
       className={cnBaseUI("text-body body-2 mb-6", className)}
-      {...props}
+      {...restProps}
     />
   );
 }
