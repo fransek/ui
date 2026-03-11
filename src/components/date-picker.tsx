@@ -26,6 +26,7 @@ export function DatePicker({
   format = "MM/dd/yyyy",
   placeholder = format.toLowerCase(),
   disabled,
+  readOnly,
   ...props
 }: DatePickerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -48,9 +49,10 @@ export function DatePicker({
       }}
       value={value}
       defaultValue={defaultValue}
-      className={cn("hover:bg-card", className)}
+      className={cn("hover:bg-card disabled:text-muted-foreground", className)}
       placeholder={placeholder}
       disabled={disabled}
+      readOnly={readOnly}
       rightAdornment={
         <Popover.Root {...popoverProps}>
           <Popover.Trigger
@@ -59,7 +61,7 @@ export function DatePicker({
                 size="icon"
                 variant="ghost"
                 aria-label="Select date"
-                disabled={disabled}
+                disabled={disabled || readOnly}
               >
                 <CalendarIcon className="size-4" />
               </Button>
