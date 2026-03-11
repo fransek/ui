@@ -7,15 +7,21 @@ import { Button } from "./button";
 import { Calendar, type CalendarProps } from "./calendar";
 import { Input, type InputProps } from "./input";
 
+type DatePickerOnValueChange = NonNullable<InputProps["onValueChange"]>;
+type DatePickerOnValue = Parameters<DatePickerOnValueChange>[0];
+type DatePickerOnValueDetails = Parameters<DatePickerOnValueChange>[1];
+
 export interface DatePickerProps extends InputProps {
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
-  handle?: PopoverTriggerProps["handle"];
-  payload?: PopoverTriggerProps["payload"];
-  openOnHover?: PopoverTriggerProps["openOnHover"];
-  delay?: PopoverTriggerProps["delay"];
-  closeDelay?: PopoverTriggerProps["closeDelay"];
+  triggerProps?: Omit<
+    PopoverTriggerProps,
+    | "children"
+    | "className"
+    | "style"
+    | "disabled"
+    | "aria-readonly"
+    | "data-validating"
+    | "render"
+  >;
   popoverProps?: Omit<Popover.Root.Props, "children">;
   calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect">;
   format?: string;
@@ -35,11 +41,7 @@ export function DatePicker({
   disabled,
   readOnly,
   popoverProps,
-  handle,
-  payload,
-  openOnHover,
-  delay,
-  closeDelay,
+  triggerProps,
   autoFocus = true,
   format = "MM/dd/yyyy",
   placeholder = format.toLowerCase(),
@@ -47,30 +49,45 @@ export function DatePicker({
   className,
   ...props
 }: DatePickerProps) {
-  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
+  const [internalValue, setInternalValue] = useState(
+    String(defaultValue ?? ""),
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const isControlled = value !== undefined;
   const inputValue = isControlled ? value : internalValue;
+  const inputValueAsString =
+    typeof inputValue === "string" ? inputValue : String(inputValue ?? "");
   const now = new Date();
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const parsedDate = parse(inputValue, format, now);
+  const parsedDate = parse(inputValueAsString, format, now);
   const date = isValid(parsedDate) ? parsedDate : undefined;
 
-  function updateInternalValue(newValue: string) {
+  function updateInternalValue(newValue: DatePickerOnValue) {
     if (!isControlled) {
-      setInternalValue(newValue);
+      setInternalValue(String(newValue));
     }
   }
 
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
     updateInternalValue(newValue);
-    onValueChange?.(newValue);
+    onValueChange?.(newValue, {
+      reason: "none",
+      event: new Event("change"),
+      cancel: () => {},
+      allowPropagation: () => {},
+      isCanceled: false,
+      isPropagationAllowed: true,
+      trigger: inputRef.current,
+    } as DatePickerOnValueDetails);
   }
 
-  const handleValueChange = (newValue: string) => {
+  const handleValueChange = (
+    newValue: DatePickerOnValue,
+    eventDetails: DatePickerOnValueDetails,
+  ) => {
     updateInternalValue(newValue);
-    onValueChange?.(newValue);
+    onValueChange?.(newValue, eventDetails);
   };
 
   return (
@@ -100,11 +117,7 @@ export function DatePicker({
               disabled={disabled || readOnly}
               aria-readonly={readOnly}
               data-validating={isValidating ? "" : undefined}
-              handle={handle}
-              payload={payload}
-              openOnHover={openOnHover}
-              delay={delay}
-              closeDelay={closeDelay}
+              {...triggerProps}
               render={
                 <Button size="icon" variant="ghost" aria-label="Select date">
                   <CalendarIcon className="size-4" />
