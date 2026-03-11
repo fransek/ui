@@ -8,10 +8,13 @@ import {
   DayPicker,
   getDefaultClassNames,
   type DayButton,
+  type DayPickerProps,
   type Locale,
 } from "react-day-picker";
 import { cn } from "../lib/utils";
 import { Button, buttonStyles } from "./button";
+
+export type CalendarProps = DayPickerProps;
 
 function Calendar({
   className,
@@ -22,7 +25,7 @@ function Calendar({
   formatters,
   components,
   ...props
-}: React.ComponentProps<typeof DayPicker>) {
+}: CalendarProps) {
   const defaultClassNames = getDefaultClassNames();
 
   return (

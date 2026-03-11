@@ -2,39 +2,28 @@ import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
 import { formatDate, isValid, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
-import { type DayPickerProps } from "react-day-picker";
-import { FieldAttributes } from "../lib/types";
 import { cn } from "../lib/utils";
 import { Button } from "./button";
-import { Calendar } from "./calendar";
-import { FieldProps } from "./field";
-import { Input } from "./input";
+import { Calendar, type CalendarProps } from "./calendar";
+import { Input, type InputProps } from "./input";
 
-export interface DatePickerProps
-  extends
-    Omit<DayPickerProps, "mode" | "selected" | "onSelect">,
-    Omit<
-      PopoverTriggerProps,
-      | "children"
-      | "className"
-      | "style"
-      | "onSelect"
-      | "hidden"
-      | "disabled"
-      | "role"
-      | "value"
-      | "defaultValue"
-    >,
-    FieldAttributes {
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
-  placeholder?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  name?: string;
-  fieldProps?: FieldProps;
+type DatePickerOnValueChange = NonNullable<InputProps["onValueChange"]>;
+type DatePickerValue = Parameters<DatePickerOnValueChange>[0];
+type DatePickerEventDetails = Parameters<DatePickerOnValueChange>[1];
+
+export interface DatePickerProps extends InputProps {
+  triggerProps?: Omit<
+    PopoverTriggerProps,
+    | "children"
+    | "className"
+    | "style"
+    | "disabled"
+    | "aria-readonly"
+    | "data-validating"
+    | "render"
+  >;
   popoverProps?: Omit<Popover.Root.Props, "children">;
+  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect">;
   format?: string;
 }
 
@@ -45,47 +34,70 @@ export function DatePicker({
   errorMessage,
   description,
   infoPopover,
-  fieldProps,
   value,
   defaultValue,
   onValueChange,
+  rightAdornment,
   disabled,
   readOnly,
   popoverProps,
-  handle,
-  payload,
-  openOnHover,
-  delay,
-  closeDelay,
+  triggerProps,
   autoFocus = true,
   format = "MM/dd/yyyy",
   placeholder = format.toLowerCase(),
+  calendarProps,
+  className,
   ...props
 }: DatePickerProps) {
-  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
+  const [internalValue, setInternalValue] = useState(
+    String(defaultValue ?? ""),
+  );
   const inputRef = useRef<HTMLInputElement>(null);
+  const calendarChangeEventRef = useRef(new Event("change"));
+  const calendarChangeReason = "none";
   const isControlled = value !== undefined;
-  const inputValue = isControlled ? value : internalValue;
+  const inputValue = String((isControlled ? value : internalValue) ?? "");
   const now = new Date();
   const [calendarOpen, setCalendarOpen] = useState(false);
   const parsedDate = parse(inputValue, format, now);
   const date = isValid(parsedDate) ? parsedDate : undefined;
 
-  function updateInternalValue(newValue: string) {
+  function updateInternalValue(newValue: DatePickerValue) {
     if (!isControlled) {
-      setInternalValue(newValue);
+      setInternalValue(String(newValue));
     }
+  }
+
+  function createCalendarChangeDetails(): DatePickerEventDetails {
+    const details = {
+      reason: calendarChangeReason,
+      event: calendarChangeEventRef.current,
+      isCanceled: false,
+      isPropagationAllowed: false,
+      trigger: inputRef.current,
+      cancel: () => {
+        details.isCanceled = true;
+      },
+      allowPropagation: () => {
+        details.isPropagationAllowed = true;
+      },
+    } as DatePickerEventDetails;
+
+    return details;
   }
 
   function handleSelect(selected: Date | undefined) {
     const newValue = selected ? formatDate(selected, format) : "";
     updateInternalValue(newValue);
-    onValueChange?.(newValue);
+    onValueChange?.(newValue, createCalendarChangeDetails());
   }
 
-  const handleValueChange = (newValue: string) => {
+  const handleValueChange = (
+    newValue: DatePickerValue,
+    eventDetails: DatePickerEventDetails,
+  ) => {
     updateInternalValue(newValue);
-    onValueChange?.(newValue);
+    onValueChange?.(newValue, eventDetails);
   };
 
   return (
@@ -99,56 +111,54 @@ export function DatePicker({
       disabled={disabled}
       readOnly={readOnly}
       ref={inputRef}
-      className={cn("hover:bg-card")}
+      className={cn("hover:bg-card", className)}
       onValueChange={handleValueChange}
       value={inputValue}
       placeholder={placeholder}
-      fieldProps={fieldProps}
+      {...props}
       rightAdornment={
-        <Popover.Root
-          open={calendarOpen}
-          onOpenChange={setCalendarOpen}
-          {...popoverProps}
-        >
-          <Popover.Trigger
-            disabled={disabled || readOnly}
-            aria-readonly={readOnly}
-            data-validating={isValidating ? "" : undefined}
-            handle={handle}
-            payload={payload}
-            openOnHover={openOnHover}
-            delay={delay}
-            closeDelay={closeDelay}
-            render={
-              <Button size="icon" variant="ghost" aria-label="Select date">
-                <CalendarIcon className="size-4" />
-              </Button>
-            }
-          />
-          <Popover.Portal>
-            <Popover.Positioner
-              className="z-10 outline-none"
-              sideOffset={8}
-              anchor={inputRef}
-            >
-              <Popover.Popup
-                aria-label="Calendar"
-                className={cn(
-                  "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
-                )}
+        rightAdornment ?? (
+          <Popover.Root
+            open={calendarOpen}
+            onOpenChange={setCalendarOpen}
+            {...popoverProps}
+          >
+            <Popover.Trigger
+              disabled={disabled || readOnly}
+              aria-readonly={readOnly}
+              data-validating={isValidating ? "" : undefined}
+              {...triggerProps}
+              render={
+                <Button size="icon" variant="ghost" aria-label="Select date">
+                  <CalendarIcon className="size-4" />
+                </Button>
+              }
+            />
+            <Popover.Portal>
+              <Popover.Positioner
+                className="z-10 outline-none"
+                sideOffset={8}
+                anchor={inputRef}
               >
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={handleSelect}
-                  autoFocus={autoFocus}
-                  defaultMonth={isValid(date) ? date : now}
-                  {...props}
-                />
-              </Popover.Popup>
-            </Popover.Positioner>
-          </Popover.Portal>
-        </Popover.Root>
+                <Popover.Popup
+                  aria-label="Calendar"
+                  className={cn(
+                    "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+                  )}
+                >
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={handleSelect}
+                    autoFocus={autoFocus}
+                    defaultMonth={isValid(date) ? date : now}
+                    {...calendarProps}
+                  />
+                </Popover.Popup>
+              </Popover.Positioner>
+            </Popover.Portal>
+          </Popover.Root>
+        )
       }
     />
   );
