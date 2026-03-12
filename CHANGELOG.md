@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.8.0](https://github.com/fransek/ui/compare/v0.7.0...v0.8.0) (2026-03-12)
+
+
+### Features
+
+* textarea added ([6fffca5](https://github.com/fransek/ui/commit/6fffca59801c3f9282f8984d2d296b572ef79ec7))
+
 ## [0.7.0](https://github.com/fransek/ui/compare/v0.6.0...v0.7.0) (2026-03-11)
 
 
