@@ -4,6 +4,7 @@ export * from "./components/calendar";
 export * from "./components/checkbox";
 export * from "./components/checkbox-group";
 export * from "./components/date-picker";
+export * from "./components/date-range-picker";
 export * from "./components/dialog";
 export * from "./components/field";
 export * from "./components/info-popover";
