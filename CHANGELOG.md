@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.8.1](https://github.com/fransek/ui/compare/v0.8.0...v0.8.1) (2026-03-15)
+
+
+### Bug Fixes
+
+* **date-picker:** fixed a bug where adding a ref broke the component ([252a7fa](https://github.com/fransek/ui/commit/252a7fa8b397e27124618ef3651771302b4f36d1))
+
 ## [0.8.0](https://github.com/fransek/ui/compare/v0.7.0...v0.8.0) (2026-03-12)
 
 
