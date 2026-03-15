@@ -15,3 +15,15 @@ export function cnBaseUI<T>(
       ),
     );
 }
+
+export function mergeRefs<T>(...refs: (React.Ref<T> | undefined)[]) {
+  return (instance: T | null) => {
+    refs.forEach((ref) => {
+      if (typeof ref === "function") {
+        ref(instance);
+      } else if (ref) {
+        ref.current = instance;
+      }
+    });
+  };
+}
