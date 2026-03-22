@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.8.2](https://github.com/fransek/ui/compare/v0.8.1...v0.8.2) (2026-03-22)
+
+
+### Bug Fixes
+
+* added text shimmer animation on `isValidatingMessage` ([77315a4](https://github.com/fransek/ui/commit/77315a47f9ae860b24432143b563eb75ba6cc33c))
+* **date-picker:** trigger onBlur event when closing calendar ([82d3670](https://github.com/fransek/ui/commit/82d3670e8ecdb28bf895913fabaa2d3d4b7290c7))
+
 ## [0.8.1](https://github.com/fransek/ui/compare/v0.8.0...v0.8.1) (2026-03-15)
 
 
