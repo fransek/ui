@@ -18,7 +18,7 @@ export function DatePicker(props: DatePickerProps) {
   const {
     calendarProps,
     popoverTriggerProps,
-    popoverProps,
+    popoverProps: { onOpenChange, ...popoverProps } = {},
     className,
     value,
     defaultValue,
@@ -67,7 +67,16 @@ export function DatePicker(props: DatePickerProps) {
       readOnly={readOnly}
       invalid={invalid}
       rightAdornment={
-        <Popover.Root {...popoverProps}>
+        <Popover.Root
+          onOpenChange={(open, e) => {
+            onOpenChange?.(open, e);
+            if (!open) {
+              inputRef.current?.focus();
+              inputRef.current?.blur();
+            }
+          }}
+          {...popoverProps}
+        >
           <Popover.Trigger
             render={
               <Button
