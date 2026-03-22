@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.8.3](https://github.com/fransek/ui/compare/v0.8.2...v0.8.3) (2026-03-22)
+
+
+### Bug Fixes
+
+* **field:** minor error message styling fix ([c40ef1e](https://github.com/fransek/ui/commit/c40ef1e23fcccdbbe2fa8faa413ed723e17c2996))
+
 ## [0.8.2](https://github.com/fransek/ui/compare/v0.8.1...v0.8.2) (2026-03-22)
 
 
