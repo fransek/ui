@@ -62,7 +62,7 @@ export function Field(props: FieldProps) {
         {isValidating && isValidatingMessage && !errorMessage && (
           <FieldDescription
             className={cnBaseUI(
-              "text-primary-foreground animate-validating-message",
+              "text-primary-foreground animate-validating-message text-sm",
               isValidatingMessageClassName,
             )}
             {...isValidatingMessageProps}

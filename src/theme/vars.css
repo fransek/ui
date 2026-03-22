@@ -115,7 +115,16 @@
   --color-code-foreground: var(--code-foreground);
 
   --animate-validating: validating 1.5s ease-in-out infinite;
-  --animate-validating-message: validating-message 1.5s ease-in-out infinite;
+  --animate-validating-message: validating-message 1.5s linear infinite;
+
+  --shimmer-gradient: linear-gradient(
+    105deg,
+    var(--muted-foreground) 40%,
+    color-mix(in oklch, var(--on-muted) 35%, var(--muted-foreground)) 45%,
+    color-mix(in oklch, var(--on-muted) 70%, var(--muted-foreground)) 50%,
+    color-mix(in oklch, var(--on-muted) 35%, var(--muted-foreground)) 55%,
+    var(--muted-foreground) 60%
+  );
 
   @keyframes validating {
     0%,
@@ -131,23 +140,22 @@
   }
 
   @keyframes validating-message {
-    0%,
-    100% {
-      color: var(--primary-foreground);
-      text-shadow: none;
+    from {
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-image: var(--shimmer-gradient);
+      background-position: 100% center;
+      background-size: 300% 100%;
+      color: transparent;
     }
-    50% {
-      color: color-mix(
-        in oklab,
-        var(--foreground) 40%,
-        var(--primary-foreground)
-      );
-      text-shadow: color-mix(
-          in oklab,
-          var(--primary-foreground) 25%,
-          transparent
-        )
-        0px 0px 4px;
+
+    to {
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-image: var(--shimmer-gradient);
+      background-position: 0% center;
+      background-size: 300% 100%;
+      color: transparent;
     }
   }
 }
