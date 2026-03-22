@@ -102,7 +102,7 @@ export function FieldError(props: BaseUIFieldErrorProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIField.Error
-      className={cnBaseUI("text-error-foreground contents text-sm", className)}
+      className={cnBaseUI("text-error-foreground text-sm", className)}
       {...restProps}
     />
   );
