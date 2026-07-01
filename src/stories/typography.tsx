@@ -150,7 +150,7 @@ body {
   font-family: 'Georgia', serif;
   line-height: 1.6;
   font-size: 16px;
-  }`}</code>
+}`}</code>
           </pre>
           <figcaption>Example CSS for readable body text</figcaption>
         </figure>
