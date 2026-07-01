@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.8.4](https://github.com/fransek/ui/compare/v0.8.3...v0.8.4) (2026-07-01)
+
+
+### Bug Fixes
+
+* update dependencies and install relevant agent skills ([#56](https://github.com/fransek/ui/issues/56)) ([171adb2](https://github.com/fransek/ui/commit/171adb2e862296fb6669083b8d5dbfb22214229d))
+
 ## [0.8.3](https://github.com/fransek/ui/compare/v0.8.2...v0.8.3) (2026-03-22)
 
 
