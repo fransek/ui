@@ -8,6 +8,7 @@ export * from "./components/dialog";
 export * from "./components/field";
 export * from "./components/info-popover";
 export * from "./components/input";
+export * from "./components/number-field";
 export * from "./components/popover";
 export * from "./components/radio";
 export * from "./components/radio-group";
