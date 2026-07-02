@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.9.0](https://github.com/fransek/ui/compare/v0.8.4...v0.9.0) (2026-07-02)
+
+
+### Features
+
+* add Toast component ([#58](https://github.com/fransek/ui/issues/58)) ([62c009a](https://github.com/fransek/ui/commit/62c009a9de9b4de6407c501da9df7315b8c83c76))
+
+
+### Bug Fixes
+
+* **theme:** increase `card` color brightness on light theme ([#61](https://github.com/fransek/ui/issues/61)) ([1c3ad88](https://github.com/fransek/ui/commit/1c3ad88b937d205ec2f2e8b394f8ac8e87b7abb8))
+* **typography:** table layout fixes ([#60](https://github.com/fransek/ui/issues/60)) ([afc1316](https://github.com/fransek/ui/commit/afc131602f2464489e3fde39a1d0a0c1265d2b27))
+
 ## [0.8.4](https://github.com/fransek/ui/compare/v0.8.3...v0.8.4) (2026-07-01)
 
 
