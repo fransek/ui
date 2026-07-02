@@ -1,5 +1,7 @@
 import {
   Select as BaseUISelect,
+  SelectGroupLabelProps,
+  SelectGroupProps,
   SelectIconProps,
   SelectItemIndicatorProps,
   SelectItemProps,
@@ -20,11 +22,49 @@ import { FieldAttributes } from "../lib/types";
 import { cn, cnBaseUI } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 
+/**
+ * The data structure accepted by the `items` prop, re-exported from Base UI's
+ * `Select.Root`. One of:
+ * - a flat array of `{ label, value }` items,
+ * - an array of groups (objects with a `label` heading and their own `items`),
+ * - a `Record` mapping each value to its label.
+ */
+export type SelectItems<T = unknown> = SelectRootProps<T>["items"];
+
+interface RenderItem {
+  label: React.ReactNode;
+  value: unknown;
+}
+
+interface RenderGroup {
+  /** Heading rendered above the group's items. */
+  label?: React.ReactNode;
+  items: readonly RenderItem[];
+}
+
+/**
+ * Base UI's `items` accepts a flat array of `{ label, value }` items or an array
+ * of groups (objects with an `items` array). Groups aren't rendered by Base UI
+ * itself, so detect them and render a `Select.Group` with a `Select.GroupLabel`
+ * heading (read from the group's `label`).
+ */
+function isGroupedItems(items: unknown): items is readonly RenderGroup[] {
+  return (
+    Array.isArray(items) &&
+    items.length > 0 &&
+    typeof items[0] === "object" &&
+    items[0] != null &&
+    "items" in items[0]
+  );
+}
+
 export interface SelectProps<T, Multiple extends boolean | undefined = false>
   extends
     Omit<SelectTriggerProps, "value">,
     SelectRootProps<T, Multiple>,
     FieldAttributes {
+  groupProps?: SelectGroupProps;
+  groupLabelProps?: SelectGroupLabelProps;
   placeholder?: React.ReactNode;
   triggerDisabled?: SelectTriggerProps["disabled"];
   triggerId?: SelectTriggerProps["id"];
@@ -104,6 +144,11 @@ export function Select<T, Multiple extends boolean | undefined = false>(
       ...scrollUpArrowProps
     } = {},
     listProps: { className: listClassName, ...listProps } = {},
+    groupProps: { className: groupClassName, ...groupProps } = {},
+    groupLabelProps: {
+      className: groupLabelClassName,
+      ...groupLabelProps
+    } = {},
     itemProps: { className: itemClassName, ...itemProps } = {},
     itemIndicatorProps: {
       className: itemIndicatorClassName,
@@ -117,6 +162,34 @@ export function Select<T, Multiple extends boolean | undefined = false>(
     } = {},
     ...restProps
   } = props;
+
+  const renderItem = (item: RenderItem) => (
+    <BaseUISelect.Item
+      key={String(item.value)}
+      value={item.value}
+      className={cnBaseUI(
+        "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 py-2 pr-2.5 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:text-base group-data-[side=none]:leading-4 before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
+        itemClassName,
+      )}
+      {...itemProps}
+    >
+      <BaseUISelect.ItemText
+        className={cnBaseUI("flex-1", itemTextClassName)}
+        {...itemTextProps}
+      >
+        {item.label}
+      </BaseUISelect.ItemText>
+      <BaseUISelect.ItemIndicator
+        className={cnBaseUI("flex", itemIndicatorClassName)}
+        {...itemIndicatorProps}
+      >
+        <Check
+          className={cn("size-4", checkIconClassName)}
+          {...checkIconProps}
+        />
+      </BaseUISelect.ItemIndicator>
+    </BaseUISelect.Item>
+  );
 
   return (
     <Field
@@ -210,34 +283,32 @@ export function Select<T, Multiple extends boolean | undefined = false>(
                 )}
                 {...listProps}
               >
-                {Array.isArray(items) &&
-                  items.map(({ label, value }) => (
-                    <BaseUISelect.Item
-                      key={String(value)}
-                      value={value}
-                      className={cnBaseUI(
-                        "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 py-2 pr-2.5 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:text-base group-data-[side=none]:leading-4 before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
-                        itemClassName,
-                      )}
-                      {...itemProps}
-                    >
-                      <BaseUISelect.ItemText
-                        className={cnBaseUI("flex-1", itemTextClassName)}
-                        {...itemTextProps}
+                {isGroupedItems(items)
+                  ? items.map((group, index) => (
+                      <BaseUISelect.Group
+                        key={index}
+                        className={cnBaseUI("not-last:mb-2", groupClassName)}
+                        {...groupProps}
                       >
-                        {label}
-                      </BaseUISelect.ItemText>
-                      <BaseUISelect.ItemIndicator
-                        className={cnBaseUI("flex", itemIndicatorClassName)}
-                        {...itemIndicatorProps}
-                      >
-                        <Check
-                          className={cn("size-4", checkIconClassName)}
-                          {...checkIconProps}
-                        />
-                      </BaseUISelect.ItemIndicator>
-                    </BaseUISelect.Item>
-                  ))}
+                        <BaseUISelect.GroupLabel
+                          className={cnBaseUI(
+                            "text-muted-foreground px-2.5 py-1 text-xs font-medium",
+                            groupLabelClassName,
+                          )}
+                          {...groupLabelProps}
+                        >
+                          {group.label}
+                        </BaseUISelect.GroupLabel>
+                        {group.items.map(renderItem)}
+                      </BaseUISelect.Group>
+                    ))
+                  : Array.isArray(items)
+                    ? (items as readonly RenderItem[]).map(renderItem)
+                    : items != null
+                      ? Object.entries(items).map(([value, itemLabel]) =>
+                          renderItem({ value, label: itemLabel }),
+                        )
+                      : null}
               </BaseUISelect.List>
               <BaseUISelect.ScrollDownArrow
                 className={cnBaseUI(
