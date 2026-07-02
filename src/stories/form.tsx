@@ -92,7 +92,7 @@ export function Form() {
         placeholder="Select a role"
         items={roles}
         value={values.role}
-        onValueChange={(value) => update("role", value as string | null)}
+        onValueChange={(value) => update("role", value)}
         errorMessage={errors.role}
       />
 
@@ -167,7 +167,7 @@ const roles = [
   { label: "Designer", value: "designer" },
   { label: "Product manager", value: "product" },
   { label: "Other", value: "other" },
-];
+] as const;
 
 function validate(values: SignUpValues): SignUpErrors {
   const errors: SignUpErrors = {};

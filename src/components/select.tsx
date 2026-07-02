@@ -20,10 +20,10 @@ import { FieldAttributes } from "../lib/types";
 import { cn, cnBaseUI } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 
-export interface SelectProps<T>
+export interface SelectProps<T, Multiple extends boolean | undefined = false>
   extends
     Omit<SelectTriggerProps, "value">,
-    SelectRootProps<T>,
+    SelectRootProps<T, Multiple>,
     FieldAttributes {
   placeholder?: React.ReactNode;
   triggerDisabled?: SelectTriggerProps["disabled"];
@@ -47,7 +47,9 @@ export interface SelectProps<T>
   scrollDownArrowProps?: SelectScrollDownArrowProps;
 }
 
-export function Select<T>(props: SelectProps<T>) {
+export function Select<T, Multiple extends boolean | undefined = false>(
+  props: SelectProps<T, Multiple>,
+) {
   const {
     label,
     isValidating,
@@ -189,7 +191,7 @@ export function Select<T>(props: SelectProps<T>) {
           >
             <BaseUISelect.Popup
               className={cnBaseUI(
-                "group bg-background outline-border min-w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
+                "group bg-background outline-border w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
                 popupClassName,
               )}
               {...popupProps}
@@ -214,29 +216,26 @@ export function Select<T>(props: SelectProps<T>) {
                       key={String(value)}
                       value={value}
                       className={cnBaseUI(
-                        "data-highlighted:before:bg-primary data-highlighted:text-on-primary grid cursor-default grid-cols-[0.75rem_1fr] items-center gap-2 py-2 pr-4 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:pr-12 group-data-[side=none]:text-base group-data-[side=none]:leading-4 data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-1 data-highlighted:before:inset-y-0 data-highlighted:before:z-[-1] data-highlighted:before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
+                        "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 py-2 pr-2.5 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:text-base group-data-[side=none]:leading-4 before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
                         itemClassName,
                       )}
                       {...itemProps}
                     >
-                      <BaseUISelect.ItemIndicator
-                        className={cnBaseUI(
-                          "col-start-1",
-                          itemIndicatorClassName,
-                        )}
-                        {...itemIndicatorProps}
-                      >
-                        <Check
-                          className={cn("size-3", checkIconClassName)}
-                          {...checkIconProps}
-                        />
-                      </BaseUISelect.ItemIndicator>
                       <BaseUISelect.ItemText
-                        className={cnBaseUI("col-start-2", itemTextClassName)}
+                        className={cnBaseUI("flex-1", itemTextClassName)}
                         {...itemTextProps}
                       >
                         {label}
                       </BaseUISelect.ItemText>
+                      <BaseUISelect.ItemIndicator
+                        className={cnBaseUI("flex", itemIndicatorClassName)}
+                        {...itemIndicatorProps}
+                      >
+                        <Check
+                          className={cn("size-4", checkIconClassName)}
+                          {...checkIconProps}
+                        />
+                      </BaseUISelect.ItemIndicator>
                     </BaseUISelect.Item>
                   ))}
               </BaseUISelect.List>
