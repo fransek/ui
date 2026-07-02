@@ -80,9 +80,9 @@
       @apply text-body text-sm not-last:mb-2;
     }
     table {
-      @apply w-full border-collapse not-last:mb-6;
+      @apply w-full table-fixed border-collapse text-sm not-last:mb-6;
       caption {
-        @apply text-body mb-2 text-sm;
+        @apply text-body mb-2;
       }
       th,
       td {

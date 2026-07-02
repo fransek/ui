@@ -2,7 +2,7 @@ import React from "react";
 
 export function Typography() {
   return (
-    <article className="bg-background typography max-w-3xl p-8">
+    <article className="bg-background typography max-w-3xl p-4 md:p-10">
       <header>
         <h1>The Art of Typography</h1>
         <p className="ingress">
@@ -81,7 +81,6 @@ export function Typography() {
             <tr>
               <th scope="col">Family</th>
               <th scope="col">Category</th>
-              <th scope="col">Best Use Case</th>
               <th scope="col">Readability</th>
             </tr>
           </thead>
@@ -91,7 +90,6 @@ export function Typography() {
                 <strong>Georgia</strong>
               </td>
               <td>Serif</td>
-              <td>Body text, Print</td>
               <td>Excellent</td>
             </tr>
             <tr>
@@ -99,7 +97,6 @@ export function Typography() {
                 <strong>Helvetica</strong>
               </td>
               <td>Sans-serif</td>
-              <td>Headlines, UI</td>
               <td>Very Good</td>
             </tr>
             <tr>
@@ -107,7 +104,6 @@ export function Typography() {
                 <strong>Times New Roman</strong>
               </td>
               <td>Serif</td>
-              <td>Formal documents</td>
               <td>Good</td>
             </tr>
             <tr>
@@ -115,7 +111,6 @@ export function Typography() {
                 <strong>Courier New</strong>
               </td>
               <td>Monospace</td>
-              <td>Code, Terminals</td>
               <td>Good</td>
             </tr>
             <tr>
@@ -123,7 +118,6 @@ export function Typography() {
                 <strong>Inter</strong>
               </td>
               <td>Sans-serif</td>
-              <td>Screen, Web</td>
               <td>Excellent</td>
             </tr>
           </tbody>
