@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "../components/button";
 import { Checkbox } from "../components/checkbox";
 import { Input } from "../components/input";
+import { NumberField } from "../components/number-field";
 import { Radio } from "../components/radio";
 import { RadioGroup } from "../components/radio-group";
 import { Select } from "../components/select";
@@ -96,6 +97,17 @@ export function Form() {
         errorMessage={errors.role}
       />
 
+      <NumberField
+        label="Seats"
+        className="sm:w-40"
+        min={1}
+        max={100}
+        value={values.seats}
+        onValueChange={(value) => update("seats", value)}
+        errorMessage={errors.seats}
+        description="How many team members need access?"
+      />
+
       <RadioGroup
         label="Plan"
         value={values.plan}
@@ -145,6 +157,7 @@ interface SignUpValues {
   email: string;
   password: string;
   role: string | null;
+  seats: number | null;
   plan: string;
   bio: string;
   terms: boolean;
@@ -157,6 +170,7 @@ const emptyValues: SignUpValues = {
   email: "",
   password: "",
   role: null,
+  seats: 1,
   plan: "",
   bio: "",
   terms: false,
@@ -187,6 +201,11 @@ function validate(values: SignUpValues): SignUpErrors {
   }
   if (!values.role) {
     errors.role = "Please select a role.";
+  }
+  if (values.seats == null) {
+    errors.seats = "Please enter the number of seats.";
+  } else if (values.seats < 1) {
+    errors.seats = "You need at least one seat.";
   }
   if (!values.plan) {
     errors.plan = "Please choose a plan.";
