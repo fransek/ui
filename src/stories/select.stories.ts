@@ -85,3 +85,17 @@ export const Grouped: Story = {
     ],
   },
 };
+
+/**
+ * Pass a `Record` that maps each value to its label as a shorthand for a flat
+ * list of items.
+ */
+export const RecordItems: Story = {
+  args: {
+    items: {
+      apple: "🍎 Apple",
+      banana: "🍌 Banana",
+      orange: "🍊 Orange",
+    },
+  },
+};

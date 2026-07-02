@@ -24,8 +24,10 @@ import { Field, FieldProps } from "./field";
 
 /**
  * The data structure accepted by the `items` prop, re-exported from Base UI's
- * `Select.Root`. Either a flat array of `{ label, value }` items or an array of
- * groups (objects with a `label` heading and their own `items`).
+ * `Select.Root`. One of:
+ * - a flat array of `{ label, value }` items,
+ * - an array of groups (objects with a `label` heading and their own `items`),
+ * - a `Record` mapping each value to its label.
  */
 export type SelectItems<T = unknown> = SelectRootProps<T>["items"];
 
@@ -300,8 +302,13 @@ export function Select<T, Multiple extends boolean | undefined = false>(
                         {group.items.map(renderItem)}
                       </BaseUISelect.Group>
                     ))
-                  : Array.isArray(items) &&
-                    (items as readonly RenderItem[]).map(renderItem)}
+                  : Array.isArray(items)
+                    ? (items as readonly RenderItem[]).map(renderItem)
+                    : items != null
+                      ? Object.entries(items).map(([value, itemLabel]) =>
+                          renderItem({ value, label: itemLabel }),
+                        )
+                      : null}
               </BaseUISelect.List>
               <BaseUISelect.ScrollDownArrow
                 className={cnBaseUI(
