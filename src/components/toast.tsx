@@ -62,7 +62,7 @@ const viewportPositionStyles: Record<ToastPosition, string> = {
 };
 
 const baseViewportStyles =
-  "fixed z-50 flex w-[calc(100vw-2rem)] max-w-90 outline-none";
+  "fixed z-50 flex w-[calc(100vw-2rem)] sm:max-w-90 outline-none";
 
 // Shared stacking/animation variables and layout for every toast.
 const baseToastStyles =
