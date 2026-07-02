@@ -8,12 +8,12 @@ import { FieldAttributes } from "../lib/types";
 import { Field, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
-export interface RadioGroupProps
-  extends BaseUIRadioGroupProps, FieldAttributes {
+export interface RadioGroupProps<T>
+  extends BaseUIRadioGroupProps<T>, FieldAttributes {
   fieldProps?: FieldProps;
 }
 
-export function RadioGroup(props: RadioGroupProps) {
+export function RadioGroup<T>(props: RadioGroupProps<T>) {
   const {
     isValidating,
     isValidatingMessage,

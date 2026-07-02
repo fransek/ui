@@ -111,7 +111,7 @@ export function Form() {
       <RadioGroup
         label="Plan"
         value={values.plan}
-        onValueChange={(value) => update("plan", value as string)}
+        onValueChange={(value) => update("plan", value)}
         errorMessage={errors.plan}
       >
         <Radio value="free" label="Free" />
