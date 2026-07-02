@@ -13,6 +13,7 @@ export * from "./components/radio";
 export * from "./components/radio-group";
 export * from "./components/select";
 export * from "./components/textarea";
+export * from "./components/toast";
 export * from "./lib/types";
 export * from "./lib/utils";
 import "./theme/index.css";

@@ -1,18 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Text } from "./text";
+import { Text as TextComponent } from "./text";
 
 const meta = {
   title: "Theme/Text",
-  component: Text,
+  component: TextComponent,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
-} satisfies Meta<typeof Text>;
+} satisfies Meta<typeof TextComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Text: Story = {};

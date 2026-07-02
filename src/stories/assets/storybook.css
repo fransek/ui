@@ -7,3 +7,10 @@
   --font-sans: "Noto Sans", sans-serif;
   --font-mono: "Noto Sans Mono", monospace;
 }
+
+/* Make the Docs view story preview canvas use the theme background */
+.docs-story,
+.sb-story {
+  background: var(--background);
+  color: var(--foreground);
+}
