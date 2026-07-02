@@ -26,9 +26,9 @@ const meta = {
     infoPopover:
       "Fruits are a great source of vitamins and minerals. Choose wisely!",
     items: [
-      { label: "Apple", value: "apple" },
-      { label: "Banana", value: "banana" },
-      { label: "Orange", value: "orange" },
+      { label: "🍎 Apple", value: "apple" },
+      { label: "🍌 Banana", value: "banana" },
+      { label: "🍊 Orange", value: "orange" },
     ],
     placeholder: "Select a fruit",
   },
@@ -50,5 +50,38 @@ export const Error: Story = {
 export const Validating: Story = {
   args: {
     isValidating: true,
+  },
+};
+
+/**
+ * Pass an array of groups (each with a `label` heading and its own `items`) to
+ * render grouped options.
+ */
+export const Grouped: Story = {
+  args: {
+    label: "Produce",
+    description: "Select your favorite produce from the list.",
+    isValidating: false,
+    isValidatingMessage: "Validating...",
+    infoPopover: "Produce includes fruits and vegetables. Choose wisely!",
+    placeholder: "Select a produce",
+    items: [
+      {
+        label: "Fruits",
+        items: [
+          { label: "🍎 Apple", value: "apple" },
+          { label: "🍌 Banana", value: "banana" },
+          { label: "🍊 Orange", value: "orange" },
+        ],
+      },
+      {
+        label: "Vegetables",
+        items: [
+          { label: "🥕 Carrot", value: "carrot" },
+          { label: "🥦 Broccoli", value: "broccoli" },
+          { label: "🥬 Spinach", value: "spinach" },
+        ],
+      },
+    ],
   },
 };
