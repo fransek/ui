@@ -83,3 +83,17 @@ export const Persistent: Story = {
     timeout: 0,
   },
 };
+
+/**
+ * `position` also accepts a responsive map keyed by breakpoint. Here toasts are
+ * full-width and bottom-centered on small screens, then move to the top-right
+ * corner from `md` up. Resize the viewport to see the anchor flip.
+ */
+export const Responsive: Story = {
+  args: {
+    position: {
+      base: "bottom-center",
+      md: "top-right",
+    },
+  },
+};
