@@ -1,18 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Typography } from "./typography";
+import { Typography as TypographyComponent } from "./typography";
 
 const meta = {
   title: "Theme/Typography",
-  component: Typography,
+  component: TypographyComponent,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
-} satisfies Meta<typeof Typography>;
+} satisfies Meta<typeof TypographyComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Typography: Story = {};

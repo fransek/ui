@@ -1,18 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Colors } from "./colors";
+import { Colors as ColorsComponent } from "./colors";
 
 const meta = {
   title: "Theme/Colors",
-  component: Colors,
+  component: ColorsComponent,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
-} satisfies Meta<typeof Colors>;
+} satisfies Meta<typeof ColorsComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Colors: Story = {};
