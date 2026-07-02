@@ -66,7 +66,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {};
+export const Basic: Story = {
+  args: {
+    timeout: 5000,
+  },
+};
 
 export const TopCenter: Story = {
   args: {
