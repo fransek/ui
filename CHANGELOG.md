@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.10.0](https://github.com/fransek/ui/compare/v0.9.0...v0.10.0) (2026-07-03)
+
+
+### Features
+
+* add NumberField component ([#64](https://github.com/fransek/ui/issues/64)) ([96de2a4](https://github.com/fransek/ui/commit/96de2a4caf6842ff377896e3beb87b87c8222bd4))
+* add Switch component ([#70](https://github.com/fransek/ui/issues/70)) ([f7dd177](https://github.com/fransek/ui/commit/f7dd177b602568a7680906a94af28e24834961c1))
+* **radio-group:** add generic value typing ([#63](https://github.com/fransek/ui/issues/63)) ([b579d76](https://github.com/fransek/ui/commit/b579d76236c01431b6878722a0938c19172dc704))
+* **select:** render grouped items ([#67](https://github.com/fransek/ui/issues/67)) ([f6762fa](https://github.com/fransek/ui/commit/f6762fa22e7766b5f71ece3ef7202512e0783cfa))
+* **select:** support multiple selection and refine item layout ([#62](https://github.com/fransek/ui/issues/62)) ([931b37d](https://github.com/fransek/ui/commit/931b37d1c9b2755a8ebf5d9f44b7608629b8dcda))
+* **spinner:** add animated loading spinner component ([#66](https://github.com/fransek/ui/issues/66)) ([7eea1e2](https://github.com/fransek/ui/commit/7eea1e26d46c1bfc50f5d24d3f700e9871af2a1a))
+
+
+### Bug Fixes
+
+* **toast:** fill available width on small screens ([#68](https://github.com/fransek/ui/issues/68)) ([882b3af](https://github.com/fransek/ui/commit/882b3af5febeb53a843bb69b1ebb05543573e311))
+
 ## [0.9.0](https://github.com/fransek/ui/compare/v0.8.4...v0.9.0) (2026-07-02)
 
 
