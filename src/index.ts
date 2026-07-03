@@ -5,6 +5,7 @@ export * from "./components/checkbox";
 export * from "./components/checkbox-group";
 export * from "./components/date-picker";
 export * from "./components/dialog";
+export * from "./components/drawer";
 export * from "./components/field";
 export * from "./components/info-popover";
 export * from "./components/input";
