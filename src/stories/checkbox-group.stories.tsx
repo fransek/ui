@@ -9,6 +9,29 @@ const meta = {
   component: CheckboxGroup,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `
+## Anatomy
+
+\`\`\`tsx
+import { CheckboxGroup, Checkbox } from "@fransek/ui";
+
+<CheckboxGroup label="...">
+  <Checkbox value="a" label="A" />
+  <Checkbox value="b" label="B" />
+</CheckboxGroup>;
+\`\`\`
+
+- **\`CheckboxGroup\`** – the root. Wraps the shared \`Field\` (rendering
+  \`label\`/\`description\`/\`errorMessage\`/\`infoPopover\`) around a
+  \`Fieldset.Root\` and Base UI's \`CheckboxGroup\`. \`children\` are the
+  individual options.
+- **\`Checkbox\`** – a single option, placed inside \`CheckboxGroup\` as
+  \`children\`.
+`,
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {

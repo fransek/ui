@@ -8,6 +8,28 @@ const meta = {
   component: RadioGroup,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `
+## Anatomy
+
+\`\`\`tsx
+import { RadioGroup, Radio } from "@fransek/ui";
+
+<RadioGroup label="..." value={value} onValueChange={setValue}>
+  <Radio value="a" label="A" />
+  <Radio value="b" label="B" />
+</RadioGroup>;
+\`\`\`
+
+- **\`RadioGroup\`** – the root. Wraps the shared \`Field\` (rendering
+  \`label\`/\`description\`/\`errorMessage\`/\`infoPopover\`) around a
+  \`Fieldset.Root\` and Base UI's \`RadioGroup\`. \`children\` are the individual
+  options.
+- **\`Radio\`** – a single option, placed inside \`RadioGroup\` as \`children\`.
+`,
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {

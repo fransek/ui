@@ -28,6 +28,30 @@ const meta = {
   component: Accordion,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `
+## Anatomy
+
+\`\`\`tsx
+import { Accordion, AccordionPanel } from "@fransek/ui";
+
+<Accordion>
+  <AccordionPanel summary="...">{/* content */}</AccordionPanel>
+  <AccordionPanel summary="...">{/* content */}</AccordionPanel>
+</Accordion>;
+\`\`\`
+
+- **\`Accordion\`** – the root. Wraps Base UI's \`Accordion.Root\` and controls
+  which panel(s) are open.
+- **\`AccordionPanel\`** – one collapsible item. Internally composes
+  \`Accordion.Item\`, \`Accordion.Header\`, \`Accordion.Trigger\` (rendering the
+  \`summary\` and chevron icon), and \`Accordion.Panel\` (rendering \`children\`).
+  Use \`headerProps\`, \`triggerProps\`, and \`panelProps\` to reach the
+  underlying parts.
+`,
+      },
+    },
   },
   tags: ["autodocs"],
   args: {
