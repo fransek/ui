@@ -28,7 +28,7 @@ const meta = {
         component: `
 ## Anatomy
 
-\`\`\`tsx
+\`\`\`jsx
 import { Dialog, DialogTitle, DialogDescription, DialogClose } from "@fransek/ui";
 
 <Dialog trigger={<button>Open</button>}>
@@ -37,15 +37,6 @@ import { Dialog, DialogTitle, DialogDescription, DialogClose } from "@fransek/ui
   <DialogClose />
 </Dialog>;
 \`\`\`
-
-- **\`Dialog\`** – the root. Wraps Base UI's \`Dialog.Root\`, \`Dialog.Trigger\`
-  (rendered from the \`trigger\` prop), \`Dialog.Portal\`, \`Dialog.Backdrop\`,
-  and \`Dialog.Popup\` (which also renders a close button unless
-  \`disablePointerDismissal\` is set). \`children\` is rendered inside the popup.
-- **\`DialogTitle\`** – wraps \`Dialog.Title\`.
-- **\`DialogDescription\`** – wraps \`Dialog.Description\`.
-- **\`DialogClose\`** – wraps \`Dialog.Close\`. Pass \`render\` to use a custom
-  trigger element, such as a \`Button\`.
 `,
       },
     },

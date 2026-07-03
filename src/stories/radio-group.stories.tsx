@@ -13,7 +13,7 @@ const meta = {
         component: `
 ## Anatomy
 
-\`\`\`tsx
+\`\`\`jsx
 import { RadioGroup, Radio } from "@fransek/ui";
 
 <RadioGroup label="..." value={value} onValueChange={setValue}>
@@ -21,12 +21,6 @@ import { RadioGroup, Radio } from "@fransek/ui";
   <Radio value="b" label="B" />
 </RadioGroup>;
 \`\`\`
-
-- **\`RadioGroup\`** – the root. Wraps the shared \`Field\` (rendering
-  \`label\`/\`description\`/\`errorMessage\`/\`infoPopover\`) around a
-  \`Fieldset.Root\` and Base UI's \`RadioGroup\`. \`children\` are the individual
-  options.
-- **\`Radio\`** – a single option, placed inside \`RadioGroup\` as \`children\`.
 `,
       },
     },

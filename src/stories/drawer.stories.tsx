@@ -31,7 +31,7 @@ const meta = {
         component: `
 ## Anatomy
 
-\`\`\`tsx
+\`\`\`jsx
 import { Drawer, DrawerTitle, DrawerDescription, DrawerClose } from "@fransek/ui";
 
 <Drawer trigger={<button>Open</button>}>
@@ -40,16 +40,6 @@ import { Drawer, DrawerTitle, DrawerDescription, DrawerClose } from "@fransek/ui
   <DrawerClose />
 </Drawer>;
 \`\`\`
-
-- **\`Drawer\`** – the root. Wraps Base UI's \`Drawer.Root\`, \`Drawer.Trigger\`
-  (rendered from the \`trigger\` prop), \`Drawer.Portal\`, \`Drawer.Backdrop\`,
-  \`Drawer.Viewport\`, \`Drawer.Popup\` (which also renders a close button
-  unless \`disablePointerDismissal\` is set), and \`Drawer.Content\`. \`children\`
-  is rendered inside the content area.
-- **\`DrawerTitle\`** – wraps \`Drawer.Title\`.
-- **\`DrawerDescription\`** – wraps \`Drawer.Description\`.
-- **\`DrawerClose\`** – wraps \`Drawer.Close\`. Pass \`render\` to use a custom
-  trigger element, such as a \`Button\`.
 `,
       },
     },

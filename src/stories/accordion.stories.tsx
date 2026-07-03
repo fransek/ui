@@ -33,7 +33,7 @@ const meta = {
         component: `
 ## Anatomy
 
-\`\`\`tsx
+\`\`\`jsx
 import { Accordion, AccordionPanel } from "@fransek/ui";
 
 <Accordion>
@@ -41,14 +41,6 @@ import { Accordion, AccordionPanel } from "@fransek/ui";
   <AccordionPanel summary="...">{/* content */}</AccordionPanel>
 </Accordion>;
 \`\`\`
-
-- **\`Accordion\`** – the root. Wraps Base UI's \`Accordion.Root\` and controls
-  which panel(s) are open.
-- **\`AccordionPanel\`** – one collapsible item. Internally composes
-  \`Accordion.Item\`, \`Accordion.Header\`, \`Accordion.Trigger\` (rendering the
-  \`summary\` and chevron icon), and \`Accordion.Panel\` (rendering \`children\`).
-  Use \`headerProps\`, \`triggerProps\`, and \`panelProps\` to reach the
-  underlying parts.
 `,
       },
     },

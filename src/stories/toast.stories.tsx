@@ -49,7 +49,7 @@ const meta = {
         component: `
 ## Anatomy
 
-\`\`\`tsx
+\`\`\`jsx
 import { ToastProvider, useToast } from "@fransek/ui";
 
 // Once, near the root of your app:
@@ -61,18 +61,6 @@ import { ToastProvider, useToast } from "@fransek/ui";
 const toast = useToast();
 toast.add({ type: "success", title: "...", description: "..." });
 \`\`\`
-
-- **\`ToastProvider\`** – the root. Wraps Base UI's \`Toast.Provider\`,
-  \`Toast.Portal\`, and \`Toast.Viewport\`, positioned by the \`position\` prop.
-  For each active toast it renders a \`Toast.Root\` containing \`Toast.Content\`
-  (with a type icon, \`Toast.Title\`, and \`Toast.Description\`) and a
-  \`Toast.Close\` button — these parts are managed internally and aren't
-  composed directly.
-- **\`useToast\`** – returns the toast manager (\`BaseUIToast.useToastManager\`)
-  used to \`add\`, \`update\`, or \`close\` toasts from anywhere inside
-  \`ToastProvider\`.
-- **\`createToastManager\`** – creates a toast manager outside of React, e.g. to
-  share across multiple \`ToastProvider\` instances.
 `,
       },
     },

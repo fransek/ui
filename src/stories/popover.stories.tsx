@@ -32,7 +32,7 @@ const meta = {
         component: `
 ## Anatomy
 
-\`\`\`tsx
+\`\`\`jsx
 import { Popover, PopoverTitle, PopoverDescription, PopoverClose } from "@fransek/ui";
 
 <Popover trigger={<button>Open</button>} arrow>
@@ -41,16 +41,6 @@ import { Popover, PopoverTitle, PopoverDescription, PopoverClose } from "@franse
   <PopoverClose />
 </Popover>;
 \`\`\`
-
-- **\`Popover\`** – the root. Wraps Base UI's \`Popover.Root\`, \`Popover.Trigger\`
-  (rendered from the \`trigger\` prop), \`Popover.Portal\`,
-  \`Popover.Positioner\`, and \`Popover.Popup\`. Set \`arrow\` to render a
-  \`Popover.Arrow\` (using \`ArrowSvg\`) pointing at the trigger. \`children\` is
-  rendered inside the popup.
-- **\`PopoverTitle\`** – wraps \`Popover.Title\`.
-- **\`PopoverDescription\`** – wraps \`Popover.Description\`.
-- **\`PopoverClose\`** – wraps \`Popover.Close\`. Pass \`render\` to use a custom
-  trigger element, such as a \`Button\`.
 `,
       },
     },
