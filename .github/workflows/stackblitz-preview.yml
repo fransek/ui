@@ -1,0 +1,33 @@
+name: "⚡ StackBlitz Preview"
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions:
+  pull-requests: write
+
+jobs:
+  stackblitz-comment:
+    name: Comment StackBlitz link
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build StackBlitz URL
+        id: stackblitz
+        env:
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          echo "url=https://stackblitz.com/github/${HEAD_REPO}/tree/${HEAD_REF}" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: stackblitz-preview
+          message: |
+            ⚡ **[Open this PR in StackBlitz](${{ steps.stackblitz.outputs.url }})**
+
+            The sandbox is generated on demand from `${{ github.event.pull_request.head.repo.full_name }}@${{ github.event.pull_request.head.ref }}` and stays in sync with new pushes to this PR.
