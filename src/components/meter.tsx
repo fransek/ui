@@ -74,7 +74,7 @@ export function Meter(props: MeterProps) {
 }
 
 const baseTrackStyles =
-  "bg-card border-border col-span-2 block overflow-hidden rounded-full border";
+  "bg-muted/20 col-span-2 block overflow-hidden rounded-full";
 
 const trackSizeStyles = {
   sm: "h-1.5",
