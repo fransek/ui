@@ -82,8 +82,8 @@ export function Drawer(props: DrawerProps) {
   const {
     trigger,
     direction = "right",
-    width,
-    height,
+    width = "30rem",
+    height = "24rem",
     actionsRef,
     children,
     defaultOpen,
@@ -160,8 +160,8 @@ export function Drawer(props: DrawerProps) {
                 style={
                   {
                     ...popupProps.style,
-                    ...(width ? { "--drawer-width": width } : {}),
-                    ...(height ? { "--drawer-height": height } : {}),
+                    "--drawer-width": width,
+                    "--drawer-height": height,
                   } as React.CSSProperties
                 }
               >
