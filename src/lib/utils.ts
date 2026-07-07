@@ -39,7 +39,7 @@ export function useMediaQuery(breakpoint: Breakpoint): boolean {
       return () => mql.removeEventListener("change", callback);
     },
     () => mediaQuery(breakpoint).matches,
-    () => mediaQuery(breakpoint).matches,
+    () => false,
   );
 }
 
