@@ -69,3 +69,28 @@ export const Overflow: Story = {
     </Drawer>
   ),
 };
+
+export const Top: Story = {
+  args: {
+    direction: "top",
+  },
+};
+
+export const Bottom: Story = {
+  args: {
+    direction: "bottom",
+  },
+};
+
+export const Left: Story = {
+  args: {
+    direction: "left",
+  },
+};
+
+export const CustomHeight: Story = {
+  args: {
+    direction: "bottom",
+    height: "16rem",
+  },
+};

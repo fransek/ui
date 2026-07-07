@@ -16,15 +16,32 @@ import React from "react";
 import { cnBaseUI } from "../lib/utils";
 import { CloseButton, CloseButtonProps } from "./close-button";
 
+export type DrawerDirection = "top" | "right" | "bottom" | "left";
+
 export interface DrawerProps
   extends DrawerRootProps, Omit<DrawerTriggerProps, "children" | "render"> {
   trigger?: DrawerTriggerProps["render"];
   /**
+   * The edge of the screen the drawer slides in from. Also determines the
+   * default `swipeDirection` (`"right"` → right, `"left"` → left, `"top"` →
+   * up, `"bottom"` → down) unless `swipeDirection` is set explicitly.
+   * @default "right"
+   */
+  direction?: DrawerDirection;
+  /**
    * The width of the drawer, as any CSS length (e.g. `"24rem"`, `"480px"`,
-   * `"50vw"`). Sets the `--drawer-width` custom property on the popup.
+   * `"50vw"`). Sets the `--drawer-width` custom property on the popup. Only
+   * applies when `direction` is `"left"` or `"right"`.
    * @default "30rem"
    */
   width?: string;
+  /**
+   * The height of the drawer, as any CSS length (e.g. `"20rem"`, `"320px"`,
+   * `"50vh"`). Sets the `--drawer-height` custom property on the popup. Only
+   * applies when `direction` is `"top"` or `"bottom"`.
+   * @default "24rem"
+   */
+  height?: string;
   portalProps?: DrawerPortalProps;
   backdropProps?: DrawerBackdropProps;
   viewportProps?: DrawerViewportProps;
@@ -35,10 +52,38 @@ export interface DrawerProps
   closeButtonIconProps?: React.ComponentProps<typeof X>;
 }
 
+const drawerSwipeDirections: Record<
+  DrawerDirection,
+  NonNullable<DrawerRootProps["swipeDirection"]>
+> = {
+  top: "up",
+  right: "right",
+  bottom: "down",
+  left: "left",
+};
+
+const drawerViewportStyles: Record<DrawerDirection, string> = {
+  top: "flex-col justify-start",
+  right: "justify-end",
+  bottom: "flex-col justify-end",
+  left: "justify-start",
+};
+
+const drawerPopupStyles: Record<DrawerDirection, string> = {
+  top: "h-(--drawer-height) max-h-[calc(100vh-3rem)] w-full transform-[translateY(var(--drawer-swipe-movement-y))] border-b px-6 py-8 data-ending-style:transform-[translateY(calc(-100%-var(--viewport-padding)-2px))] data-starting-style:transform-[translateY(calc(-100%-var(--viewport-padding)-2px))]",
+  right:
+    "h-full w-(--drawer-width) max-w-[calc(100vw-3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] border-l px-6 py-8 data-ending-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))] data-starting-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))]",
+  bottom:
+    "h-(--drawer-height) max-h-[calc(100vh-3rem)] w-full transform-[translateY(var(--drawer-swipe-movement-y))] border-t px-6 py-8 data-ending-style:transform-[translateY(calc(100%+var(--viewport-padding)+2px))] data-starting-style:transform-[translateY(calc(100%+var(--viewport-padding)+2px))]",
+  left: "h-full w-(--drawer-width) max-w-[calc(100vw-3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] border-r px-6 py-8 data-ending-style:transform-[translateX(calc(-100%-var(--viewport-padding)-2px))] data-starting-style:transform-[translateX(calc(-100%-var(--viewport-padding)-2px))]",
+};
+
 export function Drawer(props: DrawerProps) {
   const {
     trigger,
+    direction = "right",
     width,
+    height,
     actionsRef,
     children,
     defaultOpen,
@@ -54,7 +99,7 @@ export function Drawer(props: DrawerProps) {
     snapPoint,
     snapPoints,
     snapToSequentialPoints,
-    swipeDirection = "right",
+    swipeDirection = drawerSwipeDirections[direction],
     triggerId,
     portalProps,
     backdropProps: { className: backdropClassName, ...backdropProps } = {},
@@ -99,14 +144,16 @@ export function Drawer(props: DrawerProps) {
             />
             <BaseUIDrawer.Viewport
               className={cnBaseUI(
-                "fixed inset-0 flex items-stretch justify-end p-(--viewport-padding) [--viewport-padding:0px]",
+                "fixed inset-0 flex items-stretch p-(--viewport-padding) [--viewport-padding:0px]",
+                drawerViewportStyles[direction],
                 viewportClassName,
               )}
               {...viewportProps}
             >
               <BaseUIDrawer.Popup
                 className={cnBaseUI(
-                  "bg-background h-full w-(--drawer-width) max-w-[calc(100vw-3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] touch-auto overflow-y-auto overscroll-contain border-l px-6 py-8 shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--drawer-width:30rem] data-ending-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))] data-swiping:select-none",
+                  "bg-card touch-auto overflow-y-auto overscroll-contain shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--drawer-height:24rem] [--drawer-width:30rem] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-swiping:select-none",
+                  drawerPopupStyles[direction],
                   popupClassName,
                 )}
                 {...popupProps}
@@ -114,6 +161,7 @@ export function Drawer(props: DrawerProps) {
                   {
                     ...popupProps.style,
                     ...(width ? { "--drawer-width": width } : {}),
+                    ...(height ? { "--drawer-height": height } : {}),
                   } as React.CSSProperties
                 }
               >
