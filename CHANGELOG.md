@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.11.0](https://github.com/fransek/ui/compare/v0.10.0...v0.11.0) (2026-07-07)
+
+
+### Features
+
+* add Drawer component ([#71](https://github.com/fransek/ui/issues/71)) ([fe0868a](https://github.com/fransek/ui/commit/fe0868afc19774b1459c01b1d7d9f008784d211e))
+* add Meter component ([#75](https://github.com/fransek/ui/issues/75)) ([5384c56](https://github.com/fransek/ui/commit/5384c5654831b619ccfc7707b8b252779e938b06))
+
+
+### Bug Fixes
+
+* **drawer:** remove iOS-only sizing overrides causing layout mismatch ([#73](https://github.com/fransek/ui/issues/73)) ([4e2c844](https://github.com/fransek/ui/commit/4e2c8446358dc618368bf9297a78b352859fb631))
+* updated theme colors ([#78](https://github.com/fransek/ui/issues/78)) ([2a9faa5](https://github.com/fransek/ui/commit/2a9faa51acbe1f230773f64041d09c6cda8bea75))
+
 ## [0.10.0](https://github.com/fransek/ui/compare/v0.9.0...v0.10.0) (2026-07-03)
 
 
