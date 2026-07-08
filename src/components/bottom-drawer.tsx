@@ -19,9 +19,10 @@ export interface BottomDrawerProps
   extends DrawerRootProps, Omit<DrawerTriggerProps, "children" | "render"> {
   trigger?: DrawerTriggerProps["render"];
   /**
-   * The height of the drawer, as any CSS length (e.g. `"32rem"`, `"480px"`,
-   * `"80dvh"`). By default the drawer grows with its content, capped at the
-   * viewport height minus 3rem; content beyond that scrolls.
+   * The minimum height of the drawer, as any CSS length (e.g. `"32rem"`,
+   * `"480px"`, `"80dvh"`). The drawer grows with its content; when it becomes
+   * taller than the viewport, the entire drawer scrolls and its top edge
+   * moves off the screen.
    */
   height?: string;
   portalProps?: DrawerPortalProps;
@@ -106,21 +107,21 @@ export function BottomDrawer(props: BottomDrawerProps) {
             />
             <BaseUIDrawer.Viewport
               className={cnBaseUI(
-                "fixed inset-0 flex items-end justify-center p-(--viewport-padding) [--viewport-padding:0px]",
+                "fixed inset-0 flex flex-col overflow-y-auto overscroll-contain p-(--viewport-padding) pt-[3rem] [--viewport-padding:0px]",
                 viewportClassName,
               )}
               {...viewportProps}
             >
               <BaseUIDrawer.Popup
                 className={cnBaseUI(
-                  "bg-card -mb-[3rem] flex max-h-[calc(100dvh-3rem+3rem)] w-full transform-[translateY(var(--drawer-swipe-movement-y))] touch-auto flex-col rounded-t-lg border-t pb-[3rem] shadow-[0_-0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--bleed:3rem] data-ending-style:transform-[translateY(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateY(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-swiping:select-none",
+                  "bg-card relative mt-auto -mb-[3rem] flex w-full transform-[translateY(var(--drawer-swipe-movement-y))] touch-auto flex-col rounded-t-lg border-t pb-[3rem] shadow-[0_-0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--bleed:3rem] data-ending-style:transform-[translateY(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateY(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-swiping:select-none",
                   popupClassName,
                 )}
                 {...popupProps}
                 style={
                   {
                     ...popupProps.style,
-                    ...(height ? { height: `calc(${height} + 3rem)` } : {}),
+                    ...(height ? { minHeight: `calc(${height} + 3rem)` } : {}),
                   } as React.CSSProperties
                 }
               >
@@ -155,19 +156,17 @@ export function BottomDrawer(props: BottomDrawerProps) {
                   }
                   {...closeProps}
                 />
-                <div className="min-h-0 overflow-y-auto overscroll-contain px-6 pt-4 pb-8">
-                  <BaseUIDrawer.Content
-                    className={cnBaseUI(
-                      "mx-auto flex w-full flex-col gap-2",
-                      contentClassName,
-                    )}
-                    {...contentProps}
-                  >
-                    {typeof children === "function"
-                      ? children(renderProps)
-                      : children}
-                  </BaseUIDrawer.Content>
-                </div>
+                <BaseUIDrawer.Content
+                  className={cnBaseUI(
+                    "mx-auto flex w-full flex-col gap-2 px-6 pt-4 pb-8",
+                    contentClassName,
+                  )}
+                  {...contentProps}
+                >
+                  {typeof children === "function"
+                    ? children(renderProps)
+                    : children}
+                </BaseUIDrawer.Content>
               </BaseUIDrawer.Popup>
             </BaseUIDrawer.Viewport>
           </BaseUIDrawer.Portal>
