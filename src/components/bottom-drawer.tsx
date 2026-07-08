@@ -107,14 +107,18 @@ export function BottomDrawer(props: BottomDrawerProps) {
             />
             <BaseUIDrawer.Viewport
               className={cnBaseUI(
-                "fixed inset-0 flex flex-col overflow-y-auto overscroll-contain p-(--viewport-padding) pt-[3rem] [--viewport-padding:0px]",
+                "fixed inset-0 flex flex-col overflow-y-auto overscroll-contain p-(--viewport-padding) pt-[3rem] transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] [--viewport-padding:0px] data-ending-style:transform-[translateY(100%)] data-starting-style:transform-[translateY(100%)]",
                 viewportClassName,
               )}
               {...viewportProps}
             >
+              {/* The viewport carries the exit animation so the travel distance
+                  stays one screen regardless of content height. The popup's 1px
+                  ending transform keeps a transition running on the popup itself,
+                  which Base UI waits for before unmounting. */}
               <BaseUIDrawer.Popup
                 className={cnBaseUI(
-                  "bg-card relative mt-auto -mb-[3rem] flex w-full transform-[translateY(var(--drawer-swipe-movement-y))] touch-auto flex-col rounded-t-lg border-t pb-[3rem] shadow-[0_-0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--bleed:3rem] data-ending-style:transform-[translateY(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateY(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-swiping:select-none",
+                  "bg-card relative mt-auto -mb-[3rem] flex w-full transform-[translateY(var(--drawer-swipe-movement-y))] touch-auto flex-col rounded-t-lg border-t pb-[3rem] shadow-[0_-0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none data-ending-style:transform-[translateY(calc(var(--drawer-swipe-movement-y,0px)+1px))] data-swiping:select-none",
                   popupClassName,
                 )}
                 {...popupProps}
