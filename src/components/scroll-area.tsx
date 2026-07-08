@@ -39,7 +39,7 @@ export function ScrollArea(props: ScrollAreaProps) {
 
   return (
     <BaseUIScrollArea.Root
-      className={cnBaseUI("overflow-hidden", className)}
+      className={cnBaseUI("group", className)}
       {...restProps}
     >
       <BaseUIScrollArea.Viewport
@@ -50,7 +50,10 @@ export function ScrollArea(props: ScrollAreaProps) {
         {...viewportProps}
       >
         <BaseUIScrollArea.Content
-          className={cnBaseUI(contentClassName)}
+          className={cnBaseUI(
+            "group-data-has-overflow-x:pb-3 group-data-has-overflow-y:pe-3",
+            contentClassName,
+          )}
           {...contentProps}
         >
           {children}
@@ -61,10 +64,7 @@ export function ScrollArea(props: ScrollAreaProps) {
         {...scrollbarProps}
       >
         <BaseUIScrollArea.Thumb
-          className={cnBaseUI(
-            "bg-muted-foreground rounded-full",
-            thumbClassName,
-          )}
+          className={cnBaseUI(thumbStyles, thumbClassName)}
           {...thumbProps}
         />
       </BaseUIScrollArea.Scrollbar>
@@ -75,10 +75,7 @@ export function ScrollArea(props: ScrollAreaProps) {
           {...scrollbarProps}
         >
           <BaseUIScrollArea.Thumb
-            className={cnBaseUI(
-              "bg-muted-foreground rounded-full",
-              thumbClassName,
-            )}
+            className={cnBaseUI(thumbStyles, thumbClassName)}
             {...thumbProps}
           />
         </BaseUIScrollArea.Scrollbar>
@@ -90,3 +87,6 @@ export function ScrollArea(props: ScrollAreaProps) {
 
 const scrollbarStyles =
   "relative flex touch-none rounded-full bg-border opacity-0 transition-opacity duration-150 ease-[ease] select-none pointer-events-none before:absolute before:content-[''] data-[orientation=vertical]:m-1 data-[orientation=vertical]:w-1.5 data-[orientation=vertical]:before:left-1/2 data-[orientation=vertical]:before:h-full data-[orientation=vertical]:before:w-5 data-[orientation=vertical]:before:-translate-x-1/2 data-[orientation=horizontal]:m-1 data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:before:-bottom-2 data-[orientation=horizontal]:before:left-0 data-[orientation=horizontal]:before:h-5 data-[orientation=horizontal]:before:w-full data-[hovering]:pointer-events-auto data-[hovering]:opacity-100 data-[hovering]:delay-0 data-[scrolling]:pointer-events-auto data-[scrolling]:opacity-100 data-[scrolling]:duration-0";
+
+const thumbStyles =
+  "rounded-full bg-muted-foreground data-[orientation=vertical]:w-full data-[orientation=horizontal]:h-full";
