@@ -26,7 +26,7 @@
 
   --warning: oklch(82% 0.15 88);
   --on-warning: oklch(19% 0 0);
-  --warning-foreground: oklch(45% 0.15 88);
+  --warning-foreground: oklch(58% 0.15 50);
 
   --success: oklch(52% 0.15 150);
   --on-success: oklch(100% 0 0);
