@@ -46,3 +46,18 @@ export const CustomWidth: Story = {
     width: "40rem",
   },
 };
+
+export const Overflow: Story = {
+  render: (args) => (
+    <Drawer {...args} trigger={<Button variant="outline">Open Drawer</Button>}>
+      <DrawerTitle>Drawer</DrawerTitle>
+      <DrawerDescription>
+        This is a drawer that slides in from the side. You can swipe to dismiss
+        it.
+      </DrawerDescription>
+      {new Array(30).fill(null).map((_, index) => (
+        <div key={index}>Lorem ipsum dolor sit amet.</div>
+      ))}
+    </Drawer>
+  ),
+};
