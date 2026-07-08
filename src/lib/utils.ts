@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import React from "react";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -26,4 +27,35 @@ export function mergeRefs<T>(...refs: (React.Ref<T> | undefined)[]) {
       }
     });
   };
+}
+
+export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
+
+export function useMediaQuery(breakpoint: Breakpoint): boolean {
+  return React.useSyncExternalStore(
+    (callback) => {
+      const mql = mediaQuery(breakpoint);
+      mql.addEventListener("change", callback);
+      return () => mql.removeEventListener("change", callback);
+    },
+    () => mediaQuery(breakpoint).matches,
+    () => false,
+  );
+}
+
+const BREAKPOINT_VARS: Record<Breakpoint, string> = {
+  xs: "--breakpoint-xs",
+  sm: "--breakpoint-sm",
+  md: "--breakpoint-md",
+  lg: "--breakpoint-lg",
+  xl: "--breakpoint-xl",
+  "2xl": "--breakpoint-2xl",
+};
+
+function mediaQuery(breakpoint: Breakpoint) {
+  return window.matchMedia(
+    `(min-width: ${getComputedStyle(document.documentElement)
+      .getPropertyValue(BREAKPOINT_VARS[breakpoint])
+      .trim()})`,
+  );
 }

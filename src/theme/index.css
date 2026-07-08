@@ -2,4 +2,4 @@
 @import "./utilities.css";
 @import "./components.css";
 @import "./base.css";
-@source "./components/**/*.{ts,tsx,js,jsx}";
+@source "./**/*.{ts,tsx,js,jsx}";
