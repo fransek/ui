@@ -85,31 +85,29 @@ export function Dialog(props: DialogProps) {
               )}
               {...popupProps}
             >
-              {!disablePointerDismissal && (
-                <DialogClose
-                  render={
-                    <Button
-                      className={cnBaseUI(
-                        "fixed top-2 right-2",
-                        closeButtonClassName,
+              <DialogClose
+                render={
+                  <Button
+                    className={cnBaseUI(
+                      "fixed top-2 right-2",
+                      closeButtonClassName,
+                    )}
+                    variant="ghost"
+                    size="icon"
+                    aria-label="Close"
+                    {...closeButtonProps}
+                  >
+                    <X
+                      className={cn(
+                        "text-muted-foreground size-4",
+                        closeButtonIconClassName,
                       )}
-                      variant="ghost"
-                      size="icon"
-                      aria-label="Close"
-                      {...closeButtonProps}
-                    >
-                      <X
-                        className={cn(
-                          "text-muted-foreground size-4",
-                          closeButtonIconClassName,
-                        )}
-                        {...closeButtonIconProps}
-                      />
-                    </Button>
-                  }
-                  {...closeProps}
-                />
-              )}
+                      {...closeButtonIconProps}
+                    />
+                  </Button>
+                }
+                {...closeProps}
+              />
               {typeof children === "function"
                 ? children(renderProps)
                 : children}

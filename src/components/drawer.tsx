@@ -11,10 +11,8 @@ import {
   DrawerTriggerProps,
   DrawerViewportProps,
 } from "@base-ui/react/drawer";
-import { X } from "lucide-react";
 import React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
-import { Button } from "./button";
+import { cnBaseUI } from "../lib/utils";
 
 export interface DrawerProps
   extends DrawerRootProps, Omit<DrawerTriggerProps, "children" | "render"> {
@@ -30,9 +28,6 @@ export interface DrawerProps
   viewportProps?: DrawerViewportProps;
   popupProps?: DrawerPopupProps;
   contentProps?: DrawerContentProps;
-  closeProps?: DrawerCloseProps;
-  closeButtonProps?: DrawerCloseProps;
-  closeButtonIconProps?: React.ComponentProps<typeof X>;
 }
 
 export function Drawer(props: DrawerProps) {
@@ -61,15 +56,6 @@ export function Drawer(props: DrawerProps) {
     viewportProps: { className: viewportClassName, ...viewportProps } = {},
     popupProps: { className: popupClassName, ...popupProps } = {},
     contentProps: { className: contentClassName, ...contentProps } = {},
-    closeProps,
-    closeButtonProps: {
-      className: closeButtonClassName,
-      ...closeButtonProps
-    } = {},
-    closeButtonIconProps: {
-      className: closeButtonIconClassName,
-      ...closeButtonIconProps
-    } = {},
     ...restProps
   } = props;
 
@@ -112,7 +98,7 @@ export function Drawer(props: DrawerProps) {
             >
               <BaseUIDrawer.Popup
                 className={cnBaseUI(
-                  "bg-card -mr-[3rem] h-full w-[calc(var(--drawer-width)+3rem)] max-w-[calc(100vw-3rem+3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] touch-auto overflow-y-auto overscroll-contain border-l px-6 py-8 pr-[calc(1.5rem+3rem)] shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--bleed:3rem] [--drawer-width:30rem] data-ending-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-swiping:select-none",
+                  "bg-card -mr-[3rem] h-full w-[calc(var(--drawer-width)+3rem)] max-w-[calc(100vw-3rem+3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] touch-auto border-l pr-[3rem] shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--bleed:3rem] [--drawer-width:30rem] data-ending-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-swiping:select-none",
                   popupClassName,
                 )}
                 {...popupProps}
@@ -123,42 +109,19 @@ export function Drawer(props: DrawerProps) {
                   } as React.CSSProperties
                 }
               >
-                {!disablePointerDismissal && (
-                  <DrawerClose
-                    render={
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className={cnBaseUI(
-                          "absolute top-2 right-[calc(var(--spacing)*2+3rem)]",
-                          closeButtonClassName,
-                        )}
-                        aria-label="Close"
-                        {...closeButtonProps}
-                      >
-                        <X
-                          className={cn(
-                            "text-muted-foreground size-4",
-                            closeButtonIconClassName,
-                          )}
-                          {...closeButtonIconProps}
-                        />
-                      </Button>
-                    }
-                    {...closeProps}
-                  />
-                )}
-                <BaseUIDrawer.Content
-                  className={cnBaseUI(
-                    "mx-auto flex w-full flex-col gap-4",
-                    contentClassName,
-                  )}
-                  {...contentProps}
-                >
-                  {typeof children === "function"
-                    ? children(renderProps)
-                    : children}
-                </BaseUIDrawer.Content>
+                <div className="h-full overflow-y-auto overscroll-contain px-6 py-8 pr-[1.5rem]">
+                  <BaseUIDrawer.Content
+                    className={cnBaseUI(
+                      "mx-auto flex w-full flex-col gap-2",
+                      contentClassName,
+                    )}
+                    {...contentProps}
+                  >
+                    {typeof children === "function"
+                      ? children(renderProps)
+                      : children}
+                  </BaseUIDrawer.Content>
+                </div>
               </BaseUIDrawer.Popup>
             </BaseUIDrawer.Viewport>
           </BaseUIDrawer.Portal>
