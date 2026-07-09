@@ -34,7 +34,7 @@ export function Fieldset(props: FieldsetProps) {
     >
       {legend != null && (
         <BaseUIFieldset.Legend
-          render={legendRender ?? <legend />}
+          render={legendRender}
           className={cnBaseUI("text-body text-sm", legendClassName)}
           {...legendProps}
         >
