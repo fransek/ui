@@ -24,18 +24,24 @@ export function Fieldset(props: FieldsetProps) {
     ...restProps
   } = props;
 
+  const hasLegend = legend != null;
+
   return (
     <BaseUIFieldset.Root
       className={cnBaseUI(
-        "flex w-full flex-col gap-4 rounded-lg border p-4",
+        "relative flex w-full flex-col gap-4 rounded-lg border p-4",
+        hasLegend && "pt-6",
         className,
       )}
       {...restProps}
     >
-      {legend != null && (
+      {hasLegend && (
         <BaseUIFieldset.Legend
           render={legendRender}
-          className={cnBaseUI("text-body text-sm", legendClassName)}
+          className={cnBaseUI(
+            "text-body bg-background absolute -top-2.5 left-3 px-1 text-sm",
+            legendClassName,
+          )}
           {...legendProps}
         >
           {legend}
