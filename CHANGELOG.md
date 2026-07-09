@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.12.0](https://github.com/fransek/ui/compare/v0.11.0...v0.12.0) (2026-07-09)
+
+
+### Features
+
+* add Fieldset component ([#87](https://github.com/fransek/ui/issues/87)) ([ecde446](https://github.com/fransek/ui/commit/ecde446993d31cfcf0adaf42a2a4661bcf49b2bb))
+* add useMediaQuery hook and xs breakpoint ([#79](https://github.com/fransek/ui/issues/79)) ([9195a58](https://github.com/fransek/ui/commit/9195a58278bbaed93929f1f61126c81b51783339))
+* **drawer:** add built-in close button and remove bleed ([#91](https://github.com/fransek/ui/issues/91)) ([7df4ce2](https://github.com/fransek/ui/commit/7df4ce203274c5e57df8a60420aec38999e8be6a))
+* **scroll-area:** add ScrollArea component with horizontal support ([#81](https://github.com/fransek/ui/issues/81)) ([83483a9](https://github.com/fransek/ui/commit/83483a9a5b5d68363493e52a9b790ef2776b3565))
+* **theme:** add field surface color and elevate form controls ([#88](https://github.com/fransek/ui/issues/88)) ([3b9bc91](https://github.com/fransek/ui/commit/3b9bc915471a966a29fcea0aeb1894bc5d19f0b3))
+
+
+### Bug Fixes
+
+* **drawer:** scroll overflowing content and drop unused close button ([#82](https://github.com/fransek/ui/issues/82)) ([831270f](https://github.com/fransek/ui/commit/831270f937df0964272c09d42f453eb447fecebe))
+* **fieldset:** fix broken top border on iOS and add contentProps ([#89](https://github.com/fransek/ui/issues/89)) ([4bab01a](https://github.com/fransek/ui/commit/4bab01a2b9ce357daa838967ed09e82e956bf54e))
+* **theme:** adjust light warning-foreground color ([#83](https://github.com/fransek/ui/issues/83)) ([c34322a](https://github.com/fransek/ui/commit/c34322a6139c8ef4c1cd7daff5b554e31f56c960))
+
 ## [0.11.0](https://github.com/fransek/ui/compare/v0.10.0...v0.11.0) (2026-07-07)
 
 
