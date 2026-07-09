@@ -11,13 +11,19 @@ import {
 const meta = {
   title: "Components/Drawer",
   render: (args) => (
-    <Drawer {...args} trigger={<Button variant="outline">Open drawer</Button>}>
-      <DrawerTitle>Drawer</DrawerTitle>
-      <DrawerDescription>
-        This is a drawer that slides in from the side. You can swipe to dismiss
-        it.
-      </DrawerDescription>
-      <div className="mt-4 flex justify-end gap-4">
+    <Drawer
+      {...args}
+      contentProps={{ className: "h-full" }}
+      trigger={<Button variant="outline">Open drawer</Button>}
+    >
+      <div className="flex flex-1 flex-col gap-2">
+        <DrawerTitle>Drawer</DrawerTitle>
+        <DrawerDescription>
+          This is a drawer that slides in from the side. You can swipe to
+          dismiss it.
+        </DrawerDescription>
+      </div>
+      <div className="flex justify-end gap-4">
         <DrawerClose render={<Button variant="secondary">Cancel</Button>} />
         <DrawerClose render={<Button variant="primary">Confirm</Button>} />
       </div>
@@ -56,7 +62,9 @@ export const Overflow: Story = {
         it.
       </DrawerDescription>
       {new Array(30).fill(null).map((_, index) => (
-        <div key={index}>Lorem ipsum dolor sit amet.</div>
+        <Button variant="outline" key={index}>
+          Lorem ipsum
+        </Button>
       ))}
     </Drawer>
   ),
