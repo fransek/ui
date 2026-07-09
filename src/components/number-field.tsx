@@ -52,7 +52,7 @@ export function NumberField(props: NumberFieldProps) {
       >
         <BaseUINumberField.Group
           className={cnBaseUI(
-            "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
+            "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border shadow transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
           )}
           data-validating={isValidating ? "" : undefined}
         >
@@ -67,7 +67,7 @@ export function NumberField(props: NumberFieldProps) {
           </BaseUINumberField.Decrement>
           <BaseUINumberField.Input
             className={cnBaseUI(
-              "placeholder:text-muted-foreground w-full min-w-0 p-2 text-center tabular-nums outline-none",
+              "bg-field placeholder:text-muted-foreground w-full min-w-0 p-2 text-center tabular-nums outline-none",
               inputProps?.className,
             )}
             {...inputProps}

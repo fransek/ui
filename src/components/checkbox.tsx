@@ -59,7 +59,7 @@ export function Checkbox(props: CheckboxProps) {
       >
         <BaseUICheckbox.Root
           className={cnBaseUI(
-            "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary outline-highlight focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border",
+            "bg-field data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary data-checked:border-primary outline-highlight focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border shadow",
             className,
           )}
           aria-labelledby={labelId}
