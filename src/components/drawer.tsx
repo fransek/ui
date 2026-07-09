@@ -98,7 +98,7 @@ export function Drawer(props: DrawerProps) {
             >
               <BaseUIDrawer.Popup
                 className={cnBaseUI(
-                  "bg-card -mr-[3rem] h-full w-[calc(var(--drawer-width)+3rem)] max-w-[calc(100vw-3rem+3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] touch-auto border-l pr-[3rem] shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--bleed:3rem] [--drawer-width:30rem] data-ending-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-swiping:select-none",
+                  "bg-card -mr-[3rem] flex h-full w-[calc(var(--drawer-width)+3rem)] max-w-[calc(100vw-3rem+3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] touch-auto flex-col border-l pr-[3rem] shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--bleed:3rem] [--drawer-width:30rem] data-ending-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)+2px))] data-swiping:select-none",
                   popupClassName,
                 )}
                 {...popupProps}
@@ -109,7 +109,7 @@ export function Drawer(props: DrawerProps) {
                   } as React.CSSProperties
                 }
               >
-                <div className="h-full overflow-y-auto overscroll-contain px-6 py-8 pr-[1.5rem]">
+                <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-8 pr-[1.5rem]">
                   <BaseUIDrawer.Content
                     className={cnBaseUI(
                       "mx-auto flex w-full flex-col gap-2",
