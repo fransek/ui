@@ -1,3 +1,4 @@
+import { Eye, EyeOff } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 import { Checkbox } from "../components/checkbox";
@@ -16,6 +17,7 @@ export function Form() {
   const toast = useToast();
   const [values, setValues] = React.useState<SignUpValues>(emptyValues);
   const [errors, setErrors] = React.useState<SignUpErrors>({});
+  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
   const update = <K extends keyof SignUpValues>(
     key: K,
@@ -83,12 +85,28 @@ export function Form() {
 
       <Input
         label="Password"
-        type="password"
         placeholder="At least 8 characters"
         value={values.password}
         onChange={(event) => update("password", event.target.value)}
         errorMessage={errors.password}
         infoPopover="Use at least 8 characters with a mix of letters and numbers."
+        type={isPasswordVisible ? "text" : "password"}
+        rightAdornment={
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+            aria-pressed={isPasswordVisible}
+            onClick={() => setIsPasswordVisible((prev) => !prev)}
+          >
+            {isPasswordVisible ? (
+              <EyeOff className="size-4" />
+            ) : (
+              <Eye className="size-4" />
+            )}
+          </Button>
+        }
       />
 
       <Fieldset legend="Workspace">
