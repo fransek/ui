@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { Search } from "lucide-react";
+import { Eye, EyeOff, Search } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
-import { Input } from "../components/input";
+import { Input, InputProps } from "../components/input";
 
 const meta = {
   title: "Components/Fields/Input",
@@ -77,4 +77,38 @@ export const WithLeftAdornment: Story = {
       <Search className="text-muted-foreground size-5 self-center" />
     ),
   },
+};
+
+function PasswordInput(args: InputProps) {
+  const [visible, setVisible] = React.useState(false);
+
+  return (
+    <Input
+      {...args}
+      type={visible ? "text" : "password"}
+      rightAdornment={
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          aria-label={visible ? "Hide password" : "Show password"}
+          aria-pressed={visible}
+          onClick={() => setVisible((prev) => !prev)}
+        >
+          {visible ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+        </Button>
+      }
+    />
+  );
+}
+
+export const Password: Story = {
+  args: {
+    label: "Password",
+    description: undefined,
+    placeholder: "Enter your password",
+    infoPopover: undefined,
+    autoComplete: "current-password",
+  },
+  render: (args) => <PasswordInput {...args} />,
 };
