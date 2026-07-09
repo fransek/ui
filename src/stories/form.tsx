@@ -1,11 +1,14 @@
 import React from "react";
 import { Button } from "../components/button";
 import { Checkbox } from "../components/checkbox";
+import { CheckboxGroup } from "../components/checkbox-group";
+import { Fieldset } from "../components/fieldset";
 import { Input } from "../components/input";
 import { NumberField } from "../components/number-field";
 import { Radio } from "../components/radio";
 import { RadioGroup } from "../components/radio-group";
 import { Select } from "../components/select";
+import { Switch } from "../components/switch";
 import { Textarea } from "../components/textarea";
 import { useToast } from "../components/toast";
 
@@ -88,36 +91,49 @@ export function Form() {
         infoPopover="Use at least 8 characters with a mix of letters and numbers."
       />
 
-      <Select
-        label="Role"
-        placeholder="Select a role"
-        items={roles}
-        value={values.role}
-        onValueChange={(value) => update("role", value)}
-        errorMessage={errors.role}
-      />
+      <Fieldset legend="Workspace">
+        <Select
+          label="Role"
+          placeholder="Select a role"
+          items={roles}
+          value={values.role}
+          onValueChange={(value) => update("role", value)}
+          errorMessage={errors.role}
+        />
 
-      <NumberField
-        label="Seats"
-        className="sm:w-40"
-        min={1}
-        max={100}
-        value={values.seats}
-        onValueChange={(value) => update("seats", value)}
-        errorMessage={errors.seats}
-        description="How many team members need access?"
-      />
+        <NumberField
+          label="Seats"
+          className="sm:w-40"
+          min={1}
+          max={100}
+          value={values.seats}
+          onValueChange={(value) => update("seats", value)}
+          errorMessage={errors.seats}
+          description="How many team members need access?"
+        />
 
-      <RadioGroup
-        label="Plan"
-        value={values.plan}
-        onValueChange={(value) => update("plan", value)}
-        errorMessage={errors.plan}
+        <RadioGroup
+          label="Plan"
+          value={values.plan}
+          onValueChange={(value) => update("plan", value)}
+          errorMessage={errors.plan}
+        >
+          <Radio value="free" label="Free" />
+          <Radio value="pro" label="Pro" />
+          <Radio value="enterprise" label="Enterprise" />
+        </RadioGroup>
+      </Fieldset>
+
+      <CheckboxGroup
+        label="Email notifications"
+        description="Choose which updates you want to receive."
+        value={values.notifications}
+        onValueChange={(value) => update("notifications", value)}
       >
-        <Radio value="free" label="Free" />
-        <Radio value="pro" label="Pro" />
-        <Radio value="enterprise" label="Enterprise" />
-      </RadioGroup>
+        <Checkbox label="Product updates" value="product" />
+        <Checkbox label="Security alerts" value="security" />
+        <Checkbox label="Weekly digest" value="digest" />
+      </CheckboxGroup>
 
       <Textarea
         label="Bio"
@@ -126,6 +142,13 @@ export function Form() {
         value={values.bio}
         onChange={(event) => update("bio", event.target.value)}
         description="Optional — this appears on your public profile."
+      />
+
+      <Switch
+        label="Subscribe to the newsletter"
+        checked={values.newsletter}
+        onCheckedChange={(checked) => update("newsletter", checked)}
+        description="Occasional news and tips. Unsubscribe anytime."
       />
 
       <Checkbox
@@ -159,7 +182,9 @@ interface SignUpValues {
   role: string | null;
   seats: number | null;
   plan: string;
+  notifications: string[];
   bio: string;
+  newsletter: boolean;
   terms: boolean;
 }
 
@@ -172,7 +197,9 @@ const emptyValues: SignUpValues = {
   role: null,
   seats: 1,
   plan: "",
+  notifications: [],
   bio: "",
+  newsletter: false,
   terms: false,
 };
 
