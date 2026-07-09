@@ -57,7 +57,7 @@ export function Input(props: InputProps) {
           )}
           <BaseUIInput
             className={cnBaseUI(
-              "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 transition-colors",
+              "bg-field data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 shadow transition-colors",
               hasLeftAdornment && "pl-10",
               hasRightAdornment && "pr-10",
               className,

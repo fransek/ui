@@ -3,7 +3,16 @@ import React from "react";
 export function Colors() {
   return (
     <div className="bg-background flex flex-col gap-6">
-      <div className="text-foreground grid grid-cols-2 gap-4 p-4 lg:grid-cols-4">
+      <div className="typography max-w-3xl">
+        <h2 className="heading-5">Surface Colors</h2>
+        <p className="body-2">
+          These colors come in sets of three, one for the background (
+          <code>bg-*</code>), one for the foreground (<code>text-on-*</code>),
+          and one with higher contrast for stand-alone text (
+          <code>text-*-foreground</code>).
+        </p>
+      </div>
+      <div className="text-foreground grid grid-cols-2 gap-4 lg:grid-cols-4">
         <div className="bg-primary text-on-primary rounded-lg p-2">primary</div>
         <div className="text-primary-foreground bg-card border-primary-foreground rounded-lg border p-2">
           primary-foreground
@@ -31,17 +40,41 @@ export function Colors() {
           success-foreground
         </div>
       </div>
-      <div className="text-foreground grid w-fit grid-cols-2 gap-4 p-4">
-        <div>card</div>
-        <div className="bg-card h-8 w-8 rounded-lg p-2" />
-        <div>border</div>
-        <div className="bg-border h-8 w-8 rounded-lg p-2" />
-        <div>body</div>
-        <div className="bg-body h-8 w-8 rounded-lg p-2" />
-        <div>highlight</div>
-        <div className="bg-highlight h-8 w-8 rounded-lg p-2" />
-        <div>link</div>
-        <div className="bg-link h-8 w-8 rounded-lg p-2" />
+      <div className="typography max-w-3xl">
+        <h2 className="heading-5">Other Colors</h2>
+        <p className="body-2">
+          Stand-alone colors that are used for various UI elements.
+        </p>
+      </div>
+      <div className="text-foreground grid grid-cols-2 gap-4">
+        <div className="flex items-center gap-4">
+          <div className="bg-field h-8 w-8 rounded-lg p-2" />
+          <div>field</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-card h-8 w-8 rounded-lg p-2" />
+          <div>card</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-border h-8 w-8 rounded-lg p-2" />
+          <div>border</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-body h-8 w-8 rounded-lg p-2" />
+          <div>body</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-contrast h-8 w-8 rounded-lg p-2" />
+          <div>contrast</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-highlight h-8 w-8 rounded-lg p-2" />
+          <div>highlight</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-link h-8 w-8 rounded-lg p-2" />
+          <div>link</div>
+        </div>
       </div>
     </div>
   );

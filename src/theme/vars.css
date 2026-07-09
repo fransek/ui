@@ -5,9 +5,10 @@
   --contrast: oklch(0% 0 0);
   --card: oklch(100% 0 0);
   --border: oklch(84% 0 0);
-  --body: oklch(30% 0.01 280);
-  --highlight: oklch(40% 0.1 280);
+  --body: oklch(40% 0 0);
+  --highlight: oklch(40% 0.08 280);
   --link: oklch(52% 0.15 260);
+  --field: oklch(100% 0 0 / 0.6);
 
   --primary: oklch(50% 0.15 280);
   --on-primary: oklch(100% 0 0);
@@ -19,7 +20,7 @@
 
   --muted: oklch(45% 0 0);
   --on-muted: oklch(87% 0 0);
-  --muted-foreground: oklch(42% 0 0);
+  --muted-foreground: oklch(50% 0 0);
 
   --error: oklch(53% 0.15 25);
   --on-error: oklch(100% 0 0);
@@ -33,7 +34,7 @@
   --on-success: oklch(100% 0 0);
   --success-foreground: oklch(47% 0.15 150);
 
-  --code: oklch(40% 0.07 280);
+  --code: oklch(46% 0.07 280);
   --on-code: oklch(100% 0 0);
   --code-foreground: oklch(41% 0.15 280);
 }
@@ -48,6 +49,7 @@
   --body: oklch(80% 0 0);
   --highlight: oklch(80% 0.1 280);
   --link: oklch(62% 0.15 260);
+  --field: oklch(100% 0 0 / 0.02);
 
   --primary: oklch(41% 0.15 280);
   --on-primary: oklch(100% 0 0);
@@ -75,7 +77,7 @@
 
   --code: oklch(25% 0.05 280);
   --on-code: oklch(100% 0 0);
-  --code-foreground: oklch(62% 0.15 280);
+  --code-foreground: oklch(70% 0.15 280);
 }
 
 @theme inline {
@@ -90,6 +92,7 @@
   --color-body: var(--body);
   --color-highlight: var(--highlight);
   --color-link: var(--link);
+  --color-field: var(--field);
 
   --color-primary: var(--primary);
   --color-on-primary: var(--on-primary);

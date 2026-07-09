@@ -54,7 +54,7 @@ export function Switch(props: SwitchProps) {
         >
           <BaseUISwitch.Root
             className={cnBaseUI(
-              "data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary bg-card outline-highlight focus-visible:focus-outline data-checked:border-primary flex h-5 w-9 shrink-0 rounded-full border p-0.5 transition-colors duration-150 ease-[ease]",
+              "bg-muted border-muted data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary outline-highlight focus-visible:focus-outline data-checked:border-primary flex h-5 w-9 shrink-0 rounded-full border p-0.5 shadow transition-colors duration-150 ease-[ease]",
               className,
             )}
             aria-labelledby={labelId}
@@ -63,7 +63,7 @@ export function Switch(props: SwitchProps) {
           >
             <BaseUISwitch.Thumb
               className={cnBaseUI(
-                "data-checked:bg-background bg-secondary dark:data-checked:bg-foreground size-3.5 rounded-full transition-[translate,background-color] duration-150 ease-[ease] data-checked:translate-x-4",
+                "dark:data-checked:bg-foreground bg-background dark:bg-foreground size-3.5 rounded-full transition-[translate,background-color] duration-150 ease-[ease] data-checked:translate-x-4",
                 thumbClassName,
               )}
               {...thumbProps}
