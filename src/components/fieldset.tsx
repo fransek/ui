@@ -4,11 +4,12 @@ import {
   FieldsetRootProps,
 } from "@base-ui/react/fieldset";
 import React from "react";
-import { cnBaseUI } from "../lib/utils";
+import { cn, cnBaseUI } from "../lib/utils";
 
 export interface FieldsetProps extends FieldsetRootProps {
   legend?: React.ReactNode;
   legendProps?: FieldsetLegendProps;
+  contentProps?: React.ComponentProps<"div">;
 }
 
 export function Fieldset(props: FieldsetProps) {
@@ -19,6 +20,7 @@ export function Fieldset(props: FieldsetProps) {
       render: legendRender,
       ...legendProps
     } = {},
+    contentProps: { className: contentClassName, ...contentProps } = {},
     className,
     children,
     ...restProps
@@ -28,26 +30,24 @@ export function Fieldset(props: FieldsetProps) {
 
   return (
     <BaseUIFieldset.Root
-      className={cnBaseUI(
-        "relative flex w-full flex-col gap-4 rounded-lg border p-4",
-        hasLegend && "pt-6",
-        className,
-      )}
+      className={cnBaseUI("gap-4 rounded-lg border p-4", className)}
       {...restProps}
     >
       {hasLegend && (
         <BaseUIFieldset.Legend
-          render={legendRender}
-          className={cnBaseUI(
-            "text-body bg-background absolute -top-2.5 left-3 px-1 text-sm",
-            legendClassName,
-          )}
+          render={legendRender ?? <legend />}
+          className={cnBaseUI("text-body text-sm", legendClassName)}
           {...legendProps}
         >
           {legend}
         </BaseUIFieldset.Legend>
       )}
-      {children}
+      <div
+        className={cn("flex flex-col gap-4", contentClassName)}
+        {...contentProps}
+      >
+        {children}
+      </div>
     </BaseUIFieldset.Root>
   );
 }
