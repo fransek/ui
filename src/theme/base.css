@@ -12,6 +12,8 @@
 
   * {
     border-color: var(--border);
+    scrollbar-color: var(--muted) transparent;
+    scrollbar-width: thin;
     &::selection {
       background-color: var(--primary);
       color: var(--on-primary);
