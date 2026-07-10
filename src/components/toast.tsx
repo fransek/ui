@@ -144,8 +144,8 @@ function ToastList({
             />
           )}
           <div className="flex min-w-0 flex-col gap-1">
-            <BaseUIToast.Title className="body-2 font-semibold empty:hidden" />
-            <BaseUIToast.Description className="text-body body-2 empty:hidden" />
+            <BaseUIToast.Title className="body-sm font-semibold empty:hidden" />
+            <BaseUIToast.Description className="text-body body-sm empty:hidden" />
           </div>
         </BaseUIToast.Content>
         <BaseUIToast.Close

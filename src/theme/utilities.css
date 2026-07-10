@@ -1,29 +1,29 @@
-@utility heading-1 {
+@utility heading-2xl {
   font-size: var(--text-4xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--text-5xl--line-height);
 }
-@utility heading-2 {
+@utility heading-xl {
   font-size: var(--text-3xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--text-4xl--line-height);
 }
-@utility heading-3 {
+@utility heading-lg {
   font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--text-3xl--line-height);
 }
-@utility heading-4 {
+@utility heading-md {
   font-size: var(--text-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--text-2xl--line-height);
 }
-@utility heading-5 {
+@utility heading-sm {
   font-size: var(--text-lg);
   font-weight: var(--font-weight-bold);
   line-height: var(--text-xl--line-height);
 }
-@utility heading-6 {
+@utility heading-xs {
   font-size: var(--text-base);
   font-weight: var(--font-weight-bold);
   line-height: var(--text-lg--line-height);
@@ -33,12 +33,12 @@
   font-weight: var(--font-weight-semibold);
   line-height: var(--text-base--line-height);
 }
-@utility body-1 {
+@utility body {
   font-size: var(--text-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--text-base--line-height);
 }
-@utility body-2 {
+@utility body-sm {
   font-size: var(--text-sm);
   font-weight: var(--font-weight-normal);
   line-height: var(--text-sm--line-height);

@@ -37,7 +37,7 @@ const meta = {
     <Accordion {...args}>
       {items.map(({ value, title, content }) => (
         <AccordionPanel key={value} value={value} summary={title}>
-          <p className="body-2 text-body">{content}</p>
+          <p className="body-sm text-body">{content}</p>
         </AccordionPanel>
       ))}
     </Accordion>
