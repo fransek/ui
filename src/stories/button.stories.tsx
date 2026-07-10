@@ -1,7 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CircleCheckBig, Trash } from "lucide-react";
 import React from "react";
-import { Button } from "../components/button";
+import { Button, ButtonVariant } from "../components/button";
+
+const variants: ButtonVariant[] = [
+  "primary",
+  "secondary",
+  "success",
+  "warning",
+  "error",
+  "muted",
+  "outline",
+  "ghost",
+  "link",
+] as const;
 
 const meta = {
   title: "Components/Button",
@@ -21,39 +33,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    variant: "primary",
-    size: "md",
-  },
-};
+export const Primary: Story = {};
 
-export const Secondary: Story = {
-  args: {
-    variant: "secondary",
-    size: "md",
-  },
-};
-
-export const Outline: Story = {
-  args: {
-    variant: "outline",
-    size: "md",
-  },
-};
-
-export const Ghost: Story = {
-  args: {
-    variant: "ghost",
-    size: "md",
-  },
-};
-
-export const Destructive: Story = {
-  args: {
-    variant: "error",
-    size: "md",
-  },
+export const Variants: Story = {
+  render: (args) => (
+    <div className="flex flex-wrap gap-2">
+      {variants.map((variant) => (
+        <Button key={variant} {...args} variant={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Button>
+      ))}
+    </div>
+  ),
 };
 
 export const WithIcon: Story = {

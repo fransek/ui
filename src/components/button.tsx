@@ -49,6 +49,8 @@ const variantStyles = {
   muted: "bg-muted text-on-muted hover:bg-muted/90 active:bg-muted/80",
   error:
     "bg-error text-on-error hover:bg-error/90 active:bg-error/80 outline-foreground",
+  warning:
+    "bg-warning text-on-warning hover:bg-warning/90 active:bg-warning/80 outline-foreground",
   success:
     "bg-success text-on-success hover:bg-success/90 active:bg-success/80 outline-foreground",
   outline:
