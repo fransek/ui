@@ -170,7 +170,7 @@ export function DrawerTitle(props: DrawerTitleProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIDrawer.Title
-      className={cnBaseUI("heading-5", className)}
+      className={cnBaseUI("heading-sm", className)}
       {...restProps}
     />
   );
@@ -180,7 +180,7 @@ export function DrawerDescription(props: DrawerDescriptionProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIDrawer.Description
-      className={cnBaseUI("body-2 text-body", className)}
+      className={cnBaseUI("body-sm text-body", className)}
       {...restProps}
     />
   );

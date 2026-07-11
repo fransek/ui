@@ -109,7 +109,7 @@ export function PopoverTitle(props: PopoverTitleProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIPopover.Title
-      className={cnBaseUI("heading-6", className)}
+      className={cnBaseUI("heading-xs", className)}
       {...restProps}
     />
   );
@@ -119,7 +119,7 @@ export function PopoverDescription(props: PopoverDescriptionProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIPopover.Description
-      className={cnBaseUI("text-body body-2", className)}
+      className={cnBaseUI("text-body body-sm", className)}
       {...restProps}
     />
   );

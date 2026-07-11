@@ -123,7 +123,7 @@ export function DialogTitle(props: DialogTitleProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIDialog.Title
-      className={cnBaseUI("heading-6", className)}
+      className={cnBaseUI("heading-xs", className)}
       {...restProps}
     />
   );
@@ -133,7 +133,7 @@ export function DialogDescription(props: DialogDescriptionProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIDialog.Description
-      className={cnBaseUI("text-body body-2 mb-6", className)}
+      className={cnBaseUI("text-body body-sm mb-6", className)}
       {...restProps}
     />
   );
