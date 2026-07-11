@@ -12,9 +12,9 @@ export function Colors() {
           <code>text-*-foreground</code>).
         </p>
       </div>
-      <div className="text-foreground grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="text-foreground grid grid-cols-2 gap-4 font-semibold lg:grid-cols-4">
         <div className="bg-primary text-on-primary rounded-lg p-2">primary</div>
-        <div className="text-primary-foreground bg-card border-primary-foreground rounded-lg border p-2">
+        <div className="text-primary-foreground border-primary-foreground bg-card rounded-lg border p-2">
           primary-foreground
         </div>
         <div className="bg-secondary text-on-secondary rounded-lg p-2">

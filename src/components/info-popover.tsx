@@ -51,7 +51,7 @@ export function InfoPopover(props: InfoPopoverProps) {
             ? `Information about ${fieldLabel}`
             : "Information",
         className: cnBaseUI(
-          "body-sm bg-secondary text-on-secondary px-3 py-2 text-center max-w-[min(300px,calc(100vw-3rem))]",
+          "body-sm bg-foreground text-background px-3 py-2 text-center max-w-[min(300px,calc(100vw-3rem))]",
           popupClassName,
         ),
         ...popupProps,
@@ -62,7 +62,7 @@ export function InfoPopover(props: InfoPopoverProps) {
       }}
       arrowSvgProps={{
         backgroundPathProps: {
-          className: cn("fill-secondary", arrowSvgClassName),
+          className: cn("fill-foreground", arrowSvgClassName),
         },
         ...arrowSvgProps,
       }}

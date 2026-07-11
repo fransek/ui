@@ -15,8 +15,8 @@ const meta = {
       <DialogTitle className="mb-2">Are you sure?</DialogTitle>
       <DialogDescription>This action cannot be undone.</DialogDescription>
       <div className="flex justify-end gap-4">
-        <DialogClose render={<Button variant="primary">OK</Button>} />
         <DialogClose render={<Button variant="secondary">Cancel</Button>} />
+        <DialogClose render={<Button variant="primary">OK</Button>} />
       </div>
     </Dialog>
   ),
