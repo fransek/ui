@@ -122,10 +122,6 @@
   --color-on-code: var(--on-code);
   --color-code-foreground: var(--code-foreground);
 
-  --color-subtle: var(--subtle);
-  --color-on-subtle: var(--on-subtle);
-  --color-subtle-foreground: var(--subtle-foreground);
-
   --animate-validating: validating 1.5s ease-in-out infinite;
   --animate-validating-message: validating-message 1.5s linear infinite;
 
