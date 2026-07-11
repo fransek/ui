@@ -1,47 +1,89 @@
+:root {
+  /* Typographic scale — the single source of truth shared by the text
+     utilities below (heading-*, ingress, body, body-sm) and the matching
+     element styles in the .typography layer (components.css), so the two
+     stay coupled without duplicating the scale definitions. */
+  --heading-2xl-font-size: var(--text-4xl);
+  --heading-2xl-font-weight: var(--font-weight-bold);
+  --heading-2xl-line-height: var(--text-5xl--line-height);
+
+  --heading-xl-font-size: var(--text-3xl);
+  --heading-xl-font-weight: var(--font-weight-bold);
+  --heading-xl-line-height: var(--text-4xl--line-height);
+
+  --heading-lg-font-size: var(--text-2xl);
+  --heading-lg-font-weight: var(--font-weight-bold);
+  --heading-lg-line-height: var(--text-3xl--line-height);
+
+  --heading-md-font-size: var(--text-xl);
+  --heading-md-font-weight: var(--font-weight-bold);
+  --heading-md-line-height: var(--text-2xl--line-height);
+
+  --heading-sm-font-size: var(--text-lg);
+  --heading-sm-font-weight: var(--font-weight-bold);
+  --heading-sm-line-height: var(--text-xl--line-height);
+
+  --heading-xs-font-size: var(--text-base);
+  --heading-xs-font-weight: var(--font-weight-bold);
+  --heading-xs-line-height: var(--text-lg--line-height);
+
+  --ingress-font-size: var(--text-base);
+  --ingress-font-weight: var(--font-weight-semibold);
+  --ingress-line-height: var(--text-base--line-height);
+
+  --body-font-size: var(--text-base);
+  --body-font-weight: var(--font-weight-normal);
+  --body-line-height: var(--text-base--line-height);
+
+  --body-sm-font-size: var(--text-sm);
+  --body-sm-font-weight: var(--font-weight-normal);
+  --body-sm-line-height: var(--text-sm--line-height);
+}
+
 @utility heading-2xl {
-  font-size: var(--text-4xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--text-5xl--line-height);
+  font-size: var(--heading-2xl-font-size);
+  font-weight: var(--heading-2xl-font-weight);
+  line-height: var(--heading-2xl-line-height);
 }
 @utility heading-xl {
-  font-size: var(--text-3xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--text-4xl--line-height);
+  font-size: var(--heading-xl-font-size);
+  font-weight: var(--heading-xl-font-weight);
+  line-height: var(--heading-xl-line-height);
 }
 @utility heading-lg {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--text-3xl--line-height);
+  font-size: var(--heading-lg-font-size);
+  font-weight: var(--heading-lg-font-weight);
+  line-height: var(--heading-lg-line-height);
 }
 @utility heading-md {
-  font-size: var(--text-xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--text-2xl--line-height);
+  font-size: var(--heading-md-font-size);
+  font-weight: var(--heading-md-font-weight);
+  line-height: var(--heading-md-line-height);
 }
 @utility heading-sm {
-  font-size: var(--text-lg);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--text-xl--line-height);
+  font-size: var(--heading-sm-font-size);
+  font-weight: var(--heading-sm-font-weight);
+  line-height: var(--heading-sm-line-height);
 }
 @utility heading-xs {
-  font-size: var(--text-base);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--text-lg--line-height);
+  font-size: var(--heading-xs-font-size);
+  font-weight: var(--heading-xs-font-weight);
+  line-height: var(--heading-xs-line-height);
 }
 @utility ingress {
-  font-size: var(--text-base);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--text-base--line-height);
+  font-size: var(--ingress-font-size);
+  font-weight: var(--ingress-font-weight);
+  line-height: var(--ingress-line-height);
 }
 @utility body {
-  font-size: var(--text-base);
-  font-weight: var(--font-weight-normal);
-  line-height: var(--text-base--line-height);
+  font-size: var(--body-font-size);
+  font-weight: var(--body-font-weight);
+  line-height: var(--body-line-height);
 }
 @utility body-sm {
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-normal);
-  line-height: var(--text-sm--line-height);
+  font-size: var(--body-sm-font-size);
+  font-weight: var(--body-sm-font-weight);
+  line-height: var(--body-sm-line-height);
 }
 @utility focus-outline {
   outline-offset: calc(-1px);
