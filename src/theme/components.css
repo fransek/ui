@@ -1,22 +1,22 @@
 @layer components {
   .typography {
     h1 {
-      @apply heading-2xl not-last:mb-8;
+      @apply heading-2xl text-foreground not-last:mb-8;
     }
     h2 {
-      @apply heading-xl not-last:mb-6;
+      @apply heading-xl text-foreground not-last:mb-6;
     }
     h3 {
-      @apply heading-lg not-last:mb-5;
+      @apply heading-lg text-foreground not-last:mb-5;
     }
     h4 {
-      @apply heading-md not-last:mb-4;
+      @apply heading-md text-foreground not-last:mb-4;
     }
     h5 {
-      @apply heading-sm not-last:mb-3;
+      @apply heading-sm text-foreground not-last:mb-3;
     }
     h6 {
-      @apply heading-xs not-last:mb-2;
+      @apply heading-xs text-foreground not-last:mb-2;
     }
     p {
       @apply body text-body not-last:mb-6;
@@ -36,7 +36,7 @@
         @apply text-foreground border-primary m-0 border-l-4 pl-4 italic not-last:mb-6 before:content-['\201C'] after:content-['\201D'];
       }
       footer {
-        @apply text-body;
+        @apply body text-body;
       }
     }
     em {
@@ -57,7 +57,7 @@
     code,
     samp,
     kbd {
-      @apply text-code-foreground bg-contrast/10 rounded-md px-1.5 font-mono text-sm font-semibold;
+      @apply text-code-foreground bg-contrast/10 body-sm rounded-md px-1.5 font-mono font-semibold;
     }
     pre {
       @apply text-on-code bg-code overflow-x-auto rounded-lg p-4 font-mono not-last:mb-6;
@@ -77,10 +77,10 @@
       }
     }
     figcaption {
-      @apply text-body text-sm not-last:mb-2;
+      @apply text-body body-sm not-last:mb-2;
     }
     table {
-      @apply w-full table-fixed border-collapse text-sm not-last:mb-6;
+      @apply body-sm w-full table-fixed border-collapse not-last:mb-6;
       caption {
         @apply text-body mb-2;
       }
@@ -95,11 +95,10 @@
         @apply text-body not-last:border-b;
       }
     }
-    header {
-      @apply border-primary pb-4 not-last:mb-12 not-last:border-b;
-    }
-    section {
-      @apply border-primary pb-4 not-last:mb-12 not-last:border-b;
+    header,
+    section,
+    footer {
+      @apply body text-body border-primary pb-4 not-last:mb-12 not-last:border-b;
     }
     address {
       @apply inline-block;
@@ -107,20 +106,17 @@
     details {
       @apply marker:text-primary-foreground not-last:mb-6;
       summary {
-        @apply text-foreground cursor-pointer font-semibold;
+        @apply text-foreground body cursor-pointer font-semibold;
       }
       p {
         @apply text-body mt-2;
       }
     }
     small {
-      @apply text-body text-sm not-last:mb-6;
+      @apply text-body body-sm not-last:mb-6;
     }
     nav {
       @apply not-last:mb-6;
-    }
-    .ingress {
-      @apply ingress text-foreground not-last:mb-6;
     }
     .heading-2xl {
       @apply not-last:mb-8;
@@ -139,6 +135,9 @@
     }
     .heading-xs {
       @apply not-last:mb-2;
+    }
+    .ingress {
+      @apply ingress text-foreground not-last:mb-6;
     }
     .body {
       @apply text-body not-last:mb-6;
