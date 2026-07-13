@@ -1,32 +1,32 @@
 @utility heading-2xl {
   font-size: var(--text-4xl);
   font-weight: var(--font-weight-bold);
-  line-height: var(--text-5xl--line-height);
+  line-height: var(--text-4xl--line-height);
 }
 @utility heading-xl {
   font-size: var(--text-3xl);
   font-weight: var(--font-weight-bold);
-  line-height: var(--text-4xl--line-height);
+  line-height: var(--text-3xl--line-height);
 }
 @utility heading-lg {
   font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
-  line-height: var(--text-3xl--line-height);
+  line-height: var(--text-2xl--line-height);
 }
 @utility heading-md {
   font-size: var(--text-xl);
   font-weight: var(--font-weight-bold);
-  line-height: var(--text-2xl--line-height);
+  line-height: var(--text-xl--line-height);
 }
 @utility heading-sm {
   font-size: var(--text-lg);
   font-weight: var(--font-weight-bold);
-  line-height: var(--text-xl--line-height);
+  line-height: var(--text-lg--line-height);
 }
 @utility heading-xs {
   font-size: var(--text-base);
   font-weight: var(--font-weight-bold);
-  line-height: var(--text-lg--line-height);
+  line-height: var(--text-base--line-height);
 }
 @utility ingress {
   font-size: var(--text-base);

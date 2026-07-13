@@ -14,9 +14,9 @@
   --on-primary: oklch(100% 0 0);
   --primary-foreground: oklch(41% 0.15 280);
 
-  --secondary: oklch(92% 0.03 280);
+  --secondary: oklch(92% 0 0);
   --on-secondary: oklch(41% 0.15 280);
-  --secondary-foreground: oklch(50% 0.15 280);
+  --secondary-foreground: oklch(56% 0.15 280);
 
   --muted: oklch(45% 0 0);
   --on-muted: oklch(87% 0 0);
@@ -57,7 +57,7 @@
 
   --secondary: oklch(23% 0 0);
   --on-secondary: oklch(72% 0.15 280);
-  --secondary-foreground: oklch(72% 0.15 280);
+  --secondary-foreground: oklch(82% 0.15 280);
 
   --muted: oklch(39% 0 0);
   --on-muted: oklch(87% 0 0);
