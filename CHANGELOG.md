@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.13.0](https://github.com/fransek/ui/compare/v0.12.0...v0.13.0) (2026-07-13)
+
+
+### Features
+
+* **button:** add warning variant ([#94](https://github.com/fransek/ui/issues/94)) ([98968b7](https://github.com/fransek/ui/commit/98968b71af7c0df6f24955abc87dfea2f11d66c3))
+* **theme:** add thin muted scrollbar styling ([#92](https://github.com/fransek/ui/issues/92)) ([f6f3b5b](https://github.com/fransek/ui/commit/f6f3b5ba1f6ea2b6bf4e7f349e263f145220496a))
+* **theme:** revamp secondary palette ([#95](https://github.com/fransek/ui/issues/95)) ([cddbd91](https://github.com/fransek/ui/commit/cddbd910389d5a2d4d49f565e2e86ca7055a994d))
+
+
+### Bug Fixes
+
+* **theme:** refine typography line-heights and secondary palette ([#98](https://github.com/fransek/ui/issues/98)) ([2be080b](https://github.com/fransek/ui/commit/2be080b654119248a1174274e186cba64743e44b))
+* **theme:** rename typography utilities to size-based scale ([#93](https://github.com/fransek/ui/issues/93)) ([805836b](https://github.com/fransek/ui/commit/805836bc565ece21ab291909d5b9caf1735b5063))
+
 ## [0.12.0](https://github.com/fransek/ui/compare/v0.11.0...v0.12.0) (2026-07-09)
 
 
