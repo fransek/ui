@@ -8,7 +8,7 @@
   --body: oklch(40% 0 0);
   --highlight: oklch(40% 0.08 280);
   --link: oklch(52% 0.15 260);
-  --field: oklch(100% 0 0 / 0.6);
+  --field: oklch(100% 0 0);
 
   --primary: oklch(50% 0.15 280);
   --on-primary: oklch(100% 0 0);
@@ -49,7 +49,7 @@
   --body: oklch(80% 0 0);
   --highlight: oklch(80% 0.1 280);
   --link: oklch(62% 0.15 260);
-  --field: oklch(100% 0 0 / 0.02);
+  --field: oklch(25% 0 0 / 0.4);
 
   --primary: oklch(41% 0.15 280);
   --on-primary: oklch(100% 0 0);
