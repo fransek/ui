@@ -16,9 +16,15 @@ const meta = {
         <TabsTab value="projects">Projects</TabsTab>
         <TabsTab value="account">Account</TabsTab>
       </TabsList>
-      <TabsPanel value="overview">Workspace stats and activity.</TabsPanel>
-      <TabsPanel value="projects">Milestones and deadlines.</TabsPanel>
-      <TabsPanel value="account">Profile and preferences.</TabsPanel>
+      <TabsPanel className="h-50" value="overview">
+        Workspace stats and activity.
+      </TabsPanel>
+      <TabsPanel className="h-50" value="projects">
+        Milestones and deadlines.
+      </TabsPanel>
+      <TabsPanel className="h-50" value="account">
+        Profile and preferences.
+      </TabsPanel>
     </Tabs>
   ),
 } satisfies Meta<typeof Tabs>;
@@ -40,24 +46,39 @@ export const WithDisabledTab: Story = {
         </TabsTab>
         <TabsTab value="account">Account</TabsTab>
       </TabsList>
-      <TabsPanel value="overview">Workspace stats and activity.</TabsPanel>
-      <TabsPanel value="projects">Milestones and deadlines.</TabsPanel>
-      <TabsPanel value="account">Profile and preferences.</TabsPanel>
+      <TabsPanel className="h-50" value="overview">
+        Workspace stats and activity.
+      </TabsPanel>
+      <TabsPanel className="h-50" value="projects">
+        Milestones and deadlines.
+      </TabsPanel>
+      <TabsPanel className="h-50" value="account">
+        Profile and preferences.
+      </TabsPanel>
     </Tabs>
   ),
 };
 
-export const WithoutIndicator: Story = {
+export const CustomStyle: Story = {
+  parameters: {
+    layout: "centered",
+  },
   render: (args) => (
-    <Tabs {...args}>
-      <TabsList hideIndicator>
+    <Tabs {...args} className="card body-sm">
+      <TabsList className="border-b">
         <TabsTab value="overview">Overview</TabsTab>
         <TabsTab value="projects">Projects</TabsTab>
         <TabsTab value="account">Account</TabsTab>
       </TabsList>
-      <TabsPanel value="overview">Workspace stats and activity.</TabsPanel>
-      <TabsPanel value="projects">Milestones and deadlines.</TabsPanel>
-      <TabsPanel value="account">Profile and preferences.</TabsPanel>
+      <TabsPanel className="h-50" value="overview">
+        Workspace stats and activity.
+      </TabsPanel>
+      <TabsPanel className="h-50" value="projects">
+        Milestones and deadlines.
+      </TabsPanel>
+      <TabsPanel className="h-50" value="account">
+        Profile and preferences.
+      </TabsPanel>
     </Tabs>
   ),
 };

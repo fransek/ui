@@ -21,18 +21,10 @@ export function Tabs(props: TabsProps) {
 export interface TabsListProps extends BaseUITabsListProps {
   /** Props forwarded to the active-tab `Indicator`. */
   indicatorProps?: BaseUITabsIndicatorProps;
-  /** Omit the active-tab indicator. */
-  hideIndicator?: boolean;
 }
 
 export function TabsList(props: TabsListProps) {
-  const {
-    children,
-    className,
-    indicatorProps,
-    hideIndicator = false,
-    ...restProps
-  } = props;
+  const { children, className, indicatorProps, ...restProps } = props;
 
   return (
     <BaseUITabs.List
@@ -40,7 +32,7 @@ export function TabsList(props: TabsListProps) {
       {...restProps}
     >
       {children}
-      {!hideIndicator && <TabsIndicator {...indicatorProps} />}
+      <TabsIndicator {...indicatorProps} />
     </BaseUITabs.List>
   );
 }
@@ -52,7 +44,7 @@ export function TabsIndicator(props: TabsIndicatorProps) {
   return (
     <BaseUITabs.Indicator
       className={cnBaseUI(
-        "bg-background border-primary absolute top-0 left-0 -z-1 h-full w-(--active-tab-width) translate-x-(--active-tab-left) border-b-2 transition-[translate,width] duration-150 ease-in-out",
+        "border-primary-foreground absolute top-0 left-0 -z-1 h-full w-(--active-tab-width) translate-x-(--active-tab-left) border-b-2 transition-[translate,width] duration-150 ease-in-out",
         className,
       )}
       {...restProps}
@@ -67,7 +59,7 @@ export function TabsTab(props: TabsTabProps) {
   return (
     <BaseUITabs.Tab
       className={cnBaseUI(
-        "font-inherit text-muted-foreground hover:text-foreground outline-highlight focus-visible:focus-outline data-active:text-foreground flex h-[calc(2rem+1px)] items-center justify-center bg-transparent px-2 py-0 leading-5 font-normal break-keep whitespace-nowrap transition-colors outline-none select-none",
+        "data-disabled:text-muted-foreground font-inherit text-body hover:text-primary-foreground outline-highlight focus-visible:focus-outline data-active:text-primary-foreground flex h-[calc(2rem+1px)] items-center justify-center rounded bg-transparent px-2 py-0 leading-5 font-normal break-keep whitespace-nowrap transition-colors outline-none select-none",
         className,
       )}
       {...restProps}
@@ -82,7 +74,7 @@ export function TabsPanel(props: TabsPanelProps) {
   return (
     <BaseUITabs.Panel
       className={cnBaseUI(
-        "bg-background text-foreground outline-highlight focus-visible:focus-outline flex w-full items-center justify-center p-4 text-center outline-none [[hidden]]:hidden",
+        "text-foreground outline-highlight focus-visible:focus-outline flex w-full items-center justify-center p-4 text-center outline-none [[hidden]]:hidden",
         className,
       )}
       {...restProps}
