@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.14.0](https://github.com/fransek/ui/compare/v0.13.0...v0.14.0) (2026-07-14)
+
+
+### Features
+
+* add Tabs component ([#99](https://github.com/fransek/ui/issues/99)) ([c718602](https://github.com/fransek/ui/commit/c7186023cab898c7577b1d97d24f0753835dbcac))
+* color token updates and renames ([#101](https://github.com/fransek/ui/issues/101)) ([1492e04](https://github.com/fransek/ui/commit/1492e041213dca63b02bb08505a77ea0394fc1e0))
+
 ## [0.13.0](https://github.com/fransek/ui/compare/v0.12.0...v0.13.0) (2026-07-13)
 
 
