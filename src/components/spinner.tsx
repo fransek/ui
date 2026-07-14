@@ -156,7 +156,7 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: "text-primary",
-  secondary: "text-secondary",
+  secondary: "text-secondary-foreground",
   muted: "text-muted-foreground",
   error: "text-error",
   success: "text-success",
