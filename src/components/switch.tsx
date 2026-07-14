@@ -54,7 +54,7 @@ export function Switch(props: SwitchProps) {
         >
           <BaseUISwitch.Root
             className={cnBaseUI(
-              "bg-muted border-muted data-validating:not-data-invalid:animate-validating data-invalid:border-error-foreground data-invalid:data-checked:bg-error data-invalid:data-checked:border-error data-checked:bg-primary outline-highlight focus-visible:focus-outline data-checked:border-primary flex h-5 w-9 shrink-0 rounded-full border p-0.5 shadow transition-colors duration-150 ease-[ease]",
+              "bg-muted border-muted data-validating:not-data-invalid:animate-validating data-invalid:border-danger-foreground data-invalid:data-checked:bg-danger data-invalid:data-checked:border-danger data-checked:bg-primary outline-highlight focus-visible:focus-outline data-checked:border-primary flex h-5 w-9 shrink-0 rounded-full border p-0.5 shadow transition-colors duration-150 ease-[ease]",
               className,
             )}
             aria-labelledby={labelId}

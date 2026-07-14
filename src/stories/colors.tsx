@@ -27,9 +27,9 @@ export function Colors() {
         <div className="text-muted-foreground border-muted-foreground bg-card rounded-lg border p-2">
           muted-foreground
         </div>
-        <div className="bg-error text-on-error rounded-lg p-2">error</div>
-        <div className="text-error-foreground border-error-foreground bg-card rounded-lg border p-2">
-          error-foreground
+        <div className="bg-danger text-on-danger rounded-lg p-2">danger</div>
+        <div className="text-danger-foreground border-danger-foreground bg-card rounded-lg border p-2">
+          danger-foreground
         </div>
         <div className="bg-warning text-on-warning rounded-lg p-2">warning</div>
         <div className="text-warning-foreground border-warning-foreground bg-card rounded-lg border p-2">

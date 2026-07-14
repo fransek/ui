@@ -36,7 +36,7 @@ export function Form() {
 
     if (Object.keys(nextErrors).length > 0) {
       toast.add({
-        type: "error",
+        type: "danger",
         title: "Check the form",
         description: "Some fields need your attention.",
       });

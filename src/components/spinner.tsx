@@ -158,7 +158,7 @@ const variantStyles = {
   primary: "text-primary",
   secondary: "text-secondary-foreground",
   muted: "text-muted-foreground",
-  error: "text-error",
+  danger: "text-danger",
   success: "text-success",
   current: "text-current",
 };

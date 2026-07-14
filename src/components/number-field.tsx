@@ -52,7 +52,7 @@ export function NumberField(props: NumberFieldProps) {
       >
         <BaseUINumberField.Group
           className={cnBaseUI(
-            "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border shadow transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
+            "data-invalid:border-danger-foreground data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border shadow transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
           )}
           data-validating={isValidating ? "" : undefined}
         >

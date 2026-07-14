@@ -38,7 +38,7 @@ export function Textarea(props: TextareaProps) {
     >
       <FieldControl
         className={cnBaseUI(
-          "bg-field data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 shadow transition-colors",
+          "bg-field data-invalid:border-danger-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 shadow transition-colors",
           className,
         )}
         render={<textarea />}

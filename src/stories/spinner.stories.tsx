@@ -17,7 +17,14 @@ const meta = {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "muted", "error", "success", "current"],
+      options: [
+        "primary",
+        "secondary",
+        "muted",
+        "danger",
+        "success",
+        "current",
+      ],
     },
     textPosition: {
       control: "inline-radio",
@@ -53,7 +60,7 @@ export const Variants: Story = {
       <Spinner variant="primary" />
       <Spinner variant="secondary" />
       <Spinner variant="muted" />
-      <Spinner variant="error" />
+      <Spinner variant="danger" />
       <Spinner variant="success" />
     </div>
   ),

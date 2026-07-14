@@ -96,7 +96,7 @@ const indicatorVariantStyles = {
   primary: "bg-primary",
   secondary: "bg-secondary-foreground",
   muted: "bg-muted",
-  error: "bg-error",
+  danger: "bg-danger",
   success: "bg-success",
   warning: "bg-warning",
 };
