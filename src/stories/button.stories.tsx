@@ -8,7 +8,7 @@ const variants: ButtonVariant[] = [
   "secondary",
   "success",
   "warning",
-  "error",
+  "danger",
   "muted",
   "outline",
   "ghost",

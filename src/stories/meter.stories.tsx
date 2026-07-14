@@ -16,7 +16,14 @@ const meta = {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "muted", "error", "success", "warning"],
+      options: [
+        "primary",
+        "secondary",
+        "muted",
+        "danger",
+        "success",
+        "warning",
+      ],
     },
     label: { control: "text" },
     showValue: { control: "boolean" },
@@ -63,7 +70,7 @@ export const Variants: Story = {
       <Meter label="Muted" variant="muted" value={65} />
       <Meter label="Success" variant="success" value={65} />
       <Meter label="Warning" variant="warning" value={65} />
-      <Meter label="Error" variant="error" value={65} />
+      <Meter label="Danger" variant="danger" value={65} />
     </div>
   ),
 };

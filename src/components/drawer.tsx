@@ -137,7 +137,7 @@ export function Drawer(props: DrawerProps) {
                     >
                       <X
                         className={cn(
-                          "text-muted-foreground size-4",
+                          "text-muted-fg size-4",
                           closeButtonIconClassName,
                         )}
                         {...closeButtonIconProps}

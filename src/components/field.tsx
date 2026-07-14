@@ -62,7 +62,7 @@ export function Field(props: FieldProps) {
         {isValidating && isValidatingMessage && !errorMessage && (
           <FieldDescription
             className={cnBaseUI(
-              "text-primary-foreground animate-validating-message text-sm",
+              "text-primary-fg animate-validating-message text-sm",
               isValidatingMessageClassName,
             )}
             {...isValidatingMessageProps}
@@ -90,7 +90,7 @@ export function FieldDescription(props: BaseUIFieldDescriptionProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIField.Description
-      className={cnBaseUI("text-muted-foreground text-sm", className)}
+      className={cnBaseUI("text-muted-fg text-sm", className)}
       {...restProps}
     />
   );
@@ -102,7 +102,7 @@ export function FieldError(props: BaseUIFieldErrorProps) {
   const { className, ...restProps } = props;
   return (
     <BaseUIField.Error
-      className={cnBaseUI("text-error-foreground text-sm", className)}
+      className={cnBaseUI("text-danger-fg text-sm", className)}
       {...restProps}
     />
   );

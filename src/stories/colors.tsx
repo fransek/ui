@@ -9,35 +9,35 @@ export function Colors() {
           These colors come in sets of three, one for the background (
           <code>bg-*</code>), one for the foreground (<code>text-on-*</code>),
           and one with higher contrast for stand-alone text (
-          <code>text-*-foreground</code>).
+          <code>text-*-fg</code>).
         </p>
       </div>
       <div className="text-foreground grid grid-cols-2 gap-4 font-semibold lg:grid-cols-4">
         <div className="bg-primary text-on-primary rounded-lg p-2">primary</div>
-        <div className="text-primary-foreground border-primary-foreground bg-card rounded-lg border p-2">
-          primary-foreground
+        <div className="text-primary-fg border-primary-fg bg-card rounded-lg border p-2">
+          primary-fg
         </div>
         <div className="bg-secondary text-on-secondary rounded-lg p-2">
           secondary
         </div>
-        <div className="text-secondary-foreground border-secondary-foreground bg-card rounded-lg border p-2">
-          secondary-foreground
+        <div className="text-secondary-fg border-secondary-fg bg-card rounded-lg border p-2">
+          secondary-fg
         </div>
         <div className="bg-muted text-on-muted rounded-lg p-2">muted</div>
-        <div className="text-muted-foreground border-muted-foreground bg-card rounded-lg border p-2">
-          muted-foreground
+        <div className="text-muted-fg border-muted-fg bg-card rounded-lg border p-2">
+          muted-fg
         </div>
-        <div className="bg-error text-on-error rounded-lg p-2">error</div>
-        <div className="text-error-foreground border-error-foreground bg-card rounded-lg border p-2">
-          error-foreground
+        <div className="bg-danger text-on-danger rounded-lg p-2">danger</div>
+        <div className="text-danger-fg border-danger-fg bg-card rounded-lg border p-2">
+          danger-fg
         </div>
         <div className="bg-warning text-on-warning rounded-lg p-2">warning</div>
-        <div className="text-warning-foreground border-warning-foreground bg-card rounded-lg border p-2">
-          warning-foreground
+        <div className="text-warning-fg border-warning-fg bg-card rounded-lg border p-2">
+          warning-fg
         </div>
         <div className="bg-success text-on-success rounded-lg p-2">success</div>
-        <div className="text-success-foreground border-success-foreground bg-card rounded-lg border p-2">
-          success-foreground
+        <div className="text-success-fg border-success-fg bg-card rounded-lg border p-2">
+          success-fg
         </div>
       </div>
       <div className="typography max-w-3xl">

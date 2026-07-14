@@ -73,9 +73,7 @@ export const WithLeftAdornment: Story = {
     label: "Search",
     description: undefined,
     placeholder: "Search components",
-    leftAdornment: (
-      <Search className="text-muted-foreground size-5 self-center" />
-    ),
+    leftAdornment: <Search className="text-muted-fg size-5 self-center" />,
   },
 };
 

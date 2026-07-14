@@ -49,7 +49,7 @@ src/
 
 **Form fields.** The `Field` component provides label / description / error / validation slots. Wrapped inputs accept `fieldProps?: FieldProps` plus the `FieldAttributes` props (`label`, `errorMessage`, `description`, `isValidating`, `isValidatingMessage`, `invalid`, `infoPopover`) directly. Inputs read shared validation state from a parent `Field` via `useFieldContext`.
 
-**Theme.** Tokens are CSS custom properties in `src/theme/vars.css` (light `:root`, dark `.dark`), aliased into Tailwind's `@theme inline` block — there is no `tailwind.config`. Semantic tokens follow a `color` / `on-color` pairing (`primary`/`on-primary`, `error`/`on-error`, etc.), plus `background`, `foreground`, `card`, `border`, `muted`, `warning`, `success`, `link`.
+**Theme.** Tokens are CSS custom properties in `src/theme/vars.css` (light `:root`, dark `.dark`), aliased into Tailwind's `@theme inline` block — there is no `tailwind.config`. Semantic tokens follow a `color` / `on-color` pairing (`primary`/`on-primary`, `danger`/`on-danger`, etc.), plus `background`, `foreground`, `card`, `border`, `muted`, `warning`, `success`, `link`.
 
 **Build.** `rollup.config.mjs` emits two builds (`dist/cjs`, `dist/esm`) with `preserveModules` so consumers can import individual components (`@fransek/ui/button`). Peer deps (react, base-ui, lucide-react, date-fns, etc.) are externalized; `react-day-picker` and `date-fns` are optional peers (only the calendar/date-picker need them).
 

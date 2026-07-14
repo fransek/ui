@@ -52,13 +52,13 @@ export function NumberField(props: NumberFieldProps) {
       >
         <BaseUINumberField.Group
           className={cnBaseUI(
-            "data-invalid:border-error-foreground data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border shadow transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
+            "data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border shadow transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
           )}
           data-validating={isValidating ? "" : undefined}
         >
           <BaseUINumberField.Decrement
             className={cnBaseUI(
-              "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-foreground flex items-center justify-center border-r px-2.5 transition-colors select-none data-disabled:pointer-events-none",
+              "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-r px-2.5 transition-colors select-none data-disabled:pointer-events-none",
               decrementProps?.className,
             )}
             {...decrementProps}
@@ -67,14 +67,14 @@ export function NumberField(props: NumberFieldProps) {
           </BaseUINumberField.Decrement>
           <BaseUINumberField.Input
             className={cnBaseUI(
-              "bg-field placeholder:text-muted-foreground w-full min-w-0 p-2 text-center tabular-nums outline-none",
+              "bg-field placeholder:text-muted-fg w-full min-w-0 p-2 text-center tabular-nums outline-none",
               inputProps?.className,
             )}
             {...inputProps}
           />
           <BaseUINumberField.Increment
             className={cnBaseUI(
-              "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-foreground flex items-center justify-center border-l px-2.5 transition-colors select-none data-disabled:pointer-events-none",
+              "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-l px-2.5 transition-colors select-none data-disabled:pointer-events-none",
               incrementProps?.className,
             )}
             {...incrementProps}

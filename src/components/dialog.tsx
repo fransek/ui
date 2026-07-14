@@ -99,7 +99,7 @@ export function Dialog(props: DialogProps) {
                   >
                     <X
                       className={cn(
-                        "text-muted-foreground size-4",
+                        "text-muted-fg size-4",
                         closeButtonIconClassName,
                       )}
                       {...closeButtonIconProps}

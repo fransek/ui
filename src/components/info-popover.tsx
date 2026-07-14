@@ -40,7 +40,7 @@ export function InfoPopover(props: InfoPopoverProps) {
           {...buttonProps}
         >
           <Info
-            className={cn("text-muted-foreground size-4", infoIconClassName)}
+            className={cn("text-muted-fg size-4", infoIconClassName)}
             {...infoIconProps}
           />
         </Button>

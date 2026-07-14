@@ -17,7 +17,7 @@ import React from "react";
 import { cn, cnBaseUI } from "../lib/utils";
 import { Button } from "./button";
 
-export type ToastType = "info" | "success" | "warning" | "error";
+export type ToastType = "info" | "success" | "warning" | "danger";
 
 export type ToastPosition =
   | "top-left"
@@ -42,14 +42,14 @@ const typeIcons: Record<ToastType, LucideIcon> = {
   info: Info,
   success: CircleCheck,
   warning: TriangleAlert,
-  error: CircleX,
+  danger: CircleX,
 };
 
 const typeIconStyles: Record<ToastType, string> = {
-  info: "text-primary-foreground",
-  success: "text-success-foreground",
-  warning: "text-warning-foreground",
-  error: "text-error-foreground",
+  info: "text-primary-fg",
+  success: "text-success-fg",
+  warning: "text-warning-fg",
+  danger: "text-danger-fg",
 };
 
 const viewportPositionStyles: Record<ToastPosition, string> = {
@@ -158,7 +158,7 @@ function ToastList({
             />
           }
         >
-          <X className="text-muted-foreground size-4" />
+          <X className="text-muted-fg size-4" />
         </BaseUIToast.Close>
       </BaseUIToast.Root>
     );

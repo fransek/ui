@@ -8,35 +8,35 @@
   --body: oklch(40% 0 0);
   --highlight: oklch(40% 0.08 280);
   --link: oklch(52% 0.15 260);
-  --field: oklch(100% 0 0 / 0.6);
+  --field: oklch(100% 0 0);
 
   --primary: oklch(50% 0.15 280);
   --on-primary: oklch(100% 0 0);
-  --primary-foreground: oklch(41% 0.15 280);
+  --primary-fg: oklch(41% 0.15 280);
 
   --secondary: oklch(92% 0 0);
   --on-secondary: oklch(41% 0.15 280);
-  --secondary-foreground: oklch(56% 0.15 280);
+  --secondary-fg: oklch(56% 0.15 280);
 
   --muted: oklch(45% 0 0);
   --on-muted: oklch(87% 0 0);
-  --muted-foreground: oklch(50% 0 0);
+  --muted-fg: oklch(50% 0 0);
 
-  --error: oklch(53% 0.15 25);
-  --on-error: oklch(100% 0 0);
-  --error-foreground: oklch(50% 0.15 25);
+  --danger: oklch(53% 0.15 25);
+  --on-danger: oklch(100% 0 0);
+  --danger-fg: oklch(50% 0.15 25);
 
   --warning: oklch(82% 0.15 88);
   --on-warning: oklch(19% 0 0);
-  --warning-foreground: oklch(58% 0.15 50);
+  --warning-fg: oklch(58% 0.15 50);
 
   --success: oklch(52% 0.15 150);
   --on-success: oklch(100% 0 0);
-  --success-foreground: oklch(47% 0.15 150);
+  --success-fg: oklch(47% 0.15 150);
 
   --code: oklch(46% 0.07 280);
   --on-code: oklch(100% 0 0);
-  --code-foreground: oklch(41% 0.15 280);
+  --code-fg: oklch(41% 0.15 280);
 }
 
 .dark {
@@ -49,35 +49,35 @@
   --body: oklch(80% 0 0);
   --highlight: oklch(80% 0.1 280);
   --link: oklch(62% 0.15 260);
-  --field: oklch(100% 0 0 / 0.02);
+  --field: oklch(25% 0 0 / 0.4);
 
   --primary: oklch(41% 0.15 280);
   --on-primary: oklch(100% 0 0);
-  --primary-foreground: oklch(62% 0.15 280);
+  --primary-fg: oklch(62% 0.15 280);
 
   --secondary: oklch(23% 0 0);
   --on-secondary: oklch(72% 0.15 280);
-  --secondary-foreground: oklch(82% 0.15 280);
+  --secondary-fg: oklch(82% 0.15 280);
 
   --muted: oklch(39% 0 0);
   --on-muted: oklch(87% 0 0);
-  --muted-foreground: oklch(62% 0 0);
+  --muted-fg: oklch(62% 0 0);
 
-  --error: oklch(45% 0.15 25);
-  --on-error: oklch(100% 0 0);
-  --error-foreground: oklch(61% 0.15 25);
+  --danger: oklch(45% 0.15 25);
+  --on-danger: oklch(100% 0 0);
+  --danger-fg: oklch(61% 0.15 25);
 
   --warning: oklch(80% 0.15 87);
   --on-warning: oklch(0% 0 0);
-  --warning-foreground: oklch(80% 0.15 87);
+  --warning-fg: oklch(80% 0.15 87);
 
   --success: oklch(53% 0.15 150);
   --on-success: oklch(100% 0 0);
-  --success-foreground: oklch(72% 0.15 150);
+  --success-fg: oklch(72% 0.15 150);
 
   --code: oklch(25% 0.05 280);
   --on-code: oklch(100% 0 0);
-  --code-foreground: oklch(70% 0.15 280);
+  --code-fg: oklch(70% 0.15 280);
 }
 
 @theme inline {
@@ -96,42 +96,42 @@
 
   --color-primary: var(--primary);
   --color-on-primary: var(--on-primary);
-  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-fg: var(--primary-fg);
 
   --color-secondary: var(--secondary);
   --color-on-secondary: var(--on-secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-fg: var(--secondary-fg);
 
   --color-muted: var(--muted);
   --color-on-muted: var(--on-muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-fg: var(--muted-fg);
 
-  --color-error: var(--error);
-  --color-on-error: var(--on-error);
-  --color-error-foreground: var(--error-foreground);
+  --color-danger: var(--danger);
+  --color-on-danger: var(--on-danger);
+  --color-danger-fg: var(--danger-fg);
 
   --color-warning: var(--warning);
   --color-on-warning: var(--on-warning);
-  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-fg: var(--warning-fg);
 
   --color-success: var(--success);
   --color-on-success: var(--on-success);
-  --color-success-foreground: var(--success-foreground);
+  --color-success-fg: var(--success-fg);
 
   --color-code: var(--code);
   --color-on-code: var(--on-code);
-  --color-code-foreground: var(--code-foreground);
+  --color-code-fg: var(--code-fg);
 
   --animate-validating: validating 1.5s ease-in-out infinite;
   --animate-validating-message: validating-message 1.5s linear infinite;
 
   --shimmer-gradient: linear-gradient(
     105deg,
-    var(--muted-foreground) 40%,
-    color-mix(in oklch, var(--on-muted) 35%, var(--muted-foreground)) 45%,
-    color-mix(in oklch, var(--on-muted) 70%, var(--muted-foreground)) 50%,
-    color-mix(in oklch, var(--on-muted) 35%, var(--muted-foreground)) 55%,
-    var(--muted-foreground) 60%
+    var(--muted-fg) 40%,
+    color-mix(in oklch, var(--on-muted) 35%, var(--muted-fg)) 45%,
+    color-mix(in oklch, var(--on-muted) 70%, var(--muted-fg)) 50%,
+    color-mix(in oklch, var(--on-muted) 35%, var(--muted-fg)) 55%,
+    var(--muted-fg) 60%
   );
 
   @keyframes validating {

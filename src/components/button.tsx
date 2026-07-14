@@ -47,8 +47,8 @@ const variantStyles = {
   secondary:
     "bg-secondary text-on-secondary hover:bg-secondary/80 active:bg-secondary/60",
   muted: "bg-muted text-on-muted hover:bg-muted/90 active:bg-muted/80",
-  error:
-    "bg-error text-on-error hover:bg-error/90 active:bg-error/80 outline-foreground",
+  danger:
+    "bg-danger text-on-danger hover:bg-danger/90 active:bg-danger/80 outline-foreground",
   warning:
     "bg-warning text-on-warning hover:bg-warning/90 active:bg-warning/80 outline-foreground",
   success:

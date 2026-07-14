@@ -27,7 +27,7 @@ function ToastButtons() {
       <Button variant="outline" onClick={() => notify("warning")}>
         Warning
       </Button>
-      <Button variant="outline" onClick={() => notify("error")}>
+      <Button variant="outline" onClick={() => notify("danger")}>
         Error
       </Button>
     </div>

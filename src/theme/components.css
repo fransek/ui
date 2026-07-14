@@ -22,10 +22,10 @@
       @apply body text-body not-last:mb-6;
     }
     ul {
-      @apply marker:text-primary-foreground list-disc pl-6 not-last:mb-6;
+      @apply marker:text-primary-fg list-disc pl-6 not-last:mb-6;
     }
     ol {
-      @apply marker:text-primary-foreground list-decimal pl-6 not-last:mb-6;
+      @apply marker:text-primary-fg list-decimal pl-6 not-last:mb-6;
     }
     li {
       @apply body text-body not-last:mb-2;
@@ -57,7 +57,7 @@
     code,
     samp,
     kbd {
-      @apply text-code-foreground bg-contrast/10 body-sm rounded-md px-1.5 font-mono font-semibold;
+      @apply text-code-fg bg-contrast/10 body-sm rounded-md px-1.5 font-mono font-semibold;
     }
     pre {
       @apply text-on-code bg-code overflow-x-auto rounded-lg p-4 font-mono not-last:mb-6;
@@ -104,7 +104,7 @@
       @apply inline-block;
     }
     details {
-      @apply marker:text-primary-foreground not-last:mb-6;
+      @apply marker:text-primary-fg not-last:mb-6;
       summary {
         @apply text-foreground body cursor-pointer font-semibold;
       }
