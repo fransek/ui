@@ -51,13 +51,13 @@ export function Input(props: InputProps) {
         {leftSlot}
         <div className="relative w-full">
           {leftAdornment && (
-            <span className="text-muted-foreground absolute inset-y-0 left-0 z-10 flex items-center pl-2">
+            <span className="text-muted-fg absolute inset-y-0 left-0 z-10 flex items-center pl-2">
               {leftAdornment}
             </span>
           )}
           <BaseUIInput
             className={cnBaseUI(
-              "bg-field data-invalid:border-danger-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-foreground w-full min-w-40 rounded-lg border p-2 shadow transition-colors",
+              "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-fg w-full min-w-40 rounded-lg border p-2 shadow transition-colors",
               hasLeftAdornment && "pl-10",
               hasRightAdornment && "pr-10",
               className,
@@ -66,7 +66,7 @@ export function Input(props: InputProps) {
             {...restProps}
           />
           {rightAdornment && (
-            <span className="text-muted-foreground absolute inset-y-0 right-0 z-10 flex items-center pr-2">
+            <span className="text-muted-fg absolute inset-y-0 right-0 z-10 flex items-center pr-2">
               {rightAdornment}
             </span>
           )}

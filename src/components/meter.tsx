@@ -54,7 +54,7 @@ export function Meter(props: MeterProps) {
       {showValue && (
         <BaseUIMeter.Value
           className={cnBaseUI(
-            "text-muted-foreground col-start-2 text-right text-sm",
+            "text-muted-fg col-start-2 text-right text-sm",
             valueClassName,
           )}
           {...valueProps}
@@ -94,7 +94,7 @@ const baseIndicatorStyles = "block h-full transition-[width] duration-500";
 
 const indicatorVariantStyles = {
   primary: "bg-primary",
-  secondary: "bg-secondary-foreground",
+  secondary: "bg-secondary-fg",
   muted: "bg-muted",
   danger: "bg-danger",
   success: "bg-success",

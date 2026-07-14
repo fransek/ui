@@ -61,7 +61,7 @@ export function Form() {
         <h2 className="text-foreground text-xl font-semibold">
           Create your account
         </h2>
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-fg text-sm">
           Fill in the details below to get started.
         </p>
       </div>

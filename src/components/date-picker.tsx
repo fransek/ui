@@ -58,10 +58,7 @@ export function DatePicker(props: DatePickerProps) {
       }}
       value={value}
       defaultValue={defaultValue}
-      className={cnBaseUI(
-        "hover:bg-card disabled:text-muted-foreground",
-        className,
-      )}
+      className={cnBaseUI("hover:bg-card disabled:text-muted-fg", className)}
       placeholder={placeholder}
       disabled={disabled}
       readOnly={readOnly}

@@ -135,7 +135,7 @@ export function Spinner(props: SpinnerProps) {
       {spinner}
       <span
         className={cn(
-          "text-muted-foreground text-center",
+          "text-muted-fg text-center",
           size === "sm" ? "text-xs" : "text-sm",
         )}
       >
@@ -156,8 +156,8 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: "text-primary",
-  secondary: "text-secondary-foreground",
-  muted: "text-muted-foreground",
+  secondary: "text-secondary-fg",
+  muted: "text-muted-fg",
   danger: "text-danger",
   success: "text-success",
   current: "text-current",

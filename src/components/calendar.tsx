@@ -92,7 +92,7 @@ function Calendar(props: CalendarProps) {
         table: "w-full border-collapse",
         weekdays: cn("flex", defaultClassNames.weekdays),
         weekday: cn(
-          "text-muted-foreground rounded-(--cell-radius) flex-1 font-normal text-[0.8rem] select-none",
+          "text-muted-fg rounded-(--cell-radius) flex-1 font-normal text-[0.8rem] select-none",
           defaultClassNames.weekday,
         ),
         week: cn("flex w-full mt-2", defaultClassNames.week),
@@ -101,7 +101,7 @@ function Calendar(props: CalendarProps) {
           defaultClassNames.week_number_header,
         ),
         week_number: cn(
-          "text-xs select-none text-muted-foreground",
+          "text-xs select-none text-muted-fg",
           defaultClassNames.week_number,
         ),
         day: cn(
@@ -125,13 +125,10 @@ function Calendar(props: CalendarProps) {
           defaultClassNames.today,
         ),
         outside: cn(
-          "text-muted-foreground aria-selected:text-foreground",
+          "text-muted-fg aria-selected:text-foreground",
           defaultClassNames.outside,
         ),
-        disabled: cn(
-          "text-muted-foreground opacity-50",
-          defaultClassNames.disabled,
-        ),
+        disabled: cn("text-muted-fg opacity-50", defaultClassNames.disabled),
         hidden: cn("invisible", defaultClassNames.hidden),
         ...classNames,
       }}

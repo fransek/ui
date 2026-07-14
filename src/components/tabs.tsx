@@ -44,7 +44,7 @@ export function TabsIndicator(props: TabsIndicatorProps) {
   return (
     <BaseUITabs.Indicator
       className={cnBaseUI(
-        "border-primary-foreground absolute top-0 left-0 -z-1 h-full w-(--active-tab-width) translate-x-(--active-tab-left) border-b-2 transition-[translate,width] duration-150 ease-in-out",
+        "border-primary-fg absolute top-0 left-0 -z-1 h-full w-(--active-tab-width) translate-x-(--active-tab-left) border-b-2 transition-[translate,width] duration-150 ease-in-out",
         className,
       )}
       {...restProps}
@@ -59,7 +59,7 @@ export function TabsTab(props: TabsTabProps) {
   return (
     <BaseUITabs.Tab
       className={cnBaseUI(
-        "data-disabled:text-muted-foreground font-inherit text-body hover:text-primary-foreground outline-highlight focus-visible:focus-outline data-active:text-primary-foreground flex h-[calc(2rem+1px)] items-center justify-center rounded bg-transparent px-2 py-0 leading-5 font-normal break-keep whitespace-nowrap transition-colors outline-none select-none",
+        "data-disabled:text-muted-fg font-inherit text-body hover:text-primary-fg outline-highlight focus-visible:focus-outline data-active:text-primary-fg flex h-[calc(2rem+1px)] items-center justify-center rounded bg-transparent px-2 py-0 leading-5 font-normal break-keep whitespace-nowrap transition-colors outline-none select-none",
         className,
       )}
       {...restProps}

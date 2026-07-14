@@ -46,10 +46,10 @@ const typeIcons: Record<ToastType, LucideIcon> = {
 };
 
 const typeIconStyles: Record<ToastType, string> = {
-  info: "text-primary-foreground",
-  success: "text-success-foreground",
-  warning: "text-warning-foreground",
-  danger: "text-danger-foreground",
+  info: "text-primary-fg",
+  success: "text-success-fg",
+  warning: "text-warning-fg",
+  danger: "text-danger-fg",
 };
 
 const viewportPositionStyles: Record<ToastPosition, string> = {
@@ -158,7 +158,7 @@ function ToastList({
             />
           }
         >
-          <X className="text-muted-foreground size-4" />
+          <X className="text-muted-fg size-4" />
         </BaseUIToast.Close>
       </BaseUIToast.Root>
     );
