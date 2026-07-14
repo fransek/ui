@@ -9,7 +9,7 @@ export function Colors() {
           These colors come in sets of three, one for the background (
           <code>bg-*</code>), one for the foreground (<code>text-on-*</code>),
           and one with higher contrast for stand-alone text (
-          <code>text-*-foreground</code>).
+          <code>text-*-fg</code>).
         </p>
       </div>
       <div className="text-foreground grid grid-cols-2 gap-4 font-semibold lg:grid-cols-4">
