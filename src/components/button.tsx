@@ -42,20 +42,17 @@ const baseButtonStyles =
   "transition-colors font-inherit m-0 flex items-center justify-center gap-2 rounded-lg select-none outline-highlight focus-visible:focus-outline data-disabled:cursor-not-allowed data-disabled:opacity-60";
 
 const variantStyles = {
-  primary:
-    "bg-primary text-on-primary hover:bg-primary/90 active:bg-primary/80",
-  secondary:
-    "bg-secondary text-on-secondary hover:bg-secondary/80 active:bg-secondary/60",
-  muted: "bg-muted text-on-muted hover:bg-muted/90 active:bg-muted/80",
-  danger:
-    "bg-danger text-on-danger hover:bg-danger/90 active:bg-danger/80 outline-foreground",
+  primary: "bg-primary text-on-primary hover:bg-primary-hover",
+  secondary: "bg-secondary text-on-secondary hover:bg-secondary-hover",
+  muted: "bg-muted text-on-muted hover:bg-muted-hover",
+  danger: "bg-danger text-on-danger hover:bg-danger-hover outline-foreground",
   warning:
-    "bg-warning text-on-warning hover:bg-warning/90 active:bg-warning/80 outline-foreground",
+    "bg-warning text-on-warning hover:bg-warning-hover outline-foreground",
   success:
-    "bg-success text-on-success hover:bg-success/90 active:bg-success/80 outline-foreground",
+    "bg-success text-on-success hover:bg-success-hover outline-foreground",
   outline:
-    "bg-transparent border text-foreground hover:bg-muted/10 active:bg-muted/20",
-  ghost: "bg-transparent text-foreground hover:bg-muted/10 active:bg-muted/20",
+    "bg-transparent border hover:border-muted-fg text-foreground hover:bg-muted/10",
+  ghost: "bg-transparent text-foreground hover:bg-muted/10",
   link: "bg-transparent text-link not-hover:underline underline-offset-4",
 };
 

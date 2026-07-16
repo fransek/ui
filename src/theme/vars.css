@@ -11,30 +11,37 @@
   --field: oklch(100% 0 0);
 
   --primary: oklch(50% 0.15 280);
+  --primary-hover: oklch(55% 0.15 280);
   --on-primary: oklch(100% 0 0);
   --primary-fg: oklch(41% 0.15 280);
 
-  --secondary: oklch(92% 0 0);
+  --secondary: oklch(90% 0 0);
+  --secondary-hover: oklch(95% 0 0);
   --on-secondary: oklch(41% 0.15 280);
   --secondary-fg: oklch(56% 0.15 280);
 
   --muted: oklch(45% 0 0);
+  --muted-hover: oklch(50% 0 0);
   --on-muted: oklch(87% 0 0);
   --muted-fg: oklch(50% 0 0);
 
   --danger: oklch(53% 0.15 25);
+  --danger-hover: oklch(58% 0.15 25);
   --on-danger: oklch(100% 0 0);
   --danger-fg: oklch(50% 0.15 25);
 
   --warning: oklch(82% 0.15 88);
+  --warning-hover: oklch(87% 0.15 88);
   --on-warning: oklch(19% 0 0);
   --warning-fg: oklch(58% 0.15 50);
 
   --success: oklch(52% 0.15 150);
+  --success-hover: oklch(57% 0.15 150);
   --on-success: oklch(100% 0 0);
   --success-fg: oklch(47% 0.15 150);
 
   --code: oklch(46% 0.07 280);
+  --code-hover: oklch(51% 0.07 280);
   --on-code: oklch(100% 0 0);
   --code-fg: oklch(41% 0.15 280);
 }
@@ -52,30 +59,37 @@
   --field: oklch(25% 0 0 / 0.4);
 
   --primary: oklch(41% 0.15 280);
+  --primary-hover: oklch(46% 0.17 280);
   --on-primary: oklch(100% 0 0);
   --primary-fg: oklch(62% 0.15 280);
 
   --secondary: oklch(23% 0 0);
+  --secondary-hover: oklch(28% 0 0);
   --on-secondary: oklch(72% 0.15 280);
   --secondary-fg: oklch(82% 0.15 280);
 
   --muted: oklch(39% 0 0);
+  --muted-hover: oklch(44% 0 0);
   --on-muted: oklch(87% 0 0);
   --muted-fg: oklch(62% 0 0);
 
   --danger: oklch(45% 0.15 25);
+  --danger-hover: oklch(50% 0.17 25);
   --on-danger: oklch(100% 0 0);
   --danger-fg: oklch(61% 0.15 25);
 
   --warning: oklch(80% 0.15 87);
+  --warning-hover: oklch(85% 0.15 87);
   --on-warning: oklch(0% 0 0);
   --warning-fg: oklch(80% 0.15 87);
 
   --success: oklch(53% 0.15 150);
+  --success-hover: oklch(58% 0.17 150);
   --on-success: oklch(100% 0 0);
   --success-fg: oklch(72% 0.15 150);
 
   --code: oklch(25% 0.05 280);
+  --code-hover: oklch(30% 0.05 280);
   --on-code: oklch(100% 0 0);
   --code-fg: oklch(70% 0.15 280);
 }
@@ -95,30 +109,37 @@
   --color-field: var(--field);
 
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-on-primary: var(--on-primary);
   --color-primary-fg: var(--primary-fg);
 
   --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
   --color-on-secondary: var(--on-secondary);
   --color-secondary-fg: var(--secondary-fg);
 
   --color-muted: var(--muted);
+  --color-muted-hover: var(--muted-hover);
   --color-on-muted: var(--on-muted);
   --color-muted-fg: var(--muted-fg);
 
   --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
   --color-on-danger: var(--on-danger);
   --color-danger-fg: var(--danger-fg);
 
   --color-warning: var(--warning);
+  --color-warning-hover: var(--warning-hover);
   --color-on-warning: var(--on-warning);
   --color-warning-fg: var(--warning-fg);
 
   --color-success: var(--success);
+  --color-success-hover: var(--success-hover);
   --color-on-success: var(--on-success);
   --color-success-fg: var(--success-fg);
 
   --color-code: var(--code);
+  --color-code-hover: var(--code-hover);
   --color-on-code: var(--on-code);
   --color-code-fg: var(--code-fg);
 
