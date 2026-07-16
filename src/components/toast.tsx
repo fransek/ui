@@ -66,7 +66,7 @@ const baseViewportStyles =
 
 // Shared stacking/animation variables and layout for every toast.
 const baseToastStyles =
-  "[--gap:0.75rem] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))] [--height:var(--toast-frontmost-height,var(--toast-height))] absolute left-0 right-0 z-[calc(1000-var(--toast-index))] mx-auto w-full origin-center rounded-lg border bg-card bg-clip-padding p-4 pr-10 text-foreground shadow-lg select-none data-expanded:h-(--toast-height) h-(--height) data-limited:opacity-0 data-ending-style:opacity-0 [transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]";
+  "[--gap:0.75rem] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))] [--height:var(--toast-frontmost-height,var(--toast-height))] absolute left-0 right-0 z-[calc(1000-var(--toast-index))] mx-auto w-full origin-center rounded-lg border bg-card bg-clip-padding p-4 pr-10 text-foreground shadow-lg select-none data-expanded:h-(--toast-height) h-(--height) data-limited:opacity-0 data-ending-style:opacity-0 [transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s] focus-visible:focus-outline outline-highlight";
 
 // Bottom-anchored stacking maths (toasts grow upward from the bottom edge).
 const bottomToastStyles =
