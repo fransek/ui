@@ -48,3 +48,6 @@
   outline-style: solid;
   outline-width: 2px;
 }
+@utility card {
+  @apply bg-card rounded-lg border p-2 shadow;
+}
