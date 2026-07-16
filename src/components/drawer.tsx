@@ -112,7 +112,7 @@ export function Drawer(props: DrawerProps) {
             >
               <BaseUIDrawer.Popup
                 className={cnBaseUI(
-                  "bg-card h-full w-(--drawer-width) max-w-[calc(100vw-3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] touch-auto overflow-y-auto overscroll-contain border-l px-6 py-8 shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--drawer-width:30rem] data-ending-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))] data-swiping:select-none",
+                  "bg-background h-full w-(--drawer-width) max-w-[calc(100vw-3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] touch-auto overflow-y-auto overscroll-contain border-l px-6 py-8 shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--drawer-width:30rem] data-ending-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))] data-swiping:select-none",
                   popupClassName,
                 )}
                 {...popupProps}
