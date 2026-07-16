@@ -16,6 +16,7 @@ export * from "./components/popover";
 export * from "./components/radio";
 export * from "./components/radio-group";
 export * from "./components/select";
+export * from "./components/slider";
 export * from "./components/spinner";
 export * from "./components/switch";
 export * from "./components/tabs";
