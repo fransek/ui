@@ -146,8 +146,4 @@
       @apply text-body not-last:mb-6;
     }
   }
-
-  .card {
-    @apply bg-card rounded-lg border p-2 shadow;
-  }
 }
