@@ -3,6 +3,7 @@ import React from "react";
 import { cn, cnBaseUI } from "../lib/utils";
 import { Button, ButtonProps } from "./button";
 import { Popover, PopoverProps } from "./popover";
+import { tooltipArrowStyles } from "./tooltip";
 
 export interface InfoPopoverProps extends PopoverProps {
   children: React.ReactNode;
@@ -17,9 +18,9 @@ export function InfoPopover(props: InfoPopoverProps) {
     fieldLabel,
     popupProps: { className: popupClassName, ...popupProps } = {},
     positionerProps,
-    arrowSvgProps: { className: arrowSvgClassName, ...arrowSvgProps } = {},
     buttonProps: { className: buttonClassName, ...buttonProps } = {},
     infoIconProps: { className: infoIconClassName, ...infoIconProps } = {},
+    arrowProps: { className: arrowClassName, ...arrowProps } = {},
     ...restProps
   } = props;
 
@@ -51,7 +52,7 @@ export function InfoPopover(props: InfoPopoverProps) {
             ? `Information about ${fieldLabel}`
             : "Information",
         className: cnBaseUI(
-          "body-sm bg-foreground text-background px-3 py-2 text-center max-w-[min(300px,calc(100vw-3rem))]",
+          "body-sm outline-0 rounded bg-foreground text-background px-3 py-2 text-center max-w-[min(300px,calc(100vw-3rem))]",
           popupClassName,
         ),
         ...popupProps,
@@ -60,11 +61,10 @@ export function InfoPopover(props: InfoPopoverProps) {
         side: "top",
         ...positionerProps,
       }}
-      arrowSvgProps={{
-        backgroundPathProps: {
-          className: cn("fill-foreground", arrowSvgClassName),
-        },
-        ...arrowSvgProps,
+      arrowElement={<></>}
+      arrowProps={{
+        className: cn(tooltipArrowStyles, arrowClassName),
+        ...arrowProps,
       }}
       {...restProps}
     >
