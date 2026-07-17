@@ -1,4 +1,4 @@
-import { Eye, EyeOff } from "lucide-react";
+import { Apple, Banana, Citrus, Eye, EyeOff } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 import { Checkbox } from "../components/checkbox";
@@ -6,7 +6,7 @@ import { CheckboxGroup } from "../components/checkbox-group";
 import { Fieldset } from "../components/fieldset";
 import { Input } from "../components/input";
 import { NumberField } from "../components/number-field";
-import { Radio } from "../components/radio";
+import { IconRadio, Radio } from "../components/radio";
 import { RadioGroup } from "../components/radio-group";
 import { Select } from "../components/select";
 import { Switch } from "../components/switch";
@@ -82,6 +82,20 @@ export function Form() {
         onChange={(event) => update("email", event.target.value)}
         errorMessage={errors.email}
       />
+
+      <RadioGroup label="Fruit">
+        <div className="grid w-full grid-cols-3 gap-2">
+          <IconRadio value="apple" label="Apple">
+            <Apple />
+          </IconRadio>
+          <IconRadio value="banana" label="Banana">
+            <Banana />
+          </IconRadio>
+          <IconRadio value="orange" label="Orange">
+            <Citrus />
+          </IconRadio>
+        </div>
+      </RadioGroup>
 
       <Input
         label="Password"

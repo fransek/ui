@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { ChevronRight } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 import {
@@ -109,6 +110,29 @@ export const InfoCard: Story = {
       <CardClose />
       <CardContent className="pr-10">
         <CardDescription>{description}</CardDescription>
+      </CardContent>
+    </Card>
+  ),
+};
+
+export const ClickableCard: Story = {
+  render: () => (
+    <Card
+      className="group max-w-100 transition-transform hover:-translate-y-1"
+      render={<a href="/" />}
+    >
+      <CardContent className="flex-row items-center gap-4">
+        <div className="flex flex-col gap-2">
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+          </CardHeader>
+          <CardBody>
+            <CardDescription>{description}</CardDescription>
+          </CardBody>
+        </div>
+        <div>
+          <ChevronRight className="text-muted-fg transition-transform group-active:translate-x-1" />
+        </div>
       </CardContent>
     </Card>
   ),

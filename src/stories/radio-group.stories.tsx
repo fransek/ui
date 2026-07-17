@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Apple, Banana, Citrus } from "lucide-react";
 import React from "react";
-import { Radio } from "../components/radio";
+import { IconRadio, Radio } from "../components/radio";
 import { RadioGroup } from "../components/radio-group";
 
 const meta = {
@@ -52,4 +53,22 @@ export const Validating: Story = {
   args: {
     isValidating: true,
   },
+};
+
+export const Icons: Story = {
+  render: (args) => (
+    <RadioGroup {...args}>
+      <div className="grid w-full max-w-100 grid-cols-3 gap-2">
+        <IconRadio value="apple" label="Apple">
+          <Apple />
+        </IconRadio>
+        <IconRadio value="banana" label="Banana">
+          <Banana />
+        </IconRadio>
+        <IconRadio value="orange" label="Orange">
+          <Citrus />
+        </IconRadio>
+      </div>
+    </RadioGroup>
+  ),
 };

@@ -44,3 +44,29 @@ export function Radio(props: RadioProps) {
     </label>
   );
 }
+
+export function IconRadio(props: RadioProps) {
+  const { label, children, ...restProps } = props;
+
+  const id = React.useId();
+  const { isValidating } = useFieldContext();
+
+  return (
+    <label
+      className="text-foreground flex flex-col items-center gap-1 text-sm"
+      id={id}
+    >
+      <BaseUIRadio.Root
+        className={cnBaseUI(
+          "hover:border-muted-fg bg-field hover:text-foreground data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline text-muted-fg data-checked:text-on-primary data-checked:border-primary data-checked:bg-primary data-invalid:border-danger-fg flex w-full flex-col items-center justify-center gap-2 rounded-lg border p-2 shadow transition-colors",
+        )}
+        aria-labelledby={id}
+        data-validating={isValidating ? "" : undefined}
+        {...restProps}
+      >
+        {children}
+      </BaseUIRadio.Root>
+      {label}
+    </label>
+  );
+}
