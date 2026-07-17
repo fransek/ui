@@ -44,6 +44,12 @@
   --code-hover: oklch(51% 0.07 280);
   --on-code: oklch(100% 0 0);
   --code-fg: oklch(41% 0.15 280);
+
+  --chart-1: oklch(57.5% 0.163 255.5);
+  --chart-2: oklch(52.9% 0.18 142.5);
+  --chart-3: oklch(71.6% 0.141 357.4);
+  --chart-4: oklch(76.4% 0.161 75.1);
+  --chart-5: oklch(66.9% 0.141 162.1);
 }
 
 .dark {
@@ -92,6 +98,12 @@
   --code-hover: oklch(30% 0.05 280);
   --on-code: oklch(100% 0 0);
   --code-fg: oklch(70% 0.15 280);
+
+  --chart-1: oklch(62.2% 0.161 255.1);
+  --chart-2: oklch(52.9% 0.18 142.5);
+  --chart-3: oklch(62.2% 0.171 0.8);
+  --chart-4: oklch(67% 0.143 73.2);
+  --chart-5: oklch(62.1% 0.128 163.1);
 }
 
 @theme inline {
@@ -142,6 +154,12 @@
   --color-code-hover: var(--code-hover);
   --color-on-code: var(--on-code);
   --color-code-fg: var(--code-fg);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
 
   --animate-validating: validating 1.5s ease-in-out infinite;
   --animate-validating-message: validating-message 1.5s linear infinite;
