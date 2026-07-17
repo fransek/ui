@@ -64,6 +64,7 @@ export const IconButton: Story = {
   args: {
     variant: "outline",
     size: "icon",
+    tooltip: "Delete",
   },
   render: (args) => (
     <Button {...args}>
