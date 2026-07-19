@@ -44,6 +44,7 @@ export function Dialog(props: DialogProps) {
     popupProps: { className: popupClassName, ...popupProps } = {},
     closeProps,
     closeButtonProps,
+    closeButtonIconProps,
     ...restProps
   } = props;
 
@@ -80,7 +81,11 @@ export function Dialog(props: DialogProps) {
             >
               <DialogClose
                 render={
-                  <CloseButton position="top-right" {...closeButtonProps} />
+                  <CloseButton
+                    position="top-right"
+                    iconProps={closeButtonIconProps}
+                    {...closeButtonProps}
+                  />
                 }
                 {...closeProps}
               />

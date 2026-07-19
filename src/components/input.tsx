@@ -5,7 +5,7 @@ import {
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cnBaseUI } from "../lib/utils";
-import { Field, FieldProps } from "./field";
+import { Field, fieldControlStyles, FieldProps } from "./field";
 
 export interface InputProps extends BaseUIInputProps, FieldAttributes {
   fieldProps?: FieldProps;
@@ -57,7 +57,7 @@ export function Input(props: InputProps) {
           )}
           <BaseUIInput
             className={cnBaseUI(
-              "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-fg w-full min-w-40 rounded-lg border p-2 shadow transition-colors",
+              fieldControlStyles,
               hasLeftAdornment && "pl-10",
               hasRightAdornment && "pr-10",
               className,

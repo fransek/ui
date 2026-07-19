@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `@fransek/ui` is a published React component library and design system built on top of [Base UI](https://base-ui.com) (`@base-ui/react`) unstyled primitives. Components are styled with Tailwind CSS v4 using a CSS-variable–based theme, composed via the `cn` utility (clsx + tailwind-merge). It ships as a dual ESM/CJS package with per-component entry points.
 
-This is a pnpm workspace (`pnpm-workspace.yaml`); use `pnpm`, not `npm`, despite the stale `package-lock.json` in the tree. The library package lives at the repo root; `apps/*` holds workspace consumers.
+This is a pnpm workspace (`pnpm-workspace.yaml`); use `pnpm`, not `npm`. The library package lives at the repo root; `apps/*` holds workspace consumers.
 
 ## Commands
 
@@ -23,7 +23,7 @@ pnpm storybook        # Storybook dev server on :6006
 pnpm build-storybook  # Static Storybook build
 ```
 
-Run a single test file: `pnpm vitest --run src/components/date-picker.test.tsx` (or `-t "<name>"` to filter by test title).
+Run the tests for a single component's stories: `pnpm vitest --run src/stories/date-picker.stories.tsx` (or `-t "<name>"` to filter by test title). There are no standalone `*.test.*` files — stories are the test suite.
 
 Tests use the Storybook Vitest addon and run in a real Chromium browser via Playwright — the `storybook` Vitest project turns each story into a test, so Playwright browsers must be installed (`pnpm exec playwright install chromium`).
 
@@ -57,7 +57,7 @@ src/
 
 1. Create `src/components/<name>.tsx` following the pattern above.
 2. Re-export it (and its `Props` type) from `src/index.ts`.
-3. Add a story in `src/stories/<Name>.stories.tsx` (PascalCase) — stories double as the test suite.
+3. Add a story in `src/stories/<name>.stories.tsx` (kebab-case, matching the component filename) — stories double as the test suite.
 
 ## Conventions
 

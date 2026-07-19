@@ -33,7 +33,7 @@ function Calendar(props: CalendarProps) {
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn(
-        "bg-background group/calendar p-2 [--cell-radius:var(--radius-lg)] [--cell-size:--spacing(7)] in-data-[slot=card-content]:bg-transparent in-data-[slot=popover-content]:bg-transparent",
+        "bg-background group/calendar p-2 [--cell-radius:var(--radius-lg)] [--cell-size:--spacing(7)]",
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
         String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
         className,
@@ -75,7 +75,7 @@ function Calendar(props: CalendarProps) {
           defaultClassNames.dropdowns,
         ),
         dropdown_root: cn(
-          "relative cn-calendar-dropdown-root rounded outline-highlight focus-within:focus-outline",
+          "outline-highlight focus-within:focus-outline relative rounded",
           defaultClassNames.dropdown_root,
         ),
         dropdown: cn(
@@ -86,7 +86,7 @@ function Calendar(props: CalendarProps) {
           "select-none font-medium",
           captionLayout === "label"
             ? "text-sm"
-            : "cn-calendar-caption-label rounded-(--cell-radius) flex items-center gap-1 text-sm  [&>svg]:text-foreground [&>svg]:size-3.5",
+            : "rounded-(--cell-radius) flex items-center gap-1 text-sm [&>svg]:text-foreground [&>svg]:size-3.5",
           defaultClassNames.caption_label,
         ),
         table: "w-full border-collapse",
@@ -147,7 +147,7 @@ function Calendar(props: CalendarProps) {
           if (orientation === "left") {
             return (
               <ChevronLeftIcon
-                className={cn("cn-rtl-flip size-4", className)}
+                className={cn("size-4 rtl:rotate-180", className)}
                 {...props}
               />
             );
@@ -156,7 +156,7 @@ function Calendar(props: CalendarProps) {
           if (orientation === "right") {
             return (
               <ChevronRightIcon
-                className={cn("cn-rtl-flip size-4", className)}
+                className={cn("size-4 rtl:rotate-180", className)}
                 {...props}
               />
             );

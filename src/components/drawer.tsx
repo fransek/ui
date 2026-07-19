@@ -63,6 +63,7 @@ export function Drawer(props: DrawerProps) {
     contentProps: { className: contentClassName, ...contentProps } = {},
     closeProps,
     closeButtonProps,
+    closeButtonIconProps,
     ...restProps
   } = props;
 
@@ -118,7 +119,11 @@ export function Drawer(props: DrawerProps) {
               >
                 <DrawerClose
                   render={
-                    <CloseButton position="top-right" {...closeButtonProps} />
+                    <CloseButton
+                      position="top-right"
+                      iconProps={closeButtonIconProps}
+                      {...closeButtonProps}
+                    />
                   }
                   {...closeProps}
                 />
