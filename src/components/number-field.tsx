@@ -26,9 +26,9 @@ export function NumberField(props: NumberFieldProps) {
     description,
     infoPopover,
     fieldProps,
-    inputProps,
-    decrementProps,
-    incrementProps,
+    inputProps: { className: inputClassName, ...inputProps } = {},
+    decrementProps: { className: decrementClassName, ...decrementProps } = {},
+    incrementProps: { className: incrementClassName, ...incrementProps } = {},
     invalid,
     disabled,
     ...restProps
@@ -59,7 +59,7 @@ export function NumberField(props: NumberFieldProps) {
           <BaseUINumberField.Decrement
             className={cnBaseUI(
               "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-r px-2.5 transition-colors select-none data-disabled:pointer-events-none",
-              decrementProps?.className,
+              decrementClassName,
             )}
             {...decrementProps}
           >
@@ -68,14 +68,14 @@ export function NumberField(props: NumberFieldProps) {
           <BaseUINumberField.Input
             className={cnBaseUI(
               "bg-field placeholder:text-muted-fg w-full min-w-0 p-2 text-center tabular-nums outline-none",
-              inputProps?.className,
+              inputClassName,
             )}
             {...inputProps}
           />
           <BaseUINumberField.Increment
             className={cnBaseUI(
               "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-l px-2.5 transition-colors select-none data-disabled:pointer-events-none",
-              incrementProps?.className,
+              incrementClassName,
             )}
             {...incrementProps}
           >
