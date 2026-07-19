@@ -13,8 +13,8 @@ import {
 } from "@base-ui/react/drawer";
 import { X } from "lucide-react";
 import React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
-import { Button } from "./button";
+import { cnBaseUI } from "../lib/utils";
+import { CloseButton, CloseButtonProps } from "./close-button";
 
 export interface DrawerProps
   extends DrawerRootProps, Omit<DrawerTriggerProps, "children" | "render"> {
@@ -31,7 +31,7 @@ export interface DrawerProps
   popupProps?: DrawerPopupProps;
   contentProps?: DrawerContentProps;
   closeProps?: DrawerCloseProps;
-  closeButtonProps?: DrawerCloseProps;
+  closeButtonProps?: CloseButtonProps;
   closeButtonIconProps?: React.ComponentProps<typeof X>;
 }
 
@@ -62,14 +62,7 @@ export function Drawer(props: DrawerProps) {
     popupProps: { className: popupClassName, ...popupProps } = {},
     contentProps: { className: contentClassName, ...contentProps } = {},
     closeProps,
-    closeButtonProps: {
-      className: closeButtonClassName,
-      ...closeButtonProps
-    } = {},
-    closeButtonIconProps: {
-      className: closeButtonIconClassName,
-      ...closeButtonIconProps
-    } = {},
+    closeButtonProps,
     ...restProps
   } = props;
 
@@ -125,24 +118,7 @@ export function Drawer(props: DrawerProps) {
               >
                 <DrawerClose
                   render={
-                    <Button
-                      className={cnBaseUI(
-                        "fixed top-2 right-2",
-                        closeButtonClassName,
-                      )}
-                      variant="ghost"
-                      size="icon"
-                      aria-label="Close"
-                      {...closeButtonProps}
-                    >
-                      <X
-                        className={cn(
-                          "text-muted-fg size-4",
-                          closeButtonIconClassName,
-                        )}
-                        {...closeButtonIconProps}
-                      />
-                    </Button>
+                    <CloseButton position="top-right" {...closeButtonProps} />
                   }
                   {...closeProps}
                 />

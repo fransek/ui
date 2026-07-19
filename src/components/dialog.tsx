@@ -11,8 +11,8 @@ import {
 } from "@base-ui/react/dialog";
 import { X } from "lucide-react";
 import React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
-import { Button } from "./button";
+import { cnBaseUI } from "../lib/utils";
+import { CloseButton, CloseButtonProps } from "./close-button";
 
 export interface DialogProps
   extends DialogRootProps, Omit<DialogTriggerProps, "children" | "render"> {
@@ -21,7 +21,7 @@ export interface DialogProps
   backdropProps?: DialogBackdropProps;
   popupProps?: DialogPopupProps;
   closeProps?: DialogCloseProps;
-  closeButtonProps?: DialogCloseProps;
+  closeButtonProps?: CloseButtonProps;
   closeButtonIconProps?: React.ComponentProps<typeof X>;
 }
 
@@ -43,14 +43,7 @@ export function Dialog(props: DialogProps) {
     backdropProps: { className: backdropClassName, ...backdropProps } = {},
     popupProps: { className: popupClassName, ...popupProps } = {},
     closeProps,
-    closeButtonProps: {
-      className: closeButtonClassName,
-      ...closeButtonProps
-    } = {},
-    closeButtonIconProps: {
-      className: closeButtonIconClassName,
-      ...closeButtonIconProps
-    } = {},
+    closeButtonProps,
     ...restProps
   } = props;
 
@@ -87,24 +80,7 @@ export function Dialog(props: DialogProps) {
             >
               <DialogClose
                 render={
-                  <Button
-                    className={cnBaseUI(
-                      "fixed top-2 right-2",
-                      closeButtonClassName,
-                    )}
-                    variant="ghost"
-                    size="icon"
-                    aria-label="Close"
-                    {...closeButtonProps}
-                  >
-                    <X
-                      className={cn(
-                        "text-muted-fg size-4",
-                        closeButtonIconClassName,
-                      )}
-                      {...closeButtonIconProps}
-                    />
-                  </Button>
+                  <CloseButton position="top-right" {...closeButtonProps} />
                 }
                 {...closeProps}
               />

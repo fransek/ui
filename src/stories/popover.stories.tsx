@@ -15,6 +15,7 @@ const meta = {
       {...args}
       trigger={<Button variant="outline">Open Popover</Button>}
     >
+      <PopoverClose />
       <PopoverTitle className="mb-2">Popover content</PopoverTitle>
       <PopoverDescription className="mb-4">
         This popover can contain contextual information or actions.

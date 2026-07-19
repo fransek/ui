@@ -12,6 +12,7 @@ import {
 } from "@base-ui/react/popover";
 import React from "react";
 import { cn, cnBaseUI } from "../lib/utils";
+import { CloseButton } from "./close-button";
 
 export interface PopoverProps
   extends PopoverRootProps, Omit<PopoverTriggerProps, "children" | "render"> {
@@ -128,7 +129,12 @@ export function PopoverDescription(props: PopoverDescriptionProps) {
 }
 
 export function PopoverClose(props: PopoverCloseProps) {
-  return <BaseUIPopover.Close {...props} />;
+  return (
+    <BaseUIPopover.Close
+      render={<CloseButton position="top-right" />}
+      {...props}
+    />
+  );
 }
 
 interface ArrowSvgProps extends React.ComponentProps<"svg"> {
