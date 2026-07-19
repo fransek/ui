@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.15.0](https://github.com/fransek/ui/compare/v0.14.0...v0.15.0) (2026-07-19)
+
+
+### Features
+
+* add Card component ([#102](https://github.com/fransek/ui/issues/102)) ([325544f](https://github.com/fransek/ui/commit/325544f176953993348cf2b8eb1681b8616c95fd))
+* add Chart component with Recharts integration ([#110](https://github.com/fransek/ui/issues/110)) ([c7108c3](https://github.com/fransek/ui/commit/c7108c3601ebd26e403824acb473ab9e99bfd682))
+* add CloseButton component ([#111](https://github.com/fransek/ui/issues/111)) ([9fdc29b](https://github.com/fransek/ui/commit/9fdc29b4a9cdd71cff70eb0aff9a40f64afb525a))
+* **button:** add tooltip prop ([#108](https://github.com/fransek/ui/issues/108)) ([60e7d12](https://github.com/fransek/ui/commit/60e7d12a7cdd6c110d0fdbcbc893ccb731c7fc26))
+* **card:** use div tags for header/footer and add example stories ([#112](https://github.com/fransek/ui/issues/112)) ([bb33635](https://github.com/fransek/ui/commit/bb336354432bc7299a85395113a69a47300af8e4))
+* enhance component prop forwarding and styling consistency ([#114](https://github.com/fransek/ui/issues/114)) ([828a870](https://github.com/fransek/ui/commit/828a87052a47c77fe894b2e5fa986cc2dd7957d3))
+* **popover:** allow replacing the arrow element ([#109](https://github.com/fransek/ui/issues/109)) ([041dd6f](https://github.com/fransek/ui/commit/041dd6f818cd3e0ef6e5ef7efb8ebd5c5992577d))
+* **theme:** add hover color tokens ([#103](https://github.com/fransek/ui/issues/103)) ([e175be3](https://github.com/fransek/ui/commit/e175be337be38caa12ab6ce2147df2609667805c))
+* **tooltip:** add Tooltip component ([#107](https://github.com/fransek/ui/issues/107)) ([68e1760](https://github.com/fransek/ui/commit/68e176002291c104263da8346cd9ceffa36db505))
+
+
+### Bug Fixes
+
+* **button:** adjust ghost variant and close button hover styles ([#113](https://github.com/fransek/ui/issues/113)) ([198ffb7](https://github.com/fransek/ui/commit/198ffb715a325f9c5ddc1ea7ae7bc0b753a9e21d))
+* **drawer:** use background token for the popup surface ([#104](https://github.com/fransek/ui/issues/104)) ([acb733f](https://github.com/fransek/ui/commit/acb733f8f2527e0454f2ced07a4b7edc1cbe2633))
+* **toast:** show a focus ring when a toast is focused ([#105](https://github.com/fransek/ui/issues/105)) ([0aa9c82](https://github.com/fransek/ui/commit/0aa9c82c1b72d3ee0b1aec9ae4935859ee414452))
+
 ## [0.14.0](https://github.com/fransek/ui/compare/v0.13.0...v0.14.0) (2026-07-14)
 
 
