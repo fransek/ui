@@ -56,12 +56,12 @@ export function CardContent(props: CardContentProps) {
   });
 }
 
-export type CardHeaderProps = useRender.ComponentProps<"header">;
+export type CardHeaderProps = useRender.ComponentProps<"div">;
 
 export function CardHeader(props: CardHeaderProps) {
   const { render, ...restProps } = props;
 
-  return useRender({ defaultTagName: "header", render, props: restProps });
+  return useRender({ defaultTagName: "div", render, props: restProps });
 }
 
 export type CardTitleProps = useRender.ComponentProps<"h2">;
@@ -106,15 +106,15 @@ export function CardDescription(props: CardDescriptionProps) {
   });
 }
 
-export type CardFooterProps = useRender.ComponentProps<"footer">;
+export type CardFooterProps = useRender.ComponentProps<"div">;
 
 export function CardFooter(props: CardFooterProps) {
   const { render, className, ...restProps } = props;
 
   return useRender({
-    defaultTagName: "footer",
+    defaultTagName: "div",
     render,
-    props: mergeProps<"footer">(
+    props: mergeProps<"div">(
       { className: cn("flex justify-end gap-2", className) },
       restProps,
     ),
