@@ -75,6 +75,26 @@ export function Colors() {
           <div className="bg-link h-8 w-8 rounded-lg p-2" />
           <div>link</div>
         </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-chart-1 h-8 w-8 rounded-lg p-2" />
+          <div>chart-1</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-chart-2 h-8 w-8 rounded-lg p-2" />
+          <div>chart-2</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-chart-3 h-8 w-8 rounded-lg p-2" />
+          <div>chart-3</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-chart-4 h-8 w-8 rounded-lg p-2" />
+          <div>chart-4</div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-chart-5 h-8 w-8 rounded-lg p-2" />
+          <div>chart-5</div>
+        </div>
       </div>
     </div>
   );
