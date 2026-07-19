@@ -68,7 +68,7 @@ const variantStyles = {
     "bg-success text-on-success hover:bg-success-hover outline-foreground",
   outline:
     "bg-transparent border hover:border-muted-fg text-foreground hover:bg-muted/10",
-  ghost: "bg-transparent text-foreground hover:bg-muted/10",
+  ghost: "bg-transparent text-foreground hover:text-primary-fg",
   link: "bg-transparent text-link not-hover:underline underline-offset-4",
 };
 
