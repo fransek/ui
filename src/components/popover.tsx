@@ -21,6 +21,7 @@ export interface PopoverProps
   positionerProps?: PopoverPositionerProps;
   popupProps?: PopoverPopupProps;
   arrowProps?: PopoverArrowProps;
+  arrowElement?: React.ReactNode;
   arrowSvgProps?: ArrowSvgProps;
 }
 
@@ -45,6 +46,7 @@ export function Popover(props: PopoverProps) {
     } = {},
     popupProps: { className: popupClassName, ...popupProps } = {},
     arrowProps: { className: arrowClassName, ...arrowProps } = {},
+    arrowElement,
     arrowSvgProps,
     className,
     ...restProps
@@ -90,7 +92,7 @@ export function Popover(props: PopoverProps) {
                     )}
                     {...arrowProps}
                   >
-                    <ArrowSvg {...arrowSvgProps} />
+                    {arrowElement ?? <ArrowSvg {...arrowSvgProps} />}
                   </BaseUIPopover.Arrow>
                 )}
                 {typeof children === "function"
