@@ -1,4 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import {
+  CheckCircle,
+  ChevronRight,
+  Info,
+  ShieldAlert,
+  TriangleAlert,
+} from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 import {
@@ -111,5 +118,95 @@ export const InfoCard: Story = {
         <CardDescription>{description}</CardDescription>
       </CardContent>
     </Card>
+  ),
+};
+
+export const LinkCard: Story = {
+  render: () => (
+    <Card
+      className="group max-w-100 transition-transform hover:-translate-y-1"
+      render={<a href="/" />}
+    >
+      <CardContent className="flex-row items-center gap-4">
+        <div className="flex flex-col gap-2">
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+          </CardHeader>
+          <CardBody>
+            <CardDescription>{description}</CardDescription>
+          </CardBody>
+        </div>
+        <div>
+          <ChevronRight className="text-muted-fg transition-transform group-active:translate-x-1" />
+        </div>
+      </CardContent>
+    </Card>
+  ),
+};
+
+export const ColoredCards: Story = {
+  render: () => (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <Card className="bg-primary/5 border-primary-fg max-w-100">
+        <CardContent>
+          <CardHeader>
+            <CardTitle className="text-primary-fg flex items-center gap-2">
+              <Info className="size-5" />
+              Primary
+            </CardTitle>
+          </CardHeader>
+          <CardBody>
+            <CardDescription className="text-primary-fg">
+              {description}
+            </CardDescription>
+          </CardBody>
+        </CardContent>
+      </Card>
+      <Card className="bg-success/5 border-success-fg max-w-100">
+        <CardContent>
+          <CardHeader>
+            <CardTitle className="text-success-fg flex items-center gap-2">
+              <CheckCircle className="size-5" />
+              Success
+            </CardTitle>
+          </CardHeader>
+          <CardBody>
+            <CardDescription className="text-success-fg">
+              {description}
+            </CardDescription>
+          </CardBody>
+        </CardContent>
+      </Card>
+      <Card className="bg-warning/5 border-warning-fg max-w-100">
+        <CardContent>
+          <CardHeader>
+            <CardTitle className="text-warning-fg flex items-center gap-2">
+              <TriangleAlert className="size-5" />
+              Warning
+            </CardTitle>
+          </CardHeader>
+          <CardBody>
+            <CardDescription className="text-warning-fg">
+              {description}
+            </CardDescription>
+          </CardBody>
+        </CardContent>
+      </Card>
+      <Card className="bg-danger/5 border-danger-fg max-w-100">
+        <CardContent>
+          <CardHeader>
+            <CardTitle className="text-danger-fg flex items-center gap-2">
+              <ShieldAlert className="size-5" />
+              Danger
+            </CardTitle>
+          </CardHeader>
+          <CardBody>
+            <CardDescription className="text-danger-fg">
+              {description}
+            </CardDescription>
+          </CardBody>
+        </CardContent>
+      </Card>
+    </div>
   ),
 };
