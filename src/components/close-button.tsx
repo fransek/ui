@@ -15,7 +15,9 @@ export function CloseButton(props: CloseButtonProps) {
     variant = "ghost",
     position,
     className,
-    icon = <X className="text-muted-fg size-4" />,
+    icon = (
+      <X className="text-muted-fg group-hover:text-foreground size-4 transition-colors" />
+    ),
     children,
     ...restProps
   } = props;
@@ -26,7 +28,7 @@ export function CloseButton(props: CloseButtonProps) {
       variant={variant}
       aria-label="Close"
       className={cnBaseUI(
-        "rounded-full",
+        "group hover:bg-muted/10 rounded-full",
         position && "absolute",
         position && positionStyles[position],
         className,
