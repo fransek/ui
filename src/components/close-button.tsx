@@ -1,11 +1,13 @@
 import { X } from "lucide-react";
 import React from "react";
-import { cnBaseUI } from "../lib/utils";
+import { cn, cnBaseUI } from "../lib/utils";
 import { Button, ButtonProps } from "./button";
 
 export interface CloseButtonProps extends ButtonProps {
   /** The icon rendered inside the button. Defaults to a lucide `X`. */
   icon?: React.ReactNode;
+  /** Props forwarded to the default `X` icon. Ignored when `icon` is set. */
+  iconProps?: React.ComponentProps<typeof X>;
   position?: CloseButtonPosition;
 }
 
@@ -15,8 +17,15 @@ export function CloseButton(props: CloseButtonProps) {
     variant = "ghost",
     position,
     className,
+    iconProps: { className: iconClassName, ...iconProps } = {},
     icon = (
-      <X className="text-muted-fg group-hover:text-foreground size-4 transition-colors" />
+      <X
+        className={cn(
+          "text-muted-fg group-hover:text-foreground size-4 transition-colors",
+          iconClassName,
+        )}
+        {...iconProps}
+      />
     ),
     children,
     ...restProps
