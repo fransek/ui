@@ -4,10 +4,13 @@ import {
 } from "@base-ui/react/button";
 import React from "react";
 import { cn } from "../lib/utils";
+import { Tooltip, TooltipProps } from "./tooltip";
 
 export interface ButtonProps extends BaseUIButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  tooltip?: React.ReactNode;
+  tooltipProps?: TooltipProps;
 }
 
 export function Button(props: ButtonProps) {
@@ -16,11 +19,12 @@ export function Button(props: ButtonProps) {
     size = "md",
     children,
     className,
-    focusableWhenDisabled = true,
+    tooltip,
+    tooltipProps,
     ...restProps
   } = props;
 
-  return (
+  const button = (
     <BaseUIButton
       className={(state) =>
         buttonStyles({
@@ -30,12 +34,24 @@ export function Button(props: ButtonProps) {
             typeof className === "function" ? className(state) : className,
         })
       }
-      focusableWhenDisabled={focusableWhenDisabled}
+      focusableWhenDisabled
+      aria-label={
+        typeof tooltip === "string" && size === "icon" ? tooltip : undefined
+      }
       {...restProps}
     >
       {children}
     </BaseUIButton>
   );
+
+  if (tooltip)
+    return (
+      <Tooltip trigger={button} {...tooltipProps}>
+        {tooltip}
+      </Tooltip>
+    );
+
+  return button;
 }
 
 const baseButtonStyles =
