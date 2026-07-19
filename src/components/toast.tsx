@@ -11,11 +11,10 @@ import {
   Info,
   LucideIcon,
   TriangleAlert,
-  X,
 } from "lucide-react";
 import React from "react";
 import { cn, cnBaseUI } from "../lib/utils";
-import { Button } from "./button";
+import { CloseButton } from "./close-button";
 
 export type ToastType = "info" | "success" | "warning" | "danger";
 
@@ -148,18 +147,7 @@ function ToastList({
             <BaseUIToast.Description className="text-body body-sm empty:hidden" />
           </div>
         </BaseUIToast.Content>
-        <BaseUIToast.Close
-          render={
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-2 right-2"
-              aria-label="Close"
-            />
-          }
-        >
-          <X className="text-muted-fg size-4" />
-        </BaseUIToast.Close>
+        <BaseUIToast.Close render={<CloseButton position="top-right" />} />
       </BaseUIToast.Root>
     );
   });

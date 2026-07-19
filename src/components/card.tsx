@@ -1,9 +1,8 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { X } from "lucide-react";
 import React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
-import { Button, ButtonProps } from "./button";
+import { cn } from "../lib/utils";
+import { CloseButton, CloseButtonProps } from "./close-button";
 
 export type CardProps = useRender.ComponentProps<"div">;
 
@@ -38,34 +37,8 @@ export function CardImage(props: CardImageProps) {
   });
 }
 
-export interface CardCloseProps extends ButtonProps {
-  iconProps?: React.ComponentProps<typeof X>;
-}
-
-export function CardClose(props: CardCloseProps) {
-  const {
-    className,
-    iconProps: { className: iconClassName, ...iconProps } = {},
-    children,
-    ...restProps
-  } = props;
-
-  return (
-    <Button
-      className={cnBaseUI("absolute top-2 right-2 rounded-full", className)}
-      variant="ghost"
-      size="icon"
-      aria-label="Close"
-      {...restProps}
-    >
-      {children ?? (
-        <X
-          className={cn("text-muted-fg size-4", iconClassName)}
-          {...iconProps}
-        />
-      )}
-    </Button>
-  );
+export function CardClose(props: CloseButtonProps) {
+  return <CloseButton position="top-right" {...props} />;
 }
 
 export type CardContentProps = useRender.ComponentProps<"div">;
