@@ -30,7 +30,7 @@ export function Fieldset(props: FieldsetProps) {
 
   return (
     <BaseUIFieldset.Root
-      className={cnBaseUI("gap-4 rounded-lg border p-4", className)}
+      className={cnBaseUI("rounded-lg border p-4", className)}
       {...restProps}
     >
       {hasLegend && (
