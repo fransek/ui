@@ -1,7 +1,13 @@
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cnBaseUI } from "../lib/utils";
-import { Field, FieldControl, FieldControlProps, FieldProps } from "./field";
+import {
+  Field,
+  FieldControl,
+  FieldControlProps,
+  fieldControlStyles,
+  FieldProps,
+} from "./field";
 
 type TextareaFieldControlProps = FieldControlProps &
   React.ComponentPropsWithRef<"textarea">;
@@ -37,10 +43,7 @@ export function Textarea(props: TextareaProps) {
       {...fieldProps}
     >
       <FieldControl
-        className={cnBaseUI(
-          "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-fg w-full min-w-40 rounded-lg border p-2 shadow transition-colors",
-          className,
-        )}
+        className={cnBaseUI(fieldControlStyles, className)}
         render={<textarea />}
         data-validating={isValidating ? "" : undefined}
         {...restProps}
