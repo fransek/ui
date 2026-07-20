@@ -39,7 +39,7 @@ export interface DrawerProps
    * The height of the drawer, as any CSS length (e.g. `"20rem"`, `"320px"`,
    * `"50vh"`). Sets the `--drawer-height` custom property on the popup. Only
    * applies when `direction` is `"top"` or `"bottom"`.
-   * @default "24rem"
+   * @default "auto"
    */
   height?: string;
   portalProps?: DrawerPortalProps;
@@ -83,7 +83,7 @@ export function Drawer(props: DrawerProps) {
     trigger,
     direction = "right",
     width = "30rem",
-    height = "24rem",
+    height = "auto",
     actionsRef,
     children,
     defaultOpen,
@@ -91,7 +91,7 @@ export function Drawer(props: DrawerProps) {
     defaultTriggerId,
     disablePointerDismissal,
     handle,
-    modal,
+    modal = true,
     onOpenChange,
     onOpenChangeComplete,
     onSnapPointChange,
@@ -104,13 +104,22 @@ export function Drawer(props: DrawerProps) {
     portalProps,
     backdropProps: { className: backdropClassName, ...backdropProps } = {},
     viewportProps: { className: viewportClassName, ...viewportProps } = {},
-    popupProps: { className: popupClassName, ...popupProps } = {},
+    popupProps: {
+      className: popupClassName,
+      style: popupStyle,
+      ...popupProps
+    } = {},
     contentProps: { className: contentClassName, ...contentProps } = {},
     closeProps,
     closeButtonProps,
     closeButtonIconProps,
     ...restProps
   } = props;
+
+  const drawerVars = {
+    "--drawer-width": width,
+    "--drawer-height": height,
+  } as React.CSSProperties;
 
   return (
     <BaseUIDrawer.Root
@@ -136,6 +145,7 @@ export function Drawer(props: DrawerProps) {
           <BaseUIDrawer.Trigger render={trigger} {...restProps} />
           <BaseUIDrawer.Portal {...portalProps}>
             <BaseUIDrawer.Backdrop
+              hidden={modal === false}
               className={cnBaseUI(
                 "fixed inset-0 min-h-dvh bg-black opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))] transition-opacity duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] [--backdrop-opacity:0.2] data-ending-style:opacity-0 data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:opacity-0 data-swiping:duration-0 supports-[-webkit-touch-callout:none]:absolute dark:[--backdrop-opacity:0.7]",
                 backdropClassName,
@@ -144,7 +154,7 @@ export function Drawer(props: DrawerProps) {
             />
             <BaseUIDrawer.Viewport
               className={cnBaseUI(
-                "fixed inset-0 flex items-stretch p-(--viewport-padding) [--viewport-padding:0px]",
+                "pointer-events-none fixed inset-0 flex items-stretch p-(--viewport-padding) [--viewport-padding:0px]",
                 drawerViewportStyles[direction],
                 viewportClassName,
               )}
@@ -152,17 +162,15 @@ export function Drawer(props: DrawerProps) {
             >
               <BaseUIDrawer.Popup
                 className={cnBaseUI(
-                  "bg-card touch-auto overflow-y-auto overscroll-contain shadow-[0.25rem_0.25rem_0] shadow-black/12 transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none [--drawer-height:24rem] [--drawer-width:30rem] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-swiping:select-none",
+                  "bg-background pointer-events-auto touch-auto overflow-y-auto overscroll-contain shadow transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-swiping:select-none",
                   drawerPopupStyles[direction],
                   popupClassName,
                 )}
                 {...popupProps}
                 style={
-                  {
-                    ...popupProps.style,
-                    "--drawer-width": width,
-                    "--drawer-height": height,
-                  } as React.CSSProperties
+                  typeof popupStyle === "function"
+                    ? (state) => ({ ...drawerVars, ...popupStyle(state) })
+                    : { ...drawerVars, ...popupStyle }
                 }
               >
                 <DrawerClose
