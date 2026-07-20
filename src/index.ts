@@ -20,6 +20,7 @@ export * from "./components/radio";
 export * from "./components/radio-group";
 export * from "./components/scroll-area";
 export * from "./components/select";
+export * from "./components/sidebar";
 export * from "./components/spinner";
 export * from "./components/switch";
 export * from "./components/tabs";
