@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.16.0](https://github.com/fransek/ui/compare/v0.15.0...v0.16.0) (2026-07-21)
+
+
+### Features
+
+* add directional and non-modal support to Drawer component ([#77](https://github.com/fransek/ui/issues/77)) ([721ddac](https://github.com/fransek/ui/commit/721ddac5a66609e7681054ea120fb458c7147332))
+
 ## [0.15.0](https://github.com/fransek/ui/compare/v0.14.0...v0.15.0) (2026-07-19)
 
 
