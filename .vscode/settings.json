@@ -1,18 +1,16 @@
 {
+  "tailwindCSS.classFunctions": ["cn", "tw", "clsx"],
   "tailwindCSS.classAttributes": [
     "class",
     "className",
-    "ngClass",
-    ".*Styles",
     ".*Style",
+    ".*Styles",
+    ".*Props",
     ".*ClassName",
     ".*ClassNames",
-    ".*Props",
     ".className",
     ".classNames",
     "style",
-    "styles",
-    "forwardProps"
-  ],
-  "tailwindCSS.classFunctions": ["cn", "cnBaseUI"]
+    "styles"
+  ]
 }

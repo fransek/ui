@@ -4,7 +4,7 @@ import {
   RadioRootProps,
 } from "@base-ui/react/radio";
 import * as React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { useFieldContext } from "./field";
 import { InfoPopover } from "./info-popover";
 
@@ -16,14 +16,8 @@ export interface RadioProps extends RadioRootProps {
 }
 
 export function Radio(props: RadioProps) {
-  const {
-    label,
-    className,
-    infoPopover,
-    labelProps: { className: labelClassName, ...labelProps } = {},
-    indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
-    ...restProps
-  } = props;
+  const { label, infoPopover, labelProps, indicatorProps, ...restProps } =
+    props;
 
   const labelId = React.useId();
   const { isValidating } = useFieldContext();
@@ -31,24 +25,25 @@ export function Radio(props: RadioProps) {
   return (
     <div className="flex items-center gap-2">
       <label
-        className={cn("flex items-center gap-2", labelClassName)}
-        {...labelProps}
+        {...mergeProps(labelProps, {
+          className: tw("flex items-center gap-2"),
+        })}
       >
         <BaseUIRadio.Root
-          className={cnBaseUI(
-            "bg-field data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline data-checked:border-primary-fg data-invalid:border-danger-fg flex size-5 items-center justify-center rounded-full border shadow",
-            className,
-          )}
           aria-labelledby={labelId}
           data-validating={isValidating ? "" : undefined}
-          {...restProps}
+          {...mergeProps(restProps, {
+            className: tw(
+              "bg-field data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline data-checked:border-primary-fg data-invalid:border-danger-fg flex size-5 items-center justify-center rounded-full border shadow",
+            ),
+          })}
         >
           <BaseUIRadio.Indicator
-            className={cnBaseUI(
-              "before:bg-primary data-invalid:before:bg-danger flex before:size-3 before:rounded-full data-unchecked:hidden",
-              indicatorClassName,
-            )}
-            {...indicatorProps}
+            {...mergeProps(indicatorProps, {
+              className: tw(
+                "before:bg-primary data-invalid:before:bg-danger flex before:size-3 before:rounded-full data-unchecked:hidden",
+              ),
+            })}
           />
         </BaseUIRadio.Root>
         <span id={labelId}>{label}</span>

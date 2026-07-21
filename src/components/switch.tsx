@@ -5,7 +5,7 @@ import {
 } from "@base-ui/react/switch";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { Field, FieldLabel, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
@@ -20,7 +20,6 @@ export interface SwitchProps
 export function Switch(props: SwitchProps) {
   const {
     label,
-    className,
     fieldProps,
     description,
     isValidating,
@@ -28,8 +27,8 @@ export function Switch(props: SwitchProps) {
     errorMessage,
     invalid,
     infoPopover,
-    labelProps: { className: labelClassName, ...labelProps } = {},
-    thumbProps: { className: thumbClassName, ...thumbProps } = {},
+    labelProps,
+    thumbProps,
     ...restProps
   } = props;
 
@@ -46,27 +45,27 @@ export function Switch(props: SwitchProps) {
     >
       <div className="flex items-center gap-2">
         <FieldLabel
-          className={cnBaseUI(
-            "text-foreground flex items-center gap-2 text-base font-normal",
-            labelClassName,
-          )}
-          {...labelProps}
+          {...mergeProps(labelProps, {
+            className: tw(
+              "text-foreground flex items-center gap-2 text-base font-normal",
+            ),
+          })}
         >
           <BaseUISwitch.Root
-            className={cnBaseUI(
-              "bg-muted border-muted data-validating:not-data-invalid:animate-validating data-invalid:border-danger-fg data-invalid:data-checked:bg-danger data-invalid:data-checked:border-danger data-checked:bg-primary outline-highlight focus-visible:focus-outline data-checked:border-primary flex h-5 w-9 shrink-0 rounded-full border p-0.5 shadow transition-colors duration-150 ease-[ease]",
-              className,
-            )}
             aria-labelledby={labelId}
             data-validating={isValidating ? "" : undefined}
-            {...restProps}
+            {...mergeProps(restProps, {
+              className: tw(
+                "bg-muted border-muted data-validating:not-data-invalid:animate-validating data-invalid:border-danger-fg data-invalid:data-checked:bg-danger data-invalid:data-checked:border-danger data-checked:bg-primary outline-highlight focus-visible:focus-outline data-checked:border-primary flex h-5 w-9 shrink-0 rounded-full border p-0.5 shadow transition-colors duration-150 ease-[ease]",
+              ),
+            })}
           >
             <BaseUISwitch.Thumb
-              className={cnBaseUI(
-                "dark:data-checked:bg-foreground bg-background dark:bg-foreground size-3.5 rounded-full transition-[translate,background-color] duration-150 ease-[ease] data-checked:translate-x-4",
-                thumbClassName,
-              )}
-              {...thumbProps}
+              {...mergeProps(thumbProps, {
+                className: tw(
+                  "dark:data-checked:bg-foreground bg-background dark:bg-foreground size-3.5 rounded-full transition-[translate,background-color] duration-150 ease-[ease] data-checked:translate-x-4",
+                ),
+              })}
             />
           </BaseUISwitch.Root>
           <span id={labelId}>{label}</span>

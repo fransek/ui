@@ -19,7 +19,7 @@ import {
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cn, cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 
 /**
@@ -96,7 +96,6 @@ export function Select<T, Multiple extends boolean | undefined = false>(
     isValidatingMessage,
     errorMessage,
     invalid,
-    className,
     description,
     infoPopover,
     fieldProps,
@@ -127,39 +126,21 @@ export function Select<T, Multiple extends boolean | undefined = false>(
     triggerId,
     triggerName,
     triggerValue,
-    valueProps: { className: valueClassName, ...valueProps } = {},
-    selectIconProps: {
-      className: selectIconClassName,
-      ...selectIconProps
-    } = {},
-    iconProps: { className: iconClassName, ...iconProps } = {},
+    valueProps,
+    selectIconProps,
+    iconProps,
     portalProps,
-    positionerProps: {
-      className: positionerClassName,
-      ...positionerProps
-    } = {},
-    popupProps: { className: popupClassName, ...popupProps } = {},
-    scrollUpArrowProps: {
-      className: scrollUpArrowClassName,
-      ...scrollUpArrowProps
-    } = {},
-    listProps: { className: listClassName, ...listProps } = {},
-    groupProps: { className: groupClassName, ...groupProps } = {},
-    groupLabelProps: {
-      className: groupLabelClassName,
-      ...groupLabelProps
-    } = {},
-    itemProps: { className: itemClassName, ...itemProps } = {},
-    itemIndicatorProps: {
-      className: itemIndicatorClassName,
-      ...itemIndicatorProps
-    } = {},
-    checkIconProps: { className: checkIconClassName, ...checkIconProps } = {},
-    itemTextProps: { className: itemTextClassName, ...itemTextProps } = {},
-    scrollDownArrowProps: {
-      className: scrollDownArrowClassName,
-      ...scrollDownArrowProps
-    } = {},
+    positionerProps,
+    popupProps,
+    scrollUpArrowProps,
+    listProps,
+    groupProps,
+    groupLabelProps,
+    itemProps,
+    itemIndicatorProps,
+    checkIconProps,
+    itemTextProps,
+    scrollDownArrowProps,
     ...restProps
   } = props;
 
@@ -167,26 +148,21 @@ export function Select<T, Multiple extends boolean | undefined = false>(
     <BaseUISelect.Item
       key={String(item.value)}
       value={item.value}
-      className={cnBaseUI(
-        "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 py-2 pr-2.5 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:text-base group-data-[side=none]:leading-4 before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
-        itemClassName,
-      )}
-      {...itemProps}
+      {...mergeProps(itemProps, {
+        className: tw(
+          "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 py-2 pr-2.5 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:text-base group-data-[side=none]:leading-4 before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
+        ),
+      })}
     >
       <BaseUISelect.ItemText
-        className={cnBaseUI("flex-1", itemTextClassName)}
-        {...itemTextProps}
+        {...mergeProps(itemTextProps, { className: tw("flex-1") })}
       >
         {item.label}
       </BaseUISelect.ItemText>
       <BaseUISelect.ItemIndicator
-        className={cnBaseUI("flex", itemIndicatorClassName)}
-        {...itemIndicatorProps}
+        {...mergeProps(itemIndicatorProps, { className: tw("flex") })}
       >
-        <Check
-          className={cn("size-4", checkIconClassName)}
-          {...checkIconProps}
-        />
+        <Check {...mergeProps(checkIconProps, { className: tw("size-4") })} />
       </BaseUISelect.ItemIndicator>
     </BaseUISelect.Item>
   );
@@ -227,75 +203,73 @@ export function Select<T, Multiple extends boolean | undefined = false>(
         value={value}
       >
         <BaseUISelect.Trigger
-          className={cnBaseUI(
-            "bg-field outline-highlight focus-visible:focus-outline data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating hover:bg-card data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base shadow transition-colors outline-none select-none",
-            className,
-          )}
           data-validating={isValidating ? "" : undefined}
           disabled={triggerDisabled}
           id={triggerId}
           name={triggerName}
           value={triggerValue}
-          {...restProps}
+          {...mergeProps(restProps, {
+            className: tw(
+              "bg-field outline-highlight focus-visible:focus-outline data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating hover:bg-card data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base shadow transition-colors outline-none select-none",
+            ),
+          })}
         >
           <BaseUISelect.Value
-            className={cnBaseUI("data-placeholder:opacity-60", valueClassName)}
             placeholder={placeholder}
-            {...valueProps}
+            {...mergeProps(valueProps, {
+              className: tw("data-placeholder:opacity-60"),
+            })}
           />
           <BaseUISelect.Icon
-            className={cnBaseUI("flex", selectIconClassName)}
-            {...selectIconProps}
+            {...mergeProps(selectIconProps, { className: tw("flex") })}
           >
             <ChevronsUpDown
-              className={cn("size-4", iconClassName)}
-              {...iconProps}
+              {...mergeProps(iconProps, { className: tw("size-4") })}
             />
           </BaseUISelect.Icon>
         </BaseUISelect.Trigger>
         <BaseUISelect.Portal {...portalProps}>
           <BaseUISelect.Positioner
-            className={cnBaseUI(
-              "z-10 outline-none select-none",
-              positionerClassName,
-            )}
             sideOffset={8}
-            {...positionerProps}
+            {...mergeProps(positionerProps, {
+              className: tw("z-10 outline-none select-none"),
+            })}
           >
             <BaseUISelect.Popup
-              className={cnBaseUI(
-                "group bg-background outline-border w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
-                popupClassName,
-              )}
-              {...popupProps}
+              {...mergeProps(popupProps, {
+                className: tw(
+                  "group bg-background outline-border w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
+                ),
+              })}
             >
               <BaseUISelect.ScrollUpArrow
-                className={cnBaseUI(
-                  "bg-background top-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-top-full",
-                  scrollUpArrowClassName,
-                )}
-                {...scrollUpArrowProps}
+                {...mergeProps(scrollUpArrowProps, {
+                  className: tw(
+                    "bg-background top-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-top-full",
+                  ),
+                })}
               />
               <BaseUISelect.List
-                className={cnBaseUI(
-                  "relative max-h-(--available-height) scroll-py-6 overflow-y-auto py-1",
-                  listClassName,
-                )}
-                {...listProps}
+                {...mergeProps(listProps, {
+                  className: tw(
+                    "relative max-h-(--available-height) scroll-py-6 overflow-y-auto py-1",
+                  ),
+                })}
               >
                 {isGroupedItems(items)
                   ? items.map((group, index) => (
                       <BaseUISelect.Group
                         key={index}
-                        className={cnBaseUI("not-last:mb-2", groupClassName)}
-                        {...groupProps}
+                        {...mergeProps(groupProps, {
+                          className: tw("not-last:mb-2"),
+                        })}
                       >
                         <BaseUISelect.GroupLabel
-                          className={cnBaseUI(
-                            "text-muted-fg px-2.5 py-1 text-xs font-medium",
-                            groupLabelClassName,
-                          )}
-                          {...groupLabelProps}
+                          {...mergeProps(groupLabelProps, {
+                            className: tw(
+                              "text-muted-fg px-2.5 py-1 text-xs font-medium",
+                            ),
+                          })}
                         >
                           {group.label}
                         </BaseUISelect.GroupLabel>
@@ -311,11 +285,11 @@ export function Select<T, Multiple extends boolean | undefined = false>(
                       : null}
               </BaseUISelect.List>
               <BaseUISelect.ScrollDownArrow
-                className={cnBaseUI(
-                  "bg-background bottom-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-bottom-full",
-                  scrollDownArrowClassName,
-                )}
-                {...scrollDownArrowProps}
+                {...mergeProps(scrollDownArrowProps, {
+                  className: tw(
+                    "bg-background bottom-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-bottom-full",
+                  ),
+                })}
               />
             </BaseUISelect.Popup>
           </BaseUISelect.Positioner>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { cn } from "../lib/utils";
+import { cn, mergeProps } from "../lib/utils";
 
 export interface SpinnerProps extends React.ComponentProps<"svg"> {
   size?: SpinnerSize;
@@ -42,8 +42,7 @@ export function Spinner(props: SpinnerProps) {
     loopTexts = true,
     delay = 0,
     textPosition = "bottom",
-    containerProps: { className: containerClassName, ...containerProps } = {},
-    className,
+    containerProps,
     ...restProps
   } = props;
 
@@ -96,8 +95,9 @@ export function Spinner(props: SpinnerProps) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={spinnerStyles({ size, variant, extend: className })}
-      {...restProps}
+      {...mergeProps(restProps, {
+        className: spinnerStyles({ size, variant }),
+      })}
     >
       <circle
         cx="12"
@@ -124,13 +124,13 @@ export function Spinner(props: SpinnerProps) {
     <div
       role="status"
       aria-label={label}
-      className={cn(
-        "flex items-center",
-        size === "sm" ? "gap-1.5" : "gap-2",
-        textPosition === "bottom" ? "flex-col" : "flex-row",
-        containerClassName,
-      )}
-      {...containerProps}
+      {...mergeProps(containerProps, {
+        className: cn(
+          "flex items-center",
+          size === "sm" ? "gap-1.5" : "gap-2",
+          textPosition === "bottom" ? "flex-col" : "flex-row",
+        ),
+      })}
     >
       {spinner}
       <span
