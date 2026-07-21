@@ -52,7 +52,7 @@ export function InfoPopover(props: InfoPopoverProps) {
             ? `Information about ${fieldLabel}`
             : "Information",
         className: cnBaseUI(
-          "body-sm outline-0 rounded bg-foreground text-background px-3 py-2 text-center max-w-[min(300px,calc(100vw-3rem))]",
+          "body-sm bg-foreground text-background max-w-[min(300px,calc(100vw-3rem))] rounded px-3 py-2 text-center outline-0",
           popupClassName,
         ),
         ...popupProps,
