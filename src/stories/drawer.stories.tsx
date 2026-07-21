@@ -23,7 +23,7 @@ const meta = {
           dismiss it.
         </DrawerDescription>
       </div>
-      <div className="flex justify-end gap-4">
+      <div className="mt-4 flex justify-end gap-4">
         <DrawerClose render={<Button variant="secondary">Cancel</Button>} />
         <DrawerClose render={<Button variant="primary">Confirm</Button>} />
       </div>
@@ -40,12 +40,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {};
-
-export const DisablePointerDismissal: Story = {
-  args: {
-    disablePointerDismissal: true,
-  },
-};
 
 export const CustomWidth: Story = {
   args: {
@@ -68,4 +62,59 @@ export const Overflow: Story = {
       ))}
     </Drawer>
   ),
+};
+
+export const MobileMenu: Story = {
+  args: {
+    trigger: <Button variant="outline">Open Drawer</Button>,
+    direction: "bottom",
+    popupProps: {
+      className: "pb-0 px-0 pt-11",
+    },
+  },
+  render: (args) => (
+    <Drawer {...args}>
+      <div className="bg-muted absolute top-3 left-1/2 h-1 w-12 -translate-x-1/2 rounded-full" />
+      <div className="flex h-[calc(100vh-8rem)] flex-col gap-2 overflow-y-auto p-4">
+        {new Array(30).fill(null).map((_, index) => (
+          <Button className="w-fit" variant="ghost" key={index}>
+            Lorem ipsum
+          </Button>
+        ))}
+      </div>
+    </Drawer>
+  ),
+};
+
+export const Top: Story = {
+  args: {
+    direction: "top",
+  },
+};
+
+export const Bottom: Story = {
+  args: {
+    direction: "bottom",
+  },
+};
+
+export const Left: Story = {
+  args: {
+    direction: "left",
+  },
+};
+
+export const CustomHeight: Story = {
+  args: {
+    direction: "bottom",
+    height: "100%",
+  },
+};
+
+export const NonModal: Story = {
+  args: {
+    direction: "bottom",
+    disablePointerDismissal: true,
+    modal: false,
+  },
 };
