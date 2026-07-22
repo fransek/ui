@@ -2,7 +2,7 @@ import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
 import { formatDate, isValid, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
-import { cnBaseUI, mergeRefs } from "../lib/utils";
+import { mergeProps, mergeRefs, tw } from "../lib/utils";
 import { Button } from "./button";
 import { Calendar, CalendarProps } from "./calendar";
 import { Input, InputProps } from "./input";
@@ -19,7 +19,6 @@ export function DatePicker(props: DatePickerProps) {
     calendarProps,
     popoverTriggerProps,
     popoverProps: { onOpenChange, ...popoverProps } = {},
-    className,
     value,
     defaultValue,
     onValueChange,
@@ -58,7 +57,6 @@ export function DatePicker(props: DatePickerProps) {
       }}
       value={value}
       defaultValue={defaultValue}
-      className={cnBaseUI("hover:bg-card disabled:text-muted-fg", className)}
       placeholder={placeholder}
       disabled={disabled}
       readOnly={readOnly}
@@ -95,9 +93,7 @@ export function DatePicker(props: DatePickerProps) {
             >
               <Popover.Popup
                 aria-label="Calendar"
-                className={cnBaseUI(
-                  "bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
-                )}
+                className="bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0"
               >
                 <Calendar
                   mode="single"
@@ -112,7 +108,9 @@ export function DatePicker(props: DatePickerProps) {
           </Popover.Portal>
         </Popover.Root>
       }
-      {...restProps}
+      {...mergeProps(restProps, {
+        className: tw("hover:bg-card disabled:text-muted-fg"),
+      })}
     />
   );
 }

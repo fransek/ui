@@ -9,7 +9,7 @@ import {
   TooltipTriggerProps,
 } from "@base-ui/react/tooltip";
 import React from "react";
-import { cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 
 export interface TooltipProps
   extends
@@ -43,12 +43,9 @@ export function Tooltip(props: TooltipProps) {
     trackCursorAxis,
     triggerId,
     portalProps,
-    positionerProps: {
-      className: positionerClassName,
-      ...positionerProps
-    } = {},
-    popupProps: { className: popupClassName, ...popupProps } = {},
-    arrowProps: { className: arrowClassName, ...arrowProps } = {},
+    positionerProps,
+    popupProps,
+    arrowProps,
     className,
     ...restProps
   } = props;
@@ -76,21 +73,23 @@ export function Tooltip(props: TooltipProps) {
           />
           <BaseUITooltip.Portal {...portalProps}>
             <BaseUITooltip.Positioner
-              className={cnBaseUI("z-10 outline-none", positionerClassName)}
               sideOffset={8}
-              {...positionerProps}
+              {...mergeProps(positionerProps, {
+                className: tw("z-10 outline-none"),
+              })}
             >
               <BaseUITooltip.Popup
-                className={cnBaseUI(
-                  "body-sm bg-foreground text-background max-w-[min(300px,calc(100vw-3rem))] origin-(--transform-origin) rounded-md px-2 py-1 shadow-lg transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-instant:transition-none data-starting-style:scale-90 data-starting-style:opacity-0",
-                  popupClassName,
-                )}
-                {...popupProps}
+                {...mergeProps(popupProps, {
+                  className: tw(
+                    "body-sm bg-foreground text-background max-w-[min(300px,calc(100vw-3rem))] origin-(--transform-origin) rounded-md px-2 py-1 shadow-lg transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-instant:transition-none data-starting-style:scale-90 data-starting-style:opacity-0",
+                  ),
+                })}
               >
                 {arrow && (
                   <BaseUITooltip.Arrow
-                    className={cnBaseUI(tooltipArrowStyles, arrowClassName)}
-                    {...arrowProps}
+                    {...mergeProps(arrowProps, {
+                      className: tooltipArrowStyles,
+                    })}
                   />
                 )}
                 {typeof children === "function"

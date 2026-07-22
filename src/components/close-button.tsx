@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
+import { cn, mergeProps, tw } from "../lib/utils";
 import { Button, ButtonProps } from "./button";
 
 export interface CloseButtonProps extends ButtonProps {
@@ -16,15 +16,14 @@ export function CloseButton(props: CloseButtonProps) {
     size = "icon",
     variant = "ghost",
     position,
-    className,
-    iconProps: { className: iconClassName, ...iconProps } = {},
+    iconProps,
     icon = (
       <X
-        className={cn(
-          "text-muted-fg group-hover:text-foreground size-4 transition-colors",
-          iconClassName,
-        )}
-        {...iconProps}
+        {...mergeProps(iconProps, {
+          className: tw(
+            "text-muted-fg group-hover:text-foreground size-4 transition-colors",
+          ),
+        })}
       />
     ),
     children,
@@ -36,13 +35,13 @@ export function CloseButton(props: CloseButtonProps) {
       size={size}
       variant={variant}
       aria-label="Close"
-      className={cnBaseUI(
-        "group hover:bg-muted/10 rounded-full",
-        position && "absolute",
-        position && positionStyles[position],
-        className,
-      )}
-      {...restProps}
+      {...mergeProps(restProps, {
+        className: cn(
+          "group hover:bg-muted/10 rounded-full",
+          position && "absolute",
+          position && positionStyles[position],
+        ),
+      })}
     >
       {children ?? icon}
     </Button>

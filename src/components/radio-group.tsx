@@ -9,7 +9,7 @@ import {
 } from "@base-ui/react/radio-group";
 import * as React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
@@ -31,11 +31,8 @@ export function RadioGroup<T>(props: RadioGroupProps<T>) {
     label,
     children,
     invalid,
-    fieldsetProps: { className: fieldsetClassName, ...fieldsetProps } = {},
-    fieldsetLegendProps: {
-      className: fieldsetLegendClassName,
-      ...legendProps
-    } = {},
+    fieldsetProps,
+    fieldsetLegendProps,
     ...restProps
   } = props;
 
@@ -49,18 +46,17 @@ export function RadioGroup<T>(props: RadioGroupProps<T>) {
       {...fieldProps}
     >
       <Fieldset.Root
-        render={<BaseUIRadioGroup {...restProps} />}
-        className={cnBaseUI("flex flex-col gap-1", fieldsetClassName)}
-        {...fieldsetProps}
+        {...mergeProps(fieldsetProps, {
+          className: tw("flex flex-col gap-1"),
+          render: <BaseUIRadioGroup {...restProps} />,
+        })}
       >
         {label && (
           <div className="flex items-center gap-2">
             <Fieldset.Legend
-              className={cnBaseUI(
-                "text-foreground text-sm font-semibold",
-                fieldsetLegendClassName,
-              )}
-              {...legendProps}
+              {...mergeProps(fieldsetLegendProps, {
+                className: tw("text-foreground text-sm font-semibold"),
+              })}
             >
               {label}
             </Fieldset.Legend>

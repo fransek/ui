@@ -1,6 +1,6 @@
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cnBaseUI } from "../lib/utils";
+import { mergeProps } from "../lib/utils";
 import {
   Field,
   FieldControl,
@@ -23,7 +23,6 @@ export function Textarea(props: TextareaProps) {
     isValidating,
     isValidatingMessage,
     errorMessage,
-    className,
     description,
     infoPopover,
     fieldProps,
@@ -43,10 +42,11 @@ export function Textarea(props: TextareaProps) {
       {...fieldProps}
     >
       <FieldControl
-        className={cnBaseUI(fieldControlStyles, className)}
-        render={<textarea />}
         data-validating={isValidating ? "" : undefined}
-        {...restProps}
+        {...mergeProps(restProps, {
+          className: fieldControlStyles,
+          render: <textarea />,
+        })}
       />
     </Field>
   );

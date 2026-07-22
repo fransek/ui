@@ -1,6 +1,6 @@
 import { Info } from "lucide-react";
 import React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { Button, ButtonProps } from "./button";
 import { Popover, PopoverProps } from "./popover";
 import { tooltipArrowStyles } from "./tooltip";
@@ -16,11 +16,11 @@ export function InfoPopover(props: InfoPopoverProps) {
   const {
     children,
     fieldLabel,
-    popupProps: { className: popupClassName, ...popupProps } = {},
+    popupProps,
     positionerProps,
-    buttonProps: { className: buttonClassName, ...buttonProps } = {},
-    infoIconProps: { className: infoIconClassName, ...infoIconProps } = {},
-    arrowProps: { className: arrowClassName, ...arrowProps } = {},
+    buttonProps,
+    infoIconProps,
+    arrowProps,
     ...restProps
   } = props;
 
@@ -37,35 +37,30 @@ export function InfoPopover(props: InfoPopoverProps) {
           }
           variant="ghost"
           size="icon"
-          className={cnBaseUI("-m-1 p-1", buttonClassName)}
-          {...buttonProps}
+          {...mergeProps(buttonProps, { className: tw("-m-1 p-1") })}
         >
           <Info
-            className={cn("text-muted-fg size-4", infoIconClassName)}
-            {...infoIconProps}
+            {...mergeProps(infoIconProps, {
+              className: tw("text-muted-fg size-4"),
+            })}
           />
         </Button>
       }
-      popupProps={{
+      popupProps={mergeProps(popupProps, {
         "aria-label":
           typeof fieldLabel === "string"
             ? `Information about ${fieldLabel}`
             : "Information",
-        className: cnBaseUI(
-          "body-sm outline-0 rounded bg-foreground text-background px-3 py-2 text-center max-w-[min(300px,calc(100vw-3rem))]",
-          popupClassName,
+        className: tw(
+          "body-sm bg-foreground text-background max-w-[min(300px,calc(100vw-3rem))] rounded px-3 py-2 text-center outline-0",
         ),
-        ...popupProps,
-      }}
+      })}
       positionerProps={{
         side: "top",
         ...positionerProps,
       }}
       arrowElement={<></>}
-      arrowProps={{
-        className: cn(tooltipArrowStyles, arrowClassName),
-        ...arrowProps,
-      }}
+      arrowProps={mergeProps(arrowProps, { className: tooltipArrowStyles })}
       {...restProps}
     >
       {children}

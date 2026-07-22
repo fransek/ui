@@ -13,7 +13,7 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
+import { cn, mergeProps } from "../lib/utils";
 import { CloseButton } from "./close-button";
 
 export type ToastType = "info" | "success" | "warning" | "danger";
@@ -79,8 +79,8 @@ export function ToastProvider(props: ToastProviderProps) {
   const {
     position = "bottom-right",
     portalProps,
-    viewportProps: { className: viewportClassName, ...viewportProps } = {},
-    toastProps: { className: toastClassName, ...toastProps } = {},
+    viewportProps,
+    toastProps,
     children,
     ...providerProps
   } = props;
@@ -95,17 +95,13 @@ export function ToastProvider(props: ToastProviderProps) {
       {children}
       <BaseUIToast.Portal {...portalProps}>
         <BaseUIToast.Viewport
-          className={cnBaseUI(
-            baseViewportStyles,
-            viewportPositionStyles[position],
-            viewportClassName,
-          )}
-          {...viewportProps}
+          {...mergeProps(viewportProps, {
+            className: cn(baseViewportStyles, viewportPositionStyles[position]),
+          })}
         >
           <ToastList
             isTop={isTop}
             swipeDirection={swipeDirection}
-            className={toastClassName}
             {...toastProps}
           />
         </BaseUIToast.Viewport>
@@ -116,7 +112,6 @@ export function ToastProvider(props: ToastProviderProps) {
 
 function ToastList({
   isTop,
-  className,
   ...toastProps
 }: Omit<ToastRootProps, "toast"> & { isTop: boolean }) {
   const { toasts } = BaseUIToast.useToastManager();
@@ -129,12 +124,12 @@ function ToastList({
       <BaseUIToast.Root
         key={toast.id}
         toast={toast}
-        className={cnBaseUI(
-          baseToastStyles,
-          isTop ? topToastStyles : bottomToastStyles,
-          className,
-        )}
-        {...toastProps}
+        {...mergeProps(toastProps, {
+          className: cn(
+            baseToastStyles,
+            isTop ? topToastStyles : bottomToastStyles,
+          ),
+        })}
       >
         <BaseUIToast.Content className="flex gap-3 overflow-hidden transition-opacity duration-250 data-behind:pointer-events-none data-behind:opacity-0 data-expanded:pointer-events-auto data-expanded:opacity-100">
           {Icon && type && (
