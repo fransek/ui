@@ -3,7 +3,7 @@ import {
   ButtonProps as BaseUIButtonProps,
 } from "@base-ui/react/button";
 import React from "react";
-import { cn } from "../lib/utils";
+import { cn, mergeProps } from "../lib/utils";
 import { Tooltip, TooltipProps } from "./tooltip";
 
 export interface ButtonProps extends BaseUIButtonProps {
@@ -18,7 +18,6 @@ export function Button(props: ButtonProps) {
     variant = "primary",
     size = "md",
     children,
-    className,
     tooltip,
     tooltipProps,
     ...restProps
@@ -26,19 +25,11 @@ export function Button(props: ButtonProps) {
 
   const button = (
     <BaseUIButton
-      className={(state) =>
-        buttonStyles({
-          variant,
-          size,
-          extend:
-            typeof className === "function" ? className(state) : className,
-        })
-      }
       focusableWhenDisabled
       aria-label={
         typeof tooltip === "string" && size === "icon" ? tooltip : undefined
       }
-      {...restProps}
+      {...mergeProps(restProps, { className: buttonStyles({ variant, size }) })}
     >
       {children}
     </BaseUIButton>

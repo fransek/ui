@@ -10,7 +10,7 @@ import {
 } from "@base-ui/react/field";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { InfoPopover } from "./info-popover";
 
 export interface FieldProps extends BaseUIFieldRootProps, FieldAttributes {
@@ -33,10 +33,7 @@ export function Field(props: FieldProps) {
     errorMessageProps,
     descriptionProps,
     infoPopover,
-    isValidatingMessageProps: {
-      className: isValidatingMessageClassName,
-      ...isValidatingMessageProps
-    } = {},
+    isValidatingMessageProps,
     ...restProps
   } = props;
 
@@ -61,11 +58,11 @@ export function Field(props: FieldProps) {
         </FieldError>
         {isValidating && isValidatingMessage && !errorMessage && (
           <FieldDescription
-            className={cnBaseUI(
-              "text-primary-fg animate-validating-message text-sm",
-              isValidatingMessageClassName,
-            )}
-            {...isValidatingMessageProps}
+            {...mergeProps(isValidatingMessageProps, {
+              className: tw(
+                "text-primary-fg animate-validating-message text-sm",
+              ),
+            })}
           >
             {isValidatingMessage}
           </FieldDescription>
@@ -91,11 +88,9 @@ export const fieldControlStyles =
 export type FieldDescriptionProps = BaseUIFieldDescriptionProps;
 
 export function FieldDescription(props: BaseUIFieldDescriptionProps) {
-  const { className, ...restProps } = props;
   return (
     <BaseUIField.Description
-      className={cnBaseUI("text-muted-fg text-sm", className)}
-      {...restProps}
+      {...mergeProps(props, { className: tw("text-muted-fg text-sm") })}
     />
   );
 }
@@ -103,11 +98,9 @@ export function FieldDescription(props: BaseUIFieldDescriptionProps) {
 export type FieldErrorProps = BaseUIFieldErrorProps;
 
 export function FieldError(props: BaseUIFieldErrorProps) {
-  const { className, ...restProps } = props;
   return (
     <BaseUIField.Error
-      className={cnBaseUI("text-danger-fg text-sm", className)}
-      {...restProps}
+      {...mergeProps(props, { className: tw("text-danger-fg text-sm") })}
     />
   );
 }
@@ -119,11 +112,11 @@ export const FieldItem = BaseUIField.Item;
 export type FieldLabelProps = BaseUIFieldLabelProps;
 
 export function FieldLabel(props: BaseUIFieldLabelProps) {
-  const { className, ...restProps } = props;
   return (
     <BaseUIField.Label
-      className={cnBaseUI("text-foreground text-sm font-semibold", className)}
-      {...restProps}
+      {...mergeProps(props, {
+        className: tw("text-foreground text-sm font-semibold"),
+      })}
     />
   );
 }
@@ -131,11 +124,9 @@ export function FieldLabel(props: BaseUIFieldLabelProps) {
 export type FieldRootProps = BaseUIFieldRootProps;
 
 export function FieldRoot(props: BaseUIFieldRootProps) {
-  const { className, ...restProps } = props;
   return (
     <BaseUIField.Root
-      className={cnBaseUI("flex flex-col gap-1", className)}
-      {...restProps}
+      {...mergeProps(props, { className: tw("flex flex-col gap-1") })}
     />
   );
 }

@@ -5,7 +5,7 @@ import {
 import { Minus, Plus } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 
 export interface NumberFieldProps
@@ -22,13 +22,12 @@ export function NumberField(props: NumberFieldProps) {
     isValidating,
     isValidatingMessage,
     errorMessage,
-    className,
     description,
     infoPopover,
     fieldProps,
-    inputProps: { className: inputClassName, ...inputProps } = {},
-    decrementProps: { className: decrementClassName, ...decrementProps } = {},
-    incrementProps: { className: incrementClassName, ...incrementProps } = {},
+    inputProps,
+    decrementProps,
+    incrementProps,
     invalid,
     disabled,
     ...restProps
@@ -46,38 +45,35 @@ export function NumberField(props: NumberFieldProps) {
       {...fieldProps}
     >
       <BaseUINumberField.Root
-        className={cnBaseUI("w-full min-w-40", className)}
         disabled={disabled}
-        {...restProps}
+        {...mergeProps(restProps, { className: tw("w-full min-w-40") })}
       >
         <BaseUINumberField.Group
-          className={cnBaseUI(
-            "data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border shadow transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
-          )}
+          className="data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border shadow transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60"
           data-validating={isValidating ? "" : undefined}
         >
           <BaseUINumberField.Decrement
-            className={cnBaseUI(
-              "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-r px-2.5 transition-colors select-none data-disabled:pointer-events-none",
-              decrementClassName,
-            )}
-            {...decrementProps}
+            {...mergeProps(decrementProps, {
+              className: tw(
+                "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-r px-2.5 transition-colors select-none data-disabled:pointer-events-none",
+              ),
+            })}
           >
             <Minus className="size-4" />
           </BaseUINumberField.Decrement>
           <BaseUINumberField.Input
-            className={cnBaseUI(
-              "bg-field placeholder:text-muted-fg w-full min-w-0 p-2 text-center tabular-nums outline-none",
-              inputClassName,
-            )}
-            {...inputProps}
+            {...mergeProps(inputProps, {
+              className: tw(
+                "bg-field placeholder:text-muted-fg w-full min-w-0 p-2 text-center tabular-nums outline-none",
+              ),
+            })}
           />
           <BaseUINumberField.Increment
-            className={cnBaseUI(
-              "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-l px-2.5 transition-colors select-none data-disabled:pointer-events-none",
-              incrementClassName,
-            )}
-            {...incrementProps}
+            {...mergeProps(incrementProps, {
+              className: tw(
+                "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-l px-2.5 transition-colors select-none data-disabled:pointer-events-none",
+              ),
+            })}
           >
             <Plus className="size-4" />
           </BaseUINumberField.Increment>

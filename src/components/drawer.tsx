@@ -13,7 +13,7 @@ import {
 } from "@base-ui/react/drawer";
 import { X } from "lucide-react";
 import React from "react";
-import { cnBaseUI } from "../lib/utils";
+import { cn, mergeProps, tw } from "../lib/utils";
 import { CloseButton, CloseButtonProps } from "./close-button";
 
 export type DrawerDirection = "top" | "right" | "bottom" | "left";
@@ -102,14 +102,10 @@ export function Drawer(props: DrawerProps) {
     swipeDirection = drawerSwipeDirections[direction],
     triggerId,
     portalProps,
-    backdropProps: { className: backdropClassName, ...backdropProps } = {},
-    viewportProps: { className: viewportClassName, ...viewportProps } = {},
-    popupProps: {
-      className: popupClassName,
-      style: popupStyle,
-      ...popupProps
-    } = {},
-    contentProps: { className: contentClassName, ...contentProps } = {},
+    backdropProps,
+    viewportProps,
+    popupProps,
+    contentProps,
     closeProps,
     closeButtonProps,
     closeButtonIconProps,
@@ -146,32 +142,28 @@ export function Drawer(props: DrawerProps) {
           <BaseUIDrawer.Portal {...portalProps}>
             <BaseUIDrawer.Backdrop
               hidden={modal === false}
-              className={cnBaseUI(
-                "fixed inset-0 min-h-dvh bg-black opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))] transition-opacity duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] [--backdrop-opacity:0.2] data-ending-style:opacity-0 data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:opacity-0 data-swiping:duration-0 supports-[-webkit-touch-callout:none]:absolute dark:[--backdrop-opacity:0.7]",
-                backdropClassName,
-              )}
-              {...backdropProps}
+              {...mergeProps(backdropProps, {
+                className: tw(
+                  "fixed inset-0 min-h-dvh bg-black opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))] transition-opacity duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] [--backdrop-opacity:0.2] data-ending-style:opacity-0 data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:opacity-0 data-swiping:duration-0 supports-[-webkit-touch-callout:none]:absolute dark:[--backdrop-opacity:0.7]",
+                ),
+              })}
             />
             <BaseUIDrawer.Viewport
-              className={cnBaseUI(
-                "pointer-events-none fixed inset-0 flex items-stretch p-(--viewport-padding) [--viewport-padding:0px]",
-                drawerViewportStyles[direction],
-                viewportClassName,
-              )}
-              {...viewportProps}
+              {...mergeProps(viewportProps, {
+                className: cn(
+                  "pointer-events-none fixed inset-0 flex items-stretch p-(--viewport-padding) [--viewport-padding:0px]",
+                  drawerViewportStyles[direction],
+                ),
+              })}
             >
               <BaseUIDrawer.Popup
-                className={cnBaseUI(
-                  "bg-background pointer-events-auto touch-auto overflow-y-auto overscroll-contain shadow transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-swiping:select-none",
-                  drawerPopupStyles[direction],
-                  popupClassName,
-                )}
-                {...popupProps}
-                style={
-                  typeof popupStyle === "function"
-                    ? (state) => ({ ...drawerVars, ...popupStyle(state) })
-                    : { ...drawerVars, ...popupStyle }
-                }
+                {...mergeProps(popupProps, {
+                  className: cn(
+                    "bg-background pointer-events-auto touch-auto overflow-y-auto overscroll-contain shadow transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-swiping:select-none",
+                    drawerPopupStyles[direction],
+                  ),
+                  style: drawerVars,
+                })}
               >
                 <DrawerClose
                   render={
@@ -184,11 +176,9 @@ export function Drawer(props: DrawerProps) {
                   {...closeProps}
                 />
                 <BaseUIDrawer.Content
-                  className={cnBaseUI(
-                    "mx-auto flex w-full flex-col gap-2",
-                    contentClassName,
-                  )}
-                  {...contentProps}
+                  {...mergeProps(contentProps, {
+                    className: tw("mx-auto flex w-full flex-col gap-2"),
+                  })}
                 >
                   {typeof children === "function"
                     ? children(renderProps)
@@ -204,21 +194,17 @@ export function Drawer(props: DrawerProps) {
 }
 
 export function DrawerTitle(props: DrawerTitleProps) {
-  const { className, ...restProps } = props;
   return (
     <BaseUIDrawer.Title
-      className={cnBaseUI("heading-sm", className)}
-      {...restProps}
+      {...mergeProps(props, { className: tw("heading-sm") })}
     />
   );
 }
 
 export function DrawerDescription(props: DrawerDescriptionProps) {
-  const { className, ...restProps } = props;
   return (
     <BaseUIDrawer.Description
-      className={cnBaseUI("body-sm text-body", className)}
-      {...restProps}
+      {...mergeProps(props, { className: tw("body-sm text-body") })}
     />
   );
 }

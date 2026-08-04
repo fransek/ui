@@ -1,6 +1,6 @@
 import React from "react";
 import * as RechartsPrimitive from "recharts";
-import { cn } from "../lib/utils";
+import { cn, mergeProps } from "../lib/utils";
 
 export type ChartConfig = {
   [key: string]: {
@@ -33,7 +33,7 @@ export interface ChartContainerProps extends React.ComponentProps<"div"> {
 }
 
 export function ChartContainer(props: ChartContainerProps) {
-  const { id, className, children, config, style, ...restProps } = props;
+  const { id, children, config, ...restProps } = props;
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
 
@@ -47,9 +47,10 @@ export function ChartContainer(props: ChartContainerProps) {
     <ChartContext.Provider value={{ config }}>
       <div
         data-chart={chartId}
-        className={chartStyles({ extend: className })}
-        style={{ ...colorVars, ...style }}
-        {...restProps}
+        {...mergeProps(restProps, {
+          className: chartStyles(),
+          style: colorVars,
+        })}
       >
         <RechartsPrimitive.ResponsiveContainer>
           {children}

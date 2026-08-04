@@ -4,7 +4,7 @@ import {
 } from "@base-ui/react/input";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cnBaseUI } from "../lib/utils";
+import { cn, mergeProps } from "../lib/utils";
 import { Field, fieldControlStyles, FieldProps } from "./field";
 
 export interface InputProps extends BaseUIInputProps, FieldAttributes {
@@ -21,7 +21,6 @@ export function Input(props: InputProps) {
     isValidating,
     isValidatingMessage,
     errorMessage,
-    className,
     description,
     infoPopover,
     fieldProps,
@@ -56,14 +55,14 @@ export function Input(props: InputProps) {
             </span>
           )}
           <BaseUIInput
-            className={cnBaseUI(
-              fieldControlStyles,
-              hasLeftAdornment && "pl-10",
-              hasRightAdornment && "pr-10",
-              className,
-            )}
             data-validating={isValidating ? "" : undefined}
-            {...restProps}
+            {...mergeProps(restProps, {
+              className: cn(
+                fieldControlStyles,
+                hasLeftAdornment && "pl-10",
+                hasRightAdornment && "pr-10",
+              ),
+            })}
           />
           {rightAdornment && (
             <span className="text-muted-fg absolute inset-y-0 right-0 z-10 flex items-center pr-2">

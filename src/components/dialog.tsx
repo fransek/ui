@@ -11,7 +11,7 @@ import {
 } from "@base-ui/react/dialog";
 import { X } from "lucide-react";
 import React from "react";
-import { cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { CloseButton, CloseButtonProps } from "./close-button";
 
 export interface DialogProps
@@ -40,8 +40,8 @@ export function Dialog(props: DialogProps) {
     open,
     triggerId,
     portalProps,
-    backdropProps: { className: backdropClassName, ...backdropProps } = {},
-    popupProps: { className: popupClassName, ...popupProps } = {},
+    backdropProps,
+    popupProps,
     closeProps,
     closeButtonProps,
     closeButtonIconProps,
@@ -66,18 +66,18 @@ export function Dialog(props: DialogProps) {
           <BaseUIDialog.Trigger render={trigger} {...restProps} />
           <BaseUIDialog.Portal {...portalProps}>
             <BaseUIDialog.Backdrop
-              className={cnBaseUI(
-                "fixed inset-0 min-h-dvh bg-black opacity-20 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
-                backdropClassName,
-              )}
-              {...backdropProps}
+              {...mergeProps(backdropProps, {
+                className: tw(
+                  "fixed inset-0 min-h-dvh bg-black opacity-20 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
+                ),
+              })}
             />
             <BaseUIDialog.Popup
-              className={cnBaseUI(
-                "bg-background text-foreground fixed top-1/2 left-1/2 -mt-8 w-96 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border p-4 transition-all duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
-                popupClassName,
-              )}
-              {...popupProps}
+              {...mergeProps(popupProps, {
+                className: tw(
+                  "bg-background text-foreground fixed top-1/2 left-1/2 -mt-8 w-96 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border p-4 transition-all duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+                ),
+              })}
             >
               <DialogClose
                 render={
@@ -101,21 +101,17 @@ export function Dialog(props: DialogProps) {
 }
 
 export function DialogTitle(props: DialogTitleProps) {
-  const { className, ...restProps } = props;
   return (
     <BaseUIDialog.Title
-      className={cnBaseUI("heading-xs", className)}
-      {...restProps}
+      {...mergeProps(props, { className: tw("heading-xs") })}
     />
   );
 }
 
 export function DialogDescription(props: DialogDescriptionProps) {
-  const { className, ...restProps } = props;
   return (
     <BaseUIDialog.Description
-      className={cnBaseUI("text-body body-sm mb-6", className)}
-      {...restProps}
+      {...mergeProps(props, { className: tw("text-body body-sm mb-6") })}
     />
   );
 }

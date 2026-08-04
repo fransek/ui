@@ -33,7 +33,7 @@ Tests use the Storybook Vitest addon and run in a real Chromium browser via Play
 src/
   components/   # One component per file; the public API
   lib/
-    utils.ts    # cn(), cnBaseUI(), mergeRefs()
+    utils.ts    # cn(), cnBaseUI(), mergeProps(), tw(), mergeRefs()
     types.ts    # FieldAttributes shared across form components
   stories/      # Storybook stories (also serve as tests)
   theme/        # Tailwind v4 CSS theme (vars.css defines tokens for :root + .dark)
@@ -43,7 +43,8 @@ src/
 **Component pattern.** Each component extends the corresponding Base UI primitive's props interface and spreads remaining props onto the primitive:
 
 - Export an `interface <Name>Props extends BaseUI<Name>Props` and add design-system props (e.g. `variant`, `size`).
-- Base UI's `className` accepts either a string or a `(state) => string` function. When composing classes, handle both — see `button.tsx`, which calls `className(state)` when it is a function. Use `cnBaseUI()` from `lib/utils` to compose state-dependent classes cleanly.
+- Forward the caller's props onto the primitive with `mergeProps(userProps, { className: tw("…") })` from `lib/utils` — it merges `className`, `style`, and `ref` (handling Base UI's `string | (state) => string` className duality) and spreads everything else, so components no longer split `className` out by hand. See `card.tsx`/`fieldset.tsx` for the pattern and any Base UI wrapper (`tabs.tsx`, `select.tsx`) for sub-prop forwarding. Keep computed attributes (`data-validating`, `aria-labelledby`) as explicit JSX before the `{...mergeProps(...)}` spread to preserve override precedence.
+- Wrap literal default class strings in `tw("…")` so the Prettier Tailwind plugin sorts them (`tw` is a no-op identity registered in `tailwindFunctions`); use `cn(...)` for conditional/multi-part defaults. `cnBaseUI()` remains only for the rarer case where the *default* className itself is state-dependent.
 - Style **only** with Tailwind utility classes via `cn(...)`; never manually concatenate class strings.
 - Style variant/size maps are plain objects keyed by union types (`keyof typeof variantStyles`), and the class-composition function (e.g. `buttonStyles`) is exported alongside the component for reuse.
 

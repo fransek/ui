@@ -9,7 +9,7 @@ import {
 } from "@base-ui/react/fieldset";
 import * as React from "react";
 import { FieldAttributes } from "../lib/types";
-import { cnBaseUI } from "../lib/utils";
+import { mergeProps, tw } from "../lib/utils";
 import { Field, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
@@ -32,11 +32,8 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
     description,
     fieldProps,
     infoPopover,
-    fieldsetProps: { className: fieldsetClassName, ...fieldsetProps } = {},
-    fieldsetLegendProps: {
-      className: fieldsetLegendClassName,
-      ...legendProps
-    } = {},
+    fieldsetProps,
+    fieldsetLegendProps,
     ...restProps
   } = props;
   return (
@@ -50,18 +47,17 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         {...fieldProps}
       >
         <Fieldset.Root
-          render={<BaseUICheckboxGroup {...restProps} />}
-          className={cnBaseUI("flex flex-col gap-1", fieldsetClassName)}
-          {...fieldsetProps}
+          {...mergeProps(fieldsetProps, {
+            className: tw("flex flex-col gap-1"),
+            render: <BaseUICheckboxGroup {...restProps} />,
+          })}
         >
           {label && (
             <div className="flex items-center gap-2">
               <Fieldset.Legend
-                className={cnBaseUI(
-                  "text-foreground text-sm font-semibold",
-                  fieldsetLegendClassName,
-                )}
-                {...legendProps}
+                {...mergeProps(fieldsetLegendProps, {
+                  className: tw("text-foreground text-sm font-semibold"),
+                })}
               >
                 {label}
               </Fieldset.Legend>

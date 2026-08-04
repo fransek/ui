@@ -6,7 +6,7 @@ import {
   MeterValueProps,
 } from "@base-ui/react/meter";
 import React from "react";
-import { cn, cnBaseUI } from "../lib/utils";
+import { cn, mergeProps, tw } from "../lib/utils";
 
 export interface MeterProps extends BaseUIMeterRootProps {
   /** Label describing what the meter represents. */
@@ -27,46 +27,42 @@ export function Meter(props: MeterProps) {
     showValue = true,
     variant = "primary",
     size = "md",
-    className,
-    labelProps: { className: labelClassName, ...labelProps } = {},
-    valueProps: { className: valueClassName, ...valueProps } = {},
-    trackProps: { className: trackClassName, ...trackProps } = {},
-    indicatorProps: { className: indicatorClassName, ...indicatorProps } = {},
+    labelProps,
+    valueProps,
+    trackProps,
+    indicatorProps,
     ...restProps
   } = props;
 
   return (
     <BaseUIMeter.Root
-      className={cnBaseUI("grid w-48 grid-cols-2 gap-y-1.5", className)}
-      {...restProps}
+      {...mergeProps(restProps, {
+        className: tw("grid w-48 grid-cols-2 gap-y-1.5"),
+      })}
     >
       {label && (
         <BaseUIMeter.Label
-          className={cnBaseUI(
-            "text-foreground col-start-1 text-sm font-medium",
-            labelClassName,
-          )}
-          {...labelProps}
+          {...mergeProps(labelProps, {
+            className: tw("text-foreground col-start-1 text-sm font-medium"),
+          })}
         >
           {label}
         </BaseUIMeter.Label>
       )}
       {showValue && (
         <BaseUIMeter.Value
-          className={cnBaseUI(
-            "text-muted-fg col-start-2 text-right text-sm",
-            valueClassName,
-          )}
-          {...valueProps}
+          {...mergeProps(valueProps, {
+            className: tw("text-muted-fg col-start-2 text-right text-sm"),
+          })}
         />
       )}
       <BaseUIMeter.Track
-        className={cnBaseUI(trackStyles({ size }), trackClassName)}
-        {...trackProps}
+        {...mergeProps(trackProps, { className: trackStyles({ size }) })}
       >
         <BaseUIMeter.Indicator
-          className={cnBaseUI(indicatorStyles({ variant }), indicatorClassName)}
-          {...indicatorProps}
+          {...mergeProps(indicatorProps, {
+            className: indicatorStyles({ variant }),
+          })}
         />
       </BaseUIMeter.Track>
     </BaseUIMeter.Root>
