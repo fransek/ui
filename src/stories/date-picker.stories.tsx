@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { expect, screen } from "storybook/test";
 import { DatePicker } from "../components/date-picker";
 
 const meta = {
@@ -31,9 +32,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {
-  args: {},
-};
+export const Basic: Story = {};
 
 const defaultBirthDate = "01/15/1990";
 
@@ -69,7 +68,6 @@ export const WithCustomFormat: Story = {
 };
 
 export const Controlled: Story = {
-  args: {},
   render: (args) => {
     const [date, setDate] = React.useState("05/20/1995");
     return (
@@ -79,5 +77,19 @@ export const Controlled: Story = {
         onValueChange={(newDate) => setDate(newDate)}
       />
     );
+  },
+  play: async ({ canvas, userEvent }) => {
+    const input = canvas.getByRole("textbox");
+    await userEvent.clear(input);
+    await userEvent.type(input, "12/25/2000");
+    await expect(input).toHaveValue("12/25/2000");
+    const button = canvas.getByRole("button", { name: "Select date" });
+    await userEvent.click(button);
+    const dateCell = screen.getByRole("button", {
+      name: "Wednesday, December 20th, 2000",
+    });
+    await userEvent.click(dateCell);
+    await userEvent.click(button);
+    await expect(input).toHaveValue("12/20/2000");
   },
 };
