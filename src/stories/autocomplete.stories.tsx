@@ -192,7 +192,7 @@ function AsyncAutocomplete(args: AutocompleteProps) {
       status={
         loading ? (
           <span className="flex items-center gap-2">
-            <Spinner size="sm" variant="muted" />
+            <Spinner size="sm" variant="primary" />
             Searching...
           </span>
         ) : null

@@ -14,10 +14,12 @@ import {
   AutocompleteStatusProps,
   Autocomplete as BaseUIAutocomplete,
 } from "@base-ui/react/autocomplete";
+import { X } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cn, mergeProps, tw } from "../lib/utils";
-import { CloseButton, CloseButtonProps } from "./close-button";
+import { Button } from "./button";
+import { CloseButtonProps } from "./close-button";
 import { Field, fieldControlStyles, FieldProps } from "./field";
 
 /** A group of items rendered under a shared `label` heading. */
@@ -200,7 +202,7 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
       value={item}
       {...mergeProps(itemProps, {
         className: tw(
-          "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 text-sm leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
+          "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
         ),
       })}
     >
@@ -294,7 +296,14 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
             {clearable && (
               <BaseUIAutocomplete.Clear
                 render={
-                  <CloseButton aria-label="Clear" {...clearButtonProps} />
+                  <Button
+                    aria-label="Clear"
+                    size="icon"
+                    variant="ghost"
+                    {...clearButtonProps}
+                  >
+                    <X className="size-3.5" />
+                  </Button>
                 }
                 {...clearProps}
               />
@@ -316,7 +325,7 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
             <BaseUIAutocomplete.Popup
               {...mergeProps(popupProps, {
                 className: tw(
-                  "bg-background outline-border max-h-[min(24rem,var(--available-height))] w-(--anchor-width) origin-(--transform-origin) overflow-y-auto rounded-lg bg-clip-padding py-1 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+                  "bg-background outline-border scrollbar-track-background scrollbar-thumb-muted max-h-[min(24rem,var(--available-height))] w-(--anchor-width) origin-(--transform-origin) overflow-y-auto rounded-lg bg-clip-padding py-1 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
                 ),
               })}
             >
