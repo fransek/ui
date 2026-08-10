@@ -27,9 +27,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Single: Story = {
-  args: {},
-};
+export const Single: Story = {};
 
 export const Range: Story = {
   args: {

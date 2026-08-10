@@ -12,5 +12,6 @@
     ".classNames",
     "style",
     "styles"
-  ]
+  ],
+  "js/ts.experimental.useTsgo": true
 }
