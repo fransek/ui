@@ -24,16 +24,28 @@
   "exports": {
     ".": {
       "style": "./dist/esm/theme.css",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
     },
     "./theme.css": {
       "import": "./dist/esm/theme.css",
       "require": "./dist/cjs/theme.css"
     },
     "./*": {
-      "import": "./dist/esm/components/*.js",
-      "require": "./dist/cjs/components/*.js"
+      "import": {
+        "types": "./dist/esm/components/*.d.ts",
+        "default": "./dist/esm/components/*.js"
+      },
+      "require": {
+        "types": "./dist/cjs/components/*.d.ts",
+        "default": "./dist/cjs/components/*.js"
+      }
     }
   },
   "sideEffects": [
