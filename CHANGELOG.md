@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.16.1](https://github.com/fransek/ui/compare/v0.16.0...v0.16.1) (2026-08-13)
+
+
+### Bug Fixes
+
+* **build:** ship type declarations that resolve for all consumers ([#119](https://github.com/fransek/ui/issues/119)) ([0c808b7](https://github.com/fransek/ui/commit/0c808b71bfa44809c5f69bd2cb4467a66905fcb5))
+
 ## [0.16.0](https://github.com/fransek/ui/compare/v0.15.0...v0.16.0) (2026-08-10)
 
 
