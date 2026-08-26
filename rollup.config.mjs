@@ -54,7 +54,15 @@ const addDeclarationExtensions = () => ({
 
 /** @type {() => import('rollup').RollupOptions} */
 const createConfig = (format, dir) => ({
-  input: "src/index.ts",
+  // `lib/types` is type-only, so nothing in the graph keeps it alive as a
+  // runtime module. Listing it as an entry forces an (empty) JS file to be
+  // emitted so the `@fransek/ui/types` subpath export resolves at runtime.
+  input: ["src/index.ts", "src/lib/utils.ts", "src/lib/types.ts"],
+  // `lib/types` has no runtime exports, so its chunk is expected to be empty.
+  onwarn(warning, warn) {
+    if (warning.code === "EMPTY_BUNDLE") return;
+    warn(warning);
+  },
   external: [
     "react",
     "react-dom",

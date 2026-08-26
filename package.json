@@ -37,6 +37,26 @@
       "import": "./dist/esm/theme.css",
       "require": "./dist/cjs/theme.css"
     },
+    "./utils": {
+      "import": {
+        "types": "./dist/esm/lib/utils.d.ts",
+        "default": "./dist/esm/lib/utils.js"
+      },
+      "require": {
+        "types": "./dist/cjs/lib/utils.d.ts",
+        "default": "./dist/cjs/lib/utils.js"
+      }
+    },
+    "./types": {
+      "import": {
+        "types": "./dist/esm/lib/types.d.ts",
+        "default": "./dist/esm/lib/types.js"
+      },
+      "require": {
+        "types": "./dist/cjs/lib/types.d.ts",
+        "default": "./dist/cjs/lib/types.js"
+      }
+    },
     "./*": {
       "import": {
         "types": "./dist/esm/components/*.d.ts",
