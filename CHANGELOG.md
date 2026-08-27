@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.17.0](https://github.com/fransek/ui/compare/v0.16.1...v0.17.0) (2026-08-26)
+
+
+### Features
+
+* **exports:** add ./utils and ./types subpath exports ([#121](https://github.com/fransek/ui/issues/121)) ([928e0ee](https://github.com/fransek/ui/commit/928e0eede4f780d31424ecf7b901bb5855b4a400))
+
 ## [0.16.1](https://github.com/fransek/ui/compare/v0.16.0...v0.16.1) (2026-08-13)
 
 
