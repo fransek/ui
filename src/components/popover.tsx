@@ -131,7 +131,7 @@ export function PopoverClose(props: PopoverCloseProps) {
   );
 }
 
-interface ArrowSvgProps extends React.ComponentProps<"svg"> {
+export interface ArrowSvgProps extends React.ComponentProps<"svg"> {
   backgroundPathProps?: React.ComponentProps<"path">;
   borderPathProps?: React.ComponentProps<"path">;
 }
