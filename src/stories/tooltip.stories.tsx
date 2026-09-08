@@ -1,8 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Decorator, Meta, StoryObj } from "@storybook/react-vite";
 import { Save, Trash } from "lucide-react";
 import React from "react";
 import { Button } from "../components/button";
 import { Tooltip, TooltipProvider } from "../components/tooltip";
+
+const withTooltipProvider: Decorator = (Story) => (
+  <TooltipProvider>
+    <Story />
+  </TooltipProvider>
+);
 
 const meta = {
   title: "Components/Tooltip",
@@ -19,6 +25,7 @@ const meta = {
     </Tooltip>
   ),
   component: Tooltip,
+  decorators: [withTooltipProvider],
   parameters: {
     layout: "centered",
   },
@@ -44,29 +51,27 @@ export const Side: Story = {
 
 export const Grouped: Story = {
   render: (args) => (
-    <TooltipProvider>
-      <div className="flex items-center gap-1">
-        <Tooltip
-          {...args}
-          trigger={
-            <Button variant="outline" size="icon" aria-label="Save">
-              <Save className="size-4" />
-            </Button>
-          }
-        >
-          Save
-        </Tooltip>
-        <Tooltip
-          {...args}
-          trigger={
-            <Button variant="outline" size="icon" aria-label="Delete">
-              <Trash className="text-danger-fg size-4" />
-            </Button>
-          }
-        >
-          Delete
-        </Tooltip>
-      </div>
-    </TooltipProvider>
+    <div className="flex items-center gap-1">
+      <Tooltip
+        {...args}
+        trigger={
+          <Button variant="outline" size="icon" aria-label="Save">
+            <Save className="size-4" />
+          </Button>
+        }
+      >
+        Save
+      </Tooltip>
+      <Tooltip
+        {...args}
+        trigger={
+          <Button variant="outline" size="icon" aria-label="Delete">
+            <Trash className="text-danger-fg size-4" />
+          </Button>
+        }
+      >
+        Delete
+      </Tooltip>
+    </div>
   ),
 };
