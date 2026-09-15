@@ -72,8 +72,14 @@ export function mergeProps<P extends ComponentProps | undefined>(
   if (props?.style != null || defaultProps?.style != null) {
     merged.style = mergeStyles(props?.style, defaultProps?.style);
   }
-  if (props?.ref != null || defaultProps?.ref != null) {
-    merged.ref = mergeRefs(props?.ref, defaultProps?.ref);
+  if (props?.ref != null && defaultProps?.ref != null) {
+    merged.ref = mergeRefs(props.ref, defaultProps.ref);
+  } else if (props?.ref != null || defaultProps?.ref != null) {
+    // Forward a lone ref untouched. Wrapping it would hand the element a new
+    // ref identity on every render, making React detach and reattach it — which
+    // breaks Base UI primitives whose callback refs write to a store (they
+    // register triggers there, so the writes loop back into another render).
+    merged.ref = props?.ref ?? defaultProps?.ref;
   }
 
   return merged;

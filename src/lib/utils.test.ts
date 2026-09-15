@@ -121,6 +121,21 @@ describe("mergeProps", () => {
     expect(mergedProps.style).toEqual({ backgroundColor: "red" });
   });
 
+  it("should forward a lone ref without rewrapping it", () => {
+    // Base UI primitives hand their trigger a deliberately stable callback ref
+    // and re-register the element whenever its identity changes. Rewrapping a
+    // single ref would give it a new identity on every render, so React would
+    // detach and reattach it each commit and the registration writes would loop
+    // back into another render.
+    const propsRef = vi.fn();
+    const defaultRef = vi.fn();
+
+    expect(mergeProps<InputProps>({ ref: propsRef }, {}).ref).toBe(propsRef);
+    expect(mergeProps<InputProps>({}, { ref: defaultRef }).ref).toBe(
+      defaultRef,
+    );
+  });
+
   it("should not fabricate className, style, or ref when neither side has them", () => {
     const mergedProps = mergeProps<InputProps>(
       { id: "input" },
