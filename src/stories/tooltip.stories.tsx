@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Save, Trash } from "lucide-react";
 import React from "react";
+import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
 import { Tooltip, TooltipProvider } from "../components/tooltip";
 
@@ -28,7 +29,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {};
+export const Basic: Story = {
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.hover(canvas.getByRole("button", { name: "Save" }));
+    await expect(await screen.findByText("Save")).toBeInTheDocument();
+  },
+};
 
 export const WithoutArrow: Story = {
   args: {

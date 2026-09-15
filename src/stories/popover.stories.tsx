@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
 import {
   Popover,
@@ -35,7 +36,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {};
+export const Basic: Story = {
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "Open Popover" }));
+    await expect(
+      await screen.findByText("Popover content"),
+    ).toBeInTheDocument();
+  },
+};
 
 export const WithArrow: Story = {
   args: {
