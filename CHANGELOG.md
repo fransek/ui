@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.18.0](https://github.com/fransek/ui/compare/v0.17.0...v0.18.0) (2026-09-15)
+
+
+### Features
+
+* add Menu and Menubar components ([#124](https://github.com/fransek/ui/issues/124)) ([b90ca1f](https://github.com/fransek/ui/commit/b90ca1f530d828714983e180ddc6ac88c74aa1d2))
+* **deps:** support react-day-picker v10 and update dependencies ([#126](https://github.com/fransek/ui/issues/126)) ([1eb86a9](https://github.com/fransek/ui/commit/1eb86a9d41adb006ad09b7b718bcd3a72e1fd80f))
+* unify hover states across components ([#128](https://github.com/fransek/ui/issues/128)) ([ed2be01](https://github.com/fransek/ui/commit/ed2be01803b431d958b8f7dde8cd0f0ab25cf9e3))
+
+
+### Bug Fixes
+
+* fixed ref forwarding in mergeProps to prevent re-registration loops ([#129](https://github.com/fransek/ui/issues/129)) ([90ed9f7](https://github.com/fransek/ui/commit/90ed9f776c0d3cd11efea23ee2d071587fd30344))
+
 ## [0.17.0](https://github.com/fransek/ui/compare/v0.16.1...v0.17.0) (2026-08-26)
 
 
