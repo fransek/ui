@@ -109,7 +109,7 @@ export function DatePicker(props: DatePickerProps) {
         </Popover.Root>
       }
       {...mergeProps(restProps, {
-        className: tw("hover:bg-card disabled:text-muted-fg"),
+        className: tw("disabled:text-muted-fg"),
       })}
     />
   );

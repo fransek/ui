@@ -210,7 +210,7 @@ export function Select<T, Multiple extends boolean | undefined = false>(
           value={triggerValue}
           {...mergeProps(restProps, {
             className: tw(
-              "bg-field outline-highlight focus-visible:focus-outline data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating hover:bg-card data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base shadow transition-colors outline-none select-none",
+              "bg-field outline-highlight focus-visible:focus-outline data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating hover:border-muted-fg data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base shadow transition-colors outline-none select-none",
             ),
           })}
         >
