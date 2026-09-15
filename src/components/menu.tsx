@@ -1,6 +1,5 @@
 import {
   Menu as BaseUIMenu,
-  MenuArrowProps as BaseUIMenuArrowProps,
   MenuCheckboxItemIndicatorProps as BaseUIMenuCheckboxItemIndicatorProps,
   MenuCheckboxItemProps as BaseUIMenuCheckboxItemProps,
   MenuGroupLabelProps as BaseUIMenuGroupLabelProps,
@@ -22,12 +21,10 @@ import { SeparatorProps as BaseUISeparatorProps } from "@base-ui/react/separator
 import { Check, ChevronRight, Circle } from "lucide-react";
 import React from "react";
 import { cn, mergeProps, tw } from "../lib/utils";
-import { ArrowSvg, ArrowSvgProps } from "./popover";
 
 export type MenuPortalProps = BaseUIMenuPortalProps;
 export type MenuPositionerProps = BaseUIMenuPositionerProps;
 export type MenuPopupProps = BaseUIMenuPopupProps;
-export type MenuArrowProps = BaseUIMenuArrowProps;
 export type MenuSubmenuTriggerProps = BaseUIMenuSubmenuTriggerProps;
 
 /** Shared styles for the popup of a menu and of any of its submenus. */
@@ -50,20 +47,14 @@ export interface MenuProps
     > {
   /** The element rendered as the trigger that opens the menu. */
   trigger?: BaseUIMenuTriggerProps["render"];
-  /** Whether to render an arrow pointing at the trigger. */
-  arrow?: boolean;
   portalProps?: MenuPortalProps;
   positionerProps?: MenuPositionerProps;
   popupProps?: MenuPopupProps;
-  arrowProps?: MenuArrowProps;
-  arrowElement?: React.ReactNode;
-  arrowSvgProps?: ArrowSvgProps;
 }
 
 export function Menu(props: MenuProps) {
   const {
     trigger,
-    arrow,
     actionsRef,
     children,
     closeParentOnEsc,
@@ -82,9 +73,6 @@ export function Menu(props: MenuProps) {
     portalProps,
     positionerProps,
     popupProps,
-    arrowProps,
-    arrowElement,
-    arrowSvgProps,
     className,
     ...restProps
   } = props;
@@ -129,17 +117,6 @@ export function Menu(props: MenuProps) {
               <BaseUIMenu.Popup
                 {...mergeProps(popupProps, { className: menuPopupStyles })}
               >
-                {arrow && (
-                  <BaseUIMenu.Arrow
-                    {...mergeProps(arrowProps, {
-                      className: tw(
-                        "data-[side=bottom]:-top-2 data-[side=left]:-right-3.25 data-[side=left]:rotate-90 data-[side=right]:-left-3.25 data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
-                      ),
-                    })}
-                  >
-                    {arrowElement ?? <ArrowSvg {...arrowSvgProps} />}
-                  </BaseUIMenu.Arrow>
-                )}
                 {typeof children === "function"
                   ? children(renderProps)
                   : children}
@@ -308,8 +285,7 @@ export function MenuSubmenu(props: MenuSubmenuProps) {
       </BaseUIMenu.SubmenuTrigger>
       <BaseUIMenu.Portal {...portalProps}>
         <BaseUIMenu.Positioner
-          sideOffset={submenuOffset}
-          alignOffset={submenuOffset}
+          sideOffset={1}
           {...mergeProps(positionerProps, {
             className: tw("z-10 outline-none"),
           })}
@@ -323,12 +299,4 @@ export function MenuSubmenu(props: MenuSubmenuProps) {
       </BaseUIMenu.Portal>
     </BaseUIMenu.SubmenuRoot>
   );
-}
-
-/**
- * Submenus sit right next to their trigger, so nudge them outwards when they are
- * placed on a side and inwards when they have to flip above or below it.
- */
-function submenuOffset({ side }: { side: MenuPositionerProps["side"] }) {
-  return side === "top" || side === "bottom" ? 4 : -4;
 }

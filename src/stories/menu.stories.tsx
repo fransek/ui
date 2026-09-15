@@ -40,12 +40,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {};
 
-export const WithArrow: Story = {
-  args: {
-    arrow: true,
-  },
-};
-
 /**
  * Set `openOnHover` to open the menu as soon as the trigger is hovered.
  */
