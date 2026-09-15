@@ -47,7 +47,7 @@ export function AccordionPanel(props: AccordionPanelProps) {
         <BaseUIAccordion.Trigger
           {...mergeProps(triggerProps, {
             className: tw(
-              "group hover:bg-card outline-highlight focus-visible:focus-outline relative flex w-full items-center justify-between gap-4 px-3 py-2 text-left font-medium focus-visible:z-1",
+              "group hover:bg-secondary hover:text-on-secondary outline-highlight focus-visible:focus-outline relative flex w-full items-center justify-between gap-4 px-3 py-2 text-left font-medium transition-colors focus-visible:z-1",
             ),
           })}
         >
