@@ -45,32 +45,22 @@ function mergeStyles<T>(style: Style<T>, defaultStyle: Style<T>) {
   };
 }
 
-export function mergeRefs<T>(...refs: (React.Ref<T> | undefined)[]) {
-  return (instance: T | null) => {
-    refs.forEach((ref) => {
-      if (typeof ref === "function") {
-        ref(instance);
-      } else if (ref) {
-        ref.current = instance;
-      }
-    });
-  };
-}
-
 /**
- * Merges refs while keeping the result's identity stable across renders.
+ * Merges refs into a single callback ref, memoized on the refs it wraps so the
+ * result keeps its identity across renders.
  *
- * `mergeRefs` builds a new function on every call, so handing its result
- * straight to an element gives React a different ref each render, and React
- * then detaches (calls with `null`) and reattaches it on every commit. Base UI
- * primitives register their trigger element from a callback ref and write that
- * registration into a store, so the churn re-renders the component and loops.
+ * Building that callback during render would hand the element a different ref
+ * every render, and React then detaches it (calls it with `null`) and
+ * reattaches it on every commit. Base UI primitives register their trigger
+ * element from a callback ref and write that registration into a popup store,
+ * so the churn re-renders the component and loops ("Maximum update depth
+ * exceeded").
  *
  * Returns the lone ref when only one is present, and `undefined` when there is
- * none, so a component that has no ref of its own to add never fabricates one.
+ * none, so a component with no ref of its own never fabricates one.
  *
  * Follows the rules of hooks: call it unconditionally at the top level of a
- * component. Use `mergeRefs` where that isn't possible.
+ * component.
  */
 export function useMergeRefs<T>(
   ...refs: (React.Ref<T> | undefined)[]
@@ -85,7 +75,15 @@ export function useMergeRefs<T>(
       if (present.length === 1) {
         return present[0];
       }
-      return mergeRefs(...present);
+      return (instance: T | null) => {
+        present.forEach((ref) => {
+          if (typeof ref === "function") {
+            ref(instance);
+          } else {
+            ref.current = instance;
+          }
+        });
+      };
     },
     // Rebuilt only when one of the refs it wraps changes identity. Call sites
     // pass a fixed number of refs, so the dependency list keeps its length.
@@ -93,6 +91,14 @@ export function useMergeRefs<T>(
   );
 }
 
+/**
+ * Merges `className` and `style`, and spreads everything else, with the
+ * caller's props winning.
+ *
+ * Refs are spread like any other prop and never combined: merging them means
+ * building a callback during render, which React reattaches on every commit.
+ * When two refs genuinely need to reach the same element, use `useMergeProps`.
+ */
 export function mergeProps<P extends ComponentProps | undefined>(
   props: P,
   defaultProps: DefaultProps<P>,
@@ -108,30 +114,20 @@ export function mergeProps<P extends ComponentProps | undefined>(
   if (props?.style != null || defaultProps?.style != null) {
     merged.style = mergeStyles(props?.style, defaultProps?.style);
   }
-  if (props?.ref != null && defaultProps?.ref != null) {
-    merged.ref = mergeRefs(props.ref, defaultProps.ref);
-  } else if (props?.ref != null || defaultProps?.ref != null) {
-    // Forward a lone ref untouched. Wrapping it would hand the element a new
-    // ref identity on every render, making React detach and reattach it — which
-    // breaks Base UI primitives whose callback refs write to a store (they
-    // register triggers there, so the writes loop back into another render).
-    merged.ref = props?.ref ?? defaultProps?.ref;
-  }
 
   return merged;
 }
 
 /**
- * `mergeProps` with a ref that keeps its identity across renders.
+ * `mergeProps` plus the ref merging it leaves out.
  *
- * Only differs from `mergeProps` when both sides carry a ref: `mergeProps`
- * merges those into a fresh callback each render, which React reattaches on
- * every commit. Reach for this whenever a component adds a ref of its own to
- * the default props; plain `mergeProps` stays correct when the caller's ref is
- * the only one, since it is then forwarded untouched.
+ * Reach for it only when two or more refs actually have to reach the same
+ * element — a component adding a ref of its own on top of the caller's.
+ * Everywhere else `mergeProps` is the right call: it spreads a lone ref
+ * untouched and, being no hook, stays usable inside conditional JSX.
  *
  * Follows the rules of hooks: call it unconditionally at the top level of a
- * component. Sub-props merged inside conditional JSX keep using `mergeProps`.
+ * component.
  */
 export function useMergeProps<P extends ComponentProps | undefined>(
   props: P,
