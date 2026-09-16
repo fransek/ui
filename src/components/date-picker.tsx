@@ -2,7 +2,7 @@ import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
 import { formatDate, isValid, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
-import { mergeProps, mergeRefs, tw } from "../lib/utils";
+import { mergeProps, tw, useMergeRefs } from "../lib/utils";
 import { Button } from "./button";
 import { Calendar, CalendarProps } from "./calendar";
 import { Input, InputProps } from "./input";
@@ -32,6 +32,7 @@ export function DatePicker(props: DatePickerProps) {
   } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const mergedRef = useMergeRefs(ref, inputRef);
   const now = new Date();
   const [internalDate, setInternalDate] = useState<Date | undefined>(
     parseDateString(value ?? defaultValue, format, now),
@@ -48,7 +49,7 @@ export function DatePicker(props: DatePickerProps) {
 
   return (
     <Input
-      ref={mergeRefs(ref, inputRef)}
+      ref={mergedRef}
       onValueChange={(newValue, e) => {
         if (!isControlled) {
           setInternalDate(parseDateString(newValue, format, now));

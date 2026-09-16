@@ -33,7 +33,7 @@ Tests use the Storybook Vitest addon and run in a real Chromium browser via Play
 src/
   components/   # One component per file; the public API
   lib/
-    utils.ts    # cn(), cnBaseUI(), mergeProps(), tw(), mergeRefs()
+    utils.ts    # cn(), cnBaseUI(), mergeProps(), tw(), useMergeProps(), useMergeRefs()
     types.ts    # FieldAttributes shared across form components
   stories/      # Storybook stories (also serve as tests)
   theme/        # Tailwind v4 CSS theme (vars.css defines tokens for :root + .dark)
@@ -43,7 +43,8 @@ src/
 **Component pattern.** Each component extends the corresponding Base UI primitive's props interface and spreads remaining props onto the primitive:
 
 - Export an `interface <Name>Props extends BaseUI<Name>Props` and add design-system props (e.g. `variant`, `size`).
-- Forward the caller's props onto the primitive with `mergeProps(userProps, { className: tw("…") })` from `lib/utils` — it merges `className`, `style`, and `ref` (handling Base UI's `string | (state) => string` className duality) and spreads everything else, so components no longer split `className` out by hand. See `card.tsx`/`fieldset.tsx` for the pattern and any Base UI wrapper (`tabs.tsx`, `select.tsx`) for sub-prop forwarding. Keep computed attributes (`data-validating`, `aria-labelledby`) as explicit JSX before the `{...mergeProps(...)}` spread to preserve override precedence.
+- Forward the caller's props onto the primitive with `mergeProps(userProps, { className: tw("…") })` from `lib/utils` — it merges `className` and `style` (handling Base UI's `string | (state) => string` duality) and spreads everything else, so components no longer split `className` out by hand. See `card.tsx`/`fieldset.tsx` for the pattern and any Base UI wrapper (`tabs.tsx`, `select.tsx`) for sub-prop forwarding. Keep computed attributes (`data-validating`, `aria-labelledby`) as explicit JSX before the `{...mergeProps(...)}` spread to preserve override precedence.
+- `mergeProps` never merges refs — it spreads them like any other prop, so the caller's ref reaches the element untouched. Only when a component adds a **ref of its own** on top of the caller's do the refs need combining, and that is what `useMergeProps(userProps, { ref: localRef, className: tw("…") })` and `useMergeRefs(userProps.ref, localRef)` (for a bare `ref` attribute, see `date-picker.tsx`) are for. Reach for them in that case only: a merged ref has to be built during render, so it arrives with a new identity every render, React detaches and reattaches it on every commit, and Base UI primitives — which register their trigger element from that callback ref and write the registration to a store — loop back into another render ("Maximum update depth exceeded"). The hooks memoize the merge to avoid exactly that, which is also why they follow the rules of hooks and cannot be called inside conditional JSX; `mergeProps` can, and is the right call everywhere else.
 - Wrap literal default class strings in `tw("…")` so the Prettier Tailwind plugin sorts them (`tw` is a no-op identity registered in `tailwindFunctions`); use `cn(...)` for conditional/multi-part defaults. `cnBaseUI()` remains only for the rarer case where the *default* className itself is state-dependent.
 - Style **only** with Tailwind utility classes via `cn(...)`; never manually concatenate class strings.
 - Style variant/size maps are plain objects keyed by union types (`keyof typeof variantStyles`), and the class-composition function (e.g. `buttonStyles`) is exported alongside the component for reuse.

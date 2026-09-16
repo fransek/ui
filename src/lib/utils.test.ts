@@ -10,56 +10,37 @@ const asFn = <T>(value: unknown) => value as (state: unknown) => T;
 
 describe("mergeProps", () => {
   it("should merge string className and style props correctly", () => {
-    const defaultRef = { current: null };
-    const propsRef = { current: null };
-    const node = {} as HTMLInputElement;
-
     const defaultProps = {
       className: "bg-red-500",
       style: { backgroundColor: "red" },
-      ref: defaultRef,
     };
 
     const props = {
       className: "bg-blue-500 text-white",
       style: { backgroundColor: "blue", color: "white" },
-      ref: propsRef,
     };
 
     const mergedProps = mergeProps<InputProps>(props, defaultProps);
-    asFn<void>(mergedProps.ref)(node);
 
-    expect(defaultRef.current).toBe(node);
-    expect(propsRef.current).toBe(node);
     expect(mergedProps).toEqual({
       className: "bg-blue-500 text-white",
       style: { backgroundColor: "blue", color: "white" },
-      ref: expect.any(Function),
     });
   });
 
   it("should merge function className and style props correctly", () => {
-    const defaultRef = vi.fn();
-    const propsRef = vi.fn();
-    const node = {} as HTMLInputElement;
-
     const defaultProps = {
       className: () => "bg-red-500",
       style: () => ({ backgroundColor: "red" }),
-      ref: defaultRef,
     };
 
     const props = {
       className: () => "bg-blue-500 text-white",
       style: () => ({ backgroundColor: "blue", color: "white" }),
-      ref: propsRef,
     };
 
     const mergedProps = mergeProps<InputProps>(props, defaultProps);
-    asFn<void>(mergedProps.ref)(node);
 
-    expect(defaultRef).toHaveBeenCalledWith(node);
-    expect(propsRef).toHaveBeenCalledWith(node);
     expect(asFn<string>(mergedProps.className)(null)).toBe(
       "bg-blue-500 text-white",
     );
@@ -103,7 +84,6 @@ describe("mergeProps", () => {
 
   it("should keep the default when props are undefined", () => {
     const defaultRef = vi.fn();
-    const node = {} as HTMLInputElement;
 
     // Sub-props like `labelProps` are typed `Props | undefined`, so model that
     // rather than a bare `undefined` (which would make `P & D` collapse).
@@ -114,19 +94,17 @@ describe("mergeProps", () => {
       ref: defaultRef,
     });
 
-    asFn<void>(mergedProps.ref)(node);
-
-    expect(defaultRef).toHaveBeenCalledWith(node);
+    expect(mergedProps.ref).toBe(defaultRef);
     expect(mergedProps.className).toBe("bg-red-500");
     expect(mergedProps.style).toEqual({ backgroundColor: "red" });
   });
 
-  it("should forward a lone ref without rewrapping it", () => {
-    // Base UI primitives hand their trigger a deliberately stable callback ref
-    // and re-register the element whenever its identity changes. Rewrapping a
-    // single ref would give it a new identity on every render, so React would
-    // detach and reattach it each commit and the registration writes would loop
-    // back into another render.
+  it("should spread refs without ever merging them", () => {
+    // A merged ref has to be built during render, so it would arrive with a new
+    // identity every render and React would detach and reattach it on every
+    // commit. Base UI primitives register their trigger element from that
+    // callback ref and write the registration into a store, which loops back
+    // into another render. Combining refs is `useMergeProps`'s job.
     const propsRef = vi.fn();
     const defaultRef = vi.fn();
 
@@ -134,6 +112,9 @@ describe("mergeProps", () => {
     expect(mergeProps<InputProps>({}, { ref: defaultRef }).ref).toBe(
       defaultRef,
     );
+    expect(
+      mergeProps<InputProps>({ ref: propsRef }, { ref: defaultRef }).ref,
+    ).toBe(propsRef);
   });
 
   it("should not fabricate className, style, or ref when neither side has them", () => {
