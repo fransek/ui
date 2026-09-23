@@ -1,3 +1,4 @@
+import { Dialog as BaseUIDialog } from "@base-ui/react/dialog";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
@@ -44,16 +45,18 @@ export const DisablePointerDismissal: Story = {
   },
 };
 
-export const WithoutTrigger: Story = {
+const detachedDialog = BaseUIDialog.createHandle();
+
+export const DetachedTrigger: Story = {
   render: (args) => {
-    const [open, setOpen] = React.useState(false);
     return (
       <>
-        <Button variant="outline" onClick={() => setOpen(true)}>
-          Open controlled
-        </Button>
-        <Dialog {...args} open={open} onOpenChange={setOpen}>
-          <DialogTitle>Controlled dialog</DialogTitle>
+        <BaseUIDialog.Trigger
+          handle={detachedDialog}
+          render={<Button variant="outline">Open detached</Button>}
+        />
+        <Dialog {...args} handle={detachedDialog}>
+          <DialogTitle>Detached dialog</DialogTitle>
         </Dialog>
       </>
     );
@@ -61,10 +64,10 @@ export const WithoutTrigger: Story = {
   play: async ({ canvas, userEvent }) => {
     await expect(canvas.getAllByRole("button")).toHaveLength(1);
     await userEvent.click(
-      canvas.getByRole("button", { name: "Open controlled" }),
+      canvas.getByRole("button", { name: "Open detached" }),
     );
     await expect(
-      await screen.findByText("Controlled dialog"),
+      await screen.findByText("Detached dialog"),
     ).toBeInTheDocument();
   },
 };

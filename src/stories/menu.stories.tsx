@@ -1,5 +1,7 @@
+import { Menu as BaseUIMenu } from "@base-ui/react/menu";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
 import {
   Menu,
@@ -118,4 +120,31 @@ export const LinkItems: Story = {
       </MenuLinkItem>
     </Menu>
   ),
+};
+
+const detachedMenu = BaseUIMenu.createHandle();
+
+export const DetachedTrigger: Story = {
+  render: (args) => {
+    return (
+      <>
+        <BaseUIMenu.Trigger
+          handle={detachedMenu}
+          render={<Button variant="outline">Open detached</Button>}
+        />
+        <Menu {...args} handle={detachedMenu}>
+          <MenuItem>Detached item</MenuItem>
+        </Menu>
+      </>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getAllByRole("button")).toHaveLength(1);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Open detached" }),
+    );
+    await expect(
+      await screen.findByRole("menuitem", { name: "Detached item" }),
+    ).toBeInTheDocument();
+  },
 };

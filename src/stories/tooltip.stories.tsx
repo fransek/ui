@@ -1,3 +1,4 @@
+import { Tooltip as BaseUITooltip } from "@base-ui/react/tooltip";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Save, Trash } from "lucide-react";
 import React from "react";
@@ -75,4 +76,33 @@ export const Grouped: Story = {
       </div>
     </TooltipProvider>
   ),
+};
+
+const detachedTooltip = BaseUITooltip.createHandle();
+
+export const DetachedTrigger: Story = {
+  render: (args) => {
+    return (
+      <>
+        <BaseUITooltip.Trigger
+          handle={detachedTooltip}
+          render={
+            <Button variant="outline" size="icon" aria-label="Delete">
+              <Trash className="size-4" />
+            </Button>
+          }
+        />
+        <Tooltip {...args} handle={detachedTooltip}>
+          Detached tooltip
+        </Tooltip>
+      </>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getAllByRole("button")).toHaveLength(1);
+    await userEvent.hover(canvas.getByRole("button", { name: "Delete" }));
+    await expect(
+      await screen.findByText("Detached tooltip"),
+    ).toBeInTheDocument();
+  },
 };

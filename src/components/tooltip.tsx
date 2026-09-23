@@ -66,11 +66,13 @@ export function Tooltip(props: TooltipProps) {
     >
       {(renderProps) => (
         <>
-          <BaseUITooltip.Trigger
-            render={trigger}
-            className={className}
-            {...restProps}
-          />
+          {trigger && (
+            <BaseUITooltip.Trigger
+              render={trigger}
+              className={className}
+              {...restProps}
+            />
+          )}
           <BaseUITooltip.Portal {...portalProps}>
             <BaseUITooltip.Positioner
               sideOffset={8}

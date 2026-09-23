@@ -1,3 +1,4 @@
+import { Popover as BaseUIPopover } from "@base-ui/react/popover";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
@@ -54,5 +55,32 @@ export const WithArrow: Story = {
 export const Modal: Story = {
   args: {
     modal: true,
+  },
+};
+
+const detachedPopover = BaseUIPopover.createHandle();
+
+export const DetachedTrigger: Story = {
+  render: (args) => {
+    return (
+      <>
+        <BaseUIPopover.Trigger
+          handle={detachedPopover}
+          render={<Button variant="outline">Open detached</Button>}
+        />
+        <Popover {...args} handle={detachedPopover}>
+          <PopoverTitle>Detached popover</PopoverTitle>
+        </Popover>
+      </>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getAllByRole("button")).toHaveLength(1);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Open detached" }),
+    );
+    await expect(
+      await screen.findByText("Detached popover"),
+    ).toBeInTheDocument();
   },
 };
