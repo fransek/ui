@@ -43,3 +43,28 @@ export const DisablePointerDismissal: Story = {
     disablePointerDismissal: true,
   },
 };
+
+export const WithoutTrigger: Story = {
+  render: (args) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <>
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Open controlled
+        </Button>
+        <Dialog {...args} open={open} onOpenChange={setOpen}>
+          <DialogTitle>Controlled dialog</DialogTitle>
+        </Dialog>
+      </>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getAllByRole("button")).toHaveLength(1);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Open controlled" }),
+    );
+    await expect(
+      await screen.findByText("Controlled dialog"),
+    ).toBeInTheDocument();
+  },
+};
