@@ -1,4 +1,3 @@
-import { Dialog as BaseUIDialog } from "@base-ui/react/dialog";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
@@ -45,17 +44,15 @@ export const DisablePointerDismissal: Story = {
   },
 };
 
-const detachedDialog = BaseUIDialog.createHandle();
-
 export const DetachedTrigger: Story = {
   render: (args) => {
+    const [open, setOpen] = React.useState(false);
     return (
       <>
-        <BaseUIDialog.Trigger
-          handle={detachedDialog}
-          render={<Button variant="outline">Open detached</Button>}
-        />
-        <Dialog {...args} handle={detachedDialog}>
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Open detached
+        </Button>
+        <Dialog {...args} open={open} onOpenChange={setOpen}>
           <DialogTitle>Detached dialog</DialogTitle>
         </Dialog>
       </>

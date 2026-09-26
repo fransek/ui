@@ -1,4 +1,3 @@
-import { Popover as BaseUIPopover } from "@base-ui/react/popover";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
@@ -58,17 +57,21 @@ export const Modal: Story = {
   },
 };
 
-const detachedPopover = BaseUIPopover.createHandle();
-
 export const DetachedTrigger: Story = {
   render: (args) => {
+    const [open, setOpen] = React.useState(false);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
     return (
       <>
-        <BaseUIPopover.Trigger
-          handle={detachedPopover}
-          render={<Button variant="outline">Open detached</Button>}
-        />
-        <Popover {...args} handle={detachedPopover}>
+        <Button ref={buttonRef} variant="outline" onClick={() => setOpen(true)}>
+          Open detached
+        </Button>
+        <Popover
+          {...args}
+          open={open}
+          onOpenChange={setOpen}
+          positionerProps={{ anchor: buttonRef }}
+        >
           <PopoverTitle>Detached popover</PopoverTitle>
         </Popover>
       </>

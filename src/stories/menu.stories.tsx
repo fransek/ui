@@ -1,4 +1,3 @@
-import { Menu as BaseUIMenu } from "@base-ui/react/menu";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
@@ -122,17 +121,21 @@ export const LinkItems: Story = {
   ),
 };
 
-const detachedMenu = BaseUIMenu.createHandle();
-
 export const DetachedTrigger: Story = {
   render: (args) => {
+    const [open, setOpen] = React.useState(false);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
     return (
       <>
-        <BaseUIMenu.Trigger
-          handle={detachedMenu}
-          render={<Button variant="outline">Open detached</Button>}
-        />
-        <Menu {...args} handle={detachedMenu}>
+        <Button ref={buttonRef} variant="outline" onClick={() => setOpen(true)}>
+          Open detached
+        </Button>
+        <Menu
+          {...args}
+          open={open}
+          onOpenChange={setOpen}
+          positionerProps={{ anchor: buttonRef }}
+        >
           <MenuItem>Detached item</MenuItem>
         </Menu>
       </>

@@ -1,4 +1,3 @@
-import { Tooltip as BaseUITooltip } from "@base-ui/react/tooltip";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Save, Trash } from "lucide-react";
 import React from "react";
@@ -78,21 +77,30 @@ export const Grouped: Story = {
   ),
 };
 
-const detachedTooltip = BaseUITooltip.createHandle();
-
 export const DetachedTrigger: Story = {
   render: (args) => {
+    const [open, setOpen] = React.useState(false);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
     return (
       <>
-        <BaseUITooltip.Trigger
-          handle={detachedTooltip}
-          render={
-            <Button variant="outline" size="icon" aria-label="Delete">
-              <Trash className="size-4" />
-            </Button>
-          }
-        />
-        <Tooltip {...args} handle={detachedTooltip}>
+        <Button
+          ref={buttonRef}
+          variant="outline"
+          size="icon"
+          aria-label="Delete"
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+          onFocus={() => setOpen(true)}
+          onBlur={() => setOpen(false)}
+        >
+          <Trash className="size-4" />
+        </Button>
+        <Tooltip
+          {...args}
+          open={open}
+          onOpenChange={setOpen}
+          positionerProps={{ anchor: buttonRef }}
+        >
           Detached tooltip
         </Tooltip>
       </>

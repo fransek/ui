@@ -1,4 +1,3 @@
-import { Drawer as BaseUIDrawer } from "@base-ui/react/drawer";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
@@ -121,17 +120,15 @@ export const NonModal: Story = {
   },
 };
 
-const detachedDrawer = BaseUIDrawer.createHandle();
-
 export const DetachedTrigger: Story = {
   render: (args) => {
+    const [open, setOpen] = React.useState(false);
     return (
       <>
-        <BaseUIDrawer.Trigger
-          handle={detachedDrawer}
-          render={<Button variant="outline">Open detached</Button>}
-        />
-        <Drawer {...args} handle={detachedDrawer}>
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Open detached
+        </Button>
+        <Drawer {...args} open={open} onOpenChange={setOpen}>
           <DrawerTitle>Detached drawer</DrawerTitle>
         </Drawer>
       </>
