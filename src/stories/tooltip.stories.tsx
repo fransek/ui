@@ -76,3 +76,41 @@ export const Grouped: Story = {
     </TooltipProvider>
   ),
 };
+
+export const DetachedTrigger: Story = {
+  render: (args) => {
+    const [open, setOpen] = React.useState(false);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    return (
+      <>
+        <Button
+          ref={buttonRef}
+          variant="outline"
+          size="icon"
+          aria-label="Delete"
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+          onFocus={() => setOpen(true)}
+          onBlur={() => setOpen(false)}
+        >
+          <Trash className="size-4" />
+        </Button>
+        <Tooltip
+          {...args}
+          open={open}
+          onOpenChange={setOpen}
+          positionerProps={{ anchor: buttonRef }}
+        >
+          Detached tooltip
+        </Tooltip>
+      </>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getAllByRole("button")).toHaveLength(1);
+    await userEvent.hover(canvas.getByRole("button", { name: "Delete" }));
+    await expect(
+      await screen.findByText("Detached tooltip"),
+    ).toBeInTheDocument();
+  },
+};

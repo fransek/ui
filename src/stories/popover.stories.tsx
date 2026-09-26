@@ -56,3 +56,34 @@ export const Modal: Story = {
     modal: true,
   },
 };
+
+export const DetachedTrigger: Story = {
+  render: (args) => {
+    const [open, setOpen] = React.useState(false);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    return (
+      <>
+        <Button ref={buttonRef} variant="outline" onClick={() => setOpen(true)}>
+          Open detached
+        </Button>
+        <Popover
+          {...args}
+          open={open}
+          onOpenChange={setOpen}
+          positionerProps={{ anchor: buttonRef }}
+        >
+          <PopoverTitle>Detached popover</PopoverTitle>
+        </Popover>
+      </>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getAllByRole("button")).toHaveLength(1);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Open detached" }),
+    );
+    await expect(
+      await screen.findByText("Detached popover"),
+    ).toBeInTheDocument();
+  },
+};

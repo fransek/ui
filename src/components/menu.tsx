@@ -83,7 +83,7 @@ export function Menu(props: MenuProps) {
    * changes, and re-creating the trigger on every one of those renders makes it
    * register itself again, which renders `Menu.Root` again, and so on.
    */
-  const triggerElement = (
+  const triggerElement = trigger && (
     <BaseUIMenu.Trigger render={trigger} className={className} {...restProps} />
   );
 

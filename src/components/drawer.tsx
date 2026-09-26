@@ -138,7 +138,7 @@ export function Drawer(props: DrawerProps) {
     >
       {(renderProps) => (
         <>
-          <BaseUIDrawer.Trigger render={trigger} {...restProps} />
+          {trigger && <BaseUIDrawer.Trigger render={trigger} {...restProps} />}
           <BaseUIDrawer.Portal {...portalProps}>
             <BaseUIDrawer.Backdrop
               hidden={modal === false}

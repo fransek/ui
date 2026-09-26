@@ -64,11 +64,13 @@ export function Popover(props: PopoverProps) {
     >
       {(renderProps) => (
         <>
-          <BaseUIPopover.Trigger
-            render={trigger}
-            className={className}
-            {...restProps}
-          />
+          {trigger && (
+            <BaseUIPopover.Trigger
+              render={trigger}
+              className={className}
+              {...restProps}
+            />
+          )}
           <BaseUIPopover.Portal {...portalProps}>
             <BaseUIPopover.Positioner
               sideOffset={8}

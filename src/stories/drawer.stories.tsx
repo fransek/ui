@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
 import {
   Drawer,
@@ -116,5 +117,30 @@ export const NonModal: Story = {
     direction: "bottom",
     disablePointerDismissal: true,
     modal: false,
+  },
+};
+
+export const DetachedTrigger: Story = {
+  render: (args) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <>
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Open detached
+        </Button>
+        <Drawer {...args} open={open} onOpenChange={setOpen}>
+          <DrawerTitle>Detached drawer</DrawerTitle>
+        </Drawer>
+      </>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getAllByRole("button")).toHaveLength(1);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Open detached" }),
+    );
+    await expect(
+      await screen.findByText("Detached drawer"),
+    ).toBeInTheDocument();
   },
 };

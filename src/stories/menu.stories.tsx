@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
 import {
   Menu,
@@ -118,4 +119,35 @@ export const LinkItems: Story = {
       </MenuLinkItem>
     </Menu>
   ),
+};
+
+export const DetachedTrigger: Story = {
+  render: (args) => {
+    const [open, setOpen] = React.useState(false);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    return (
+      <>
+        <Button ref={buttonRef} variant="outline" onClick={() => setOpen(true)}>
+          Open detached
+        </Button>
+        <Menu
+          {...args}
+          open={open}
+          onOpenChange={setOpen}
+          positionerProps={{ anchor: buttonRef }}
+        >
+          <MenuItem>Detached item</MenuItem>
+        </Menu>
+      </>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getAllByRole("button")).toHaveLength(1);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Open detached" }),
+    );
+    await expect(
+      await screen.findByRole("menuitem", { name: "Detached item" }),
+    ).toBeInTheDocument();
+  },
 };

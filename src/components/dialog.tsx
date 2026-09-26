@@ -63,7 +63,7 @@ export function Dialog(props: DialogProps) {
     >
       {(renderProps) => (
         <>
-          <BaseUIDialog.Trigger render={trigger} {...restProps} />
+          {trigger && <BaseUIDialog.Trigger render={trigger} {...restProps} />}
           <BaseUIDialog.Portal {...portalProps}>
             <BaseUIDialog.Backdrop
               {...mergeProps(backdropProps, {
