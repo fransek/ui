@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.19.0](https://github.com/fransek/ui/compare/v0.18.0...v0.19.0) (2026-09-26)
+
+
+### Features
+
+* move ref merging out of mergeProps into useMergeProps/useMergeRefs ([#130](https://github.com/fransek/ui/issues/130)) ([6ced4fc](https://github.com/fransek/ui/commit/6ced4fcb74cdc1e88795b088cf441c40f2000106))
+
+
+### Bug Fixes
+
+* skip rendering the built-in trigger when `trigger` is omitted ([#132](https://github.com/fransek/ui/issues/132)) ([0d98be2](https://github.com/fransek/ui/commit/0d98be2840aea2b02f1a54fd873409cc05ea0224))
+
 ## [0.18.0](https://github.com/fransek/ui/compare/v0.17.0...v0.18.0) (2026-09-15)
 
 
