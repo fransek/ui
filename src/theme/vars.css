@@ -15,10 +15,10 @@
   --on-primary: oklch(100% 0 0);
   --primary-fg: oklch(41% 0.15 280);
 
-  --secondary: oklch(90% 0 0);
-  --secondary-hover: oklch(95% 0 0);
+  --secondary: oklch(50% 0 0 / 0.2);
+  --secondary-hover: oklch(50% 0 0 / 0.3);
   --on-secondary: oklch(41% 0.15 280);
-  --secondary-fg: oklch(56% 0.15 280);
+  --secondary-fg: oklch(33% 0.1 280);
 
   --muted: oklch(45% 0 0);
   --muted-hover: oklch(50% 0 0);
@@ -30,15 +30,30 @@
   --on-danger: oklch(100% 0 0);
   --danger-fg: oklch(50% 0.15 25);
 
+  --danger-subtle: oklch(53% 0.15 25 / 0.2);
+  --danger-subtle-hover: oklch(53% 0.15 25 / 0.3);
+  --on-danger-subtle: oklch(50% 0.15 25);
+  --danger-subtle-fg: oklch(50% 0.1 25);
+
   --warning: oklch(82% 0.15 88);
   --warning-hover: oklch(87% 0.15 88);
   --on-warning: oklch(19% 0 0);
   --warning-fg: oklch(55% 0.15 50);
 
+  --warning-subtle: oklch(53% 0.15 88 / 0.2);
+  --warning-subtle-hover: oklch(53% 0.15 88 / 0.3);
+  --on-warning-subtle: oklch(50% 0.15 50);
+  --warning-subtle-fg: oklch(55% 0.1 50);
+
   --success: oklch(52% 0.15 150);
   --success-hover: oklch(57% 0.15 150);
   --on-success: oklch(100% 0 0);
   --success-fg: oklch(47% 0.15 150);
+
+  --success-subtle: oklch(53% 0.15 150 / 0.2);
+  --success-subtle-hover: oklch(53% 0.15 150 / 0.3);
+  --on-success-subtle: oklch(45% 0.15 150);
+  --success-subtle-fg: oklch(47% 0.1 150);
 
   --code: oklch(46% 0.07 280);
   --code-hover: oklch(51% 0.07 280);
@@ -69,10 +84,10 @@
   --on-primary: oklch(100% 0 0);
   --primary-fg: oklch(62% 0.15 280);
 
-  --secondary: oklch(23% 0 0);
-  --secondary-hover: oklch(28% 0 0);
+  --secondary: oklch(50% 0 0 / 0.2);
+  --secondary-hover: oklch(50% 0 0 / 0.3);
   --on-secondary: oklch(72% 0.15 280);
-  --secondary-fg: oklch(82% 0.15 280);
+  --secondary-fg: oklch(82% 0.1 280);
 
   --muted: oklch(39% 0 0);
   --muted-hover: oklch(44% 0 0);
@@ -84,15 +99,30 @@
   --on-danger: oklch(100% 0 0);
   --danger-fg: oklch(61% 0.15 25);
 
+  --danger-subtle: oklch(45% 0.15 25 / 0.2);
+  --danger-subtle-hover: oklch(45% 0.15 25 / 0.3);
+  --on-danger-subtle: oklch(70% 0.15 25);
+  --danger-subtle-fg: oklch(61% 0.1 25);
+
   --warning: oklch(80% 0.15 87);
   --warning-hover: oklch(85% 0.15 87);
   --on-warning: oklch(0% 0 0);
   --warning-fg: oklch(80% 0.15 87);
 
+  --warning-subtle: oklch(80% 0.15 87 / 0.2);
+  --warning-subtle-hover: oklch(80% 0.15 87 / 0.3);
+  --on-warning-subtle: oklch(80% 0.15 87);
+  --warning-subtle-fg: oklch(80% 0.1 87);
+
   --success: oklch(53% 0.15 150);
   --success-hover: oklch(58% 0.17 150);
   --on-success: oklch(100% 0 0);
   --success-fg: oklch(72% 0.15 150);
+
+  --success-subtle: oklch(53% 0.15 150 / 0.2);
+  --success-subtle-hover: oklch(53% 0.15 150 / 0.3);
+  --on-success-subtle: oklch(70% 0.15 150);
+  --success-subtle-fg: oklch(70% 0.1 150);
 
   --code: oklch(25% 0.05 280);
   --code-hover: oklch(30% 0.05 280);
@@ -140,15 +170,30 @@
   --color-on-danger: var(--on-danger);
   --color-danger-fg: var(--danger-fg);
 
+  --color-danger-subtle: var(--danger-subtle);
+  --color-danger-subtle-hover: var(--danger-subtle-hover);
+  --color-on-danger-subtle: var(--on-danger-subtle);
+  --color-danger-subtle-fg: var(--danger-subtle-fg);
+
   --color-warning: var(--warning);
   --color-warning-hover: var(--warning-hover);
   --color-on-warning: var(--on-warning);
   --color-warning-fg: var(--warning-fg);
 
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-subtle-hover: var(--warning-subtle-hover);
+  --color-on-warning-subtle: var(--on-warning-subtle);
+  --color-warning-subtle-fg: var(--warning-subtle-fg);
+
   --color-success: var(--success);
   --color-success-hover: var(--success-hover);
   --color-on-success: var(--on-success);
   --color-success-fg: var(--success-fg);
+
+  --color-success-subtle: var(--success-subtle);
+  --color-success-subtle-hover: var(--success-subtle-hover);
+  --color-on-success-subtle: var(--on-success-subtle);
+  --color-success-subtle-fg: var(--success-subtle-fg);
 
   --color-code: var(--code);
   --color-code-hover: var(--code-hover);
