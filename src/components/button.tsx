@@ -1,12 +1,9 @@
-import {
-  Button as BaseUIButton,
-  ButtonProps as BaseUIButtonProps,
-} from "@base-ui/react/button";
+import * as BaseUI from "@base-ui/react/button";
 import React from "react";
 import { cn, mergeProps, tw } from "../lib/utils";
 import { Tooltip, TooltipProps } from "./tooltip";
 
-export interface ButtonProps extends BaseUIButtonProps {
+export interface ButtonProps extends BaseUI.ButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   compact?: boolean;
@@ -26,7 +23,7 @@ export function Button(props: ButtonProps) {
   } = props;
 
   const button = (
-    <BaseUIButton
+    <BaseUI.Button
       focusableWhenDisabled
       aria-label={
         typeof tooltip === "string" && size === "icon" ? tooltip : undefined
@@ -36,7 +33,7 @@ export function Button(props: ButtonProps) {
       })}
     >
       {children}
-    </BaseUIButton>
+    </BaseUI.Button>
   );
 
   if (tooltip)

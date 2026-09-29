@@ -1,12 +1,5 @@
-import {
-  Fieldset,
-  FieldsetLegendProps,
-  FieldsetRootProps,
-} from "@base-ui/react/fieldset";
-import {
-  RadioGroup as BaseUIRadioGroup,
-  RadioGroupProps as BaseUIRadioGroupProps,
-} from "@base-ui/react/radio-group";
+import * as BaseUIFieldset from "@base-ui/react/fieldset";
+import * as BaseUI from "@base-ui/react/radio-group";
 import * as React from "react";
 import { FieldAttributes } from "../lib/types";
 import { mergeProps, tw } from "../lib/utils";
@@ -14,10 +7,10 @@ import { Field, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
 export interface RadioGroupProps<T>
-  extends BaseUIRadioGroupProps<T>, FieldAttributes {
+  extends BaseUI.RadioGroupProps<T>, FieldAttributes {
   fieldProps?: FieldProps;
-  fieldsetProps?: FieldsetRootProps;
-  fieldsetLegendProps?: FieldsetLegendProps;
+  fieldsetProps?: BaseUIFieldset.FieldsetRootProps;
+  fieldsetLegendProps?: BaseUIFieldset.FieldsetLegendProps;
 }
 
 export function RadioGroup<T>(props: RadioGroupProps<T>) {
@@ -45,28 +38,28 @@ export function RadioGroup<T>(props: RadioGroupProps<T>) {
       invalid={invalid}
       {...fieldProps}
     >
-      <Fieldset.Root
+      <BaseUIFieldset.Fieldset.Root
         {...mergeProps(fieldsetProps, {
           className: tw("flex flex-col gap-1"),
-          render: <BaseUIRadioGroup {...restProps} />,
+          render: <BaseUI.RadioGroup {...restProps} />,
         })}
       >
         {label && (
           <div className="flex items-center gap-2">
-            <Fieldset.Legend
+            <BaseUIFieldset.Fieldset.Legend
               {...mergeProps(fieldsetLegendProps, {
                 className: tw("text-foreground text-sm font-semibold"),
               })}
             >
               {label}
-            </Fieldset.Legend>
+            </BaseUIFieldset.Fieldset.Legend>
             {infoPopover && (
               <InfoPopover fieldLabel={label}>{infoPopover}</InfoPopover>
             )}
           </div>
         )}
         {children}
-      </Fieldset.Root>
+      </BaseUIFieldset.Fieldset.Root>
     </Field>
   );
 }

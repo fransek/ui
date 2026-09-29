@@ -2,12 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
-import {
-  Popover,
-  PopoverClose,
-  PopoverDescription,
-  PopoverTitle,
-} from "../components/popover";
+import { Popover } from "../components/popover";
 
 const meta = {
   title: "Components/Popover",
@@ -16,13 +11,13 @@ const meta = {
       {...args}
       trigger={<Button variant="outline">Open Popover</Button>}
     >
-      <PopoverClose />
-      <PopoverTitle className="mb-2">Popover content</PopoverTitle>
-      <PopoverDescription className="mb-4">
+      <Popover.Close />
+      <Popover.Title className="mb-2">Popover content</Popover.Title>
+      <Popover.Description className="mb-4">
         This popover can contain contextual information or actions.
-      </PopoverDescription>
+      </Popover.Description>
       <div className="flex justify-end">
-        <PopoverClose render={<Button size="sm">Close</Button>} />
+        <Popover.Close render={<Button size="sm">Close</Button>} />
       </div>
     </Popover>
   ),
@@ -72,7 +67,7 @@ export const DetachedTrigger: Story = {
           onOpenChange={setOpen}
           positionerProps={{ anchor: buttonRef }}
         >
-          <PopoverTitle>Detached popover</PopoverTitle>
+          <Popover.Title>Detached popover</Popover.Title>
         </Popover>
       </>
     );

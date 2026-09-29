@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { Accordion, AccordionPanel } from "../components/accordion";
+import { Accordion } from "../components/accordion";
 
 const items = [
   {
@@ -36,9 +36,9 @@ const meta = {
   render: (args) => (
     <Accordion {...args}>
       {items.map(({ value, title, content }) => (
-        <AccordionPanel key={value} value={value} summary={title}>
+        <Accordion.Panel key={value} value={value} summary={title}>
           <p className="body-sm text-body">{content}</p>
-        </AccordionPanel>
+        </Accordion.Panel>
       ))}
     </Accordion>
   ),

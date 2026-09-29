@@ -2,31 +2,21 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
-import {
-  Menu,
-  MenuCheckboxItem,
-  MenuGroup,
-  MenuItem,
-  MenuLinkItem,
-  MenuRadioGroup,
-  MenuRadioItem,
-  MenuSeparator,
-  MenuSubmenu,
-} from "../components/menu";
+import { Menu } from "../components/menu";
 
 const meta = {
   title: "Components/Menu",
   render: (args) => (
     <Menu {...args} trigger={<Button variant="outline">Open menu</Button>}>
-      <MenuItem>New file</MenuItem>
-      <MenuItem>Open file</MenuItem>
-      <MenuSubmenu trigger="Export as">
-        <MenuItem>PDF</MenuItem>
-        <MenuItem>PNG</MenuItem>
-        <MenuItem>SVG</MenuItem>
-      </MenuSubmenu>
-      <MenuSeparator />
-      <MenuItem disabled>Print</MenuItem>
+      <Menu.Item>New file</Menu.Item>
+      <Menu.Item>Open file</Menu.Item>
+      <Menu.Submenu trigger="Export as">
+        <Menu.Item>PDF</Menu.Item>
+        <Menu.Item>PNG</Menu.Item>
+        <Menu.Item>SVG</Menu.Item>
+      </Menu.Submenu>
+      <Menu.Separator />
+      <Menu.Item disabled>Print</Menu.Item>
     </Menu>
   ),
   component: Menu,
@@ -60,63 +50,63 @@ export const Disabled: Story = {
 };
 
 /**
- * Wrap related items in a `MenuGroup` and give it a `label` heading.
+ * Wrap related items in a `Menu.Group` and give it a `label` heading.
  */
 export const Grouped: Story = {
   render: (args) => (
     <Menu {...args} trigger={<Button variant="outline">Open menu</Button>}>
-      <MenuGroup label="Document">
-        <MenuItem>New file</MenuItem>
-        <MenuItem>Open file</MenuItem>
-      </MenuGroup>
-      <MenuGroup label="Share">
-        <MenuItem>Invite people</MenuItem>
-        <MenuItem>Copy link</MenuItem>
-      </MenuGroup>
+      <Menu.Group label="Document">
+        <Menu.Item>New file</Menu.Item>
+        <Menu.Item>Open file</Menu.Item>
+      </Menu.Group>
+      <Menu.Group label="Share">
+        <Menu.Item>Invite people</Menu.Item>
+        <Menu.Item>Copy link</Menu.Item>
+      </Menu.Group>
     </Menu>
   ),
 };
 
 /**
- * `MenuCheckboxItem` toggles a value and keeps the menu open by default.
+ * `Menu.CheckboxItem` toggles a value and keeps the menu open by default.
  */
 export const CheckboxItems: Story = {
   render: (args) => (
     <Menu {...args} trigger={<Button variant="outline">View</Button>}>
-      <MenuCheckboxItem defaultChecked>Sidebar</MenuCheckboxItem>
-      <MenuCheckboxItem>Minimap</MenuCheckboxItem>
-      <MenuCheckboxItem>Breadcrumbs</MenuCheckboxItem>
+      <Menu.CheckboxItem defaultChecked>Sidebar</Menu.CheckboxItem>
+      <Menu.CheckboxItem>Minimap</Menu.CheckboxItem>
+      <Menu.CheckboxItem>Breadcrumbs</Menu.CheckboxItem>
     </Menu>
   ),
 };
 
 /**
- * `MenuRadioItem` selects a single value out of a `MenuRadioGroup`.
+ * `Menu.RadioItem` selects a single value out of a `Menu.RadioGroup`.
  */
 export const RadioItems: Story = {
   render: (args) => (
     <Menu {...args} trigger={<Button variant="outline">Sort by</Button>}>
-      <MenuRadioGroup defaultValue="name">
-        <MenuRadioItem value="name">Name</MenuRadioItem>
-        <MenuRadioItem value="size">Size</MenuRadioItem>
-        <MenuRadioItem value="modified">Last modified</MenuRadioItem>
-      </MenuRadioGroup>
+      <Menu.RadioGroup defaultValue="name">
+        <Menu.RadioItem value="name">Name</Menu.RadioItem>
+        <Menu.RadioItem value="size">Size</Menu.RadioItem>
+        <Menu.RadioItem value="modified">Last modified</Menu.RadioItem>
+      </Menu.RadioGroup>
     </Menu>
   ),
 };
 
 /**
- * `MenuLinkItem` renders an anchor that navigates instead of running a handler.
+ * `Menu.LinkItem` renders an anchor that navigates instead of running a handler.
  */
 export const LinkItems: Story = {
   render: (args) => (
     <Menu {...args} trigger={<Button variant="outline">Resources</Button>}>
-      <MenuLinkItem href="https://base-ui.com" target="_blank">
+      <Menu.LinkItem href="https://base-ui.com" target="_blank">
         Base UI
-      </MenuLinkItem>
-      <MenuLinkItem href="https://tailwindcss.com" target="_blank">
+      </Menu.LinkItem>
+      <Menu.LinkItem href="https://tailwindcss.com" target="_blank">
         Tailwind CSS
-      </MenuLinkItem>
+      </Menu.LinkItem>
     </Menu>
   ),
 };
@@ -136,7 +126,7 @@ export const DetachedTrigger: Story = {
           onOpenChange={setOpen}
           positionerProps={{ anchor: buttonRef }}
         >
-          <MenuItem>Detached item</MenuItem>
+          <Menu.Item>Detached item</Menu.Item>
         </Menu>
       </>
     );

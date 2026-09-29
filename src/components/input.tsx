@@ -1,13 +1,10 @@
-import {
-  Input as BaseUIInput,
-  InputProps as BaseUIInputProps,
-} from "@base-ui/react/input";
+import * as BaseUI from "@base-ui/react/input";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { cn, mergeProps } from "../lib/utils";
 import { Field, fieldControlStyles, FieldProps } from "./field";
 
-export interface InputProps extends BaseUIInputProps, FieldAttributes {
+export interface InputProps extends BaseUI.InputProps, FieldAttributes {
   fieldProps?: FieldProps;
   leftAdornment?: React.ReactNode;
   rightAdornment?: React.ReactNode;
@@ -54,7 +51,7 @@ export function Input(props: InputProps) {
               {leftAdornment}
             </span>
           )}
-          <BaseUIInput
+          <BaseUI.Input
             data-validating={isValidating ? "" : undefined}
             {...mergeProps(restProps, {
               className: cn(

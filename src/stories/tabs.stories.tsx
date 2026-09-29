@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "../components/tabs";
+import { Tabs } from "../components/tabs";
 
 const meta = {
   title: "Components/Tabs",
@@ -11,20 +11,20 @@ const meta = {
   },
   render: (args) => (
     <Tabs {...args}>
-      <TabsList>
-        <TabsTab value="overview">Overview</TabsTab>
-        <TabsTab value="projects">Projects</TabsTab>
-        <TabsTab value="account">Account</TabsTab>
-      </TabsList>
-      <TabsPanel className="h-50" value="overview">
+      <Tabs.List>
+        <Tabs.Tab value="overview">Overview</Tabs.Tab>
+        <Tabs.Tab value="projects">Projects</Tabs.Tab>
+        <Tabs.Tab value="account">Account</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel className="h-50" value="overview">
         Workspace stats and activity.
-      </TabsPanel>
-      <TabsPanel className="h-50" value="projects">
+      </Tabs.Panel>
+      <Tabs.Panel className="h-50" value="projects">
         Milestones and deadlines.
-      </TabsPanel>
-      <TabsPanel className="h-50" value="account">
+      </Tabs.Panel>
+      <Tabs.Panel className="h-50" value="account">
         Profile and preferences.
-      </TabsPanel>
+      </Tabs.Panel>
     </Tabs>
   ),
 } satisfies Meta<typeof Tabs>;
@@ -37,22 +37,22 @@ export const Basic: Story = {};
 export const WithDisabledTab: Story = {
   render: (args) => (
     <Tabs {...args}>
-      <TabsList>
-        <TabsTab value="overview">Overview</TabsTab>
-        <TabsTab value="projects" disabled>
+      <Tabs.List>
+        <Tabs.Tab value="overview">Overview</Tabs.Tab>
+        <Tabs.Tab value="projects" disabled>
           Projects
-        </TabsTab>
-        <TabsTab value="account">Account</TabsTab>
-      </TabsList>
-      <TabsPanel className="h-50" value="overview">
+        </Tabs.Tab>
+        <Tabs.Tab value="account">Account</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel className="h-50" value="overview">
         Workspace stats and activity.
-      </TabsPanel>
-      <TabsPanel className="h-50" value="projects">
+      </Tabs.Panel>
+      <Tabs.Panel className="h-50" value="projects">
         Milestones and deadlines.
-      </TabsPanel>
-      <TabsPanel className="h-50" value="account">
+      </Tabs.Panel>
+      <Tabs.Panel className="h-50" value="account">
         Profile and preferences.
-      </TabsPanel>
+      </Tabs.Panel>
     </Tabs>
   ),
 };
@@ -63,20 +63,20 @@ export const CustomStyle: Story = {
   },
   render: (args) => (
     <Tabs {...args} className="card body-sm">
-      <TabsList className="border-b">
-        <TabsTab value="overview">Overview</TabsTab>
-        <TabsTab value="projects">Projects</TabsTab>
-        <TabsTab value="account">Account</TabsTab>
-      </TabsList>
-      <TabsPanel className="h-50" value="overview">
+      <Tabs.List className="border-b">
+        <Tabs.Tab value="overview">Overview</Tabs.Tab>
+        <Tabs.Tab value="projects">Projects</Tabs.Tab>
+        <Tabs.Tab value="account">Account</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel className="h-50" value="overview">
         Workspace stats and activity.
-      </TabsPanel>
-      <TabsPanel className="h-50" value="projects">
+      </Tabs.Panel>
+      <Tabs.Panel className="h-50" value="projects">
         Milestones and deadlines.
-      </TabsPanel>
-      <TabsPanel className="h-50" value="account">
+      </Tabs.Panel>
+      <Tabs.Panel className="h-50" value="account">
         Profile and preferences.
-      </TabsPanel>
+      </Tabs.Panel>
     </Tabs>
   ),
 };

@@ -1,21 +1,13 @@
-import {
-  ScrollArea as BaseUIScrollArea,
-  ScrollAreaContentProps,
-  ScrollAreaCornerProps,
-  ScrollAreaRootProps,
-  ScrollAreaScrollbarProps,
-  ScrollAreaThumbProps,
-  ScrollAreaViewportProps,
-} from "@base-ui/react/scroll-area";
+import * as BaseUI from "@base-ui/react/scroll-area";
 import React from "react";
 import { cn, mergeProps, tw } from "../lib/utils";
 
-export interface ScrollAreaProps extends ScrollAreaRootProps {
-  viewportProps?: ScrollAreaViewportProps;
-  contentProps?: ScrollAreaContentProps;
-  scrollbarProps?: ScrollAreaScrollbarProps;
-  thumbProps?: ScrollAreaThumbProps;
-  cornerProps?: ScrollAreaCornerProps;
+export interface ScrollAreaProps extends BaseUI.ScrollAreaRootProps {
+  viewportProps?: BaseUI.ScrollAreaViewportProps;
+  contentProps?: BaseUI.ScrollAreaContentProps;
+  scrollbarProps?: BaseUI.ScrollAreaScrollbarProps;
+  thumbProps?: BaseUI.ScrollAreaThumbProps;
+  cornerProps?: BaseUI.ScrollAreaCornerProps;
   /**
    * Which scrollbars to render.
    * @default "vertical"
@@ -41,13 +33,13 @@ export function ScrollArea(props: ScrollAreaProps) {
       : [orientation];
 
   return (
-    <BaseUIScrollArea.Root {...restProps}>
-      <BaseUIScrollArea.Viewport
+    <BaseUI.ScrollArea.Root {...restProps}>
+      <BaseUI.ScrollArea.Viewport
         {...mergeProps(viewportProps, {
           className: tw("focus-visible:focus-outline outline-highlight h-full"),
         })}
       >
-        <BaseUIScrollArea.Content
+        <BaseUI.ScrollArea.Content
           {...mergeProps(contentProps, {
             className: cn(
               orientations.includes("vertical") && "data-has-overflow-y:pr-2",
@@ -56,10 +48,10 @@ export function ScrollArea(props: ScrollAreaProps) {
           })}
         >
           {children}
-        </BaseUIScrollArea.Content>
-      </BaseUIScrollArea.Viewport>
+        </BaseUI.ScrollArea.Content>
+      </BaseUI.ScrollArea.Viewport>
       {orientations.map((scrollbarOrientation) => (
-        <BaseUIScrollArea.Scrollbar
+        <BaseUI.ScrollArea.Scrollbar
           key={scrollbarOrientation}
           orientation={scrollbarOrientation}
           {...mergeProps(scrollbarProps, {
@@ -68,16 +60,16 @@ export function ScrollArea(props: ScrollAreaProps) {
             ),
           })}
         >
-          <BaseUIScrollArea.Thumb
+          <BaseUI.ScrollArea.Thumb
             {...mergeProps(thumbProps, {
               className: tw(
                 "bg-contrast/50 rounded-full data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full",
               ),
             })}
           />
-        </BaseUIScrollArea.Scrollbar>
+        </BaseUI.ScrollArea.Scrollbar>
       ))}
-      {orientation === "both" && <BaseUIScrollArea.Corner {...cornerProps} />}
-    </BaseUIScrollArea.Root>
+      {orientation === "both" && <BaseUI.ScrollArea.Corner {...cornerProps} />}
+    </BaseUI.ScrollArea.Root>
   );
 }

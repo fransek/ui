@@ -1,17 +1,13 @@
-import {
-  Radio as BaseUIRadio,
-  RadioIndicatorProps,
-  RadioRootProps,
-} from "@base-ui/react/radio";
+import * as BaseUI from "@base-ui/react/radio";
 import * as React from "react";
 import { mergeProps, tw } from "../lib/utils";
 import { useFieldContext } from "./field";
 import { InfoPopover } from "./info-popover";
 
-export interface RadioProps extends RadioRootProps {
+export interface RadioProps extends BaseUI.RadioRootProps {
   label?: React.ReactNode;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-  indicatorProps?: RadioIndicatorProps;
+  indicatorProps?: BaseUI.RadioIndicatorProps;
   infoPopover?: React.ReactNode;
 }
 
@@ -29,7 +25,7 @@ export function Radio(props: RadioProps) {
           className: tw("flex items-center gap-2"),
         })}
       >
-        <BaseUIRadio.Root
+        <BaseUI.Radio.Root
           aria-labelledby={labelId}
           data-validating={isValidating ? "" : undefined}
           {...mergeProps(restProps, {
@@ -38,14 +34,14 @@ export function Radio(props: RadioProps) {
             ),
           })}
         >
-          <BaseUIRadio.Indicator
+          <BaseUI.Radio.Indicator
             {...mergeProps(indicatorProps, {
               className: tw(
                 "before:bg-primary data-invalid:before:bg-danger flex before:size-3 before:rounded-full data-unchecked:hidden",
               ),
             })}
           />
-        </BaseUIRadio.Root>
+        </BaseUI.Radio.Root>
         <span id={labelId}>{label}</span>
       </label>
       {infoPopover && (

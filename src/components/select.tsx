@@ -1,21 +1,4 @@
-import {
-  Select as BaseUISelect,
-  SelectGroupLabelProps,
-  SelectGroupProps,
-  SelectIconProps,
-  SelectItemIndicatorProps,
-  SelectItemProps,
-  SelectItemTextProps,
-  SelectListProps,
-  SelectPopupProps,
-  SelectPortalProps,
-  SelectPositionerProps,
-  SelectRootProps,
-  SelectScrollDownArrowProps,
-  SelectScrollUpArrowProps,
-  SelectTriggerProps,
-  SelectValueProps,
-} from "@base-ui/react/select";
+import * as BaseUI from "@base-ui/react/select";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
@@ -29,7 +12,7 @@ import { Field, FieldProps } from "./field";
  * - an array of groups (objects with a `label` heading and their own `items`),
  * - a `Record` mapping each value to its label.
  */
-export type SelectItems<T = unknown> = SelectRootProps<T>["items"];
+export type SelectItems<T = unknown> = BaseUI.SelectRootProps<T>["items"];
 
 interface RenderItem {
   label: React.ReactNode;
@@ -60,31 +43,31 @@ function isGroupedItems(items: unknown): items is readonly RenderGroup[] {
 
 export interface SelectProps<T, Multiple extends boolean | undefined = false>
   extends
-    Omit<SelectTriggerProps, "value">,
-    SelectRootProps<T, Multiple>,
+    Omit<BaseUI.SelectTriggerProps, "value">,
+    BaseUI.SelectRootProps<T, Multiple>,
     FieldAttributes {
-  groupProps?: SelectGroupProps;
-  groupLabelProps?: SelectGroupLabelProps;
+  groupProps?: BaseUI.SelectGroupProps;
+  groupLabelProps?: BaseUI.SelectGroupLabelProps;
   placeholder?: React.ReactNode;
-  triggerDisabled?: SelectTriggerProps["disabled"];
-  triggerId?: SelectTriggerProps["id"];
-  triggerName?: SelectTriggerProps["name"];
-  triggerValue?: SelectTriggerProps["value"];
+  triggerDisabled?: BaseUI.SelectTriggerProps["disabled"];
+  triggerId?: BaseUI.SelectTriggerProps["id"];
+  triggerName?: BaseUI.SelectTriggerProps["name"];
+  triggerValue?: BaseUI.SelectTriggerProps["value"];
   fieldProps?: FieldProps;
-  triggerProps?: SelectTriggerProps;
-  valueProps?: SelectValueProps;
-  selectIconProps?: SelectIconProps;
+  triggerProps?: BaseUI.SelectTriggerProps;
+  valueProps?: BaseUI.SelectValueProps;
+  selectIconProps?: BaseUI.SelectIconProps;
   iconProps?: React.ComponentPropsWithoutRef<"svg">;
-  portalProps?: SelectPortalProps;
-  positionerProps?: SelectPositionerProps;
-  popupProps?: SelectPopupProps;
-  scrollUpArrowProps?: SelectScrollUpArrowProps;
-  listProps?: SelectListProps;
-  itemProps?: SelectItemProps;
-  itemIndicatorProps?: SelectItemIndicatorProps;
+  portalProps?: BaseUI.SelectPortalProps;
+  positionerProps?: BaseUI.SelectPositionerProps;
+  popupProps?: BaseUI.SelectPopupProps;
+  scrollUpArrowProps?: BaseUI.SelectScrollUpArrowProps;
+  listProps?: BaseUI.SelectListProps;
+  itemProps?: BaseUI.SelectItemProps;
+  itemIndicatorProps?: BaseUI.SelectItemIndicatorProps;
   checkIconProps?: React.ComponentPropsWithoutRef<"svg">;
-  itemTextProps?: SelectItemTextProps;
-  scrollDownArrowProps?: SelectScrollDownArrowProps;
+  itemTextProps?: BaseUI.SelectItemTextProps;
+  scrollDownArrowProps?: BaseUI.SelectScrollDownArrowProps;
 }
 
 export function Select<T, Multiple extends boolean | undefined = false>(
@@ -145,7 +128,7 @@ export function Select<T, Multiple extends boolean | undefined = false>(
   } = props;
 
   const renderItem = (item: RenderItem) => (
-    <BaseUISelect.Item
+    <BaseUI.Select.Item
       key={String(item.value)}
       value={item.value}
       {...mergeProps(itemProps, {
@@ -154,17 +137,17 @@ export function Select<T, Multiple extends boolean | undefined = false>(
         ),
       })}
     >
-      <BaseUISelect.ItemText
+      <BaseUI.Select.ItemText
         {...mergeProps(itemTextProps, { className: tw("flex-1") })}
       >
         {item.label}
-      </BaseUISelect.ItemText>
-      <BaseUISelect.ItemIndicator
+      </BaseUI.Select.ItemText>
+      <BaseUI.Select.ItemIndicator
         {...mergeProps(itemIndicatorProps, { className: tw("flex") })}
       >
         <Check {...mergeProps(checkIconProps, { className: tw("size-4") })} />
-      </BaseUISelect.ItemIndicator>
-    </BaseUISelect.Item>
+      </BaseUI.Select.ItemIndicator>
+    </BaseUI.Select.Item>
   );
 
   return (
@@ -178,7 +161,7 @@ export function Select<T, Multiple extends boolean | undefined = false>(
       invalid={invalid}
       {...fieldProps}
     >
-      <BaseUISelect.Root
+      <BaseUI.Select.Root
         items={items}
         actionsRef={actionsRef}
         autoComplete={autoComplete}
@@ -202,7 +185,7 @@ export function Select<T, Multiple extends boolean | undefined = false>(
         required={required}
         value={value}
       >
-        <BaseUISelect.Trigger
+        <BaseUI.Select.Trigger
           data-validating={isValidating ? "" : undefined}
           disabled={triggerDisabled}
           id={triggerId}
@@ -214,42 +197,42 @@ export function Select<T, Multiple extends boolean | undefined = false>(
             ),
           })}
         >
-          <BaseUISelect.Value
+          <BaseUI.Select.Value
             placeholder={placeholder}
             {...mergeProps(valueProps, {
               className: tw("data-placeholder:opacity-60"),
             })}
           />
-          <BaseUISelect.Icon
+          <BaseUI.Select.Icon
             {...mergeProps(selectIconProps, { className: tw("flex") })}
           >
             <ChevronsUpDown
               {...mergeProps(iconProps, { className: tw("size-4") })}
             />
-          </BaseUISelect.Icon>
-        </BaseUISelect.Trigger>
-        <BaseUISelect.Portal {...portalProps}>
-          <BaseUISelect.Positioner
+          </BaseUI.Select.Icon>
+        </BaseUI.Select.Trigger>
+        <BaseUI.Select.Portal {...portalProps}>
+          <BaseUI.Select.Positioner
             sideOffset={8}
             {...mergeProps(positionerProps, {
               className: tw("z-10 outline-none select-none"),
             })}
           >
-            <BaseUISelect.Popup
+            <BaseUI.Select.Popup
               {...mergeProps(popupProps, {
                 className: tw(
                   "group bg-background outline-border w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
                 ),
               })}
             >
-              <BaseUISelect.ScrollUpArrow
+              <BaseUI.Select.ScrollUpArrow
                 {...mergeProps(scrollUpArrowProps, {
                   className: tw(
                     "bg-background top-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-top-full",
                   ),
                 })}
               />
-              <BaseUISelect.List
+              <BaseUI.Select.List
                 {...mergeProps(listProps, {
                   className: tw(
                     "relative max-h-(--available-height) scroll-py-6 overflow-y-auto py-1",
@@ -258,13 +241,13 @@ export function Select<T, Multiple extends boolean | undefined = false>(
               >
                 {isGroupedItems(items)
                   ? items.map((group, index) => (
-                      <BaseUISelect.Group
+                      <BaseUI.Select.Group
                         key={index}
                         {...mergeProps(groupProps, {
                           className: tw("not-last:mb-2"),
                         })}
                       >
-                        <BaseUISelect.GroupLabel
+                        <BaseUI.Select.GroupLabel
                           {...mergeProps(groupLabelProps, {
                             className: tw(
                               "text-muted-fg px-2.5 py-1 text-xs font-medium",
@@ -272,9 +255,9 @@ export function Select<T, Multiple extends boolean | undefined = false>(
                           })}
                         >
                           {group.label}
-                        </BaseUISelect.GroupLabel>
+                        </BaseUI.Select.GroupLabel>
                         {group.items.map(renderItem)}
-                      </BaseUISelect.Group>
+                      </BaseUI.Select.Group>
                     ))
                   : Array.isArray(items)
                     ? (items as readonly RenderItem[]).map(renderItem)
@@ -283,18 +266,18 @@ export function Select<T, Multiple extends boolean | undefined = false>(
                           renderItem({ value, label: itemLabel }),
                         )
                       : null}
-              </BaseUISelect.List>
-              <BaseUISelect.ScrollDownArrow
+              </BaseUI.Select.List>
+              <BaseUI.Select.ScrollDownArrow
                 {...mergeProps(scrollDownArrowProps, {
                   className: tw(
                     "bg-background bottom-0 z-1 flex h-4 w-full cursor-default items-center justify-center rounded-lg text-center text-xs before:absolute before:left-0 before:h-full before:w-full before:content-[''] data-[side=none]:before:-bottom-full",
                   ),
                 })}
               />
-            </BaseUISelect.Popup>
-          </BaseUISelect.Positioner>
-        </BaseUISelect.Portal>
-      </BaseUISelect.Root>
+            </BaseUI.Select.Popup>
+          </BaseUI.Select.Positioner>
+        </BaseUI.Select.Portal>
+      </BaseUI.Select.Root>
     </Field>
   );
 }

@@ -1,12 +1,5 @@
-import {
-  CheckboxGroup as BaseUICheckboxGroup,
-  CheckboxGroupProps as BaseUICheckboxGroupProps,
-} from "@base-ui/react/checkbox-group";
-import {
-  Fieldset,
-  FieldsetLegendProps,
-  FieldsetRootProps,
-} from "@base-ui/react/fieldset";
+import * as BaseUI from "@base-ui/react/checkbox-group";
+import * as BaseUIFieldset from "@base-ui/react/fieldset";
 import * as React from "react";
 import { FieldAttributes } from "../lib/types";
 import { mergeProps, tw } from "../lib/utils";
@@ -14,11 +7,11 @@ import { Field, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
 export interface CheckboxGroupProps
-  extends BaseUICheckboxGroupProps, FieldAttributes {
+  extends BaseUI.CheckboxGroupProps, FieldAttributes {
   children?: React.ReactNode;
   fieldProps?: FieldProps;
-  fieldsetProps?: FieldsetRootProps;
-  fieldsetLegendProps?: FieldsetLegendProps;
+  fieldsetProps?: BaseUIFieldset.FieldsetRootProps;
+  fieldsetLegendProps?: BaseUIFieldset.FieldsetLegendProps;
 }
 
 export function CheckboxGroup(props: CheckboxGroupProps) {
@@ -46,28 +39,28 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         invalid={invalid}
         {...fieldProps}
       >
-        <Fieldset.Root
+        <BaseUIFieldset.Fieldset.Root
           {...mergeProps(fieldsetProps, {
             className: tw("flex flex-col gap-1"),
-            render: <BaseUICheckboxGroup {...restProps} />,
+            render: <BaseUI.CheckboxGroup {...restProps} />,
           })}
         >
           {label && (
             <div className="flex items-center gap-2">
-              <Fieldset.Legend
+              <BaseUIFieldset.Fieldset.Legend
                 {...mergeProps(fieldsetLegendProps, {
                   className: tw("text-foreground text-sm font-semibold"),
                 })}
               >
                 {label}
-              </Fieldset.Legend>
+              </BaseUIFieldset.Fieldset.Legend>
               {infoPopover && (
                 <InfoPopover fieldLabel={label}>{infoPopover}</InfoPopover>
               )}
             </div>
           )}
           {children}
-        </Fieldset.Root>
+        </BaseUIFieldset.Fieldset.Root>
       </Field>
     </CheckboxGroupContext.Provider>
   );

@@ -1,24 +1,18 @@
-import {
-  Meter as BaseUIMeter,
-  MeterRootProps as BaseUIMeterRootProps,
-  MeterIndicatorProps,
-  MeterLabelProps,
-  MeterValueProps,
-} from "@base-ui/react/meter";
+import * as BaseUI from "@base-ui/react/meter";
 import React from "react";
 import { cn, mergeProps, tw } from "../lib/utils";
 
-export interface MeterProps extends BaseUIMeterRootProps {
+export interface MeterProps extends BaseUI.MeterRootProps {
   /** Label describing what the meter represents. */
   label?: React.ReactNode;
   /** Whether to display the formatted value next to the label. Defaults to true. */
   showValue?: boolean;
   variant?: MeterVariant;
   size?: MeterSize;
-  labelProps?: MeterLabelProps;
-  valueProps?: MeterValueProps;
-  trackProps?: React.ComponentProps<typeof BaseUIMeter.Track>;
-  indicatorProps?: MeterIndicatorProps;
+  labelProps?: BaseUI.MeterLabelProps;
+  valueProps?: BaseUI.MeterValueProps;
+  trackProps?: React.ComponentProps<typeof BaseUI.Meter.Track>;
+  indicatorProps?: BaseUI.MeterIndicatorProps;
 }
 
 export function Meter(props: MeterProps) {
@@ -35,37 +29,37 @@ export function Meter(props: MeterProps) {
   } = props;
 
   return (
-    <BaseUIMeter.Root
+    <BaseUI.Meter.Root
       {...mergeProps(restProps, {
         className: tw("grid w-48 grid-cols-2 gap-y-1.5"),
       })}
     >
       {label && (
-        <BaseUIMeter.Label
+        <BaseUI.Meter.Label
           {...mergeProps(labelProps, {
             className: tw("text-foreground col-start-1 text-sm font-medium"),
           })}
         >
           {label}
-        </BaseUIMeter.Label>
+        </BaseUI.Meter.Label>
       )}
       {showValue && (
-        <BaseUIMeter.Value
+        <BaseUI.Meter.Value
           {...mergeProps(valueProps, {
             className: tw("text-muted-fg col-start-2 text-right text-sm"),
           })}
         />
       )}
-      <BaseUIMeter.Track
+      <BaseUI.Meter.Track
         {...mergeProps(trackProps, { className: trackStyles({ size }) })}
       >
-        <BaseUIMeter.Indicator
+        <BaseUI.Meter.Indicator
           {...mergeProps(indicatorProps, {
             className: indicatorStyles({ variant }),
           })}
         />
-      </BaseUIMeter.Track>
-    </BaseUIMeter.Root>
+      </BaseUI.Meter.Track>
+    </BaseUI.Meter.Root>
   );
 }
 

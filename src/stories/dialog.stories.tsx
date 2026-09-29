@@ -2,22 +2,17 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogTitle,
-} from "../components/dialog";
+import { Dialog } from "../components/dialog";
 
 const meta = {
   title: "Components/Dialog",
   render: (args) => (
     <Dialog {...args} trigger={<Button variant="outline">Open Dialog</Button>}>
-      <DialogTitle className="mb-2">Are you sure?</DialogTitle>
-      <DialogDescription>This action cannot be undone.</DialogDescription>
+      <Dialog.Title className="mb-2">Are you sure?</Dialog.Title>
+      <Dialog.Description>This action cannot be undone.</Dialog.Description>
       <div className="flex justify-end gap-4">
-        <DialogClose render={<Button variant="secondary">Cancel</Button>} />
-        <DialogClose render={<Button variant="primary">OK</Button>} />
+        <Dialog.Close render={<Button variant="secondary">Cancel</Button>} />
+        <Dialog.Close render={<Button variant="primary">OK</Button>} />
       </div>
     </Dialog>
   ),
@@ -53,7 +48,7 @@ export const DetachedTrigger: Story = {
           Open detached
         </Button>
         <Dialog {...args} open={open} onOpenChange={setOpen}>
-          <DialogTitle>Detached dialog</DialogTitle>
+          <Dialog.Title>Detached dialog</Dialog.Title>
         </Dialog>
       </>
     );

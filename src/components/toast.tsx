@@ -1,10 +1,4 @@
-import {
-  Toast as BaseUIToast,
-  ToastProviderProps as BaseUIToastProviderProps,
-  ToastPortalProps,
-  ToastRootProps,
-  ToastViewportProps,
-} from "@base-ui/react/toast";
+import * as BaseUI from "@base-ui/react/toast";
 import {
   CircleCheck,
   CircleX,
@@ -26,15 +20,15 @@ export type ToastPosition =
   | "bottom-center"
   | "bottom-right";
 
-export interface ToastProviderProps extends BaseUIToastProviderProps {
+export interface ToastProviderProps extends BaseUI.ToastProviderProps {
   /**
    * Where toasts are anchored on the screen.
    * @default "bottom-right"
    */
   position?: ToastPosition;
-  portalProps?: ToastPortalProps;
-  viewportProps?: ToastViewportProps;
-  toastProps?: Omit<ToastRootProps, "toast">;
+  portalProps?: BaseUI.ToastPortalProps;
+  viewportProps?: BaseUI.ToastViewportProps;
+  toastProps?: Omit<BaseUI.ToastRootProps, "toast">;
 }
 
 const typeIcons: Record<ToastType, LucideIcon> = {
@@ -91,10 +85,10 @@ export function ToastProvider(props: ToastProviderProps) {
     : ["down", "right"];
 
   return (
-    <BaseUIToast.Provider {...providerProps}>
+    <BaseUI.Toast.Provider {...providerProps}>
       {children}
-      <BaseUIToast.Portal {...portalProps}>
-        <BaseUIToast.Viewport
+      <BaseUI.Toast.Portal {...portalProps}>
+        <BaseUI.Toast.Viewport
           {...mergeProps(viewportProps, {
             className: cn(baseViewportStyles, viewportPositionStyles[position]),
           })}
@@ -104,24 +98,24 @@ export function ToastProvider(props: ToastProviderProps) {
             swipeDirection={swipeDirection}
             {...toastProps}
           />
-        </BaseUIToast.Viewport>
-      </BaseUIToast.Portal>
-    </BaseUIToast.Provider>
+        </BaseUI.Toast.Viewport>
+      </BaseUI.Toast.Portal>
+    </BaseUI.Toast.Provider>
   );
 }
 
 function ToastList({
   isTop,
   ...toastProps
-}: Omit<ToastRootProps, "toast"> & { isTop: boolean }) {
-  const { toasts } = BaseUIToast.useToastManager();
+}: Omit<BaseUI.ToastRootProps, "toast"> & { isTop: boolean }) {
+  const { toasts } = BaseUI.Toast.useToastManager();
 
   return toasts.map((toast) => {
     const type = toast.type as ToastType | undefined;
     const Icon = type ? typeIcons[type] : undefined;
 
     return (
-      <BaseUIToast.Root
+      <BaseUI.Toast.Root
         key={toast.id}
         toast={toast}
         {...mergeProps(toastProps, {
@@ -131,22 +125,22 @@ function ToastList({
           ),
         })}
       >
-        <BaseUIToast.Content className="flex gap-3 overflow-hidden transition-opacity duration-250 data-behind:pointer-events-none data-behind:opacity-0 data-expanded:pointer-events-auto data-expanded:opacity-100">
+        <BaseUI.Toast.Content className="flex gap-3 overflow-hidden transition-opacity duration-250 data-behind:pointer-events-none data-behind:opacity-0 data-expanded:pointer-events-auto data-expanded:opacity-100">
           {Icon && type && (
             <Icon
               className={cn("mt-0.5 size-5 shrink-0", typeIconStyles[type])}
             />
           )}
           <div className="flex min-w-0 flex-col gap-1">
-            <BaseUIToast.Title className="body-sm font-semibold empty:hidden" />
-            <BaseUIToast.Description className="text-body body-sm empty:hidden" />
+            <BaseUI.Toast.Title className="body-sm font-semibold empty:hidden" />
+            <BaseUI.Toast.Description className="text-body body-sm empty:hidden" />
           </div>
-        </BaseUIToast.Content>
-        <BaseUIToast.Close render={<CloseButton position="top-right" />} />
-      </BaseUIToast.Root>
+        </BaseUI.Toast.Content>
+        <BaseUI.Toast.Close render={<CloseButton position="top-right" />} />
+      </BaseUI.Toast.Root>
     );
   });
 }
 
-export const useToast = BaseUIToast.useToastManager;
-export const createToastManager = BaseUIToast.createToastManager;
+export const useToast = BaseUI.Toast.useToastManager;
+export const createToastManager = BaseUI.Toast.createToastManager;

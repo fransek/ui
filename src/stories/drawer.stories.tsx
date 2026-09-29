@@ -2,12 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, screen } from "storybook/test";
 import { Button } from "../components/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerDescription,
-  DrawerTitle,
-} from "../components/drawer";
+import { Drawer } from "../components/drawer";
 
 const meta = {
   title: "Components/Drawer",
@@ -18,15 +13,15 @@ const meta = {
       trigger={<Button variant="outline">Open drawer</Button>}
     >
       <div className="flex flex-1 flex-col gap-2">
-        <DrawerTitle>Drawer</DrawerTitle>
-        <DrawerDescription>
+        <Drawer.Title>Drawer</Drawer.Title>
+        <Drawer.Description>
           This is a drawer that slides in from the side. You can swipe to
           dismiss it.
-        </DrawerDescription>
+        </Drawer.Description>
       </div>
       <div className="mt-4 flex justify-end gap-4">
-        <DrawerClose render={<Button variant="secondary">Cancel</Button>} />
-        <DrawerClose render={<Button variant="primary">Confirm</Button>} />
+        <Drawer.Close render={<Button variant="secondary">Cancel</Button>} />
+        <Drawer.Close render={<Button variant="primary">Confirm</Button>} />
       </div>
     </Drawer>
   ),
@@ -51,11 +46,11 @@ export const CustomWidth: Story = {
 export const Overflow: Story = {
   render: (args) => (
     <Drawer {...args} trigger={<Button variant="outline">Open Drawer</Button>}>
-      <DrawerTitle>Drawer</DrawerTitle>
-      <DrawerDescription>
+      <Drawer.Title>Drawer</Drawer.Title>
+      <Drawer.Description>
         This is a drawer that slides in from the side. You can swipe to dismiss
         it.
-      </DrawerDescription>
+      </Drawer.Description>
       {new Array(30).fill(null).map((_, index) => (
         <Button variant="outline" key={index}>
           Lorem ipsum
@@ -129,7 +124,7 @@ export const DetachedTrigger: Story = {
           Open detached
         </Button>
         <Drawer {...args} open={open} onOpenChange={setOpen}>
-          <DrawerTitle>Detached drawer</DrawerTitle>
+          <Drawer.Title>Detached drawer</Drawer.Title>
         </Drawer>
       </>
     );
