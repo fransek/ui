@@ -23,21 +23,43 @@ export function Colors() {
         <div className="text-secondary-fg border-secondary-fg bg-card rounded-lg border p-2">
           secondary-fg
         </div>
-        <div className="bg-muted text-on-muted rounded-lg p-2">muted</div>
-        <div className="text-muted-fg border-muted-fg bg-card rounded-lg border p-2">
-          muted-fg
+        <div className="bg-success text-on-success rounded-lg p-2">success</div>
+        <div className="text-success-fg border-success-fg bg-card rounded-lg border p-2">
+          success-fg
         </div>
-        <div className="bg-danger text-on-danger rounded-lg p-2">danger</div>
-        <div className="text-danger-fg border-danger-fg bg-card rounded-lg border p-2">
-          danger-fg
+        <div className="bg-success-subtle text-on-success-subtle rounded-lg p-2">
+          success-subtle
+        </div>
+        <div className="text-success-subtle-fg border-success-subtle-fg bg-card rounded-lg border p-2">
+          success-subtle-fg
         </div>
         <div className="bg-warning text-on-warning rounded-lg p-2">warning</div>
         <div className="text-warning-fg border-warning-fg bg-card rounded-lg border p-2">
           warning-fg
         </div>
-        <div className="bg-success text-on-success rounded-lg p-2">success</div>
-        <div className="text-success-fg border-success-fg bg-card rounded-lg border p-2">
-          success-fg
+        <div className="bg-warning-subtle text-on-warning-subtle rounded-lg p-2">
+          warning-subtle
+        </div>
+        <div className="text-warning-subtle-fg border-warning-subtle-fg bg-card rounded-lg border p-2">
+          warning-subtle-fg
+        </div>
+        <div className="bg-danger text-on-danger rounded-lg p-2">danger</div>
+        <div className="text-danger-fg border-danger-fg bg-card rounded-lg border p-2">
+          danger-fg
+        </div>
+        <div className="bg-danger-subtle text-on-danger-subtle rounded-lg p-2">
+          danger-subtle
+        </div>
+        <div className="text-danger-subtle-fg border-danger-subtle-fg bg-card rounded-lg border p-2">
+          danger-subtle-fg
+        </div>
+        <div className="bg-muted text-on-muted rounded-lg p-2">muted</div>
+        <div className="text-muted-fg border-muted-fg bg-card rounded-lg border p-2">
+          muted-fg
+        </div>
+        <div className="bg-code text-on-code rounded-lg p-2">code</div>
+        <div className="text-code-fg border-code-fg bg-card rounded-lg border p-2">
+          code-fg
         </div>
       </div>
       <div className="typography max-w-3xl">

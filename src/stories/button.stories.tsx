@@ -7,13 +7,23 @@ const variants: ButtonVariant[] = [
   "primary",
   "secondary",
   "success",
+  "success-subtle",
   "warning",
+  "warning-subtle",
   "danger",
+  "danger-subtle",
   "muted",
   "outline",
   "ghost",
   "link",
 ] as const;
+
+function kebabCaseToCapitalized(str: string) {
+  return str
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
 
 const meta = {
   title: "Components/Button",
@@ -40,7 +50,7 @@ export const Variants: Story = {
     <div className="flex flex-wrap gap-2">
       {variants.map((variant) => (
         <Button key={variant} {...args} variant={variant}>
-          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+          {kebabCaseToCapitalized(variant)}
         </Button>
       ))}
     </div>
