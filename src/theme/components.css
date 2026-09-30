@@ -145,5 +145,8 @@
     .body-sm {
       @apply text-body not-last:mb-6;
     }
+    .eyebrow {
+      @apply text-body not-last:mb-3;
+    }
   }
 }

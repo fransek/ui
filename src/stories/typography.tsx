@@ -4,6 +4,7 @@ export function Typography() {
   return (
     <article className="bg-background typography max-w-3xl p-4 md:p-10">
       <header>
+        <div className="eyebrow">Typography</div>
         <h1>The Art of Typography</h1>
         <p className="ingress">
           Typography is the art and technique of arranging type to make the
