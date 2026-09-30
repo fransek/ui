@@ -156,9 +156,9 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: "text-primary",
-  secondary: "text-secondary-fg",
   muted: "text-muted-fg",
   danger: "text-danger",
+  warning: "text-warning",
   success: "text-success",
   current: "text-current",
 };

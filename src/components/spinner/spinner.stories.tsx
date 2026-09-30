@@ -17,14 +17,7 @@ const meta = {
     },
     variant: {
       control: "select",
-      options: [
-        "primary",
-        "secondary",
-        "muted",
-        "danger",
-        "success",
-        "current",
-      ],
+      options: ["primary", "muted", "danger", "warning", "success", "current"],
     },
     textPosition: {
       control: "inline-radio",
@@ -58,9 +51,9 @@ export const Variants: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Spinner variant="primary" />
-      <Spinner variant="secondary" />
       <Spinner variant="muted" />
       <Spinner variant="danger" />
+      <Spinner variant="warning" />
       <Spinner variant="success" />
     </div>
   ),

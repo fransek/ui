@@ -16,14 +16,7 @@ const meta = {
     },
     variant: {
       control: "select",
-      options: [
-        "primary",
-        "secondary",
-        "muted",
-        "danger",
-        "success",
-        "warning",
-      ],
+      options: ["primary", "muted", "danger", "success", "warning"],
     },
     label: { control: "text" },
     showValue: { control: "boolean" },
@@ -66,7 +59,6 @@ export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <Meter label="Primary" variant="primary" value={65} />
-      <Meter label="Secondary" variant="secondary" value={65} />
       <Meter label="Muted" variant="muted" value={65} />
       <Meter label="Success" variant="success" value={65} />
       <Meter label="Warning" variant="warning" value={65} />
