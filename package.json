@@ -59,12 +59,12 @@
     },
     "./*": {
       "import": {
-        "types": "./dist/esm/components/*.d.ts",
-        "default": "./dist/esm/components/*.js"
+        "types": "./dist/esm/components/*/index.d.ts",
+        "default": "./dist/esm/components/*/index.js"
       },
       "require": {
-        "types": "./dist/cjs/components/*.d.ts",
-        "default": "./dist/cjs/components/*.js"
+        "types": "./dist/cjs/components/*/index.d.ts",
+        "default": "./dist/cjs/components/*/index.js"
       }
     }
   },

@@ -1,5 +1,6 @@
 import typescript from "@rollup/plugin-typescript";
 import cssnano from "cssnano";
+import { globSync, readFileSync } from "node:fs";
 import postcssImport from "postcss-import";
 import postcss from "rollup-plugin-postcss";
 
@@ -52,28 +53,39 @@ const addDeclarationExtensions = () => ({
   },
 });
 
-/** @type {() => import('rollup').RollupOptions} */
+// Each component directory's `index.ts` only re-exports, so Rollup would fold
+// it into the root barrel and never emit it. Listing them as entries keeps the
+// `@fransek/ui/<component>` subpath exports resolvable.
+const componentEntries = globSync("src/components/*/index.ts");
+
+// Every peer dependency (and any subpath of one, e.g. `@base-ui/react/button`)
+// is provided by the consumer, so none of them may be bundled.
+const { peerDependencies } = JSON.parse(readFileSync("package.json", "utf8"));
+const peers = Object.keys(peerDependencies);
+const external = (id) =>
+  peers.some((peer) => id === peer || id.startsWith(`${peer}/`));
+
+/**
+ * @param {"cjs" | "esm"} format
+ * @param {string} dir
+ * @returns {import("rollup").RollupOptions}
+ */
 const createConfig = (format, dir) => ({
   // `lib/types` is type-only, so nothing in the graph keeps it alive as a
   // runtime module. Listing it as an entry forces an (empty) JS file to be
   // emitted so the `@fransek/ui/types` subpath export resolves at runtime.
-  input: ["src/index.ts", "src/lib/utils.ts", "src/lib/types.ts"],
+  input: [
+    "src/index.ts",
+    "src/lib/utils.ts",
+    "src/lib/types.ts",
+    ...componentEntries,
+  ],
   // `lib/types` has no runtime exports, so its chunk is expected to be empty.
   onwarn(warning, warn) {
     if (warning.code === "EMPTY_BUNDLE") return;
     warn(warning);
   },
-  external: [
-    "react",
-    "react-dom",
-    "lucide-react",
-    "clsx",
-    "tailwind-merge",
-    "react-day-picker",
-    /@base-ui\/react\/.*/,
-    "date-fns",
-    "recharts",
-  ],
+  external,
   output: {
     dir,
     format,
@@ -89,10 +101,10 @@ const createConfig = (format, dir) => ({
         declarationDir: dir,
         emitDeclarationOnly: true,
       },
-      exclude: ["**/*.test.ts", "**/*.spec.ts", "stories/**/*"],
+      exclude: ["**/*.{test,spec,stories}.{ts,tsx}", "**/stories/**"],
     }),
     postcss({
-      plugins: [postcssImport(), cssnano({ preset: "default" })],
+      plugins: [postcssImport(), cssnano()],
       extract: "theme.css",
     }),
     ...(format === "cjs" ? [emitCjsPackageJson()] : []),

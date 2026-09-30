@@ -23,7 +23,7 @@ pnpm storybook        # Storybook dev server on :6006
 pnpm build-storybook  # Static Storybook build
 ```
 
-Run the tests for a single component's stories: `pnpm vitest --run src/stories/date-picker.stories.tsx` (or `-t "<name>"` to filter by test title). There are no standalone `*.test.*` files — stories are the test suite.
+Run the tests for a single component's stories: `pnpm vitest --run src/components/date-picker/date-picker.stories.tsx` (or `-t "<name>"` to filter by test title). There are no standalone `*.test.*` files — stories are the test suite.
 
 Tests use the Storybook Vitest addon and run in a real Chromium browser via Playwright — the `storybook` Vitest project turns each story into a test, so Playwright browsers must be installed (`pnpm exec playwright install chromium`).
 
@@ -31,11 +31,15 @@ Tests use the Storybook Vitest addon and run in a real Chromium browser via Play
 
 ```
 src/
-  components/   # One component per file; the public API
+  components/   # One directory per component; the public API
+    <name>/
+      <name>.tsx          # The component
+      <name>.stories.tsx  # Its stories (also serve as tests)
+      index.ts            # Barrel: export * from "./<name>"
   lib/
     utils.ts    # cn(), cnBaseUI(), mergeProps(), tw(), useMergeProps(), useMergeRefs()
     types.ts    # FieldAttributes shared across form components
-  stories/      # Storybook stories (also serve as tests)
+  stories/      # Non-component stories (theme, examples, utils) + Storybook assets
   theme/        # Tailwind v4 CSS theme (vars.css defines tokens for :root + .dark)
   index.ts      # Barrel export — every public component/type re-exported here
 ```
@@ -43,8 +47,8 @@ src/
 **Component pattern.** Each component extends the corresponding Base UI primitive's props interface and spreads remaining props onto the primitive:
 
 - Export an `interface <Name>Props extends BaseUI<Name>Props` and add design-system props (e.g. `variant`, `size`).
-- Forward the caller's props onto the primitive with `mergeProps(userProps, { className: tw("…") })` from `lib/utils` — it merges `className` and `style` (handling Base UI's `string | (state) => string` duality) and spreads everything else, so components no longer split `className` out by hand. See `card.tsx`/`fieldset.tsx` for the pattern and any Base UI wrapper (`tabs.tsx`, `select.tsx`) for sub-prop forwarding. Keep computed attributes (`data-validating`, `aria-labelledby`) as explicit JSX before the `{...mergeProps(...)}` spread to preserve override precedence.
-- `mergeProps` never merges refs — it spreads them like any other prop, so the caller's ref reaches the element untouched. Only when a component adds a **ref of its own** on top of the caller's do the refs need combining, and that is what `useMergeProps(userProps, { ref: localRef, className: tw("…") })` and `useMergeRefs(userProps.ref, localRef)` (for a bare `ref` attribute, see `date-picker.tsx`) are for. Reach for them in that case only: a merged ref has to be built during render, so it arrives with a new identity every render, React detaches and reattaches it on every commit, and Base UI primitives — which register their trigger element from that callback ref and write the registration to a store — loop back into another render ("Maximum update depth exceeded"). The hooks memoize the merge to avoid exactly that, which is also why they follow the rules of hooks and cannot be called inside conditional JSX; `mergeProps` can, and is the right call everywhere else.
+- Forward the caller's props onto the primitive with `mergeProps(userProps, { className: tw("…") })` from `lib/utils` — it merges `className` and `style` (handling Base UI's `string | (state) => string` duality) and spreads everything else, so components no longer split `className` out by hand. See `card/card.tsx`/`fieldset/fieldset.tsx` for the pattern and any Base UI wrapper (`tabs/tabs.tsx`, `select/select.tsx`) for sub-prop forwarding. Keep computed attributes (`data-validating`, `aria-labelledby`) as explicit JSX before the `{...mergeProps(...)}` spread to preserve override precedence.
+- `mergeProps` never merges refs — it spreads them like any other prop, so the caller's ref reaches the element untouched. Only when a component adds a **ref of its own** on top of the caller's do the refs need combining, and that is what `useMergeProps(userProps, { ref: localRef, className: tw("…") })` and `useMergeRefs(userProps.ref, localRef)` (for a bare `ref` attribute, see `date-picker/date-picker.tsx`) are for. Reach for them in that case only: a merged ref has to be built during render, so it arrives with a new identity every render, React detaches and reattaches it on every commit, and Base UI primitives — which register their trigger element from that callback ref and write the registration to a store — loop back into another render ("Maximum update depth exceeded"). The hooks memoize the merge to avoid exactly that, which is also why they follow the rules of hooks and cannot be called inside conditional JSX; `mergeProps` can, and is the right call everywhere else.
 - Wrap literal default class strings in `tw("…")` so the Prettier Tailwind plugin sorts them (`tw` is a no-op identity registered in `tailwindFunctions`); use `cn(...)` for conditional/multi-part defaults. `cnBaseUI()` remains only for the rarer case where the *default* className itself is state-dependent.
 - Style **only** with Tailwind utility classes via `cn(...)`; never manually concatenate class strings.
 - Style variant/size maps are plain objects keyed by union types (`keyof typeof variantStyles`), and the class-composition function (e.g. `buttonStyles`) is exported alongside the component for reuse.
@@ -53,13 +57,15 @@ src/
 
 **Theme.** Tokens are CSS custom properties in `src/theme/vars.css` (light `:root`, dark `.dark`), aliased into Tailwind's `@theme inline` block — there is no `tailwind.config`. Semantic tokens follow a `color` / `on-color` pairing (`primary`/`on-primary`, `danger`/`on-danger`, etc.), plus `background`, `foreground`, `card`, `border`, `muted`, `warning`, `success`, `link`.
 
-**Build.** `rollup.config.mjs` emits two builds (`dist/cjs`, `dist/esm`) with `preserveModules` so consumers can import individual components (`@fransek/ui/button`). Peer deps (react, base-ui, lucide-react, date-fns, etc.) are externalized; `react-day-picker` and `date-fns` are optional peers (only the calendar/date-picker need them).
+**Build.** `rollup.config.mjs` emits two builds (`dist/cjs`, `dist/esm`) with `preserveModules` so consumers can import individual components (`@fransek/ui/button`, mapped to `dist/*/components/<name>/index.js`). Every `src/components/*/index.ts` is a Rollup entry so these barrels are emitted; stories are excluded from declarations. Peer deps (react, base-ui, lucide-react, date-fns, etc.) are externalized; `react-day-picker` and `date-fns` are optional peers (only the calendar/date-picker need them).
 
 ## Adding a component
 
-1. Create `src/components/<name>.tsx` following the pattern above.
-2. Re-export it (and its `Props` type) from `src/index.ts`.
-3. Add a story in `src/stories/<name>.stories.tsx` (kebab-case, matching the component filename) — stories double as the test suite.
+1. Create `src/components/<name>/<name>.tsx` following the pattern above, plus `src/components/<name>/index.ts` containing `export * from "./<name>";`.
+2. Re-export it from `src/index.ts` (`export * from "./components/<name>";`).
+3. Add a story in `src/components/<name>/<name>.stories.tsx` (kebab-case, matching the component filename) — stories double as the test suite.
+
+Import other components through their directory barrel (`import { Button } from "../button";`), and shared helpers from `../../lib/utils`.
 
 ## Conventions
 
