@@ -1,14 +1,10 @@
-import {
-  Fieldset as BaseUIFieldset,
-  FieldsetLegendProps,
-  FieldsetRootProps,
-} from "@base-ui/react/fieldset";
+import * as BaseUI from "@base-ui/react/fieldset";
 import React from "react";
 import { mergeProps, tw } from "../lib/utils";
 
-export interface FieldsetProps extends FieldsetRootProps {
+export interface FieldsetProps extends BaseUI.FieldsetRootProps {
   legend?: React.ReactNode;
-  legendProps?: FieldsetLegendProps;
+  legendProps?: BaseUI.FieldsetLegendProps;
   contentProps?: React.ComponentProps<"div">;
 }
 
@@ -18,20 +14,20 @@ export function Fieldset(props: FieldsetProps) {
   const hasLegend = legend != null;
 
   return (
-    <BaseUIFieldset.Root
+    <BaseUI.Fieldset.Root
       {...mergeProps(restProps, {
         className: tw("rounded-lg border p-4"),
       })}
     >
       {hasLegend && (
-        <BaseUIFieldset.Legend
+        <BaseUI.Fieldset.Legend
           {...mergeProps(legendProps, {
             className: tw("text-body text-sm"),
             render: <legend />,
           })}
         >
           {legend}
-        </BaseUIFieldset.Legend>
+        </BaseUI.Fieldset.Legend>
       )}
       <div
         {...mergeProps(contentProps, {
@@ -40,6 +36,6 @@ export function Fieldset(props: FieldsetProps) {
       >
         {children}
       </div>
-    </BaseUIFieldset.Root>
+    </BaseUI.Fieldset.Root>
   );
 }

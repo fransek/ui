@@ -1,8 +1,4 @@
-import {
-  Switch as BaseUISwitch,
-  SwitchRootProps as BaseUISwitchRootProps,
-  SwitchThumbProps,
-} from "@base-ui/react/switch";
+import * as BaseUI from "@base-ui/react/switch";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { mergeProps, tw } from "../lib/utils";
@@ -10,10 +6,10 @@ import { Field, FieldLabel, FieldProps } from "./field";
 import { InfoPopover } from "./info-popover";
 
 export interface SwitchProps
-  extends BaseUISwitchRootProps, Omit<FieldAttributes, "label"> {
+  extends BaseUI.SwitchRootProps, Omit<FieldAttributes, "label"> {
   label?: React.ReactNode;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-  thumbProps?: SwitchThumbProps;
+  thumbProps?: BaseUI.SwitchThumbProps;
   fieldProps?: FieldProps;
 }
 
@@ -51,7 +47,7 @@ export function Switch(props: SwitchProps) {
             ),
           })}
         >
-          <BaseUISwitch.Root
+          <BaseUI.Switch.Root
             aria-labelledby={labelId}
             data-validating={isValidating ? "" : undefined}
             {...mergeProps(restProps, {
@@ -60,14 +56,14 @@ export function Switch(props: SwitchProps) {
               ),
             })}
           >
-            <BaseUISwitch.Thumb
+            <BaseUI.Switch.Thumb
               {...mergeProps(thumbProps, {
                 className: tw(
                   "dark:data-checked:bg-foreground bg-background dark:bg-foreground size-3.5 rounded-full transition-[translate,background-color] duration-150 ease-[ease] data-checked:translate-x-4",
                 ),
               })}
             />
-          </BaseUISwitch.Root>
+          </BaseUI.Switch.Root>
           <span id={labelId}>{label}</span>
         </FieldLabel>
         {infoPopover && (

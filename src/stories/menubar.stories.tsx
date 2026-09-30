@@ -1,40 +1,34 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import {
-  Menu,
-  MenuCheckboxItem,
-  MenuItem,
-  MenuSeparator,
-  MenuSubmenu,
-} from "../components/menu";
-import { Menubar, MenubarTrigger } from "../components/menubar";
+import { Menu } from "../components/menu";
+import { Menubar } from "../components/menubar";
 
 const meta = {
   title: "Components/Menubar",
   render: (args) => (
     <Menubar {...args}>
-      <Menu trigger={<MenubarTrigger>File</MenubarTrigger>}>
-        <MenuItem>New</MenuItem>
-        <MenuItem>Open</MenuItem>
-        <MenuItem>Save</MenuItem>
-        <MenuSubmenu trigger="Export as">
-          <MenuItem>PDF</MenuItem>
-          <MenuItem>PNG</MenuItem>
-          <MenuItem>SVG</MenuItem>
-        </MenuSubmenu>
-        <MenuSeparator />
-        <MenuItem>Print</MenuItem>
+      <Menu trigger={<Menubar.Trigger>File</Menubar.Trigger>}>
+        <Menu.Item>New</Menu.Item>
+        <Menu.Item>Open</Menu.Item>
+        <Menu.Item>Save</Menu.Item>
+        <Menu.Submenu trigger="Export as">
+          <Menu.Item>PDF</Menu.Item>
+          <Menu.Item>PNG</Menu.Item>
+          <Menu.Item>SVG</Menu.Item>
+        </Menu.Submenu>
+        <Menu.Separator />
+        <Menu.Item>Print</Menu.Item>
       </Menu>
-      <Menu trigger={<MenubarTrigger>Edit</MenubarTrigger>}>
-        <MenuItem>Cut</MenuItem>
-        <MenuItem>Copy</MenuItem>
-        <MenuItem>Paste</MenuItem>
+      <Menu trigger={<Menubar.Trigger>Edit</Menubar.Trigger>}>
+        <Menu.Item>Cut</Menu.Item>
+        <Menu.Item>Copy</Menu.Item>
+        <Menu.Item>Paste</Menu.Item>
       </Menu>
-      <Menu trigger={<MenubarTrigger>View</MenubarTrigger>}>
-        <MenuCheckboxItem defaultChecked>Sidebar</MenuCheckboxItem>
-        <MenuCheckboxItem>Minimap</MenuCheckboxItem>
+      <Menu trigger={<Menubar.Trigger>View</Menubar.Trigger>}>
+        <Menu.CheckboxItem defaultChecked>Sidebar</Menu.CheckboxItem>
+        <Menu.CheckboxItem>Minimap</Menu.CheckboxItem>
       </Menu>
-      <Menu disabled trigger={<MenubarTrigger>Help</MenubarTrigger>} />
+      <Menu disabled trigger={<Menubar.Trigger>Help</Menubar.Trigger>} />
     </Menubar>
   ),
   component: Menubar,

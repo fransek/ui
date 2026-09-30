@@ -1,27 +1,18 @@
-import {
-  Popover as BaseUIPopover,
-  PopoverArrowProps,
-  PopoverCloseProps,
-  PopoverDescriptionProps,
-  PopoverPopupProps,
-  PopoverPortalProps,
-  PopoverPositionerProps,
-  PopoverRootProps,
-  PopoverTitleProps,
-  PopoverTriggerProps,
-} from "@base-ui/react/popover";
+import * as BaseUI from "@base-ui/react/popover";
 import React from "react";
 import { mergeProps, tw } from "../lib/utils";
 import { CloseButton } from "./close-button";
 
 export interface PopoverProps
-  extends PopoverRootProps, Omit<PopoverTriggerProps, "children" | "render"> {
-  trigger?: PopoverTriggerProps["render"];
+  extends
+    BaseUI.PopoverRootProps,
+    Omit<BaseUI.PopoverTriggerProps, "children" | "render"> {
+  trigger?: BaseUI.PopoverTriggerProps["render"];
   arrow?: boolean;
-  portalProps?: PopoverPortalProps;
-  positionerProps?: PopoverPositionerProps;
-  popupProps?: PopoverPopupProps;
-  arrowProps?: PopoverArrowProps;
+  portalProps?: BaseUI.PopoverPortalProps;
+  positionerProps?: BaseUI.PopoverPositionerProps;
+  popupProps?: BaseUI.PopoverPopupProps;
+  arrowProps?: BaseUI.PopoverArrowProps;
   arrowElement?: React.ReactNode;
   arrowSvgProps?: ArrowSvgProps;
 }
@@ -51,7 +42,7 @@ export function Popover(props: PopoverProps) {
   } = props;
 
   return (
-    <BaseUIPopover.Root
+    <BaseUI.Popover.Root
       actionsRef={actionsRef}
       defaultOpen={defaultOpen}
       defaultTriggerId={defaultTriggerId}
@@ -65,20 +56,20 @@ export function Popover(props: PopoverProps) {
       {(renderProps) => (
         <>
           {trigger && (
-            <BaseUIPopover.Trigger
+            <BaseUI.Popover.Trigger
               render={trigger}
               className={className}
               {...restProps}
             />
           )}
-          <BaseUIPopover.Portal {...portalProps}>
-            <BaseUIPopover.Positioner
+          <BaseUI.Popover.Portal {...portalProps}>
+            <BaseUI.Popover.Positioner
               sideOffset={8}
               {...mergeProps(positionerProps, {
                 className: tw("z-10 outline-none"),
               })}
             >
-              <BaseUIPopover.Popup
+              <BaseUI.Popover.Popup
                 {...mergeProps(popupProps, {
                   className: tw(
                     "bg-background outline-border max-w-[calc(100vw-3rem)] min-w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding p-4 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
@@ -86,7 +77,7 @@ export function Popover(props: PopoverProps) {
                 })}
               >
                 {arrow && (
-                  <BaseUIPopover.Arrow
+                  <BaseUI.Popover.Arrow
                     {...mergeProps(arrowProps, {
                       className: tw(
                         "data-[side=bottom]:-top-2 data-[side=left]:-right-3.25 data-[side=left]:rotate-90 data-[side=right]:-left-3.25 data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
@@ -94,44 +85,48 @@ export function Popover(props: PopoverProps) {
                     })}
                   >
                     {arrowElement ?? <ArrowSvg {...arrowSvgProps} />}
-                  </BaseUIPopover.Arrow>
+                  </BaseUI.Popover.Arrow>
                 )}
                 {typeof children === "function"
                   ? children(renderProps)
                   : children}
-              </BaseUIPopover.Popup>
-            </BaseUIPopover.Positioner>
-          </BaseUIPopover.Portal>
+              </BaseUI.Popover.Popup>
+            </BaseUI.Popover.Positioner>
+          </BaseUI.Popover.Portal>
         </>
       )}
-    </BaseUIPopover.Root>
+    </BaseUI.Popover.Root>
   );
 }
 
-export function PopoverTitle(props: PopoverTitleProps) {
+export function PopoverTitle(props: BaseUI.PopoverTitleProps) {
   return (
-    <BaseUIPopover.Title
+    <BaseUI.Popover.Title
       {...mergeProps(props, { className: tw("heading-xs") })}
     />
   );
 }
 
-export function PopoverDescription(props: PopoverDescriptionProps) {
+export function PopoverDescription(props: BaseUI.PopoverDescriptionProps) {
   return (
-    <BaseUIPopover.Description
+    <BaseUI.Popover.Description
       {...mergeProps(props, { className: tw("text-body body-sm") })}
     />
   );
 }
 
-export function PopoverClose(props: PopoverCloseProps) {
+export function PopoverClose(props: BaseUI.PopoverCloseProps) {
   return (
-    <BaseUIPopover.Close
+    <BaseUI.Popover.Close
       render={<CloseButton position="top-right" />}
       {...props}
     />
   );
 }
+
+Popover.Title = PopoverTitle;
+Popover.Description = PopoverDescription;
+Popover.Close = PopoverClose;
 
 export interface ArrowSvgProps extends React.ComponentProps<"svg"> {
   backgroundPathProps?: React.ComponentProps<"path">;

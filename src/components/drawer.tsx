@@ -1,16 +1,4 @@
-import {
-  Drawer as BaseUIDrawer,
-  DrawerBackdropProps,
-  DrawerCloseProps,
-  DrawerContentProps,
-  DrawerDescriptionProps,
-  DrawerPopupProps,
-  DrawerPortalProps,
-  DrawerRootProps,
-  DrawerTitleProps,
-  DrawerTriggerProps,
-  DrawerViewportProps,
-} from "@base-ui/react/drawer";
+import * as BaseUI from "@base-ui/react/drawer";
 import { X } from "lucide-react";
 import React from "react";
 import { cn, mergeProps, tw } from "../lib/utils";
@@ -19,8 +7,10 @@ import { CloseButton, CloseButtonProps } from "./close-button";
 export type DrawerDirection = "top" | "right" | "bottom" | "left";
 
 export interface DrawerProps
-  extends DrawerRootProps, Omit<DrawerTriggerProps, "children" | "render"> {
-  trigger?: DrawerTriggerProps["render"];
+  extends
+    BaseUI.DrawerRootProps,
+    Omit<BaseUI.DrawerTriggerProps, "children" | "render"> {
+  trigger?: BaseUI.DrawerTriggerProps["render"];
   /**
    * The edge of the screen the drawer slides in from. Also determines the
    * default `swipeDirection` (`"right"` → right, `"left"` → left, `"top"` →
@@ -42,19 +32,19 @@ export interface DrawerProps
    * @default "auto"
    */
   height?: string;
-  portalProps?: DrawerPortalProps;
-  backdropProps?: DrawerBackdropProps;
-  viewportProps?: DrawerViewportProps;
-  popupProps?: DrawerPopupProps;
-  contentProps?: DrawerContentProps;
-  closeProps?: DrawerCloseProps;
+  portalProps?: BaseUI.DrawerPortalProps;
+  backdropProps?: BaseUI.DrawerBackdropProps;
+  viewportProps?: BaseUI.DrawerViewportProps;
+  popupProps?: BaseUI.DrawerPopupProps;
+  contentProps?: BaseUI.DrawerContentProps;
+  closeProps?: BaseUI.DrawerCloseProps;
   closeButtonProps?: CloseButtonProps;
   closeButtonIconProps?: React.ComponentProps<typeof X>;
 }
 
 const drawerSwipeDirections: Record<
   DrawerDirection,
-  NonNullable<DrawerRootProps["swipeDirection"]>
+  NonNullable<BaseUI.DrawerRootProps["swipeDirection"]>
 > = {
   top: "up",
   right: "right",
@@ -118,7 +108,7 @@ export function Drawer(props: DrawerProps) {
   } as React.CSSProperties;
 
   return (
-    <BaseUIDrawer.Root
+    <BaseUI.Drawer.Root
       actionsRef={actionsRef}
       defaultOpen={defaultOpen}
       defaultSnapPoint={defaultSnapPoint}
@@ -138,9 +128,9 @@ export function Drawer(props: DrawerProps) {
     >
       {(renderProps) => (
         <>
-          {trigger && <BaseUIDrawer.Trigger render={trigger} {...restProps} />}
-          <BaseUIDrawer.Portal {...portalProps}>
-            <BaseUIDrawer.Backdrop
+          {trigger && <BaseUI.Drawer.Trigger render={trigger} {...restProps} />}
+          <BaseUI.Drawer.Portal {...portalProps}>
+            <BaseUI.Drawer.Backdrop
               hidden={modal === false}
               {...mergeProps(backdropProps, {
                 className: tw(
@@ -148,7 +138,7 @@ export function Drawer(props: DrawerProps) {
                 ),
               })}
             />
-            <BaseUIDrawer.Viewport
+            <BaseUI.Drawer.Viewport
               {...mergeProps(viewportProps, {
                 className: cn(
                   "pointer-events-none fixed inset-0 flex items-stretch p-(--viewport-padding) [--viewport-padding:0px]",
@@ -156,7 +146,7 @@ export function Drawer(props: DrawerProps) {
                 ),
               })}
             >
-              <BaseUIDrawer.Popup
+              <BaseUI.Drawer.Popup
                 {...mergeProps(popupProps, {
                   className: cn(
                     "bg-background pointer-events-auto touch-auto overflow-y-auto overscroll-contain shadow transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-swiping:select-none",
@@ -175,7 +165,7 @@ export function Drawer(props: DrawerProps) {
                   }
                   {...closeProps}
                 />
-                <BaseUIDrawer.Content
+                <BaseUI.Drawer.Content
                   {...mergeProps(contentProps, {
                     className: tw("mx-auto flex w-full flex-col gap-2"),
                   })}
@@ -183,32 +173,36 @@ export function Drawer(props: DrawerProps) {
                   {typeof children === "function"
                     ? children(renderProps)
                     : children}
-                </BaseUIDrawer.Content>
-              </BaseUIDrawer.Popup>
-            </BaseUIDrawer.Viewport>
-          </BaseUIDrawer.Portal>
+                </BaseUI.Drawer.Content>
+              </BaseUI.Drawer.Popup>
+            </BaseUI.Drawer.Viewport>
+          </BaseUI.Drawer.Portal>
         </>
       )}
-    </BaseUIDrawer.Root>
+    </BaseUI.Drawer.Root>
   );
 }
 
-export function DrawerTitle(props: DrawerTitleProps) {
+export function DrawerTitle(props: BaseUI.DrawerTitleProps) {
   return (
-    <BaseUIDrawer.Title
+    <BaseUI.Drawer.Title
       {...mergeProps(props, { className: tw("heading-sm") })}
     />
   );
 }
 
-export function DrawerDescription(props: DrawerDescriptionProps) {
+export function DrawerDescription(props: BaseUI.DrawerDescriptionProps) {
   return (
-    <BaseUIDrawer.Description
+    <BaseUI.Drawer.Description
       {...mergeProps(props, { className: tw("body-sm text-body") })}
     />
   );
 }
 
-export function DrawerClose(props: DrawerCloseProps) {
-  return <BaseUIDrawer.Close {...props} />;
+export function DrawerClose(props: BaseUI.DrawerCloseProps) {
+  return <BaseUI.Drawer.Close {...props} />;
 }
+
+Drawer.Title = DrawerTitle;
+Drawer.Description = DrawerDescription;
+Drawer.Close = DrawerClose;

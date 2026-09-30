@@ -1,4 +1,4 @@
-import { Popover, type PopoverTriggerProps } from "@base-ui/react/popover";
+import * as BaseUI from "@base-ui/react/popover";
 import { formatDate, isValid, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
@@ -9,8 +9,8 @@ import { Input, InputProps } from "./input";
 
 export interface DatePickerProps extends InputProps {
   calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect">;
-  popoverTriggerProps?: PopoverTriggerProps;
-  popoverProps?: Omit<Popover.Root.Props, "children">;
+  popoverTriggerProps?: BaseUI.PopoverTriggerProps;
+  popoverProps?: Omit<BaseUI.Popover.Root.Props, "children">;
   format?: string;
 }
 
@@ -63,7 +63,7 @@ export function DatePicker(props: DatePickerProps) {
       readOnly={readOnly}
       invalid={invalid}
       rightAdornment={
-        <Popover.Root
+        <BaseUI.Popover.Root
           onOpenChange={(open, e) => {
             onOpenChange?.(open, e);
             if (!open) {
@@ -73,7 +73,7 @@ export function DatePicker(props: DatePickerProps) {
           }}
           {...popoverProps}
         >
-          <Popover.Trigger
+          <BaseUI.Popover.Trigger
             render={
               <Button
                 size="icon"
@@ -86,13 +86,13 @@ export function DatePicker(props: DatePickerProps) {
             }
             {...popoverTriggerProps}
           />
-          <Popover.Portal>
-            <Popover.Positioner
+          <BaseUI.Popover.Portal>
+            <BaseUI.Popover.Positioner
               className="z-10 outline-none"
               sideOffset={8}
               anchor={inputRef}
             >
-              <Popover.Popup
+              <BaseUI.Popover.Popup
                 aria-label="Calendar"
                 className="bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0"
               >
@@ -104,10 +104,10 @@ export function DatePicker(props: DatePickerProps) {
                   autoFocus
                   {...calendarProps}
                 />
-              </Popover.Popup>
-            </Popover.Positioner>
-          </Popover.Portal>
-        </Popover.Root>
+              </BaseUI.Popover.Popup>
+            </BaseUI.Popover.Positioner>
+          </BaseUI.Popover.Portal>
+        </BaseUI.Popover.Root>
       }
       {...mergeProps(restProps, {
         className: tw("disabled:text-muted-fg"),

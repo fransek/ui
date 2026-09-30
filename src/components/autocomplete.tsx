@@ -1,19 +1,4 @@
-import {
-  AutocompleteClearProps,
-  AutocompleteCollectionProps,
-  AutocompleteEmptyProps,
-  AutocompleteGroupLabelProps,
-  AutocompleteGroupProps,
-  AutocompleteInputProps,
-  AutocompleteItemProps,
-  AutocompleteListProps,
-  AutocompletePopupProps,
-  AutocompletePortalProps,
-  AutocompletePositionerProps,
-  AutocompleteRootProps,
-  AutocompleteStatusProps,
-  Autocomplete as BaseUIAutocomplete,
-} from "@base-ui/react/autocomplete";
+import * as BaseUI from "@base-ui/react/autocomplete";
 import { X } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
@@ -87,8 +72,8 @@ function normalizeItems<T>(
 
 export interface AutocompleteProps<T = unknown>
   extends
-    Omit<AutocompleteInputProps, "children">,
-    Omit<AutocompleteRootProps<T>, "children" | "items">,
+    Omit<BaseUI.AutocompleteInputProps, "children">,
+    Omit<BaseUI.AutocompleteRootProps<T>, "children" | "items">,
     FieldAttributes {
   /**
    * The items to search through. A flat array, an array of groups, or a
@@ -112,18 +97,18 @@ export interface AutocompleteProps<T = unknown>
   /** Rendered inside the input, after the text. */
   rightAdornment?: React.ReactNode;
   fieldProps?: FieldProps;
-  clearProps?: AutocompleteClearProps;
+  clearProps?: BaseUI.AutocompleteClearProps;
   clearButtonProps?: CloseButtonProps;
-  portalProps?: AutocompletePortalProps;
-  positionerProps?: AutocompletePositionerProps;
-  popupProps?: AutocompletePopupProps;
-  statusProps?: AutocompleteStatusProps;
-  emptyProps?: AutocompleteEmptyProps;
-  listProps?: AutocompleteListProps;
-  groupProps?: AutocompleteGroupProps;
-  groupLabelProps?: AutocompleteGroupLabelProps;
-  collectionProps?: Omit<AutocompleteCollectionProps, "children">;
-  itemProps?: AutocompleteItemProps;
+  portalProps?: BaseUI.AutocompletePortalProps;
+  positionerProps?: BaseUI.AutocompletePositionerProps;
+  popupProps?: BaseUI.AutocompletePopupProps;
+  statusProps?: BaseUI.AutocompleteStatusProps;
+  emptyProps?: BaseUI.AutocompleteEmptyProps;
+  listProps?: BaseUI.AutocompleteListProps;
+  groupProps?: BaseUI.AutocompleteGroupProps;
+  groupLabelProps?: BaseUI.AutocompleteGroupLabelProps;
+  collectionProps?: Omit<BaseUI.AutocompleteCollectionProps, "children">;
+  itemProps?: BaseUI.AutocompleteItemProps;
 }
 
 export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
@@ -197,7 +182,7 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
   const rightSlotCount = Number(hasRightAdornment) + Number(clearable);
 
   const renderItem = (item: T, index: number) => (
-    <BaseUIAutocomplete.Item
+    <BaseUI.Autocomplete.Item
       key={index}
       value={item}
       {...mergeProps(itemProps, {
@@ -207,26 +192,26 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
       })}
     >
       {isLabeledItem(item) ? item.label : String(item)}
-    </BaseUIAutocomplete.Item>
+    </BaseUI.Autocomplete.Item>
   );
 
   const renderGroup = (group: AutocompleteGroup<T>, index: number) => (
-    <BaseUIAutocomplete.Group
+    <BaseUI.Autocomplete.Group
       key={index}
       items={group.items}
       {...mergeProps(groupProps, { className: tw("not-last:mb-2") })}
     >
-      <BaseUIAutocomplete.GroupLabel
+      <BaseUI.Autocomplete.GroupLabel
         {...mergeProps(groupLabelProps, {
           className: tw("text-muted-fg px-2.5 py-1 text-xs font-medium"),
         })}
       >
         {group.label}
-      </BaseUIAutocomplete.GroupLabel>
-      <BaseUIAutocomplete.Collection {...collectionProps}>
+      </BaseUI.Autocomplete.GroupLabel>
+      <BaseUI.Autocomplete.Collection {...collectionProps}>
         {renderItem}
-      </BaseUIAutocomplete.Collection>
-    </BaseUIAutocomplete.Group>
+      </BaseUI.Autocomplete.Collection>
+    </BaseUI.Autocomplete.Group>
   );
 
   return (
@@ -240,7 +225,7 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
       invalid={invalid}
       {...fieldProps}
     >
-      <BaseUIAutocomplete.Root
+      <BaseUI.Autocomplete.Root
         items={normalizedItems}
         actionsRef={actionsRef}
         autoHighlight={autoHighlight}
@@ -281,7 +266,7 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
               {leftAdornment}
             </span>
           )}
-          <BaseUIAutocomplete.Input
+          <BaseUI.Autocomplete.Input
             data-validating={isValidating ? "" : undefined}
             {...mergeProps(restProps, {
               className: cn(
@@ -294,7 +279,7 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
           />
           <span className="absolute inset-y-0 right-0 z-10 flex items-center gap-1 pr-2">
             {clearable && (
-              <BaseUIAutocomplete.Clear
+              <BaseUI.Autocomplete.Clear
                 render={
                   <Button
                     aria-label="Clear"
@@ -315,21 +300,21 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
             )}
           </span>
         </div>
-        <BaseUIAutocomplete.Portal {...portalProps}>
-          <BaseUIAutocomplete.Positioner
+        <BaseUI.Autocomplete.Portal {...portalProps}>
+          <BaseUI.Autocomplete.Positioner
             sideOffset={8}
             {...mergeProps(positionerProps, {
               className: tw("z-10 outline-none select-none"),
             })}
           >
-            <BaseUIAutocomplete.Popup
+            <BaseUI.Autocomplete.Popup
               {...mergeProps(popupProps, {
                 className: tw(
                   "bg-background outline-border scrollbar-track-background scrollbar-thumb-muted max-h-[min(24rem,var(--available-height))] w-(--anchor-width) origin-(--transform-origin) overflow-y-auto rounded-lg bg-clip-padding py-1 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
                 ),
               })}
             >
-              <BaseUIAutocomplete.Status
+              <BaseUI.Autocomplete.Status
                 {...mergeProps(statusProps, {
                   className: tw(
                     "text-muted-fg px-2.5 py-2 text-sm empty:m-0 empty:p-0",
@@ -337,8 +322,8 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
                 })}
               >
                 {status}
-              </BaseUIAutocomplete.Status>
-              <BaseUIAutocomplete.Empty
+              </BaseUI.Autocomplete.Status>
+              <BaseUI.Autocomplete.Empty
                 {...mergeProps(emptyProps, {
                   className: tw(
                     "text-muted-fg px-2.5 py-2 text-sm empty:m-0 empty:p-0",
@@ -346,16 +331,16 @@ export function Autocomplete<T = unknown>(props: AutocompleteProps<T>) {
                 })}
               >
                 {emptyMessage}
-              </BaseUIAutocomplete.Empty>
-              <BaseUIAutocomplete.List
+              </BaseUI.Autocomplete.Empty>
+              <BaseUI.Autocomplete.List
                 {...mergeProps(listProps, { className: tw("relative") })}
               >
                 {grouped ? renderGroup : renderItem}
-              </BaseUIAutocomplete.List>
-            </BaseUIAutocomplete.Popup>
-          </BaseUIAutocomplete.Positioner>
-        </BaseUIAutocomplete.Portal>
-      </BaseUIAutocomplete.Root>
+              </BaseUI.Autocomplete.List>
+            </BaseUI.Autocomplete.Popup>
+          </BaseUI.Autocomplete.Positioner>
+        </BaseUI.Autocomplete.Portal>
+      </BaseUI.Autocomplete.Root>
     </Field>
   );
 }

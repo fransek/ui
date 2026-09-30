@@ -1,23 +1,14 @@
-import {
-  Field as BaseUIField,
-  FieldControlProps as BaseUIFieldControlProps,
-  FieldDescriptionProps as BaseUIFieldDescriptionProps,
-  FieldErrorProps as BaseUIFieldErrorProps,
-  FieldItemProps as BaseUIFieldItemProps,
-  FieldLabelProps as BaseUIFieldLabelProps,
-  FieldRootProps as BaseUIFieldRootProps,
-  FieldValidityProps as BaseUIFieldValidityProps,
-} from "@base-ui/react/field";
+import * as BaseUI from "@base-ui/react/field";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
 import { mergeProps, tw } from "../lib/utils";
 import { InfoPopover } from "./info-popover";
 
-export interface FieldProps extends BaseUIFieldRootProps, FieldAttributes {
-  labelProps?: BaseUIFieldLabelProps;
-  errorMessageProps?: BaseUIFieldErrorProps;
-  descriptionProps?: BaseUIFieldDescriptionProps;
-  isValidatingMessageProps?: BaseUIFieldDescriptionProps;
+export interface FieldProps extends BaseUI.FieldRootProps, FieldAttributes {
+  labelProps?: BaseUI.FieldLabelProps;
+  errorMessageProps?: BaseUI.FieldErrorProps;
+  descriptionProps?: BaseUI.FieldDescriptionProps;
+  isValidatingMessageProps?: BaseUI.FieldDescriptionProps;
 }
 
 export function Field(props: FieldProps) {
@@ -77,43 +68,43 @@ export function Field(props: FieldProps) {
   );
 }
 
-export type FieldControlProps = BaseUIFieldControlProps;
+export type FieldControlProps = BaseUI.FieldControlProps;
 
-export const FieldControl = BaseUIField.Control;
+export const FieldControl = BaseUI.Field.Control;
 
 /** Base classes shared by text-like field controls (`Input`, `Textarea`). */
 export const fieldControlStyles =
   "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-fg w-full min-w-40 rounded-lg border p-2 shadow transition-colors";
 
-export type FieldDescriptionProps = BaseUIFieldDescriptionProps;
+export type FieldDescriptionProps = BaseUI.FieldDescriptionProps;
 
-export function FieldDescription(props: BaseUIFieldDescriptionProps) {
+export function FieldDescription(props: BaseUI.FieldDescriptionProps) {
   return (
-    <BaseUIField.Description
+    <BaseUI.Field.Description
       {...mergeProps(props, { className: tw("text-muted-fg text-sm") })}
     />
   );
 }
 
-export type FieldErrorProps = BaseUIFieldErrorProps;
+export type FieldErrorProps = BaseUI.FieldErrorProps;
 
-export function FieldError(props: BaseUIFieldErrorProps) {
+export function FieldError(props: BaseUI.FieldErrorProps) {
   return (
-    <BaseUIField.Error
+    <BaseUI.Field.Error
       {...mergeProps(props, { className: tw("text-danger-fg text-sm") })}
     />
   );
 }
 
-export type FieldItemProps = BaseUIFieldItemProps;
+export type FieldItemProps = BaseUI.FieldItemProps;
 
-export const FieldItem = BaseUIField.Item;
+export const FieldItem = BaseUI.Field.Item;
 
-export type FieldLabelProps = BaseUIFieldLabelProps;
+export type FieldLabelProps = BaseUI.FieldLabelProps;
 
-export function FieldLabel(props: BaseUIFieldLabelProps) {
+export function FieldLabel(props: BaseUI.FieldLabelProps) {
   return (
-    <BaseUIField.Label
+    <BaseUI.Field.Label
       {...mergeProps(props, {
         className: tw("text-foreground text-sm font-semibold"),
       })}
@@ -121,19 +112,19 @@ export function FieldLabel(props: BaseUIFieldLabelProps) {
   );
 }
 
-export type FieldRootProps = BaseUIFieldRootProps;
+export type FieldRootProps = BaseUI.FieldRootProps;
 
-export function FieldRoot(props: BaseUIFieldRootProps) {
+export function FieldRoot(props: BaseUI.FieldRootProps) {
   return (
-    <BaseUIField.Root
+    <BaseUI.Field.Root
       {...mergeProps(props, { className: tw("flex flex-col gap-1") })}
     />
   );
 }
 
-export type FieldValidityProps = BaseUIFieldValidityProps;
+export type FieldValidityProps = BaseUI.FieldValidityProps;
 
-export const FieldValidity = BaseUIField.Validity;
+export const FieldValidity = BaseUI.Field.Validity;
 
 export const FieldContext = React.createContext({
   isValidating: false,
@@ -142,3 +133,11 @@ export const FieldContext = React.createContext({
 export function useFieldContext() {
   return React.useContext(FieldContext);
 }
+
+Field.Root = FieldRoot;
+Field.Label = FieldLabel;
+Field.Control = FieldControl;
+Field.Description = FieldDescription;
+Field.Error = FieldError;
+Field.Item = FieldItem;
+Field.Validity = FieldValidity;

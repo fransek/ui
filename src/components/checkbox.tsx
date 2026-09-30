@@ -1,8 +1,4 @@
-import {
-  Checkbox as BaseUICheckbox,
-  CheckboxRootProps as BaseUICheckboxRootProps,
-  CheckboxIndicatorProps,
-} from "@base-ui/react/checkbox";
+import * as BaseUI from "@base-ui/react/checkbox";
 import { CheckIcon } from "lucide-react";
 import React from "react";
 import { FieldAttributes } from "../lib/types";
@@ -18,10 +14,10 @@ import {
 import { InfoPopover } from "./info-popover";
 
 export interface CheckboxProps
-  extends BaseUICheckboxRootProps, Omit<FieldAttributes, "label"> {
+  extends BaseUI.CheckboxRootProps, Omit<FieldAttributes, "label"> {
   label?: React.ReactNode;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-  indicatorProps?: CheckboxIndicatorProps;
+  indicatorProps?: BaseUI.CheckboxIndicatorProps;
   iconProps?: React.SVGProps<SVGSVGElement>;
   fieldProps?: FieldProps;
 }
@@ -56,7 +52,7 @@ export function Checkbox(props: CheckboxProps) {
           ),
         })}
       >
-        <BaseUICheckbox.Root
+        <BaseUI.Checkbox.Root
           aria-labelledby={labelId}
           data-validating={isValidating ? "" : undefined}
           {...mergeProps(restProps, {
@@ -65,7 +61,7 @@ export function Checkbox(props: CheckboxProps) {
             ),
           })}
         >
-          <BaseUICheckbox.Indicator
+          <BaseUI.Checkbox.Indicator
             {...mergeProps(indicatorProps, {
               className: tw(
                 "text-on-primary data-invalid:border-danger data-invalid:bg-danger flex data-unchecked:hidden",
@@ -75,8 +71,8 @@ export function Checkbox(props: CheckboxProps) {
             <CheckIcon
               {...mergeProps(iconProps, { className: tw("size-4") })}
             />
-          </BaseUICheckbox.Indicator>
-        </BaseUICheckbox.Root>
+          </BaseUI.Checkbox.Indicator>
+        </BaseUI.Checkbox.Root>
         <span id={labelId}>{label}</span>
       </FieldLabel>
       {infoPopover && (
