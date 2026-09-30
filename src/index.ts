@@ -6,6 +6,7 @@ export * from "./components/card";
 export * from "./components/chart";
 export * from "./components/checkbox";
 export * from "./components/checkbox-group";
+export * from "./components/chip";
 export * from "./components/close-button";
 export * from "./components/date-picker";
 export * from "./components/dialog";
