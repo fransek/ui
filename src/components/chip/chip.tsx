@@ -78,6 +78,7 @@ const baseChipStyles = tw(
 const variantStyles = {
   primary: tw("bg-primary text-on-primary"),
   secondary: tw("bg-secondary text-on-secondary"),
+  tertiary: tw("bg-tertiary text-on-tertiary"),
   muted: tw("bg-muted text-on-muted"),
   danger: tw("bg-danger text-on-danger"),
   "danger-subtle": tw("bg-danger-subtle text-on-danger-subtle"),
