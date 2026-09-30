@@ -84,7 +84,6 @@ const baseIndicatorStyles = "block h-full transition-[width] duration-500";
 
 const indicatorVariantStyles = {
   primary: "bg-primary",
-  secondary: "bg-secondary-fg",
   muted: "bg-muted",
   danger: "bg-danger",
   success: "bg-success",
