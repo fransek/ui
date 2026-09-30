@@ -6,7 +6,7 @@
   --card: oklch(100% 0 0);
   --border: oklch(84% 0 0);
   --body: oklch(40% 0 0);
-  --highlight: oklch(40% 0.08 280);
+  --highlight: oklch(50% 0.15 280);
   --link: oklch(52% 0.15 260);
   --field: oklch(100% 0 0);
 
@@ -50,9 +50,9 @@
   --on-warning-subtle: oklch(50% 0.15 50);
   --warning-subtle-fg: oklch(55% 0.1 50);
 
-  --success: oklch(52% 0.15 150);
-  --success-hover: oklch(57% 0.15 150);
-  --on-success: oklch(100% 0 0);
+  --success: oklch(70% 0.15 150);
+  --success-hover: oklch(75% 0.17 150);
+  --on-success: oklch(19% 0 0);
   --success-fg: oklch(47% 0.15 150);
 
   --success-subtle: oklch(53% 0.15 150 / 0.2);
@@ -80,14 +80,14 @@
   --card: oklch(19% 0 0);
   --border: oklch(32% 0 0);
   --body: oklch(80% 0 0);
-  --highlight: oklch(80% 0.1 280);
+  --highlight: oklch(72% 0.15 280);
   --link: oklch(62% 0.15 260);
   --field: oklch(25% 0 0 / 0.4);
 
   --primary: oklch(41% 0.15 280);
   --primary-hover: oklch(46% 0.17 280);
   --on-primary: oklch(100% 0 0);
-  --primary-fg: oklch(62% 0.15 280);
+  --primary-fg: oklch(70% 0.15 280);
 
   --secondary: oklch(50% 0 0 / 0.2);
   --secondary-hover: oklch(50% 0 0 / 0.3);
@@ -124,9 +124,9 @@
   --on-warning-subtle: oklch(80% 0.15 87);
   --warning-subtle-fg: oklch(80% 0.1 87);
 
-  --success: oklch(53% 0.15 150);
-  --success-hover: oklch(58% 0.17 150);
-  --on-success: oklch(100% 0 0);
+  --success: oklch(67% 0.15 150);
+  --success-hover: oklch(72% 0.17 150);
+  --on-success: oklch(0% 0 0);
   --success-fg: oklch(72% 0.15 150);
 
   --success-subtle: oklch(53% 0.15 150 / 0.2);
