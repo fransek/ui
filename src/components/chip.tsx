@@ -1,3 +1,4 @@
+import * as BaseUIButton from "@base-ui/react/button";
 import * as BaseUI from "@base-ui/react/use-render";
 import { X } from "lucide-react";
 import React from "react";
@@ -16,7 +17,7 @@ export interface ChipProps extends BaseUI.useRender.ComponentProps<"span"> {
    */
   removeLabel?: string;
   /** Props forwarded to the remove button. */
-  removeButtonProps?: React.ComponentProps<"button">;
+  removeButtonProps?: BaseUIButton.ButtonProps;
   /** Dims the chip and disables the remove button. */
   disabled?: boolean;
 }
@@ -24,7 +25,7 @@ export interface ChipProps extends BaseUI.useRender.ComponentProps<"span"> {
 export function Chip(props: ChipProps) {
   const {
     render,
-    variant = "secondary",
+    variant = "primary",
     size = "md",
     icon,
     onRemove,
@@ -48,8 +49,7 @@ export function Chip(props: ChipProps) {
           {icon}
           {children}
           {onRemove && (
-            <button
-              type="button"
+            <BaseUIButton.Button
               disabled={disabled}
               aria-label={
                 removeLabel ??
@@ -58,12 +58,12 @@ export function Chip(props: ChipProps) {
               onClick={onRemove}
               {...mergeProps(removeButtonProps, {
                 className: tw(
-                  "outline-highlight focus-visible:focus-outline -my-1 flex cursor-pointer items-center justify-center rounded-full p-0.5 opacity-70 transition-[opacity,background-color] hover:bg-current/15 hover:opacity-100 disabled:cursor-not-allowed disabled:hover:bg-transparent",
+                  "outline-highlight focus-visible:focus-outline -my-1 flex cursor-pointer items-center justify-center rounded-full p-0.5 opacity-70 transition-[opacity,background-color] hover:bg-current/15 hover:opacity-100 data-disabled:cursor-not-allowed data-disabled:hover:bg-transparent",
                 ),
               })}
             >
               <X className="size-3.5" aria-hidden />
-            </button>
+            </BaseUIButton.Button>
           )}
         </>
       ),
@@ -99,7 +99,7 @@ const removableSizeStyles: Record<ChipSize, string> = {
 };
 
 export const chipStyles = ({
-  variant = "secondary",
+  variant = "primary",
   size = "md",
   removable,
   extend,
