@@ -20,11 +20,11 @@
 
 ```
 src/
-  components/   # React components (one file per component)
+  components/   # One directory per component: <name>.tsx, <name>.stories.tsx, index.ts
   lib/
     types.ts    # Shared TypeScript types (e.g. FieldAttributes)
     utils.ts    # cn() utility (clsx + tailwind-merge)
-  stories/      # Storybook stories for each component
+  stories/      # Non-component stories (theme, examples, utils)
   theme/        # CSS theme files (vars, base, utilities, components)
     vars.css    # CSS custom properties for light + dark mode
     index.css   # Aggregates all theme partials
@@ -32,22 +32,22 @@ src/
 
 ## Component Conventions
 
-- Each component lives in `src/components/<name>.tsx` and is exported from `src/index.ts`.
+- Each component lives in `src/components/<name>/<name>.tsx` (re-exported by `src/components/<name>/index.ts`) and is exported from `src/index.ts`.
 - Components extend the corresponding **Base UI** primitive's props interface and forward all extra props with `...props`.
-- Styling is done exclusively with Tailwind utility classes using the `cn()` helper from `../lib/utils`.
+- Styling is done exclusively with Tailwind utility classes using the `cn()` helper from `../../lib/utils`.
 - Components that include a form field wrapper accept `fieldProps?: FieldProps` and the `FieldAttributes` props (`label`, `errorMessage`, `isValidating`, `isValidatingMessage`, `description`) directly on the component.
 - The `Field` component provides labelling, validation, and description slots for wrapped inputs.
 - Use the `useFieldContext` hook inside inputs to read shared `isValidating` state from a parent `Field`.
 
 ### Adding a New Component
 
-1. Create `src/components/<name>.tsx`:
+1. Create `src/components/<name>/<name>.tsx` and an `index.ts` barrel next to it:
    - Import the Base UI primitive and its prop types.
    - Define an exported `interface <Name>Props` that extends the Base UI props.
    - Export the component function with destructured props and sensible defaults.
    - Apply `cn(...)` for class composition; never concatenate class strings manually.
 2. Export it from `src/index.ts`.
-3. Add a Storybook story in `src/stories/<Name>.stories.tsx`.
+3. Add a Storybook story in `src/components/<name>/<name>.stories.tsx`.
 
 ### CSS Theme
 

@@ -1,5 +1,6 @@
 import typescript from "@rollup/plugin-typescript";
 import cssnano from "cssnano";
+import { readdirSync } from "node:fs";
 import postcssImport from "postcss-import";
 import postcss from "rollup-plugin-postcss";
 
@@ -52,12 +53,24 @@ const addDeclarationExtensions = () => ({
   },
 });
 
+// Each component directory's `index.ts` only re-exports, so Rollup would fold
+// it into the root barrel and never emit it. Listing them as entries keeps the
+// `@fransek/ui/<component>` subpath exports resolvable.
+const componentEntries = readdirSync("src/components", { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => `src/components/${entry.name}/index.ts`);
+
 /** @type {() => import('rollup').RollupOptions} */
 const createConfig = (format, dir) => ({
   // `lib/types` is type-only, so nothing in the graph keeps it alive as a
   // runtime module. Listing it as an entry forces an (empty) JS file to be
   // emitted so the `@fransek/ui/types` subpath export resolves at runtime.
-  input: ["src/index.ts", "src/lib/utils.ts", "src/lib/types.ts"],
+  input: [
+    "src/index.ts",
+    "src/lib/utils.ts",
+    "src/lib/types.ts",
+    ...componentEntries,
+  ],
   // `lib/types` has no runtime exports, so its chunk is expected to be empty.
   onwarn(warning, warn) {
     if (warning.code === "EMPTY_BUNDLE") return;
@@ -89,7 +102,13 @@ const createConfig = (format, dir) => ({
         declarationDir: dir,
         emitDeclarationOnly: true,
       },
-      exclude: ["**/*.test.ts", "**/*.spec.ts", "stories/**/*"],
+      exclude: [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "**/*.stories.ts",
+        "**/*.stories.tsx",
+        "**/stories/**/*",
+      ],
     }),
     postcss({
       plugins: [postcssImport(), cssnano({ preset: "default" })],
