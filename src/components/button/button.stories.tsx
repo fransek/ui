@@ -6,6 +6,7 @@ import { Button, ButtonVariant } from "./button";
 const variants: ButtonVariant[] = [
   "primary",
   "secondary",
+  "tertiary",
   "success",
   "success-subtle",
   "warning",

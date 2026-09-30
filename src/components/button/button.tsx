@@ -58,6 +58,7 @@ const pressStyles = tw("not-data-disabled:not-aria-disabled:active:scale-97");
 const variantStyles = {
   primary: tw("bg-primary text-on-primary hover:bg-primary-hover"),
   secondary: tw("bg-secondary text-on-secondary hover:bg-secondary-hover"),
+  tertiary: tw("bg-tertiary text-on-tertiary hover:bg-tertiary-hover"),
   muted: tw("bg-muted text-on-muted hover:bg-muted-hover"),
   danger: tw(
     "bg-danger text-on-danger outline-foreground hover:bg-danger-hover",

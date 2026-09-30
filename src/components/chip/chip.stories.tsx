@@ -7,6 +7,7 @@ import { Chip, ChipVariant } from "./chip";
 const variants: ChipVariant[] = [
   "primary",
   "secondary",
+  "tertiary",
   "success",
   "success-subtle",
   "warning",

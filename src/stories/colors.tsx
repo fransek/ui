@@ -23,6 +23,12 @@ export function Colors() {
         <div className="text-secondary-fg border-secondary-fg bg-card rounded-lg border p-2">
           secondary-fg
         </div>
+        <div className="bg-tertiary text-on-tertiary rounded-lg p-2">
+          tertiary
+        </div>
+        <div className="text-tertiary-fg border-tertiary-fg bg-card rounded-lg border p-2">
+          tertiary-fg
+        </div>
         <div className="bg-success text-on-success rounded-lg p-2">success</div>
         <div className="text-success-fg border-success-fg bg-card rounded-lg border p-2">
           success-fg

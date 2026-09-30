@@ -18,7 +18,12 @@
   --secondary: oklch(50% 0 0 / 0.2);
   --secondary-hover: oklch(50% 0 0 / 0.3);
   --on-secondary: oklch(41% 0.15 280);
-  --secondary-fg: oklch(33% 0.1 280);
+  --secondary-fg: oklch(50% 0.1 280);
+
+  --tertiary: oklch(50% 0 0 / 0.2);
+  --tertiary-hover: oklch(50% 0 0 / 0.3);
+  --on-tertiary: oklch(30% 0 0);
+  --tertiary-fg: oklch(40% 0 0);
 
   --muted: oklch(45% 0 0);
   --muted-hover: oklch(50% 0 0);
@@ -87,7 +92,12 @@
   --secondary: oklch(50% 0 0 / 0.2);
   --secondary-hover: oklch(50% 0 0 / 0.3);
   --on-secondary: oklch(72% 0.15 280);
-  --secondary-fg: oklch(82% 0.1 280);
+  --secondary-fg: oklch(62% 0.1 280);
+
+  --tertiary: oklch(50% 0 0 / 0.2);
+  --tertiary-hover: oklch(50% 0 0 / 0.3);
+  --on-tertiary: oklch(92% 0 0);
+  --tertiary-fg: oklch(80% 0 0);
 
   --muted: oklch(39% 0 0);
   --muted-hover: oklch(44% 0 0);
@@ -159,6 +169,11 @@
   --color-secondary-hover: var(--secondary-hover);
   --color-on-secondary: var(--on-secondary);
   --color-secondary-fg: var(--secondary-fg);
+
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-hover: var(--tertiary-hover);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-tertiary-fg: var(--tertiary-fg);
 
   --color-muted: var(--muted);
   --color-muted-hover: var(--muted-hover);
