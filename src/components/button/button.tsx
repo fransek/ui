@@ -47,7 +47,7 @@ export function Button(props: ButtonProps) {
 }
 
 const baseButtonStyles = tw(
-  "font-inherit outline-highlight focus-visible:focus-outline m-0 flex cursor-pointer items-center justify-center gap-2 rounded-lg transition-[color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,scale] select-none aria-disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:opacity-60",
+  "font-inherit outline-highlight focus-visible:focus-outline m-0 flex cursor-pointer items-center justify-center gap-2 rounded-lg transition-[color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,scale] select-none focus-visible:outline-offset-1 aria-disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:opacity-60",
 );
 
 // Disabled buttons stay focusable (no native `disabled`), so :active still
@@ -59,21 +59,15 @@ const variantStyles = {
   primary: tw("bg-primary text-on-primary hover:bg-primary-hover"),
   secondary: tw("bg-secondary text-on-secondary hover:bg-secondary-hover"),
   muted: tw("bg-muted text-on-muted hover:bg-muted-hover"),
-  danger: tw(
-    "bg-danger text-on-danger outline-foreground hover:bg-danger-hover",
-  ),
+  danger: tw("bg-danger text-on-danger hover:bg-danger-hover"),
   "danger-subtle": tw(
     "bg-danger-subtle text-on-danger-subtle hover:bg-danger-subtle-hover",
   ),
-  warning: tw(
-    "bg-warning text-on-warning outline-foreground hover:bg-warning-hover",
-  ),
+  warning: tw("bg-warning text-on-warning hover:bg-warning-hover"),
   "warning-subtle": tw(
     "bg-warning-subtle text-on-warning-subtle hover:bg-warning-subtle-hover",
   ),
-  success: tw(
-    "bg-success outline-foreground hover:bg-success-hover text-on-success",
-  ),
+  success: tw("bg-success hover:bg-success-hover text-on-success"),
   "success-subtle": tw(
     "bg-success-subtle text-on-success-subtle hover:bg-success-subtle-hover",
   ),
@@ -109,7 +103,7 @@ export const buttonStyles = ({
     variant !== "link" && pressStyles,
     variantStyles[variant],
     sizeStyles[size],
-    compact && "min-w-0 p-0",
+    compact && "min-w-0 px-1.5 py-0",
     extend,
   );
 

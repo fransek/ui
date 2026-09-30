@@ -57,10 +57,6 @@ export function Colors() {
         <div className="text-muted-fg border-muted-fg bg-card rounded-lg border p-2">
           muted-fg
         </div>
-        <div className="bg-code text-on-code rounded-lg p-2">code</div>
-        <div className="text-code-fg border-code-fg bg-card rounded-lg border p-2">
-          code-fg
-        </div>
       </div>
       <div className="typography max-w-3xl">
         <h2 className="heading-5">Other Colors</h2>
