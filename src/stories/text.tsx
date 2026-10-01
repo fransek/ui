@@ -12,6 +12,7 @@ export function Text() {
       <div className="ingress">ingress</div>
       <div className="body">body</div>
       <div className="body-sm">body-sm</div>
+      <div className="eyebrow">eyebrow</div>
     </div>
   );
 }

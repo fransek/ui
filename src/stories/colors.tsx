@@ -4,69 +4,59 @@ export function Colors() {
   return (
     <div className="bg-background flex flex-col gap-6">
       <div className="typography max-w-3xl">
-        <h2 className="heading-5">Surface Colors</h2>
-        <p className="body-2">
-          These colors come in sets of three, one for the background (
-          <code>bg-*</code>), one for the foreground (<code>text-on-*</code>),
-          and one with higher contrast for stand-alone text (
-          <code>text-*-fg</code>).
+        <h2 className="heading-sm">Surface Colors</h2>
+        <p className="body-sm">
+          These colors come in pairs, one for the background (<code>bg-*</code>)
+          and one for the foreground (<code>text-on-*</code>).
         </p>
       </div>
       <div className="text-foreground grid grid-cols-2 gap-4 font-semibold lg:grid-cols-4">
         <div className="bg-primary text-on-primary rounded-lg p-2">primary</div>
-        <div className="text-primary-fg border-primary-fg bg-card rounded-lg border p-2">
-          primary-fg
-        </div>
         <div className="bg-secondary text-on-secondary rounded-lg p-2">
           secondary
-        </div>
-        <div className="text-secondary-fg border-secondary-fg bg-card rounded-lg border p-2">
-          secondary-fg
         </div>
         <div className="bg-tertiary text-on-tertiary rounded-lg p-2">
           tertiary
         </div>
-        <div className="text-tertiary-fg border-tertiary-fg bg-card rounded-lg border p-2">
-          tertiary-fg
-        </div>
+        <div className="bg-muted text-on-muted rounded-lg p-2">muted</div>
         <div className="bg-success text-on-success rounded-lg p-2">success</div>
-        <div className="text-success-fg border-success-fg bg-card rounded-lg border p-2">
-          success-fg
-        </div>
         <div className="bg-success-subtle text-on-success-subtle rounded-lg p-2">
           success-subtle
         </div>
-        <div className="text-success-subtle-fg border-success-subtle-fg bg-card rounded-lg border p-2">
-          success-subtle-fg
-        </div>
         <div className="bg-warning text-on-warning rounded-lg p-2">warning</div>
-        <div className="text-warning-fg border-warning-fg bg-card rounded-lg border p-2">
-          warning-fg
-        </div>
         <div className="bg-warning-subtle text-on-warning-subtle rounded-lg p-2">
           warning-subtle
         </div>
-        <div className="text-warning-subtle-fg border-warning-subtle-fg bg-card rounded-lg border p-2">
-          warning-subtle-fg
-        </div>
         <div className="bg-danger text-on-danger rounded-lg p-2">danger</div>
-        <div className="text-danger-fg border-danger-fg bg-card rounded-lg border p-2">
-          danger-fg
-        </div>
         <div className="bg-danger-subtle text-on-danger-subtle rounded-lg p-2">
           danger-subtle
         </div>
-        <div className="text-danger-subtle-fg border-danger-subtle-fg bg-card rounded-lg border p-2">
-          danger-subtle-fg
-        </div>
-        <div className="bg-muted text-on-muted rounded-lg p-2">muted</div>
-        <div className="text-muted-fg border-muted-fg bg-card rounded-lg border p-2">
-          muted-fg
-        </div>
       </div>
       <div className="typography max-w-3xl">
-        <h2 className="heading-5">Other Colors</h2>
-        <p className="body-2">
+        <h2 className="heading-sm">Foreground Colors</h2>
+        <p className="body-sm">
+          These colors are used for text and other elements that appear on top
+          of surfaces.
+        </p>
+      </div>
+      <div className="heading-xs">
+        <div className="text-primary-fg">primary-fg</div>
+        <div className="text-secondary-fg">secondary-fg</div>
+        <div className="text-tertiary-fg">tertiary-fg</div>
+        <div className="text-muted-fg">muted-fg</div>
+        <div className="text-success-fg">success-fg</div>
+        <div className="text-success-subtle-fg">success-subtle-fg</div>
+        <div className="text-warning-fg">warning-fg</div>
+        <div className="text-warning-subtle-fg">warning-subtle-fg</div>
+        <div className="text-danger-fg">danger-fg</div>
+        <div className="text-danger-subtle-fg">danger-subtle-fg</div>
+        <div className="text-foreground">foreground</div>
+        <div className="text-body">body</div>
+        <div className="text-link">link</div>
+      </div>
+      <div className="typography max-w-3xl">
+        <h2 className="heading-sm">Other Colors</h2>
+        <p className="body-sm">
           Stand-alone colors that are used for various UI elements.
         </p>
       </div>
@@ -84,20 +74,12 @@ export function Colors() {
           <div>border</div>
         </div>
         <div className="flex items-center gap-4">
-          <div className="bg-body h-8 w-8 rounded-lg p-2" />
-          <div>body</div>
-        </div>
-        <div className="flex items-center gap-4">
           <div className="bg-contrast h-8 w-8 rounded-lg p-2" />
           <div>contrast</div>
         </div>
         <div className="flex items-center gap-4">
           <div className="bg-highlight h-8 w-8 rounded-lg p-2" />
           <div>highlight</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="bg-link h-8 w-8 rounded-lg p-2" />
-          <div>link</div>
         </div>
         <div className="flex items-center gap-4">
           <div className="bg-chart-1 h-8 w-8 rounded-lg p-2" />
