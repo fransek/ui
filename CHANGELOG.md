@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.20.0](https://github.com/fransek/ui/compare/v0.19.0...v0.20.0) (2026-10-02)
+
+
+### Features
+
+* add Chip component with multiple variants and sizes ([#136](https://github.com/fransek/ui/issues/136)) ([695f4f7](https://github.com/fransek/ui/commit/695f4f705dddd8d9ca1187be880bb4b09bc1ea9e))
+* add subtle button variants and press feedback ([#133](https://github.com/fransek/ui/issues/133)) ([08197e0](https://github.com/fransek/ui/commit/08197e0a42285f34b72009fca1858ee0da0f2b07))
+* expose sub-components as static properties on their roots ([#135](https://github.com/fransek/ui/issues/135)) ([501e8c2](https://github.com/fransek/ui/commit/501e8c27e2aba03151ecb58ba2df298128764e6a))
+* **slider:** add Slider component ([#142](https://github.com/fransek/ui/issues/142)) ([21997b3](https://github.com/fransek/ui/commit/21997b3318fe08b66b13b6ac0d597aa8d717b27d))
+* **spinner,meter:** drop secondary variant and add warning spinner ([#138](https://github.com/fransek/ui/issues/138)) ([c2d7e69](https://github.com/fransek/ui/commit/c2d7e69635f47786a3021448590ebbe0f5372c33))
+* **theme:** add eyebrow text style and retune foreground colors ([#141](https://github.com/fransek/ui/issues/141)) ([b65dd3c](https://github.com/fransek/ui/commit/b65dd3c44a565320cb4fd971052ef364402237cb))
+* **theme:** add tertiary color and Button/Chip variants ([#139](https://github.com/fransek/ui/issues/139)) ([0468197](https://github.com/fransek/ui/commit/04681970ce0692d2b3885fb3c11b85e48d48832b))
+
+
+### Bug Fixes
+
+* **theme:** retune highlight, success and focus outline styles ([#140](https://github.com/fransek/ui/issues/140)) ([9afa278](https://github.com/fransek/ui/commit/9afa2788a510fd11f7d175fb36850809c89e47b6))
+
 ## [0.19.0](https://github.com/fransek/ui/compare/v0.18.0...v0.19.0) (2026-09-26)
 
 
