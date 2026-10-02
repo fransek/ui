@@ -5,6 +5,9 @@ import {
   AlignRight,
   Bold,
   Italic,
+  Monitor,
+  Moon,
+  Sun,
   Underline,
 } from "lucide-react";
 import React from "react";
@@ -100,6 +103,22 @@ export const Vertical: Story = {
   args: {
     orientation: "vertical",
   },
+  render: (args) => (
+    <ToggleGroup {...args} defaultValue={["system"]}>
+      <ToggleGroup.Item value="system">
+        <Monitor className="size-4" />
+        System
+      </ToggleGroup.Item>
+      <ToggleGroup.Item value="light">
+        <Sun className="size-4" />
+        Light
+      </ToggleGroup.Item>
+      <ToggleGroup.Item value="dark">
+        <Moon className="size-4" />
+        Dark
+      </ToggleGroup.Item>
+    </ToggleGroup>
+  ),
 };
 
 export const Disabled: Story = {
