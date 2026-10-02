@@ -2,14 +2,15 @@ import * as BaseUI from "@base-ui/react/slider";
 import React from "react";
 import { FieldAttributes } from "../../lib/types";
 import { mergeProps, tw } from "../../lib/utils";
-import { Field, FieldLabel, FieldLabelProps, FieldProps } from "../field";
+import { Field, FieldProps } from "../field";
 import { InfoPopover } from "../info-popover";
 
-export interface SliderProps extends BaseUI.SliderRootProps, FieldAttributes {
+export interface SliderProps
+  extends Omit<BaseUI.SliderRootProps, "children">, FieldAttributes {
   /** Whether to display the formatted value next to the label. Defaults to true. */
   showValue?: boolean;
   fieldProps?: FieldProps;
-  labelProps?: FieldLabelProps;
+  labelProps?: BaseUI.SliderLabelProps;
   valueProps?: BaseUI.SliderValueProps;
   controlProps?: BaseUI.SliderControlProps;
   trackProps?: BaseUI.SliderTrackProps;
@@ -38,7 +39,10 @@ export function Slider(props: SliderProps) {
     ...restProps
   } = props;
 
-  const currentValue = restProps.value ?? restProps.defaultValue;
+  // Base UI seeds its uncontrolled state from the first `defaultValue` only, so
+  // the thumb count follows suit to stay in step with the root's values.
+  const [initialValue] = React.useState(restProps.defaultValue);
+  const currentValue = restProps.value ?? initialValue;
   const thumbCount = Array.isArray(currentValue) ? currentValue.length : 1;
 
   return (
@@ -59,7 +63,15 @@ export function Slider(props: SliderProps) {
       >
         {(label || showValue) && (
           <div className="flex items-center gap-2">
-            {label && <FieldLabel {...labelProps}>{label}</FieldLabel>}
+            {label && (
+              <BaseUI.Slider.Label
+                {...mergeProps(labelProps, {
+                  className: tw("text-foreground text-sm font-semibold"),
+                })}
+              >
+                {label}
+              </BaseUI.Slider.Label>
+            )}
             {label && infoPopover && (
               <InfoPopover fieldLabel={label}>{infoPopover}</InfoPopover>
             )}
@@ -97,12 +109,12 @@ export function Slider(props: SliderProps) {
             {Array.from({ length: thumbCount }, (_, index) => (
               <BaseUI.Slider.Thumb
                 key={index}
-                index={index}
                 {...mergeProps(thumbProps, {
                   className: tw(
                     "bg-field border-muted-fg dark:bg-foreground has-focus-visible:focus-outline outline-highlight data-invalid:border-danger-fg size-4 rounded-full border shadow select-none dark:border-none",
                   ),
                 })}
+                index={index}
               />
             ))}
           </BaseUI.Slider.Track>
