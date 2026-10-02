@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Bold, Heart } from "lucide-react";
+import { Bold, Heart, HeartOff } from "lucide-react";
 import React from "react";
 import { expect, fn } from "storybook/test";
 import { Toggle } from "./toggle";
@@ -66,6 +66,31 @@ export const WithIcon: Story = {
         Favorite
       </>
     ),
+  },
+};
+
+export const RenderProps: Story = {
+  args: {
+    size: "icon",
+    "aria-label": "Favorite",
+    children: ({ pressed }) => (
+      <>
+        {pressed ? (
+          <Heart className="size-5" />
+        ) : (
+          <HeartOff className="size-5" />
+        )}
+      </>
+    ),
+  },
+  play: async ({ canvas, userEvent }) => {
+    const toggle = canvas.getByRole("button", { name: "Favorite" });
+    await expect(toggle.querySelector(".lucide-heart-off")).not.toBeNull();
+    await userEvent.click(toggle);
+    await expect(toggle.querySelector(".lucide-heart")).not.toBeNull();
+    await expect(toggle.querySelector(".lucide-heart-off")).toBeNull();
+    await userEvent.click(toggle);
+    await expect(toggle.querySelector(".lucide-heart-off")).not.toBeNull();
   },
 };
 
