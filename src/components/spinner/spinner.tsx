@@ -105,7 +105,7 @@ export function Spinner(props: SpinnerProps) {
         r="10"
         stroke="currentColor"
         strokeWidth="3"
-        className="opacity-25"
+        className={cn(variant === "current" ? "opacity-25" : "stroke-track")}
       />
       <path
         d="M12 2a10 10 0 0 1 10 10"

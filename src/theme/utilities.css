@@ -58,3 +58,6 @@
 @utility card {
   @apply bg-card rounded-lg border p-2 shadow;
 }
+@utility link {
+  @apply text-link decoration-link/50 hover:decoration-link/75 active:decoration-link underline underline-offset-2;
+}

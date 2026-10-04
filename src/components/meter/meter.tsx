@@ -64,7 +64,7 @@ export function Meter(props: MeterProps) {
 }
 
 const baseTrackStyles =
-  "bg-muted/40 col-span-2 block overflow-hidden rounded-full";
+  "bg-track col-span-2 block overflow-hidden rounded-full";
 
 const trackSizeStyles = {
   sm: "h-1.5",
@@ -84,7 +84,7 @@ const baseIndicatorStyles = "block h-full transition-[width] duration-500";
 
 const indicatorVariantStyles = {
   primary: "bg-primary",
-  muted: "bg-muted",
+  muted: "bg-muted-fg",
   danger: "bg-danger",
   success: "bg-success",
   warning: "bg-warning",
