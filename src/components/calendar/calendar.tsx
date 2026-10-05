@@ -111,16 +111,16 @@ function Calendar(props: CalendarProps) {
           defaultClassNames.day,
         ),
         range_start: cn(
-          "bg-primary not-last:after:bg-primary/50 relative isolate z-10 rounded-(--cell-radius) after:absolute after:inset-y-0 after:right-0 after:w-4 after:rounded-l-(--cell-radius)",
+          "bg-primary not-last:after:bg-secondary relative isolate z-10 rounded-(--cell-radius) after:absolute after:inset-y-0 after:right-0 after:w-4 after:rounded-l-(--cell-radius)",
           defaultClassNames.range_start,
         ),
         range_middle: cn("z-0 rounded-none", defaultClassNames.range_middle),
         range_end: cn(
-          "bg-primary not-first:after:bg-primary/50 relative isolate z-10 rounded-(--cell-radius) after:absolute after:inset-y-0 after:left-0 after:w-4 after:rounded-r-(--cell-radius)",
+          "bg-primary not-first:after:bg-secondary relative isolate z-10 rounded-(--cell-radius) after:absolute after:inset-y-0 after:left-0 after:w-4 after:rounded-r-(--cell-radius)",
           defaultClassNames.range_end,
         ),
         today: cn(
-          "bg-muted/50 text-foreground rounded-(--cell-radius)",
+          "bg-tertiary text-foreground rounded-(--cell-radius)",
           defaultClassNames.today,
         ),
         outside: cn(
@@ -210,7 +210,7 @@ function CalendarDayButton(
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "data-[selected-single=true]:bg-primary data-[selected-single=true]:text-on-primary data-[range-middle=true]:bg-primary/50 data-[range-middle=true]:text-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-on-primary data-[range-end=true]:bg-primary data-[range-end=true]:text-on-primary group-data-[focused=true]/day:border-highlight group-data-[focused=true]/day:focus-outline relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 p-1 text-sm leading-none font-normal text-inherit group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) [&>span]:text-xs [&>span]:opacity-70",
+        "data-[selected-single=true]:bg-primary data-[selected-single=true]:text-on-primary data-[range-middle=true]:bg-secondary data-[range-middle=true]:text-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-on-primary data-[range-end=true]:bg-primary data-[range-end=true]:text-on-primary group-data-[focused=true]/day:border-highlight group-data-[focused=true]/day:focus-outline relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 p-1 text-sm leading-none font-normal text-inherit group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) [&>span]:text-xs [&>span]:opacity-70",
         defaultClassNames.day,
         className,
       )}

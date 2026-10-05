@@ -1,0 +1,72 @@
+:root {
+  --background: oklch(98% 0 0);
+  --foreground: oklch(19% 0 0);
+
+  --card: oklch(100% 0 0);
+  --track: oklch(50% 0 0 / 0.33);
+  --field: oklch(100% 0 0);
+  --hover: oklch(50% 0 0 / 0.125);
+  --active: oklch(50% 0 0 / 0.25);
+  --border: oklch(84% 0 0);
+  --contrast: oklch(0% 0 0);
+  --contrast-inverse: oklch(100% 0 0);
+  --body: oklch(40% 0 0);
+  --highlight: oklch(50% 0.15 280);
+  --link: oklch(52% 0.15 260);
+
+  --primary: oklch(50% 0.15 280);
+  --primary-hover: oklch(55% 0.15 280);
+  --on-primary: oklch(100% 0 0);
+  --primary-fg: oklch(41% 0.15 280);
+
+  --secondary: oklch(50% 0.15 280 / 0.3);
+  --secondary-hover: oklch(50% 0.15 280 / 0.4);
+  --on-secondary: oklch(41% 0.15 280);
+  --secondary-fg: oklch(46% 0.08 280);
+
+  --tertiary: oklch(50% 0 0 / 0.3);
+  --tertiary-hover: oklch(50% 0 0 / 0.4);
+  --on-tertiary: oklch(30% 0 0);
+  --tertiary-fg: oklch(46% 0 0);
+
+  --muted: oklch(70% 0 0);
+  --muted-hover: oklch(75% 0 0);
+  --on-muted: oklch(30% 0 0);
+  --muted-fg: oklch(50% 0 0);
+
+  --danger: oklch(53% 0.15 25);
+  --danger-hover: oklch(58% 0.15 25);
+  --on-danger: oklch(100% 0 0);
+  --danger-fg: oklch(50% 0.15 25);
+
+  --danger-subtle: oklch(53% 0.15 25 / 0.3);
+  --danger-subtle-hover: oklch(53% 0.15 25 / 0.4);
+  --on-danger-subtle: oklch(45% 0.15 25);
+  --danger-subtle-fg: oklch(50% 0.1 25);
+
+  --warning: oklch(82% 0.15 88);
+  --warning-hover: oklch(87% 0.15 88);
+  --on-warning: oklch(19% 0 0);
+  --warning-fg: oklch(55% 0.15 50);
+
+  --warning-subtle: oklch(63% 0.15 88 / 0.3);
+  --warning-subtle-hover: oklch(63% 0.15 88 / 0.4);
+  --on-warning-subtle: oklch(45% 0.15 50);
+  --warning-subtle-fg: oklch(55% 0.1 50);
+
+  --success: oklch(70% 0.15 150);
+  --success-hover: oklch(75% 0.17 150);
+  --on-success: oklch(19% 0 0);
+  --success-fg: oklch(47% 0.15 150);
+
+  --success-subtle: oklch(53% 0.15 150 / 0.3);
+  --success-subtle-hover: oklch(53% 0.15 150 / 0.4);
+  --on-success-subtle: oklch(40% 0.15 150);
+  --success-subtle-fg: oklch(47% 0.08 150);
+
+  --chart-1: oklch(64% 0.2 280);
+  --chart-2: oklch(70% 0.2 150);
+  --chart-3: oklch(70% 0.2 50);
+  --chart-4: oklch(66% 0.2 315);
+  --chart-5: oklch(70% 0.2 180);
+}

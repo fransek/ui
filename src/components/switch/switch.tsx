@@ -59,7 +59,7 @@ export function Switch(props: SwitchProps) {
             <BaseUI.Switch.Thumb
               {...mergeProps(thumbProps, {
                 className: tw(
-                  "dark:data-checked:bg-foreground bg-background dark:bg-foreground size-3.5 rounded-full transition-[translate,background-color] duration-150 ease-[ease] data-checked:translate-x-4",
+                  "bg-contrast-inverse dark:bg-contrast size-3.5 rounded-full transition-[translate,background-color] duration-150 ease-[ease] data-checked:translate-x-4",
                 ),
               })}
             />

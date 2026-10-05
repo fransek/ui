@@ -52,7 +52,7 @@ export function NumberField(props: NumberFieldProps) {
           <BaseUI.NumberField.Decrement
             {...mergeProps(decrementProps, {
               className: tw(
-                "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-r px-2.5 transition-colors select-none data-disabled:pointer-events-none",
+                "text-foreground hover:bg-hover active:bg-active data-disabled:text-muted-fg flex items-center justify-center border-r px-2.5 transition-colors select-none data-disabled:pointer-events-none",
               ),
             })}
           >
@@ -68,7 +68,7 @@ export function NumberField(props: NumberFieldProps) {
           <BaseUI.NumberField.Increment
             {...mergeProps(incrementProps, {
               className: tw(
-                "text-foreground hover:bg-muted/10 active:bg-muted/20 data-disabled:text-muted-fg flex items-center justify-center border-l px-2.5 transition-colors select-none data-disabled:pointer-events-none",
+                "text-foreground hover:bg-hover active:bg-active data-disabled:text-muted-fg flex items-center justify-center border-l px-2.5 transition-colors select-none data-disabled:pointer-events-none",
               ),
             })}
           >
