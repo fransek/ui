@@ -1,0 +1,124 @@
+@theme inline {
+  --breakpoint-xs: 30rem;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-track: var(--track);
+  --color-hover: var(--hover);
+  --color-active: var(--active);
+  --color-contrast: var(--contrast);
+  --color-contrast-inverse: var(--contrast-inverse);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-body: var(--body);
+  --color-highlight: var(--highlight);
+  --color-link: var(--link);
+  --color-field: var(--field);
+
+  --color-default: var(--background);
+  --color-default-hover: var(--hover);
+  --color-default-active: var(--active);
+  --color-on-default: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-primary-fg: var(--primary-fg);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-fg: var(--secondary-fg);
+
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-hover: var(--tertiary-hover);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-tertiary-fg: var(--tertiary-fg);
+
+  --color-muted: var(--muted);
+  --color-muted-hover: var(--muted-hover);
+  --color-on-muted: var(--on-muted);
+  --color-muted-fg: var(--muted-fg);
+
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-on-danger: var(--on-danger);
+  --color-danger-fg: var(--danger-fg);
+
+  --color-danger-subtle: var(--danger-subtle);
+  --color-danger-subtle-hover: var(--danger-subtle-hover);
+  --color-on-danger-subtle: var(--on-danger-subtle);
+  --color-danger-subtle-fg: var(--danger-subtle-fg);
+
+  --color-warning: var(--warning);
+  --color-warning-hover: var(--warning-hover);
+  --color-on-warning: var(--on-warning);
+  --color-warning-fg: var(--warning-fg);
+
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-subtle-hover: var(--warning-subtle-hover);
+  --color-on-warning-subtle: var(--on-warning-subtle);
+  --color-warning-subtle-fg: var(--warning-subtle-fg);
+
+  --color-success: var(--success);
+  --color-success-hover: var(--success-hover);
+  --color-on-success: var(--on-success);
+  --color-success-fg: var(--success-fg);
+
+  --color-success-subtle: var(--success-subtle);
+  --color-success-subtle-hover: var(--success-subtle-hover);
+  --color-on-success-subtle: var(--on-success-subtle);
+  --color-success-subtle-fg: var(--success-subtle-fg);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --animate-validating: validating 1.5s ease-in-out infinite;
+  --animate-validating-message: validating-message 1.5s linear infinite;
+
+  --shimmer-gradient: linear-gradient(
+    105deg,
+    var(--muted-fg) 40%,
+    color-mix(in oklch, white 25%, var(--muted-fg)) 45%,
+    color-mix(in oklch, white 50%, var(--muted-fg)) 50%,
+    color-mix(in oklch, white 25%, var(--muted-fg)) 55%,
+    var(--muted-fg) 60%
+  );
+
+  @keyframes validating {
+    0%,
+    100% {
+      border-color: var(--primary);
+      box-shadow: none;
+    }
+    50% {
+      border-color: color-mix(in oklab, var(--foreground) 40%, var(--primary));
+      box-shadow: 0 0 4px 4px
+        color-mix(in oklab, var(--primary) 15%, transparent);
+    }
+  }
+
+  @keyframes validating-message {
+    from {
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-image: var(--shimmer-gradient);
+      background-position: 100% center;
+      background-size: 300% 100%;
+      color: transparent;
+    }
+
+    to {
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-image: var(--shimmer-gradient);
+      background-position: 0% center;
+      background-size: 300% 100%;
+      color: transparent;
+    }
+  }
+}

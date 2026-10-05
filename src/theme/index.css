@@ -1,5 +1,7 @@
-@import "./vars.css";
+@import "./light.css";
+@import "./dark.css";
+@import "./theme.css";
+@import "./base.css";
 @import "./utilities.css";
 @import "./components.css";
-@import "./base.css";
 @source "./**/*.{ts,tsx,js,jsx}";

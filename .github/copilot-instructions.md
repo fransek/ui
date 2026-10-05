@@ -25,8 +25,10 @@ src/
     types.ts    # Shared TypeScript types (e.g. FieldAttributes)
     utils.ts    # cn() utility (clsx + tailwind-merge)
   stories/      # Non-component stories (theme, examples, utils)
-  theme/        # CSS theme files (vars, base, utilities, components)
-    vars.css    # CSS custom properties for light + dark mode
+  theme/        # CSS theme files (light, dark, theme, base, utilities, components)
+    light.css   # CSS custom properties for light mode (:root)
+    dark.css    # CSS custom properties for dark mode (.dark)
+    theme.css   # @theme inline aliases into Tailwind
     index.css   # Aggregates all theme partials
 ```
 
@@ -51,7 +53,7 @@ src/
 
 ### CSS Theme
 
-Theme tokens are CSS custom properties defined in `src/theme/vars.css` for both light (`:root`) and dark (`.dark`) modes, then aliased into Tailwind's `@theme inline` block. Available semantic color tokens include `background`, `foreground`, `card`, `border`, `primary` / `on-primary` / `primary-foreground`, `secondary`, `muted`, `error`, `warning`, `success`, etc.
+Theme tokens are CSS custom properties defined in `src/theme/light.css` (`:root`) and `src/theme/dark.css` (`.dark`), then aliased into Tailwind's `@theme inline` block in `src/theme/theme.css`. Available semantic color tokens include `background`, `foreground`, `card`, `border`, `primary` / `on-primary` / `primary-foreground`, `secondary`, `muted`, `error`, `warning`, `success`, etc.
 
 ## Scripts
 
