@@ -40,7 +40,7 @@ src/
     utils.ts    # cn(), cnBaseUI(), mergeProps(), tw(), useMergeProps(), useMergeRefs()
     types.ts    # FieldAttributes shared across form components
   stories/      # Non-component stories (theme, examples, utils) + Storybook assets
-  theme/        # Tailwind v4 CSS theme (vars.css defines tokens for :root + .dark)
+  theme/        # Tailwind v4 CSS theme (light.css / dark.css tokens, theme.css aliases)
   index.ts      # Barrel export — every public component/type re-exported here
 ```
 
@@ -55,7 +55,7 @@ src/
 
 **Form fields.** The `Field` component provides label / description / error / validation slots. Wrapped inputs accept `fieldProps?: FieldProps` plus the `FieldAttributes` props (`label`, `errorMessage`, `description`, `isValidating`, `isValidatingMessage`, `invalid`, `infoPopover`) directly. Inputs read shared validation state from a parent `Field` via `useFieldContext`.
 
-**Theme.** Tokens are CSS custom properties in `src/theme/vars.css` (light `:root`, dark `.dark`), aliased into Tailwind's `@theme inline` block — there is no `tailwind.config`. Semantic tokens follow a `color` / `on-color` pairing (`primary`/`on-primary`, `danger`/`on-danger`, etc.), plus `background`, `foreground`, `card`, `border`, `muted`, `warning`, `success`, `link`.
+**Theme.** Tokens are CSS custom properties in `src/theme/light.css` (`:root`) and `src/theme/dark.css` (`.dark`), aliased into Tailwind's `@theme inline` block in `src/theme/theme.css` — there is no `tailwind.config`. Semantic tokens follow a `color` / `on-color` pairing (`primary`/`on-primary`, `danger`/`on-danger`, etc.), plus `background`, `foreground`, `track`, `hover`, `active`, `card`, `border`, `muted`, `tertiary`, `warning`, `success`, `link`. Shared utilities (`heading-*`, `body`, `link`, `card`, …) are defined with `@utility` in `src/theme/utilities.css`.
 
 **Build.** `rollup.config.mjs` emits two builds (`dist/cjs`, `dist/esm`) with `preserveModules` so consumers can import individual components (`@fransek/ui/button`, mapped to `dist/*/components/<name>/index.js`). Every `src/components/*/index.ts` is a Rollup entry so these barrels are emitted; stories are excluded from declarations. Peer deps (react, base-ui, lucide-react, date-fns, etc.) are externalized; `react-day-picker` and `date-fns` are optional peers (only the calendar/date-picker need them).
 

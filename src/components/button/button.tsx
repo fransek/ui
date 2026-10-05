@@ -73,12 +73,10 @@ const variantStyles = {
     "bg-success-subtle text-on-success-subtle hover:bg-success-subtle-hover",
   ),
   outline: tw(
-    "text-foreground hover:border-muted-fg hover:bg-muted/10 border bg-transparent",
+    "text-foreground hover:border-muted-fg hover:bg-hover border bg-transparent",
   ),
-  ghost: tw("text-foreground hover:bg-muted/10 bg-transparent"),
-  link: tw(
-    "text-link decoration-link/50 hover:decoration-link/75 active:decoration-link bg-transparent underline underline-offset-2",
-  ),
+  ghost: tw("text-foreground hover:bg-hover bg-transparent"),
+  link: tw("link bg-transparent"),
 };
 
 const sizeStyles = {

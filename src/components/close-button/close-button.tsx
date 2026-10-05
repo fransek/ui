@@ -37,7 +37,7 @@ export function CloseButton(props: CloseButtonProps) {
       aria-label="Close"
       {...mergeProps(restProps, {
         className: cn(
-          "group hover:bg-muted/10 rounded-full",
+          "group hover:bg-hover rounded-full",
           position && "absolute",
           position && positionStyles[position],
         ),

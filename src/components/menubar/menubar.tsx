@@ -18,7 +18,7 @@ export function Menubar(props: MenubarProps) {
 }
 
 export const menubarTriggerStyles =
-  "font-inherit outline-highlight focus-visible:focus-outline data-disabled:text-muted-fg hover:bg-muted/10 data-popup-open:bg-muted/20 m-0 flex items-center justify-center rounded-md bg-transparent px-3 py-1.5 text-sm font-medium transition-colors outline-none select-none data-disabled:cursor-not-allowed";
+  "font-inherit outline-highlight focus-visible:focus-outline data-disabled:text-muted-fg hover:bg-hover data-popup-open:bg-active m-0 flex items-center justify-center rounded-md bg-transparent px-3 py-1.5 text-sm font-medium transition-colors outline-none select-none data-disabled:cursor-not-allowed";
 
 export type MenubarTriggerProps = BaseUIButton.ButtonProps;
 

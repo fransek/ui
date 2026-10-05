@@ -95,7 +95,7 @@ export function Slider(props: SliderProps) {
             data-validating={isValidating ? "" : undefined}
             {...mergeProps(trackProps, {
               className: tw(
-                "bg-muted/40 data-validating:not-data-invalid:animate-validating h-3 w-full rounded-full select-none data-[orientation=vertical]:h-full data-[orientation=vertical]:w-3",
+                "bg-track data-validating:not-data-invalid:animate-validating h-3 w-full rounded-full select-none data-[orientation=vertical]:h-full data-[orientation=vertical]:w-3",
               ),
             })}
           >
