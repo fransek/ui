@@ -120,7 +120,7 @@ function Calendar(props: CalendarProps) {
           defaultClassNames.range_end,
         ),
         today: cn(
-          "bg-track text-foreground rounded-(--cell-radius)",
+          "bg-tertiary text-foreground rounded-(--cell-radius)",
           defaultClassNames.today,
         ),
         outside: cn(
