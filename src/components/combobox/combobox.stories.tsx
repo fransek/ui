@@ -20,6 +20,7 @@ const meta = {
   component: Combobox,
   parameters: {
     layout: "centered",
+    width: 400,
   },
   tags: ["autodocs"],
   argTypes: {
@@ -180,6 +181,77 @@ export const RecordItems: Story = {
       banana: "🍌 Banana",
       orange: "🍊 Orange",
     },
+  },
+};
+
+/**
+ * The selection survives re-renders even when the `Record` is recreated on
+ * every render, as an inline literal is.
+ */
+export const ControlledRecordItems: Story = {
+  args: {
+    label: "Fruits",
+    multiple: true,
+  },
+  render: function Render(args) {
+    const [value, setValue] = React.useState<unknown[]>([]);
+    return (
+      <Combobox
+        {...args}
+        items={{ apple: "🍎 Apple", banana: "🍌 Banana", orange: "🍊 Orange" }}
+        value={value}
+        onValueChange={(next) => setValue(next as unknown[])}
+      />
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("combobox", { name: "Fruits" }));
+    await userEvent.click(
+      await screen.findByRole("option", { name: "🍎 Apple" }),
+    );
+    await waitFor(() =>
+      expect(screen.getByRole("option", { name: "🍎 Apple" })).toHaveAttribute(
+        "aria-selected",
+        "true",
+      ),
+    );
+    // Clicking the selected item again deselects it rather than duplicating it.
+    await userEvent.click(screen.getByRole("option", { name: "🍎 Apple" }));
+    await waitFor(() =>
+      expect(
+        canvas.queryByRole("button", { name: "Remove 🍎 Apple" }),
+      ).not.toBeInTheDocument(),
+    );
+  },
+};
+
+/**
+ * Items of any shape can be used by passing `itemToStringLabel`, which is used
+ * to filter, fill the input, and render the options and chips.
+ */
+export const CustomObjectItems: Story = {
+  args: {
+    label: "User",
+    description: undefined,
+    infoPopover: undefined,
+    placeholder: "Select users",
+    multiple: true,
+    items: [
+      { id: 1, name: "Ada Lovelace" },
+      { id: 2, name: "Alan Turing" },
+      { id: 3, name: "Grace Hopper" },
+    ],
+    itemToStringLabel: (user) => (user as { name: string }).name,
+    itemToStringValue: (user) => String((user as { id: number }).id),
+  },
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("combobox", { name: "User" }));
+    await userEvent.click(
+      await screen.findByRole("option", { name: "Ada Lovelace" }),
+    );
+    await expect(
+      canvas.getByRole("button", { name: "Remove Ada Lovelace" }),
+    ).toBeInTheDocument();
   },
 };
 

@@ -39,6 +39,7 @@ const meta = {
   component: ChartContainer,
   parameters: {
     layout: "centered",
+    width: 600,
   },
   tags: ["autodocs"],
   args: {
@@ -53,7 +54,7 @@ type Story = StoryObj<typeof meta>;
 export const LineBasic: Story = {
   name: "Line",
   render: () => (
-    <ChartContainer config={chartConfig} className="w-xl">
+    <ChartContainer config={chartConfig}>
       <LineChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis
@@ -89,7 +90,7 @@ export const LineBasic: Story = {
 export const AreaGradient: Story = {
   name: "Area",
   render: () => (
-    <ChartContainer config={chartConfig} className="w-xl">
+    <ChartContainer config={chartConfig}>
       <AreaChart accessibilityLayer data={chartData}>
         <defs>
           <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
@@ -148,7 +149,7 @@ export const AreaGradient: Story = {
 
 export const BarGrouped: Story = {
   render: () => (
-    <ChartContainer config={chartConfig} className="w-xl">
+    <ChartContainer config={chartConfig}>
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis
@@ -177,7 +178,7 @@ export const BarGrouped: Story = {
 
 export const BarStacked: Story = {
   render: () => (
-    <ChartContainer config={chartConfig} className="w-xl">
+    <ChartContainer config={chartConfig}>
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis
@@ -208,7 +209,7 @@ export const BarStacked: Story = {
 
 export const BarHorizontal: Story = {
   render: () => (
-    <ChartContainer config={{ desktop: chartConfig.desktop }} className="w-xl">
+    <ChartContainer config={{ desktop: chartConfig.desktop }}>
       <BarChart accessibilityLayer data={chartData} layout="vertical">
         <XAxis type="number" hide />
         <YAxis

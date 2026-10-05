@@ -1,19 +1,29 @@
 import * as BaseUI from "@base-ui/react/combobox";
 import { Check, ChevronsUpDown, X } from "lucide-react";
 import React from "react";
+import {
+  getItemKey,
+  getItemLabel,
+  isGroupedItems,
+  isLabeledItemEqual,
+  ListboxGroup,
+  listboxGroupLabelStyles,
+  listboxGroupStyles,
+  ListboxItems,
+  listboxItemStyles,
+  listboxMessageStyles,
+  listboxPopupStyles,
+  listboxPositionerStyles,
+  useNormalizedItems,
+} from "../../lib/listbox";
 import { FieldAttributes } from "../../lib/types";
 import { cn, mergeProps, tw } from "../../lib/utils";
-import { Button } from "../button";
+import { Button, ButtonProps } from "../button";
 import { chipStyles } from "../chip";
-import { CloseButtonProps } from "../close-button";
-import { Field, FieldProps } from "../field";
+import { Field, fieldControlStyles, FieldProps } from "../field";
 
 /** A group of items rendered under a shared `label` heading. */
-export interface ComboboxGroup<T = unknown> {
-  /** Heading rendered above the group's items. */
-  label?: React.ReactNode;
-  items: readonly T[];
-}
+export type ComboboxGroup<T = unknown> = ListboxGroup<T>;
 
 /**
  * The data structure accepted by the `items` prop. One of:
@@ -21,57 +31,7 @@ export interface ComboboxGroup<T = unknown> {
  * - an array of groups (objects with a `label` heading and their own `items`),
  * - a `Record` mapping each value to its label.
  */
-export type ComboboxItems<T = unknown> =
-  readonly T[] | readonly ComboboxGroup<T>[] | Record<string, React.ReactNode>;
-
-interface LabeledItem {
-  label: React.ReactNode;
-  value: unknown;
-}
-
-/**
- * Base UI resolves `{ label, value }` items automatically — matching the query
- * against `label`, filling the input with it, and submitting `value` — so
- * detect the shape to know which part to render inside items and chips.
- */
-function isLabeledItem(item: unknown): item is LabeledItem {
-  return typeof item === "object" && item != null && "label" in item;
-}
-
-function getItemLabel(item: unknown): React.ReactNode {
-  return isLabeledItem(item) ? item.label : String(item);
-}
-
-/**
- * Groups are objects carrying their own `items` array. Base UI filters within
- * them but doesn't render the headings itself, so they need a `Group` with a
- * `GroupLabel` wrapper around the group's `Collection`.
- */
-function isGroupedItems(items: unknown): items is readonly ComboboxGroup[] {
-  return (
-    Array.isArray(items) &&
-    items.length > 0 &&
-    typeof items[0] === "object" &&
-    items[0] != null &&
-    "items" in items[0]
-  );
-}
-
-/**
- * Base UI's `items` only accepts arrays, so expand the `Record` shorthand
- * (shared with `Select`) into the equivalent flat list of labeled items.
- */
-function normalizeItems<T>(
-  items: ComboboxItems<T> | undefined,
-): readonly T[] | undefined {
-  if (items == null || Array.isArray(items)) {
-    return items as readonly T[] | undefined;
-  }
-  return Object.entries(items).map(([value, label]) => ({
-    value,
-    label,
-  })) as unknown as readonly T[];
-}
+export type ComboboxItems<T = unknown> = ListboxItems<T>;
 
 export interface ComboboxProps<
   T = unknown,
@@ -109,7 +69,7 @@ export interface ComboboxProps<
   chipProps?: BaseUI.ComboboxChipProps;
   chipRemoveProps?: BaseUI.ComboboxChipRemoveProps;
   clearProps?: BaseUI.ComboboxClearProps;
-  clearButtonProps?: CloseButtonProps;
+  clearButtonProps?: ButtonProps;
   triggerProps?: BaseUI.ComboboxTriggerProps;
   portalProps?: BaseUI.ComboboxPortalProps;
   positionerProps?: BaseUI.ComboboxPositionerProps;
@@ -202,8 +162,9 @@ export function Combobox<
     ...restProps
   } = props;
 
-  const normalizedItems = normalizeItems(items);
+  const normalizedItems = useNormalizedItems(items);
   const grouped = isGroupedItems(normalizedItems);
+  const isRecord = items != null && !Array.isArray(items);
 
   const renderInput = (className: string, hidePlaceholder = false) => (
     <BaseUI.Combobox.Input
@@ -218,17 +179,17 @@ export function Combobox<
   );
 
   const renderChip = (item: T, index: number) => {
-    const itemLabel = getItemLabel(item);
+    const itemLabel = getItemLabel(item, itemToStringLabel);
     return (
       <BaseUI.Combobox.Chip
-        key={index}
+        key={getItemKey(item, index, itemToStringValue)}
         {...mergeProps(chipProps, {
           className: chipStyles({
-            variant: "muted",
+            variant: "tertiary",
             size: "sm",
             removable: true,
             extend: tw(
-              "outline-highlight data-highlighted:focus-outline outline-none",
+              "outline-highlight data-highlighted:focus-outline h-8 rounded-lg outline-none data-disabled:opacity-100",
             ),
           }),
         })}
@@ -252,15 +213,11 @@ export function Combobox<
 
   const renderItem = (item: T, index: number) => (
     <BaseUI.Combobox.Item
-      key={index}
+      key={getItemKey(item, index, itemToStringValue)}
       value={item}
-      {...mergeProps(itemProps, {
-        className: tw(
-          "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
-        ),
-      })}
+      {...mergeProps(itemProps, { className: listboxItemStyles })}
     >
-      <span className="flex-1">{getItemLabel(item)}</span>
+      <span className="flex-1">{getItemLabel(item, itemToStringLabel)}</span>
       <BaseUI.Combobox.ItemIndicator
         {...mergeProps(itemIndicatorProps, { className: tw("flex") })}
       >
@@ -273,12 +230,10 @@ export function Combobox<
     <BaseUI.Combobox.Group
       key={index}
       items={group.items}
-      {...mergeProps(groupProps, { className: tw("not-last:mb-2") })}
+      {...mergeProps(groupProps, { className: listboxGroupStyles })}
     >
       <BaseUI.Combobox.GroupLabel
-        {...mergeProps(groupLabelProps, {
-          className: tw("text-muted-fg px-2.5 py-1 text-xs font-medium"),
-        })}
+        {...mergeProps(groupLabelProps, { className: listboxGroupLabelStyles })}
       >
         {group.label}
       </BaseUI.Combobox.GroupLabel>
@@ -317,7 +272,9 @@ export function Combobox<
         inline={inline}
         inputRef={inputRef}
         inputValue={inputValue}
-        isItemEqualToValue={isItemEqualToValue}
+        isItemEqualToValue={
+          isItemEqualToValue ?? (isRecord ? isLabeledItemEqual : undefined)
+        }
         itemToStringLabel={itemToStringLabel}
         itemToStringValue={itemToStringValue}
         limit={limit}
@@ -341,8 +298,9 @@ export function Combobox<
         <BaseUI.Combobox.InputGroup
           data-validating={isValidating ? "" : undefined}
           {...mergeProps(inputGroupProps, {
-            className: tw(
-              "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating outline-highlight has-[input:focus-visible]:focus-outline flex w-full min-w-40 items-center gap-1 rounded-lg border pr-2 shadow transition-colors data-disabled:opacity-60",
+            className: cn(
+              fieldControlStyles,
+              "has-[input:focus-visible]:focus-outline flex items-center gap-1 p-0 pr-2 data-disabled:opacity-60",
             ),
           })}
         >
@@ -355,7 +313,7 @@ export function Combobox<
             <BaseUI.Combobox.Chips
               {...mergeProps(chipsProps, {
                 className: tw(
-                  "flex flex-1 flex-wrap items-center gap-1 py-1 pl-1.5",
+                  "flex flex-1 flex-wrap items-center gap-1 py-1 pl-1",
                 ),
               })}
             >
@@ -378,7 +336,9 @@ export function Combobox<
                   aria-label="Clear"
                   size="icon"
                   variant="ghost"
-                  {...clearButtonProps}
+                  {...mergeProps(clearButtonProps, {
+                    className: tw("data-disabled:opacity-100"),
+                  })}
                 >
                   <X className="size-3.5" />
                 </Button>
@@ -388,7 +348,13 @@ export function Combobox<
           )}
           <BaseUI.Combobox.Trigger
             aria-label="Open popup"
-            render={<Button size="icon" variant="ghost" />}
+            render={
+              <Button
+                size="icon"
+                variant="ghost"
+                className="data-disabled:opacity-100"
+              />
+            }
             {...triggerProps}
           >
             <ChevronsUpDown className="size-4" />
@@ -398,30 +364,22 @@ export function Combobox<
           <BaseUI.Combobox.Positioner
             sideOffset={8}
             {...mergeProps(positionerProps, {
-              className: tw("z-10 outline-none select-none"),
+              className: listboxPositionerStyles,
             })}
           >
             <BaseUI.Combobox.Popup
-              {...mergeProps(popupProps, {
-                className: tw(
-                  "bg-background outline-border scrollbar-track-background scrollbar-thumb-muted max-h-[min(24rem,var(--available-height))] w-(--anchor-width) origin-(--transform-origin) overflow-y-auto rounded-lg bg-clip-padding py-1 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
-                ),
-              })}
+              {...mergeProps(popupProps, { className: listboxPopupStyles })}
             >
               <BaseUI.Combobox.Status
                 {...mergeProps(statusProps, {
-                  className: tw(
-                    "text-muted-fg px-2.5 py-2 text-sm empty:m-0 empty:p-0",
-                  ),
+                  className: listboxMessageStyles,
                 })}
               >
                 {status}
               </BaseUI.Combobox.Status>
               <BaseUI.Combobox.Empty
                 {...mergeProps(emptyProps, {
-                  className: tw(
-                    "text-muted-fg px-2.5 py-2 text-sm empty:m-0 empty:p-0",
-                  ),
+                  className: listboxMessageStyles,
                 })}
               >
                 {emptyMessage}
