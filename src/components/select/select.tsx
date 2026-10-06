@@ -193,7 +193,7 @@ export function Select<T, Multiple extends boolean | undefined = false>(
           value={triggerValue}
           {...mergeProps(restProps, {
             className: tw(
-              "bg-field outline-highlight focus-visible:focus-outline data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating hover:border-muted-fg data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base shadow transition-colors outline-none select-none",
+              "bg-field focus-visible:focus-outline data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating hover:border-muted-fg data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base shadow-sm transition-colors outline-none select-none",
             ),
           })}
         >
@@ -221,7 +221,7 @@ export function Select<T, Multiple extends boolean | undefined = false>(
             <BaseUI.Select.Popup
               {...mergeProps(popupProps, {
                 className: tw(
-                  "group bg-background outline-border w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
+                  "group popup popup-transition w-(--anchor-width) data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:data-starting-style:transition-none",
                 ),
               })}
             >

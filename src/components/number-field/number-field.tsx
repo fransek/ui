@@ -46,7 +46,7 @@ export function NumberField(props: NumberFieldProps) {
         {...mergeProps(restProps, { className: tw("w-full min-w-40") })}
       >
         <BaseUI.NumberField.Group
-          className="data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline outline-highlight flex items-stretch overflow-hidden rounded-lg border shadow transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60"
+          className="data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating has-[input:focus-visible]:focus-outline flex items-stretch overflow-hidden rounded-lg border shadow-sm transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60"
           data-validating={isValidating ? "" : undefined}
         >
           <BaseUI.NumberField.Decrement

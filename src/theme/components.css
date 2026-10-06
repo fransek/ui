@@ -46,7 +46,7 @@
       @apply text-foreground font-semibold;
     }
     mark {
-      @apply text-on-primary bg-primary;
+      @apply primary;
     }
     a {
       @apply link;
@@ -57,10 +57,10 @@
     code,
     samp,
     kbd {
-      @apply text-on-tertiary bg-tertiary body-sm rounded-md px-1.5 font-mono font-semibold;
+      @apply tertiary body-sm rounded-md px-1.5 font-mono font-semibold;
     }
     pre {
-      @apply text-on-tertiary bg-tertiary overflow-x-auto rounded-lg p-4 font-mono not-last:mb-6;
+      @apply tertiary overflow-x-auto rounded-lg p-4 font-mono not-last:mb-6;
       code {
         @apply bg-transparent p-0 text-inherit;
       }

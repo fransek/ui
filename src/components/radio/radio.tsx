@@ -30,7 +30,7 @@ export function Radio(props: RadioProps) {
           data-validating={isValidating ? "" : undefined}
           {...mergeProps(restProps, {
             className: tw(
-              "bg-field data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline data-checked:border-primary-fg data-invalid:border-danger-fg flex size-5 items-center justify-center rounded-full border shadow",
+              "bg-field data-validating:not-data-invalid:animate-validating focus-visible:focus-outline data-checked:border-primary-fg data-invalid:border-danger-fg flex size-5 items-center justify-center rounded-full border shadow-sm",
             ),
           })}
         >

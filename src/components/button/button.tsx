@@ -49,7 +49,7 @@ export function Button(props: ButtonProps) {
 }
 
 const baseButtonStyles = tw(
-  "font-inherit outline-highlight focus-visible:focus-outline m-0 flex cursor-pointer items-center justify-center gap-2 rounded-lg transition-[color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,scale] select-none focus-visible:outline-offset-1 aria-disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:opacity-60",
+  "focus-visible:focus-outline m-0 flex cursor-pointer items-center justify-center gap-2 rounded-lg transition-[color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,scale] select-none focus-visible:outline-offset-1 aria-disabled:cursor-not-allowed data-disabled:cursor-not-allowed data-disabled:opacity-60",
 );
 
 // Disabled buttons stay focusable (no native `disabled`), so :active still
@@ -61,22 +61,16 @@ const pressStyles = tw(
 );
 
 const variantStyles = {
-  primary: tw("bg-primary text-on-primary hover:bg-primary-hover"),
-  secondary: tw("bg-secondary text-on-secondary hover:bg-secondary-hover"),
-  tertiary: tw("bg-tertiary text-on-tertiary hover:bg-tertiary-hover"),
-  muted: tw("bg-muted text-on-muted hover:bg-muted-hover"),
-  danger: tw("bg-danger text-on-danger hover:bg-danger-hover"),
-  "danger-subtle": tw(
-    "bg-danger-subtle text-on-danger-subtle hover:bg-danger-subtle-hover",
-  ),
-  warning: tw("bg-warning text-on-warning hover:bg-warning-hover"),
-  "warning-subtle": tw(
-    "bg-warning-subtle text-on-warning-subtle hover:bg-warning-subtle-hover",
-  ),
-  success: tw("bg-success hover:bg-success-hover text-on-success"),
-  "success-subtle": tw(
-    "bg-success-subtle text-on-success-subtle hover:bg-success-subtle-hover",
-  ),
+  primary: tw("primary hover:bg-primary-hover"),
+  secondary: tw("secondary hover:bg-secondary-hover"),
+  tertiary: tw("tertiary hover:bg-tertiary-hover"),
+  muted: tw("muted hover:bg-muted-hover"),
+  danger: tw("danger hover:bg-danger-hover"),
+  "danger-subtle": tw("danger-subtle hover:bg-danger-subtle-hover"),
+  warning: tw("warning hover:bg-warning-hover"),
+  "warning-subtle": tw("warning-subtle hover:bg-warning-subtle-hover"),
+  success: tw("success hover:bg-success-hover"),
+  "success-subtle": tw("success-subtle hover:bg-success-subtle-hover"),
   outline: tw(
     "text-foreground hover:border-muted-fg hover:bg-hover border bg-transparent",
   ),
@@ -85,10 +79,10 @@ const variantStyles = {
 };
 
 const sizeStyles = {
-  icon: "p-1.5",
-  sm: "text-xs min-w-16 px-2.5 py-1.5 font-normal",
-  md: "text-sm min-w-20 px-3 py-2 font-semibold",
-  lg: "text-base min-w-24 px-4 py-2 font-semibold",
+  icon: tw("p-1.5"),
+  sm: tw("min-w-16 px-2.5 py-1.5 text-xs font-normal"),
+  md: tw("min-w-20 px-3 py-2 text-sm font-semibold"),
+  lg: tw("min-w-24 px-4 py-2 text-base font-semibold"),
 };
 
 export const buttonStyles = ({

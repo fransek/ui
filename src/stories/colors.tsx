@@ -17,41 +17,43 @@ function SurfaceColors() {
         <h2 className="heading-sm">Surface Colors</h2>
         <p className="body-sm">
           These colors come in pairs, one for the background (<code>bg-*</code>)
-          and one for the foreground (<code>text-on-*</code>).
+          and one for the foreground (<code>text-on-*</code>). Each pair is also
+          available as a single utility that sets both, e.g.{" "}
+          <code>primary</code> or <code>danger-subtle</code>.
         </p>
       </div>
       <div className="text-foreground grid grid-cols-2 gap-4 font-semibold lg:grid-cols-4">
         <div className="bg-default text-on-default hover:bg-default-hover active:bg-default-active col-span-2 rounded-lg border p-2 transition-colors lg:col-span-4">
           default
         </div>
-        <div className="bg-primary text-on-primary hover:bg-primary-hover rounded-lg p-2 transition-colors">
+        <div className="primary hover:bg-primary-hover rounded-lg p-2 transition-colors">
           primary
         </div>
-        <div className="bg-secondary text-on-secondary hover:bg-secondary-hover rounded-lg p-2 transition-colors">
+        <div className="secondary hover:bg-secondary-hover rounded-lg p-2 transition-colors">
           secondary
         </div>
-        <div className="bg-tertiary text-on-tertiary hover:bg-tertiary-hover rounded-lg p-2 transition-colors">
+        <div className="tertiary hover:bg-tertiary-hover rounded-lg p-2 transition-colors">
           tertiary
         </div>
-        <div className="bg-muted text-on-muted hover:bg-muted-hover rounded-lg p-2 transition-colors">
+        <div className="muted hover:bg-muted-hover rounded-lg p-2 transition-colors">
           muted
         </div>
-        <div className="bg-success text-on-success hover:bg-success-hover rounded-lg p-2 transition-colors">
+        <div className="success hover:bg-success-hover rounded-lg p-2 transition-colors">
           success
         </div>
-        <div className="bg-success-subtle text-on-success-subtle hover:bg-success-subtle-hover rounded-lg p-2 transition-colors">
+        <div className="success-subtle hover:bg-success-subtle-hover rounded-lg p-2 transition-colors">
           success-subtle
         </div>
-        <div className="bg-warning text-on-warning hover:bg-warning-hover rounded-lg p-2 transition-colors">
+        <div className="warning hover:bg-warning-hover rounded-lg p-2 transition-colors">
           warning
         </div>
-        <div className="bg-warning-subtle text-on-warning-subtle hover:bg-warning-subtle-hover rounded-lg p-2 transition-colors">
+        <div className="warning-subtle hover:bg-warning-subtle-hover rounded-lg p-2 transition-colors">
           warning-subtle
         </div>
-        <div className="bg-danger text-on-danger hover:bg-danger-hover rounded-lg p-2 transition-colors">
+        <div className="danger hover:bg-danger-hover rounded-lg p-2 transition-colors">
           danger
         </div>
-        <div className="bg-danger-subtle text-on-danger-subtle hover:bg-danger-subtle-hover rounded-lg p-2 transition-colors">
+        <div className="danger-subtle hover:bg-danger-subtle-hover rounded-lg p-2 transition-colors">
           danger-subtle
         </div>
       </div>

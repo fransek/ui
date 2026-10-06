@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { cn, mergeProps } from "../../lib/utils";
+import { cn, mergeProps, tw } from "../../lib/utils";
 
 export interface SpinnerProps extends React.ComponentProps<"svg"> {
   size?: SpinnerSize;
@@ -145,22 +145,23 @@ export function Spinner(props: SpinnerProps) {
   );
 }
 
-const baseSpinnerStyles =
-  "animate-spin shrink-0 motion-reduce:[animation-duration:2s]";
+const baseSpinnerStyles = tw(
+  "shrink-0 animate-spin motion-reduce:[animation-duration:2s]",
+);
 
 const sizeStyles = {
-  sm: "size-4",
-  md: "size-6",
-  lg: "size-8",
+  sm: tw("size-4"),
+  md: tw("size-6"),
+  lg: tw("size-8"),
 };
 
 const variantStyles = {
-  primary: "text-primary",
-  muted: "text-muted-fg",
-  danger: "text-danger",
-  warning: "text-warning",
-  success: "text-success",
-  current: "text-current",
+  primary: tw("text-primary"),
+  muted: tw("text-muted-fg"),
+  danger: tw("text-danger"),
+  warning: tw("text-warning"),
+  success: tw("text-success"),
+  current: tw("text-current"),
 };
 
 export const spinnerStyles = ({

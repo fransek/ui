@@ -164,7 +164,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
   return (
     <div
       className={cn(
-        "bg-background outline-border grid min-w-32 items-start gap-1.5 rounded-lg bg-clip-padding px-2.5 py-1.5 text-xs shadow-lg outline",
+        "popup grid min-w-32 items-start gap-1.5 px-2.5 py-1.5 text-xs",
         className,
       )}
     >
@@ -199,7 +199,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                     !hideIndicator && (
                       <div
                         className={cn(
-                          "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                          "shrink-0 rounded-xs border-(--color-border) bg-(--color-bg)",
                           {
                             "size-2.5": indicator === "dot",
                             "w-1": indicator === "line",
@@ -290,7 +290,7 @@ export function ChartLegendContent(props: ChartLegendContentProps) {
               <itemConfig.icon />
             ) : (
               <div
-                className="size-2.5 shrink-0 rounded-[2px]"
+                className="size-2.5 shrink-0 rounded-xs"
                 style={{ backgroundColor: item.color }}
               />
             )}

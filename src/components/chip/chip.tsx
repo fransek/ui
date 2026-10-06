@@ -58,7 +58,7 @@ export function Chip(props: ChipProps) {
               onClick={onRemove}
               {...mergeProps(removeButtonProps, {
                 className: tw(
-                  "outline-highlight focus-visible:focus-outline -my-1 flex cursor-pointer items-center justify-center rounded-full p-0.5 opacity-70 transition-[opacity,background-color] hover:bg-current/15 hover:opacity-100 data-disabled:cursor-not-allowed data-disabled:hover:bg-transparent",
+                  "focus-visible:focus-outline -my-1 flex cursor-pointer items-center justify-center rounded-full p-0.5 opacity-70 transition-[opacity,background-color] hover:bg-current/15 hover:opacity-100 data-disabled:cursor-not-allowed data-disabled:hover:bg-transparent",
                 ),
               })}
             >
@@ -76,16 +76,16 @@ const baseChipStyles = tw(
 );
 
 const variantStyles = {
-  primary: tw("bg-primary text-on-primary"),
-  secondary: tw("bg-secondary text-on-secondary"),
-  tertiary: tw("bg-tertiary text-on-tertiary"),
-  muted: tw("bg-muted text-on-muted"),
-  danger: tw("bg-danger text-on-danger"),
-  "danger-subtle": tw("bg-danger-subtle text-on-danger-subtle"),
-  warning: tw("bg-warning text-on-warning"),
-  "warning-subtle": tw("bg-warning-subtle text-on-warning-subtle"),
-  success: tw("bg-success text-on-success"),
-  "success-subtle": tw("bg-success-subtle text-on-success-subtle"),
+  primary: tw("primary"),
+  secondary: tw("secondary"),
+  tertiary: tw("tertiary"),
+  muted: tw("muted"),
+  danger: tw("danger"),
+  "danger-subtle": tw("danger-subtle"),
+  warning: tw("warning"),
+  "warning-subtle": tw("warning-subtle"),
+  success: tw("success"),
+  "success-subtle": tw("success-subtle"),
   outline: tw("text-foreground border bg-transparent"),
 };
 

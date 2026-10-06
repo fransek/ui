@@ -51,7 +51,7 @@ export function TabsTab(props: TabsTabProps) {
     <BaseUI.Tabs.Tab
       {...mergeProps(props, {
         className: tw(
-          "data-disabled:text-muted-fg font-inherit text-body hover:text-primary-fg outline-highlight focus-visible:focus-outline data-active:text-primary-fg flex h-[calc(2rem+1px)] items-center justify-center rounded bg-transparent px-2 py-0 leading-5 font-normal break-keep whitespace-nowrap transition-colors outline-none select-none",
+          "data-disabled:text-muted-fg text-body hover:text-primary-fg focus-visible:focus-outline data-active:text-primary-fg flex h-[calc(2rem+1px)] items-center justify-center rounded-sm bg-transparent px-2 py-0 leading-5 font-normal break-keep whitespace-nowrap transition-colors outline-none select-none",
         ),
       })}
     />
@@ -65,7 +65,7 @@ export function TabsPanel(props: TabsPanelProps) {
     <BaseUI.Tabs.Panel
       {...mergeProps(props, {
         className: tw(
-          "text-foreground outline-highlight focus-visible:focus-outline flex w-full items-center justify-center p-4 text-center outline-none [[hidden]]:hidden",
+          "text-foreground focus-visible:focus-outline flex w-full items-center justify-center p-4 text-center outline-none [[hidden]]:hidden",
         ),
       })}
     />

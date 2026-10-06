@@ -52,7 +52,7 @@ export function InfoPopover(props: InfoPopoverProps) {
             ? `Information about ${fieldLabel}`
             : "Information",
         className: tw(
-          "body-sm bg-foreground text-background max-w-[min(300px,calc(100vw-3rem))] rounded px-3 py-2 text-center outline-0",
+          "body-sm bg-foreground text-background max-w-[min(300px,calc(100vw-3rem))] rounded-sm px-3 py-2 text-center outline-0",
         ),
       })}
       positionerProps={{

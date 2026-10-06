@@ -52,8 +52,8 @@ export type CloseButtonPosition =
   "top-right" | "top-left" | "bottom-right" | "bottom-left";
 
 const positionStyles: Record<CloseButtonPosition, string> = {
-  "top-right": "top-2 right-2",
-  "top-left": "top-2 left-2",
-  "bottom-right": "right-2 bottom-2",
-  "bottom-left": "bottom-2 left-2",
+  "top-right": tw("top-2 right-2"),
+  "top-left": tw("top-2 left-2"),
+  "bottom-right": tw("right-2 bottom-2"),
+  "bottom-left": tw("bottom-2 left-2"),
 };

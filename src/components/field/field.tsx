@@ -73,8 +73,9 @@ export type FieldControlProps = BaseUI.FieldControlProps;
 export const FieldControl = BaseUI.Field.Control;
 
 /** Base classes shared by text-like field controls (`Input`, `Textarea`). */
-export const fieldControlStyles =
-  "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating outline-highlight focus-visible:focus-outline placeholder:text-muted-fg w-full min-w-40 rounded-lg border p-2 shadow transition-colors";
+export const fieldControlStyles = tw(
+  "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating focus-visible:focus-outline placeholder:text-muted-fg w-full min-w-40 rounded-lg border p-2 shadow-sm transition-colors",
+);
 
 export type FieldDescriptionProps = BaseUI.FieldDescriptionProps;
 

@@ -120,7 +120,7 @@ export function isLabeledItemEqual(item: unknown, value: unknown): boolean {
 }
 
 export const listboxPopupStyles = tw(
-  "bg-background outline-border scrollbar-track-background scrollbar-thumb-muted max-h-[min(24rem,var(--available-height))] w-(--anchor-width) origin-(--transform-origin) overflow-y-auto rounded-lg bg-clip-padding py-1 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+  "popup popup-transition scrollbar-track-background scrollbar-thumb-muted max-h-[min(24rem,var(--available-height))] w-(--anchor-width) overflow-y-auto py-1",
 );
 
 /** Shared by the popup's `Status` and `Empty` messages. */
