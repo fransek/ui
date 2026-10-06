@@ -8,6 +8,7 @@ export * from "./components/checkbox";
 export * from "./components/checkbox-group";
 export * from "./components/chip";
 export * from "./components/close-button";
+export * from "./components/combobox";
 export * from "./components/date-picker";
 export * from "./components/dialog";
 export * from "./components/drawer";

@@ -28,11 +28,9 @@ const meta = {
   component: Accordion,
   parameters: {
     layout: "centered",
+    width: 400,
   },
   tags: ["autodocs"],
-  args: {
-    className: "w-[400px]",
-  },
   render: (args) => (
     <Accordion {...args}>
       {items.map(({ value, title, content }) => (

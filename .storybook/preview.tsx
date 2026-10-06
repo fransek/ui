@@ -1,5 +1,6 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 import type { Preview, ReactRenderer } from "@storybook/react-vite";
+import React from "react";
 import "../src/stories/assets/storybook.css";
 
 const preview: Preview = {
@@ -32,6 +33,18 @@ const preview: Preview = {
       },
       defaultTheme: "dark",
     }),
+    // Centered stories shrink to their content; `width` gives the story a
+    // fixed width instead (capped to the viewport) for content that fills it.
+    (Story, { parameters }) =>
+      parameters.width ? (
+        <div
+          style={{ width: `min(${parameters.width}px, calc(100vw - 2rem))` }}
+        >
+          <Story />
+        </div>
+      ) : (
+        <Story />
+      ),
   ],
 };
 
