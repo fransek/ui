@@ -1,6 +1,7 @@
 import * as BaseUI from "@base-ui/react/button";
 import React from "react";
 import { cn, mergeProps, tw } from "../../lib/utils";
+import { useButtonGroupContext } from "../button-group";
 import { Tooltip, TooltipProps } from "../tooltip";
 
 export interface ButtonProps extends BaseUI.ButtonProps {
@@ -12,9 +13,10 @@ export interface ButtonProps extends BaseUI.ButtonProps {
 }
 
 export function Button(props: ButtonProps) {
+  const group = useButtonGroupContext();
   const {
     variant = "primary",
-    size = "md",
+    size = group.size ?? "md",
     children,
     tooltip,
     tooltipProps,
@@ -52,8 +54,11 @@ const baseButtonStyles = tw(
 
 // Disabled buttons stay focusable (no native `disabled`), so :active still
 // matches. Base UI marks them with data-disabled, react-day-picker's nav
-// buttons with aria-disabled.
-const pressStyles = tw("not-data-disabled:not-aria-disabled:active:scale-97");
+// buttons with aria-disabled. Grouped buttons skip it: scaling one segment
+// would pull its shared border away from its neighbours.
+const pressStyles = tw(
+  "not-in-data-button-group:not-data-disabled:not-aria-disabled:active:scale-97",
+);
 
 const variantStyles = {
   primary: tw("bg-primary text-on-primary hover:bg-primary-hover"),
