@@ -36,7 +36,7 @@ export function ScrollArea(props: ScrollAreaProps) {
     <BaseUI.ScrollArea.Root {...restProps}>
       <BaseUI.ScrollArea.Viewport
         {...mergeProps(viewportProps, {
-          className: tw("focus-visible:focus-outline outline-highlight h-full"),
+          className: tw("focus-visible:focus-outline h-full"),
         })}
       >
         <BaseUI.ScrollArea.Content

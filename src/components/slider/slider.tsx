@@ -111,7 +111,7 @@ export function Slider(props: SliderProps) {
                 key={index}
                 {...mergeProps(thumbProps, {
                   className: tw(
-                    "bg-field border-muted-fg dark:bg-foreground has-focus-visible:focus-outline outline-highlight data-invalid:border-danger-fg size-4 rounded-full border shadow select-none dark:border-none",
+                    "bg-field border-muted-fg dark:bg-foreground has-focus-visible:focus-outline data-invalid:border-danger-fg size-4 rounded-full border shadow-sm select-none dark:border-none",
                   ),
                 })}
                 index={index}

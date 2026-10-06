@@ -72,7 +72,7 @@ export function Popover(props: PopoverProps) {
               <BaseUI.Popover.Popup
                 {...mergeProps(popupProps, {
                   className: tw(
-                    "bg-background outline-border max-w-[calc(100vw-3rem)] min-w-(--anchor-width) origin-(--transform-origin) rounded-lg bg-clip-padding p-4 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+                    "popup popup-transition max-w-[calc(100vw-3rem)] min-w-(--anchor-width) p-4",
                   ),
                 })}
               >

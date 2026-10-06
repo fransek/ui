@@ -63,13 +63,14 @@ export function Meter(props: MeterProps) {
   );
 }
 
-const baseTrackStyles =
-  "bg-track col-span-2 block overflow-hidden rounded-full";
+const baseTrackStyles = tw(
+  "bg-track col-span-2 block overflow-hidden rounded-full",
+);
 
 const trackSizeStyles = {
-  sm: "h-1.5",
-  md: "h-2",
-  lg: "h-3",
+  sm: tw("h-1.5"),
+  md: tw("h-2"),
+  lg: tw("h-3"),
 };
 
 export const trackStyles = ({
@@ -80,14 +81,14 @@ export const trackStyles = ({
   extend?: string;
 }) => cn(baseTrackStyles, trackSizeStyles[size], extend);
 
-const baseIndicatorStyles = "block h-full transition-[width] duration-500";
+const baseIndicatorStyles = tw("block h-full transition-[width] duration-500");
 
 const indicatorVariantStyles = {
-  primary: "bg-primary",
-  muted: "bg-muted-fg",
-  danger: "bg-danger",
-  success: "bg-success",
-  warning: "bg-warning",
+  primary: tw("bg-primary"),
+  muted: tw("bg-muted-fg"),
+  danger: tw("bg-danger"),
+  success: tw("bg-success"),
+  warning: tw("bg-warning"),
 };
 
 export const indicatorStyles = ({

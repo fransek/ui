@@ -53,19 +53,25 @@ const drawerSwipeDirections: Record<
 };
 
 const drawerViewportStyles: Record<DrawerDirection, string> = {
-  top: "flex-col justify-start",
-  right: "justify-end",
-  bottom: "flex-col justify-end",
-  left: "justify-start",
+  top: tw("flex-col justify-start"),
+  right: tw("justify-end"),
+  bottom: tw("flex-col justify-end"),
+  left: tw("justify-start"),
 };
 
 const drawerPopupStyles: Record<DrawerDirection, string> = {
-  top: "h-(--drawer-height) max-h-[calc(100vh-3rem)] w-full transform-[translateY(var(--drawer-swipe-movement-y))] border-b px-6 py-8 data-ending-style:transform-[translateY(calc(-100%-var(--viewport-padding)-2px))] data-starting-style:transform-[translateY(calc(-100%-var(--viewport-padding)-2px))]",
-  right:
+  top: tw(
+    "h-(--drawer-height) max-h-[calc(100vh-3rem)] w-full transform-[translateY(var(--drawer-swipe-movement-y))] border-b px-6 py-8 data-ending-style:transform-[translateY(calc(-100%-var(--viewport-padding)-2px))] data-starting-style:transform-[translateY(calc(-100%-var(--viewport-padding)-2px))]",
+  ),
+  right: tw(
     "h-full w-(--drawer-width) max-w-[calc(100vw-3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] border-l px-6 py-8 data-ending-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))] data-starting-style:transform-[translateX(calc(100%+var(--viewport-padding)+2px))]",
-  bottom:
+  ),
+  bottom: tw(
     "h-(--drawer-height) max-h-[calc(100vh-3rem)] w-full transform-[translateY(var(--drawer-swipe-movement-y))] border-t px-6 py-8 data-ending-style:transform-[translateY(calc(100%+var(--viewport-padding)+2px))] data-starting-style:transform-[translateY(calc(100%+var(--viewport-padding)+2px))]",
-  left: "h-full w-(--drawer-width) max-w-[calc(100vw-3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] border-r px-6 py-8 data-ending-style:transform-[translateX(calc(-100%-var(--viewport-padding)-2px))] data-starting-style:transform-[translateX(calc(-100%-var(--viewport-padding)-2px))]",
+  ),
+  left: tw(
+    "h-full w-(--drawer-width) max-w-[calc(100vw-3rem)] transform-[translateX(var(--drawer-swipe-movement-x))] border-r px-6 py-8 data-ending-style:transform-[translateX(calc(-100%-var(--viewport-padding)-2px))] data-starting-style:transform-[translateX(calc(-100%-var(--viewport-padding)-2px))]",
+  ),
 };
 
 export function Drawer(props: DrawerProps) {
@@ -149,7 +155,7 @@ export function Drawer(props: DrawerProps) {
               <BaseUI.Drawer.Popup
                 {...mergeProps(popupProps, {
                   className: cn(
-                    "bg-background pointer-events-auto touch-auto overflow-y-auto overscroll-contain shadow transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-swiping:select-none",
+                    "bg-background pointer-events-auto touch-auto overflow-y-auto overscroll-contain shadow-sm transition-transform duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] outline-none data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-swiping:select-none",
                     drawerPopupStyles[direction],
                   ),
                   style: drawerVars,

@@ -10,15 +10,16 @@ export function Menubar(props: MenubarProps) {
     <BaseUI.Menubar
       {...mergeProps(props, {
         className: tw(
-          "bg-background flex rounded-lg border p-1 shadow data-[orientation=vertical]:flex-col",
+          "bg-background flex rounded-lg border p-1 shadow-sm data-[orientation=vertical]:flex-col",
         ),
       })}
     />
   );
 }
 
-export const menubarTriggerStyles =
-  "font-inherit outline-highlight focus-visible:focus-outline data-disabled:text-muted-fg hover:bg-hover data-popup-open:bg-active m-0 flex items-center justify-center rounded-md bg-transparent px-3 py-1.5 text-sm font-medium transition-colors outline-none select-none data-disabled:cursor-not-allowed";
+export const menubarTriggerStyles = tw(
+  "focus-visible:focus-outline data-disabled:text-muted-fg hover:bg-hover data-popup-open:bg-active m-0 flex items-center justify-center rounded-md bg-transparent px-3 py-1.5 text-sm font-medium transition-colors outline-none select-none data-disabled:cursor-not-allowed",
+);
 
 export type MenubarTriggerProps = BaseUIButton.ButtonProps;
 

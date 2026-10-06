@@ -94,7 +94,7 @@ export function DatePicker(props: DatePickerProps) {
             >
               <BaseUI.Popover.Popup
                 aria-label="Calendar"
-                className="bg-background outline-border origin-(--transform-origin) overflow-hidden rounded-lg bg-clip-padding shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0"
+                className="popup popup-transition overflow-hidden"
               >
                 <Calendar
                   mode="single"

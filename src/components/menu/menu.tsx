@@ -10,12 +10,14 @@ export type MenuPopupProps = BaseUI.MenuPopupProps;
 export type MenuSubmenuTriggerProps = BaseUI.MenuSubmenuTriggerProps;
 
 /** Shared styles for the popup of a menu and of any of its submenus. */
-export const menuPopupStyles =
-  "bg-background outline-border max-h-(--available-height) min-w-40 origin-(--transform-origin) overflow-y-auto rounded-lg bg-clip-padding py-1 shadow-lg outline transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0";
+export const menuPopupStyles = tw(
+  "popup popup-transition max-h-(--available-height) min-w-40 overflow-y-auto py-1",
+);
 
 /** Shared styles for every kind of menu item, including the submenu trigger. */
-export const menuItemStyles =
-  "data-disabled:text-muted-fg data-highlighted:data-disabled:before:bg-muted data-highlighted:data-disabled:text-on-muted relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 text-sm leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm data-disabled:cursor-not-allowed pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]";
+export const menuItemStyles = tw(
+  "data-disabled:text-muted-fg data-highlighted:data-disabled:before:bg-muted data-highlighted:data-disabled:text-on-muted relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 text-sm leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm data-disabled:cursor-not-allowed pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
+);
 
 /**
  * Colors of a menu item per variant, for its idle, highlighted and (for a
@@ -45,7 +47,9 @@ export const menuItemClassName = ({
 const plainItemStyles = tw("gap-1.5");
 
 /** Fixed-size slot that keeps the labels of indicator items aligned. */
-const indicatorSlotStyles = "flex size-4 shrink-0 items-center justify-center";
+const indicatorSlotStyles = tw(
+  "flex size-4 shrink-0 items-center justify-center",
+);
 
 export interface MenuProps
   extends

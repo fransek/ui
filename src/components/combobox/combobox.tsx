@@ -189,7 +189,7 @@ export function Combobox<
             size: "sm",
             removable: true,
             extend: tw(
-              "outline-highlight data-highlighted:focus-outline h-8 rounded-lg outline-none data-disabled:opacity-100",
+              "data-highlighted:focus-outline h-8 rounded-lg outline-none data-disabled:opacity-100",
             ),
           }),
         })}
