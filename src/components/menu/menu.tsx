@@ -15,7 +15,34 @@ export const menuPopupStyles =
 
 /** Shared styles for every kind of menu item, including the submenu trigger. */
 export const menuItemStyles =
-  "data-highlighted:before:bg-primary data-highlighted:text-on-primary data-disabled:text-muted-fg relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 text-sm leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm data-disabled:cursor-not-allowed pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]";
+  "data-disabled:text-muted-fg data-highlighted:data-disabled:before:bg-muted data-highlighted:data-disabled:text-on-muted relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 text-sm leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm data-disabled:cursor-not-allowed pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]";
+
+/**
+ * Colors of a menu item per variant, for its idle, highlighted and (for a
+ * submenu trigger) open state.
+ */
+export const menuItemVariantStyles = {
+  default: tw(
+    "data-highlighted:before:bg-primary data-highlighted:text-on-primary data-popup-open:before:bg-primary data-popup-open:text-on-primary",
+  ),
+  danger: tw(
+    "text-danger-fg data-highlighted:before:bg-danger data-highlighted:text-on-danger data-popup-open:before:bg-danger data-popup-open:text-on-danger",
+  ),
+};
+
+export type MenuItemVariant = keyof typeof menuItemVariantStyles;
+
+/** Composes the classes of a menu item of the given variant. */
+export const menuItemClassName = ({
+  variant = "default",
+  extend,
+}: {
+  variant?: MenuItemVariant;
+  extend?: string;
+} = {}) => cn(menuItemStyles, menuItemVariantStyles[variant], extend);
+
+/** Spacing for items whose content is an icon followed by a label. */
+const plainItemStyles = tw("gap-1.5");
 
 /** Fixed-size slot that keeps the labels of indicator items aligned. */
 const indicatorSlotStyles = "flex size-4 shrink-0 items-center justify-center";
@@ -115,35 +142,50 @@ export function Menu(props: MenuProps) {
   );
 }
 
-export type MenuItemProps = BaseUI.MenuItemProps;
+export interface MenuItemProps extends BaseUI.MenuItemProps {
+  variant?: MenuItemVariant;
+}
 
 export function MenuItem(props: MenuItemProps) {
+  const { variant, ...restProps } = props;
+
   return (
-    <BaseUI.Menu.Item {...mergeProps(props, { className: menuItemStyles })} />
+    <BaseUI.Menu.Item
+      {...mergeProps(restProps, {
+        className: menuItemClassName({ variant, extend: plainItemStyles }),
+      })}
+    />
   );
 }
 
-export type MenuLinkItemProps = BaseUI.MenuLinkItemProps;
+export interface MenuLinkItemProps extends BaseUI.MenuLinkItemProps {
+  variant?: MenuItemVariant;
+}
 
 export function MenuLinkItem(props: MenuLinkItemProps) {
+  const { variant, ...restProps } = props;
+
   return (
     <BaseUI.Menu.LinkItem
-      {...mergeProps(props, { className: menuItemStyles })}
+      {...mergeProps(restProps, {
+        className: menuItemClassName({ variant, extend: plainItemStyles }),
+      })}
     />
   );
 }
 
 export interface MenuCheckboxItemProps extends BaseUI.MenuCheckboxItemProps {
+  variant?: MenuItemVariant;
   indicatorProps?: BaseUI.MenuCheckboxItemIndicatorProps;
   iconProps?: React.ComponentPropsWithoutRef<"svg">;
 }
 
 export function MenuCheckboxItem(props: MenuCheckboxItemProps) {
-  const { children, indicatorProps, iconProps, ...restProps } = props;
+  const { children, variant, indicatorProps, iconProps, ...restProps } = props;
 
   return (
     <BaseUI.Menu.CheckboxItem
-      {...mergeProps(restProps, { className: menuItemStyles })}
+      {...mergeProps(restProps, { className: menuItemClassName({ variant }) })}
     >
       <span className={indicatorSlotStyles}>
         <BaseUI.Menu.CheckboxItemIndicator
@@ -164,16 +206,17 @@ export function MenuRadioGroup(props: MenuRadioGroupProps) {
 }
 
 export interface MenuRadioItemProps extends BaseUI.MenuRadioItemProps {
+  variant?: MenuItemVariant;
   indicatorProps?: BaseUI.MenuRadioItemIndicatorProps;
   iconProps?: React.ComponentPropsWithoutRef<"svg">;
 }
 
 export function MenuRadioItem(props: MenuRadioItemProps) {
-  const { children, indicatorProps, iconProps, ...restProps } = props;
+  const { children, variant, indicatorProps, iconProps, ...restProps } = props;
 
   return (
     <BaseUI.Menu.RadioItem
-      {...mergeProps(restProps, { className: menuItemStyles })}
+      {...mergeProps(restProps, { className: menuItemClassName({ variant }) })}
     >
       <span className={indicatorSlotStyles}>
         <BaseUI.Menu.RadioItemIndicator
@@ -235,6 +278,8 @@ export function MenuSeparator(props: MenuSeparatorProps) {
 export interface MenuSubmenuProps extends BaseUI.MenuSubmenuRootProps {
   /** The content of the item that opens the submenu. */
   trigger?: React.ReactNode;
+  /** The variant of the item that opens the submenu. */
+  variant?: MenuItemVariant;
   triggerProps?: Omit<MenuSubmenuTriggerProps, "children">;
   iconProps?: React.ComponentPropsWithoutRef<"svg">;
   portalProps?: MenuPortalProps;
@@ -246,6 +291,7 @@ export function MenuSubmenu(props: MenuSubmenuProps) {
   const {
     children,
     trigger,
+    variant,
     triggerProps,
     iconProps,
     portalProps,
@@ -258,10 +304,7 @@ export function MenuSubmenu(props: MenuSubmenuProps) {
     <BaseUI.Menu.SubmenuRoot {...restProps}>
       <BaseUI.Menu.SubmenuTrigger
         {...mergeProps(triggerProps, {
-          className: cn(
-            menuItemStyles,
-            "data-popup-open:before:bg-primary data-popup-open:text-on-primary w-full",
-          ),
+          className: menuItemClassName({ variant, extend: tw("w-full") }),
         })}
       >
         <span className="flex-1">{trigger}</span>

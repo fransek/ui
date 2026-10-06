@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Trash } from "lucide-react";
 import React from "react";
 import { expect, screen } from "storybook/test";
 import { Button } from "../button";
@@ -15,6 +16,10 @@ const meta = {
         <Menu.Item>PNG</Menu.Item>
         <Menu.Item>SVG</Menu.Item>
       </Menu.Submenu>
+      <Menu.Item variant="danger">
+        <Trash className="size-4" />
+        Delete
+      </Menu.Item>
       <Menu.Separator />
       <Menu.Item disabled>Print</Menu.Item>
     </Menu>
@@ -93,6 +98,45 @@ export const RadioItems: Story = {
       </Menu.RadioGroup>
     </Menu>
   ),
+};
+
+/**
+ * Set `variant="danger"` on any kind of item, or on a `Menu.Submenu`, to mark
+ * a destructive action.
+ */
+export const Danger: Story = {
+  render: (args) => (
+    <Menu {...args} trigger={<Button variant="outline">Account</Button>}>
+      <Menu.Item>Edit profile</Menu.Item>
+      <Menu.Submenu trigger="Remove data" variant="danger">
+        <Menu.Item variant="danger">Clear history</Menu.Item>
+        <Menu.Item variant="danger">Clear cache</Menu.Item>
+      </Menu.Submenu>
+      <Menu.Separator />
+      <Menu.LinkItem variant="danger" href="#delete-account">
+        <Trash className="size-4" />
+        Delete account
+      </Menu.LinkItem>
+      <Menu.Item variant="danger" disabled>
+        Delete organization
+      </Menu.Item>
+    </Menu>
+  ),
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "Account" }));
+    const items = [
+      await screen.findByRole("menuitem", { name: "Remove data" }),
+      screen.getByRole("menuitem", { name: "Delete account" }),
+      screen.getByRole("menuitem", { name: "Delete organization" }),
+    ];
+    for (const item of items) {
+      await expect(item).not.toHaveAttribute("variant");
+      await expect(item).toHaveClass("text-danger-fg");
+    }
+    await expect(
+      screen.getByRole("menuitem", { name: "Edit profile" }),
+    ).not.toHaveClass("text-danger-fg");
+  },
 };
 
 /**
