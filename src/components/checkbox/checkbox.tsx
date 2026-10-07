@@ -57,14 +57,14 @@ export function Checkbox(props: CheckboxProps) {
           data-validating={isValidating ? "" : undefined}
           {...mergeProps(restProps, {
             className: tw(
-              "bg-field data-validating:not-data-invalid:animate-validating data-invalid:border-danger-fg data-invalid:data-checked:bg-danger data-invalid:data-checked:border-danger data-checked:bg-primary data-checked:border-primary focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border shadow-sm",
+              "bg-field data-validating:not-data-invalid:animate-validating data-invalid:border-danger-fg data-invalid:data-checked:bg-danger data-invalid:data-checked:border-danger data-checked:bg-primary data-checked:border-primary focus-visible:focus-outline flex size-5 items-center justify-center rounded-sm border shadow-sm transition-colors",
             ),
           })}
         >
           <BaseUI.Checkbox.Indicator
             {...mergeProps(indicatorProps, {
               className: tw(
-                "text-on-primary data-invalid:border-danger data-invalid:bg-danger flex data-unchecked:hidden",
+                "text-on-primary data-invalid:border-danger data-invalid:bg-danger flex transition-transform data-ending-style:scale-0 data-starting-style:scale-0 data-unchecked:not-data-ending-style:hidden",
               ),
             })}
           >
