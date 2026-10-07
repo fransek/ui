@@ -30,14 +30,14 @@ export function Radio(props: RadioProps) {
           data-validating={isValidating ? "" : undefined}
           {...mergeProps(restProps, {
             className: tw(
-              "bg-field data-validating:not-data-invalid:animate-validating focus-visible:focus-outline data-checked:border-primary-fg data-invalid:border-danger-fg flex size-5 items-center justify-center rounded-full border shadow-sm",
+              "bg-field data-validating:not-data-invalid:animate-validating focus-visible:focus-outline data-checked:border-primary-fg data-invalid:border-danger-fg flex size-5 items-center justify-center rounded-full border shadow-sm transition-colors",
             ),
           })}
         >
           <BaseUI.Radio.Indicator
             {...mergeProps(indicatorProps, {
               className: tw(
-                "before:bg-primary data-invalid:before:bg-danger flex before:size-3 before:rounded-full data-unchecked:hidden",
+                "before:bg-primary data-invalid:before:bg-danger flex transition-transform before:size-3 before:rounded-full data-ending-style:scale-0 data-starting-style:scale-0 data-unchecked:not-data-ending-style:hidden",
               ),
             })}
           />
