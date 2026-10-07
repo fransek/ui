@@ -12,7 +12,7 @@
 
   * {
     border-color: var(--border);
-    outline-color: var(--highlight);
+    outline-color: var(--focus);
     scrollbar-color: var(--muted) transparent;
     scrollbar-width: thin;
     &::selection {

@@ -1,8 +1,9 @@
 import * as BaseUI from "@base-ui/react/select";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React from "react";
+import { listboxItemStyles } from "../../lib/listbox";
 import { FieldAttributes } from "../../lib/types";
-import { mergeProps, tw } from "../../lib/utils";
+import { cn, mergeProps, tw } from "../../lib/utils";
 import { Field, FieldProps } from "../field";
 
 /**
@@ -132,8 +133,11 @@ export function Select<T, Multiple extends boolean | undefined = false>(
       key={String(item.value)}
       value={item.value}
       {...mergeProps(itemProps, {
-        className: tw(
-          "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 py-2 pr-2.5 pl-2.5 text-sm leading-4 outline-none select-none group-data-[side=none]:text-base group-data-[side=none]:leading-4 before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
+        className: cn(
+          listboxItemStyles,
+          tw(
+            "text-sm group-data-[side=none]:text-base group-data-[side=none]:leading-4",
+          ),
         ),
       })}
     >

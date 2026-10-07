@@ -129,7 +129,7 @@ export const listboxMessageStyles = tw(
 );
 
 export const listboxItemStyles = tw(
-  "data-highlighted:before:bg-primary data-highlighted:text-on-primary relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
+  "data-highlighted:before:bg-highlight data-highlighted:text-on-highlight relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
 );
 
 export const listboxGroupStyles = tw("not-last:mb-2");

@@ -25,7 +25,7 @@
       @apply marker:text-primary-fg list-disc pl-6 not-last:mb-6;
     }
     ol {
-      @apply marker:text-primary-fg list-decimal pl-6 not-last:mb-6;
+      @apply marker:text-muted-fg list-decimal pl-6 not-last:mb-6;
     }
     li {
       @apply body text-body not-last:mb-2;
@@ -46,13 +46,13 @@
       @apply text-foreground font-semibold;
     }
     mark {
-      @apply primary;
+      @apply secondary;
     }
     a {
       @apply link;
     }
     hr {
-      @apply border-primary not-last:mb-6;
+      @apply not-last:mb-6;
     }
     code,
     samp,
@@ -89,7 +89,7 @@
         @apply px-4 py-2 text-left;
       }
       th {
-        @apply text-foreground border-primary border-b font-semibold;
+        @apply text-foreground border-muted-fg border-b font-semibold;
       }
       tr {
         @apply text-body not-last:border-b;
@@ -98,7 +98,7 @@
     header,
     section,
     footer {
-      @apply body text-body border-primary pb-4 not-last:mb-12 not-last:border-b;
+      @apply body text-body pb-4 not-last:mb-12 not-last:border-b;
     }
     address {
       @apply inline-block;

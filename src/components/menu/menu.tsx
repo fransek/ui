@@ -16,7 +16,7 @@ export const menuPopupStyles = tw(
 
 /** Shared styles for every kind of menu item, including the submenu trigger. */
 export const menuItemStyles = tw(
-  "data-disabled:text-muted-fg data-highlighted:data-disabled:before:bg-muted data-highlighted:data-disabled:text-on-muted relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 text-sm leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm data-disabled:cursor-not-allowed pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
+  "data-disabled:text-muted-fg data-disabled:data-highlighted:text-muted-fg data-disabled:data-highlighted:before:bg-highlight relative z-0 flex cursor-default items-center gap-3 px-2.5 py-2 text-sm leading-4 outline-none select-none before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm data-disabled:cursor-not-allowed pointer-coarse:py-2.5 pointer-coarse:text-[0.925rem]",
 );
 
 /**
@@ -25,10 +25,10 @@ export const menuItemStyles = tw(
  */
 export const menuItemVariantStyles = {
   default: tw(
-    "data-highlighted:before:bg-primary data-highlighted:text-on-primary data-popup-open:before:bg-primary data-popup-open:text-on-primary",
+    "data-highlighted:before:bg-highlight data-highlighted:text-on-highlight data-popup-open:before:bg-highlight data-popup-open:text-on-highlight",
   ),
   danger: tw(
-    "text-danger-fg data-highlighted:before:bg-danger data-highlighted:text-on-danger data-popup-open:before:bg-danger data-popup-open:text-on-danger",
+    "text-danger-fg data-highlighted:before:bg-danger-subtle-hover data-highlighted:text-on-danger-subtle data-popup-open:before:bg-danger-subtle-hover data-popup-open:text-on-danger-subtle",
   ),
 };
 

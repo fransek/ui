@@ -1,7 +1,37 @@
 import { clsx, type ClassValue } from "clsx";
 import React from "react";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
 import { ClassName, ComponentProps, DefaultProps, Style } from "./types";
+
+/**
+ * The color-pair utilities from `theme/utilities.css`, each setting both a
+ * background and a text color. Grouped so that a later pair replaces an
+ * earlier one, and replaces any earlier `bg-*`/`text-*` color too, while a
+ * later plain `bg-*`/`text-*` still overrides only its half of the pair.
+ */
+const twMerge = extendTailwindMerge<"color-pair">({
+  extend: {
+    classGroups: {
+      "color-pair": [
+        "primary",
+        "secondary",
+        "tertiary",
+        "muted",
+        "success",
+        "success-subtle",
+        "warning",
+        "warning-subtle",
+        "danger",
+        "danger-subtle",
+        "highlight",
+        "inverse",
+      ],
+    },
+    conflictingClassGroups: {
+      "color-pair": ["bg-color", "text-color"],
+    },
+  },
+});
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
