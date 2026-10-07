@@ -56,6 +56,10 @@ function SurfaceColors() {
         <div className="danger-subtle hover:bg-danger-subtle-hover rounded-lg p-2 transition-colors">
           danger-subtle
         </div>
+        <div className="highlight rounded-lg p-2 transition-colors">
+          highlight
+        </div>
+        <div className="inverse rounded-lg p-2 transition-colors">inverse</div>
       </div>
     </div>
   );
@@ -141,8 +145,8 @@ function OtherColors() {
           <div>contrast-inverse</div>
         </div>
         <div className="flex items-center gap-4">
-          <div className="bg-highlight size-8 rounded-lg p-2" />
-          <div>highlight</div>
+          <div className="bg-focus size-8 rounded-lg p-2" />
+          <div>focus</div>
         </div>
         <div className="flex items-center gap-4">
           <div className="bg-chart-1 size-8 rounded-lg p-2" />

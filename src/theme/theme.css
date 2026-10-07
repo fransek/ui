@@ -12,7 +12,7 @@
   --color-card: var(--card);
   --color-border: var(--border);
   --color-body: var(--body);
-  --color-highlight: var(--highlight);
+  --color-focus: var(--focus);
   --color-link: var(--link);
   --color-field: var(--field);
 
@@ -70,6 +70,12 @@
   --color-success-subtle-hover: var(--success-subtle-hover);
   --color-on-success-subtle: var(--on-success-subtle);
   --color-success-subtle-fg: var(--success-subtle-fg);
+
+  --color-highlight: var(--highlight);
+  --color-on-highlight: var(--on-highlight);
+
+  --color-inverse: var(--inverse);
+  --color-on-inverse: var(--on-inverse);
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);

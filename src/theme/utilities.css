@@ -38,6 +38,14 @@
   background-color: var(--color-danger-subtle);
   color: var(--color-on-danger-subtle);
 }
+@utility highlight {
+  background-color: var(--color-highlight);
+  color: var(--color-on-highlight);
+}
+@utility inverse {
+  background-color: var(--color-inverse);
+  color: var(--color-on-inverse);
+}
 
 @utility heading-2xl {
   font-size: var(--text-4xl);

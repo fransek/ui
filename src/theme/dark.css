@@ -11,7 +11,7 @@
   --contrast: oklch(100% 0 0);
   --contrast-inverse: oklch(0% 0 0);
   --body: oklch(80% 0 0);
-  --highlight: oklch(72% 0.15 280);
+  --focus: oklch(72% 0.15 280);
   --link: oklch(62% 0.15 260);
 
   --primary: oklch(41% 0.15 280);
@@ -63,6 +63,12 @@
   --success-subtle-hover: oklch(53% 0.15 150 / 0.3);
   --on-success-subtle: oklch(70% 0.15 150);
   --success-subtle-fg: oklch(70% 0.08 150);
+
+  --highlight: oklch(50% 0 0 / 0.3);
+  --on-highlight: oklch(100% 0 0);
+
+  --inverse: oklch(90% 0 0);
+  --on-inverse: oklch(0% 0 0);
 
   --chart-1: oklch(60% 0.2 280);
   --chart-2: oklch(66% 0.2 150);
