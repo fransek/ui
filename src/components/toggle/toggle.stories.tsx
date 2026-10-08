@@ -94,6 +94,47 @@ export const RenderProps: Story = {
   },
 };
 
+export const Variant: Story = {
+  render: (args) => (
+    <div className="flex items-center gap-2">
+      <Toggle {...args} variant="outline">
+        {({ pressed }) => (
+          <>
+            {pressed ? (
+              <Heart className="size-4" />
+            ) : (
+              <HeartOff className="size-4" />
+            )}
+            Outline
+          </>
+        )}
+      </Toggle>
+      <Toggle
+        {...args}
+        variant={({ pressed }) => (pressed ? "success" : "outline")}
+      >
+        By state
+      </Toggle>
+    </div>
+  ),
+  play: async ({ canvas, userEvent }) => {
+    const fixed = canvas.getByRole("button", { name: "Outline" });
+    await expect(fixed).toHaveClass("border");
+    await expect(fixed.querySelector(".lucide-heart-off")).not.toBeNull();
+    await userEvent.click(fixed);
+    await expect(fixed).toHaveClass("border");
+    await expect(fixed.querySelector(".lucide-heart")).not.toBeNull();
+    await expect(fixed.querySelector(".lucide-heart-off")).toBeNull();
+
+    const byState = canvas.getByRole("button", { name: "By state" });
+    await expect(byState).toHaveClass("border");
+    await expect(byState).not.toHaveClass("success");
+    await userEvent.click(byState);
+    await expect(byState).toHaveClass("success");
+    await expect(byState).not.toHaveClass("border");
+  },
+};
+
 export const Disabled: Story = {
   args: {
     disabled: true,

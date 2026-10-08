@@ -12,6 +12,7 @@ import { Select } from "../components/select";
 import { Switch } from "../components/switch";
 import { Textarea } from "../components/textarea";
 import { useToast } from "../components/toast";
+import { Toggle } from "../components/toggle";
 
 export function Form() {
   const toast = useToast();
@@ -92,20 +93,21 @@ export function Form() {
         infoPopover="Use at least 8 characters with a mix of letters and numbers."
         type={isPasswordVisible ? "text" : "password"}
         rightAdornment={
-          <Button
-            type="button"
+          <Toggle
             variant="ghost"
             size="icon"
-            aria-label={isPasswordVisible ? "Hide password" : "Show password"}
-            aria-pressed={isPasswordVisible}
-            onClick={() => setIsPasswordVisible((prev) => !prev)}
+            aria-label="Show password"
+            pressed={isPasswordVisible}
+            onPressedChange={setIsPasswordVisible}
           >
-            {isPasswordVisible ? (
-              <EyeOff className="size-4" />
-            ) : (
-              <Eye className="size-4" />
-            )}
-          </Button>
+            {({ pressed }) =>
+              pressed ? (
+                <EyeOff className="size-4" />
+              ) : (
+                <Eye className="size-4" />
+              )
+            }
+          </Toggle>
         }
       />
 
