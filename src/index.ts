@@ -22,6 +22,7 @@ export * from "./components/menu";
 export * from "./components/menubar";
 export * from "./components/meter";
 export * from "./components/number-field";
+export * from "./components/pagination";
 export * from "./components/popover";
 export * from "./components/radio";
 export * from "./components/radio-group";
