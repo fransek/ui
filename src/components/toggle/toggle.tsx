@@ -2,12 +2,17 @@ import { mergeProps as mergeBaseUIProps } from "@base-ui/react/merge-props";
 import * as BaseUI from "@base-ui/react/toggle";
 import React from "react";
 import { mergeProps } from "../../lib/utils";
-import { ButtonSize, buttonStyles } from "../button";
+import { ButtonSize, buttonStyles, ButtonVariant } from "../button";
 
 export interface ToggleProps<T extends string = string> extends Omit<
   BaseUI.ToggleProps<T>,
   "children"
 > {
+  /**
+   * Button variant, or a function of the toggle's state returning one.
+   * Defaults to `primary` when pressed and `tertiary` otherwise.
+   */
+  variant?: ButtonVariant | ((state: BaseUI.Toggle.State) => ButtonVariant);
   size?: ButtonSize;
   compact?: boolean;
   /** Content of the toggle, or a function of its state to render different content when pressed. */
@@ -16,7 +21,14 @@ export interface ToggleProps<T extends string = string> extends Omit<
 }
 
 export function Toggle<T extends string = string>(props: ToggleProps<T>) {
-  const { size = "md", compact, children, render, ...restProps } = props;
+  const {
+    variant,
+    size = "md",
+    compact,
+    children,
+    render,
+    ...restProps
+  } = props;
 
   return (
     <BaseUI.Toggle
@@ -45,7 +57,12 @@ export function Toggle<T extends string = string>(props: ToggleProps<T>) {
       }
       {...mergeProps(restProps, {
         className: (state: BaseUI.Toggle.State) =>
-          toggleStyles({ pressed: state.pressed, size, compact }),
+          toggleStyles({
+            pressed: state.pressed,
+            variant: typeof variant === "function" ? variant(state) : variant,
+            size,
+            compact,
+          }),
       })}
     >
       {typeof children === "function" ? undefined : children}
@@ -55,15 +72,17 @@ export function Toggle<T extends string = string>(props: ToggleProps<T>) {
 
 export const toggleStyles = ({
   pressed,
+  variant,
   size = "md",
   compact,
 }: {
   pressed: boolean;
+  variant?: ButtonVariant;
   size?: ButtonSize;
   compact?: boolean;
 }) =>
   buttonStyles({
-    variant: pressed ? "primary" : "tertiary",
+    variant: variant ?? (pressed ? "primary" : "tertiary"),
     size,
     compact,
   });
