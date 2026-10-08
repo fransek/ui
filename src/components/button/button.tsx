@@ -89,16 +89,19 @@ export const buttonStyles = ({
   variant = "primary",
   size = "md",
   compact,
+  pressEffect = true,
   extend,
 }: {
   variant?: ButtonVariant;
   size?: ButtonSize;
   compact?: boolean;
+  /** Scale the button down while it is pressed. Never applies to `link`. */
+  pressEffect?: boolean;
   extend?: string;
 }) =>
   cn(
     baseButtonStyles,
-    variant !== "link" && pressStyles,
+    pressEffect && variant !== "link" && pressStyles,
     variantStyles[variant],
     sizeStyles[size],
     compact && "min-w-0 px-1.5 py-0",
