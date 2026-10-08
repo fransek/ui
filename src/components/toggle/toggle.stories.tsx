@@ -98,7 +98,16 @@ export const Variant: Story = {
   render: (args) => (
     <div className="flex items-center gap-2">
       <Toggle {...args} variant="outline">
-        Outline
+        {({ pressed }) => (
+          <>
+            {pressed ? (
+              <Heart className="size-4" />
+            ) : (
+              <HeartOff className="size-4" />
+            )}
+            Outline
+          </>
+        )}
       </Toggle>
       <Toggle
         {...args}
@@ -111,8 +120,11 @@ export const Variant: Story = {
   play: async ({ canvas, userEvent }) => {
     const fixed = canvas.getByRole("button", { name: "Outline" });
     await expect(fixed).toHaveClass("border");
+    await expect(fixed.querySelector(".lucide-heart-off")).not.toBeNull();
     await userEvent.click(fixed);
     await expect(fixed).toHaveClass("border");
+    await expect(fixed.querySelector(".lucide-heart")).not.toBeNull();
+    await expect(fixed.querySelector(".lucide-heart-off")).toBeNull();
 
     const byState = canvas.getByRole("button", { name: "By state" });
     await expect(byState).toHaveClass("border");
