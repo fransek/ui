@@ -12,6 +12,21 @@ const sizeStyles = {
 
 export type TableSize = keyof typeof sizeStyles;
 
+// Sticky cells are opaque so scrolled content doesn't show through. They paint
+// the row's (translucent) background, which the row exposes as
+// `--table-row-bg`, over the page background as an inset shadow: unlike a
+// gradient, a shadow transitions along with the row's hover color.
+const stickyStyles = {
+  start: tw(
+    "bg-background sticky start-0 z-1 shadow-[inset_-1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)] transition-shadow rtl:shadow-[inset_1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)]",
+  ),
+  end: tw(
+    "bg-background sticky end-0 z-1 shadow-[inset_1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)] transition-shadow rtl:shadow-[inset_-1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)]",
+  ),
+};
+
+export type TableSticky = keyof typeof stickyStyles;
+
 interface TableContextValue {
   size: TableSize;
   striped: boolean;
@@ -111,7 +126,8 @@ export function TableBody(props: TableBodyProps) {
     props: mergeProps(restProps, {
       className: cn(
         "[&>tr:last-child]:border-b-0",
-        striped && "[&>tr:nth-child(even)]:bg-hover/40",
+        striped &&
+          "[&>tr:nth-child(even)]:not-hover:[--table-row-bg:color-mix(in_oklab,var(--color-muted)_10%,transparent)]",
       ),
     }),
   });
@@ -126,7 +142,7 @@ export function TableFooter(props: TableFooterProps) {
     defaultTagName: "tfoot",
     render,
     props: mergeProps(restProps, {
-      className: tw("border-t font-medium [&>tr:last-child]:border-b-0"),
+      className: tw("border-t font-semibold [&>tr:last-child]:border-b-0"),
     }),
   });
 }
@@ -146,7 +162,7 @@ export function TableRow(props: TableRowProps) {
       "data-selected": selected ? "" : undefined,
       ...mergeProps(restProps, {
         className: tw(
-          "data-selected:bg-primary/10 data-selected:hover:bg-primary/15 in-[tbody]:hover:bg-hover border-b transition-colors",
+          "border-b bg-(--table-row-bg) transition-colors in-[tbody]:hover:[--table-row-bg:var(--color-hover)] data-selected:[--table-row-bg:color-mix(in_oklab,var(--color-secondary)_50%,transparent)] data-selected:hover:[--table-row-bg:color-mix(in_oklab,var(--color-secondary-hover)_50%,transparent)]",
         ),
       }),
     },
@@ -167,6 +183,11 @@ export interface TableHeadProps extends BaseUI.useRender.ComponentProps<"th"> {
   onSort?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /** Props forwarded to the sort button. */
   sortButtonProps?: BaseUIButton.ButtonProps;
+  /**
+   * Pins the column to the start or end edge while the table's container
+   * scrolls horizontally. Set the same value on the column's cells.
+   */
+  sticky?: TableSticky;
 }
 
 export function TableHead(props: TableHeadProps) {
@@ -175,6 +196,7 @@ export function TableHead(props: TableHeadProps) {
     sortDirection,
     onSort,
     sortButtonProps,
+    sticky,
     children,
     ...restProps
   } = props;
@@ -193,10 +215,12 @@ export function TableHead(props: TableHeadProps) {
     props: {
       scope: "col",
       "aria-sort": sortDirection,
+      "data-sticky": sticky,
       ...mergeProps(restProps, {
         className: cn(
-          "text-muted-fg text-left align-middle font-medium whitespace-nowrap",
+          "text-muted-fg text-left align-middle font-semibold whitespace-nowrap",
           sizeStyles[size],
+          sticky && stickyStyles[sticky],
         ),
       }),
       children: onSort ? (
@@ -204,7 +228,7 @@ export function TableHead(props: TableHeadProps) {
           onClick={onSort}
           {...mergeProps(sortButtonProps, {
             className: tw(
-              "hover:text-foreground focus-visible:focus-outline -mx-1 inline-flex cursor-pointer items-center gap-1 rounded-sm px-1 font-medium transition-colors",
+              "hover:text-foreground focus-visible:focus-outline -mx-1 inline-flex cursor-pointer items-center gap-1 rounded-sm px-1 font-semibold transition-colors",
             ),
           })}
         >
@@ -224,18 +248,31 @@ export function TableHead(props: TableHeadProps) {
   });
 }
 
-export type TableCellProps = BaseUI.useRender.ComponentProps<"td">;
+export interface TableCellProps extends BaseUI.useRender.ComponentProps<"td"> {
+  /**
+   * Pins the cell to the start or end edge while the table's container
+   * scrolls horizontally. Set the same value on the column's header.
+   */
+  sticky?: TableSticky;
+}
 
 export function TableCell(props: TableCellProps) {
-  const { render, ...restProps } = props;
+  const { render, sticky, ...restProps } = props;
   const { size } = useTableContext();
 
   return BaseUI.useRender({
     defaultTagName: "td",
     render,
-    props: mergeProps(restProps, {
-      className: cn("align-middle", sizeStyles[size]),
-    }),
+    props: {
+      "data-sticky": sticky,
+      ...mergeProps(restProps, {
+        className: cn(
+          "align-middle",
+          sizeStyles[size],
+          sticky && stickyStyles[sticky],
+        ),
+      }),
+    },
   });
 }
 

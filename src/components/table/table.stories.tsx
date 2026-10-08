@@ -5,6 +5,7 @@ import { expect } from "storybook/test";
 import { Button } from "../button";
 import { Checkbox } from "../checkbox";
 import { Chip, ChipVariant } from "../chip";
+import { Pagination } from "../pagination";
 import { Table, TableSortDirection } from "./table";
 
 const meta = {
@@ -308,6 +309,108 @@ export const StickyHeader: Story = {
         </Table.Body>
       </Table>
     );
+  },
+};
+
+export const Paginated: Story = {
+  render: () => {
+    // Not a multiple of the five sample invoices, so pages don't repeat.
+    const pageSize = 8;
+    const rows = Array.from({ length: 95 }, (_, index) => ({
+      ...invoices[index % invoices.length],
+      id: `INV-${String(index + 1).padStart(3, "0")}`,
+    }));
+    const pageCount = Math.ceil(rows.length / pageSize);
+    const [page, setPage] = React.useState(1);
+    const start = (page - 1) * pageSize;
+    const end = Math.min(start + pageSize, rows.length);
+
+    return (
+      <div className="flex flex-col gap-3">
+        <Table>
+          <InvoiceHeader />
+          <Table.Body>
+            <InvoiceRows rows={rows.slice(start, end)} />
+          </Table.Body>
+        </Table>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="body-sm text-muted-fg">
+            Showing {start + 1}–{end} of {rows.length}
+          </p>
+          <Pagination
+            size="sm"
+            page={page}
+            pageCount={pageCount}
+            onPageChange={setPage}
+          />
+        </div>
+      </div>
+    );
+  },
+  play: async ({ canvas, userEvent }) => {
+    await expect(canvas.getByText("Showing 1–8 of 95")).toBeVisible();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Page 12" }));
+    await expect(canvas.getByText("Showing 89–95 of 95")).toBeVisible();
+    // Header row plus the seven invoices on the last page.
+    await expect(canvas.getAllByRole("row")).toHaveLength(8);
+    await expect(canvas.getAllByRole("row")[1]).toHaveTextContent("INV-089");
+  },
+};
+
+export const HorizontalScroll: Story = {
+  render: () => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    return (
+      <Table containerProps={{ className: "max-w-xl rounded-lg border" }}>
+        <Table.Header sticky>
+          <Table.Row>
+            <Table.Head sticky="start">Customer</Table.Head>
+            {months.map((month) => (
+              <Table.Head key={month} className="text-right">
+                {month}
+              </Table.Head>
+            ))}
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {invoices.map((invoice, row) => (
+            <Table.Row key={invoice.id} selected={row === 1}>
+              <Table.Cell sticky="start" className="font-medium">
+                {invoice.customer}
+              </Table.Cell>
+              {months.map((month, column) => (
+                <Table.Cell key={month} className="text-right tabular-nums">
+                  {currency.format(invoice.amount * ((column % 4) + 1))}
+                </Table.Cell>
+              ))}
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    );
+  },
+  play: async ({ canvas }) => {
+    const firstColumn = canvas.getByRole("cell", { name: "Acme Corp" });
+    await expect(firstColumn).toHaveAttribute("data-sticky", "start");
+    await expect(getComputedStyle(firstColumn).position).toBe("sticky");
+
+    const container = canvas.getByRole("table").parentElement!;
+    await expect(container.scrollWidth).toBeGreaterThan(container.clientWidth);
   },
 };
 
