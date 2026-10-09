@@ -26,7 +26,7 @@ export function TabsList(props: TabsListProps) {
     <BaseUI.Tabs.List
       {...mergeProps(restProps, {
         className: tw(
-          "relative z-1 -mb-px flex gap-1 data-[orientation=vertical]:-mr-px data-[orientation=vertical]:mb-0 data-[orientation=vertical]:shrink-0 data-[orientation=vertical]:flex-col",
+          "relative z-1 -mb-px flex gap-1 data-[orientation=vertical]:mb-0 data-[orientation=vertical]:shrink-0 data-[orientation=vertical]:flex-col",
         ),
       })}
     >
@@ -43,7 +43,7 @@ export function TabsIndicator(props: TabsIndicatorProps) {
     <BaseUI.Tabs.Indicator
       {...mergeProps(props, {
         className: tw(
-          "border-primary-fg absolute top-0 left-0 -z-1 h-full w-(--active-tab-width) translate-x-(--active-tab-left) border-b-2 transition-[translate,width,height] duration-150 ease-in-out data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-full data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:translate-y-(--active-tab-top) data-[orientation=vertical]:border-r-2 data-[orientation=vertical]:border-b-0",
+          "border-primary-fg absolute top-0 left-0 -z-1 h-full w-(--active-tab-width) translate-x-(--active-tab-left) border-b-2 transition-[translate,width,height] duration-150 ease-in-out data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-full data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:translate-y-(--active-tab-top) data-[orientation=vertical]:border-s-2 data-[orientation=vertical]:border-b-0",
         ),
       })}
     />
