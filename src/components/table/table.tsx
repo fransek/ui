@@ -1,0 +1,347 @@
+import * as BaseUIButton from "@base-ui/react/button";
+import * as BaseUI from "@base-ui/react/use-render";
+import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
+import React from "react";
+import { cn, mergeProps, tw } from "../../lib/utils";
+import { ScrollArea, ScrollAreaProps } from "../scroll-area";
+
+const sizeStyles = {
+  sm: tw("px-2 py-1.5"),
+  md: tw("px-3 py-2.5"),
+  lg: tw("px-4 py-3.5"),
+};
+
+export type TableSize = keyof typeof sizeStyles;
+
+// A sticky header draws its bottom edge on its cells, as `--table-header-edge`:
+// WebKit doesn't paint a box shadow on the `thead` itself. Header cells draw
+// the edge on their own, and sticky cells fold it into their shadow below.
+const headerEdgeStyles = tw("shadow-(--table-header-edge)");
+
+// Sticky cells are opaque so scrolled content doesn't show through. They paint
+// the row's (translucent) background, which the row exposes as
+// `--table-row-bg`, over the page background as an inset shadow: unlike a
+// gradient, a shadow transitions along with the row's hover color.
+const stickyStyles = {
+  start: tw(
+    "bg-background sticky start-0 z-1 shadow-[var(--table-header-edge,0_0_#0000),inset_-1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)] transition-shadow rtl:shadow-[var(--table-header-edge,0_0_#0000),inset_1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)]",
+  ),
+  end: tw(
+    "bg-background sticky end-0 z-1 shadow-[var(--table-header-edge,0_0_#0000),inset_1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)] transition-shadow rtl:shadow-[var(--table-header-edge,0_0_#0000),inset_-1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)]",
+  ),
+};
+
+export type TableSticky = keyof typeof stickyStyles;
+
+interface TableContextValue {
+  size: TableSize;
+  striped: boolean;
+}
+
+const TableContext = React.createContext<TableContextValue>({
+  size: "md",
+  striped: false,
+});
+
+export function useTableContext() {
+  return React.useContext(TableContext);
+}
+
+export interface TableProps extends BaseUI.useRender.ComponentProps<"table"> {
+  /**
+   * Cell padding density.
+   * @default "md"
+   */
+  size?: TableSize;
+  /** Shades every other body row. */
+  striped?: boolean;
+  /**
+   * Props forwarded to the `ScrollArea` wrapping the table. A max height or
+   * width set on it bounds the scrollable region.
+   */
+  containerProps?: ScrollAreaProps;
+}
+
+export function Table(props: TableProps) {
+  const {
+    render,
+    size = "md",
+    striped = false,
+    containerProps,
+    ...restProps
+  } = props;
+
+  const contextValue = React.useMemo(
+    () => ({ size, striped }),
+    [size, striped],
+  );
+
+  const { viewportProps, contentProps, ...scrollAreaProps } =
+    containerProps ?? {};
+
+  const table = BaseUI.useRender({
+    defaultTagName: "table",
+    render,
+    props: mergeProps(restProps, {
+      className: tw("body-sm text-foreground w-full caption-bottom"),
+    }),
+  });
+
+  return (
+    <TableContext.Provider value={contextValue}>
+      {/* A ScrollArea rather than an overflowing div: iOS paints native
+          scrollbars beneath sticky cells, while these scrollbars sit after an
+          isolated viewport and so stack above everything inside it. */}
+      <ScrollArea
+        orientation="both"
+        {...mergeProps(scrollAreaProps, { className: tw("w-full") })}
+        viewportProps={mergeProps(viewportProps, {
+          className: tw("isolate max-h-[inherit] rounded-[inherit]"),
+        })}
+        contentProps={mergeProps(contentProps, {
+          className: tw("data-has-overflow-x:pb-0 data-has-overflow-y:pr-0"),
+        })}
+      >
+        {table}
+      </ScrollArea>
+    </TableContext.Provider>
+  );
+}
+
+export interface TableHeaderProps extends BaseUI.useRender
+  .ComponentProps<"thead"> {
+  /**
+   * Keeps the header in view while the table's container scrolls. Give the
+   * container a max height through `containerProps` for this to take effect.
+   */
+  sticky?: boolean;
+}
+
+export function TableHeader(props: TableHeaderProps) {
+  const { render, sticky, ...restProps } = props;
+
+  return BaseUI.useRender({
+    defaultTagName: "thead",
+    render,
+    props: {
+      "data-sticky": sticky ? "" : undefined,
+      ...mergeProps(restProps, {
+        className: tw(
+          "data-sticky:bg-background data-sticky:sticky data-sticky:top-0 data-sticky:z-10 data-sticky:[--table-header-edge:inset_0_-1px_0_var(--color-border)]",
+        ),
+      }),
+    },
+  });
+}
+
+export type TableBodyProps = BaseUI.useRender.ComponentProps<"tbody">;
+
+export function TableBody(props: TableBodyProps) {
+  const { render, ...restProps } = props;
+  const { striped } = useTableContext();
+
+  return BaseUI.useRender({
+    defaultTagName: "tbody",
+    render,
+    props: mergeProps(restProps, {
+      className: cn(
+        "[&>tr:last-child]:border-b-0",
+        striped &&
+          "[&>tr:nth-child(even)]:not-hover:[--table-row-bg:color-mix(in_oklab,var(--color-muted)_10%,transparent)]",
+      ),
+    }),
+  });
+}
+
+export type TableFooterProps = BaseUI.useRender.ComponentProps<"tfoot">;
+
+export function TableFooter(props: TableFooterProps) {
+  const { render, ...restProps } = props;
+
+  return BaseUI.useRender({
+    defaultTagName: "tfoot",
+    render,
+    props: mergeProps(restProps, {
+      className: tw("border-t font-semibold [&>tr:last-child]:border-b-0"),
+    }),
+  });
+}
+
+export interface TableRowProps extends BaseUI.useRender.ComponentProps<"tr"> {
+  /** Highlights the row as selected. */
+  selected?: boolean;
+}
+
+export function TableRow(props: TableRowProps) {
+  const { render, selected, ...restProps } = props;
+
+  return BaseUI.useRender({
+    defaultTagName: "tr",
+    render,
+    props: {
+      "data-selected": selected ? "" : undefined,
+      ...mergeProps(restProps, {
+        className: tw(
+          "border-b bg-(--table-row-bg) transition-colors in-[tbody]:hover:[--table-row-bg:var(--color-hover)] data-selected:[--table-row-bg:color-mix(in_oklab,var(--color-secondary)_50%,transparent)] data-selected:hover:[--table-row-bg:color-mix(in_oklab,var(--color-secondary-hover)_50%,transparent)]",
+        ),
+      }),
+    },
+  });
+}
+
+export type TableSortDirection = "ascending" | "descending" | "none";
+
+export interface TableHeadProps extends BaseUI.useRender.ComponentProps<"th"> {
+  /**
+   * The column's current sort direction. Sets `aria-sort` on the header cell.
+   */
+  sortDirection?: TableSortDirection;
+  /**
+   * When set, the header content is wrapped in a button that calls this
+   * handler, and a sort indicator is shown.
+   */
+  onSort?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  /** Props forwarded to the sort button. */
+  sortButtonProps?: BaseUIButton.ButtonProps;
+  /**
+   * Pins the column to the start or end edge while the table's container
+   * scrolls horizontally. Set the same value on the column's cells.
+   */
+  sticky?: TableSticky;
+}
+
+export function TableHead(props: TableHeadProps) {
+  const {
+    render,
+    sortDirection,
+    onSort,
+    sortButtonProps,
+    sticky,
+    children,
+    ...restProps
+  } = props;
+  const { size } = useTableContext();
+
+  const SortIcon =
+    sortDirection === "ascending"
+      ? ArrowUp
+      : sortDirection === "descending"
+        ? ArrowDown
+        : ChevronsUpDown;
+
+  return BaseUI.useRender({
+    defaultTagName: "th",
+    render,
+    props: {
+      scope: "col",
+      "aria-sort": sortDirection,
+      "data-sticky": sticky,
+      ...mergeProps(restProps, {
+        className: cn(
+          "text-muted-fg text-left align-middle font-semibold whitespace-nowrap",
+          headerEdgeStyles,
+          sizeStyles[size],
+          sticky && stickyStyles[sticky],
+        ),
+      }),
+      children: onSort ? (
+        <BaseUIButton.Button
+          onClick={onSort}
+          {...mergeProps(sortButtonProps, {
+            className: tw(
+              "hover:text-foreground focus-visible:focus-outline -mx-1 inline-flex cursor-pointer items-center gap-1 rounded-sm px-1 font-semibold transition-colors",
+            ),
+          })}
+        >
+          {children}
+          <SortIcon
+            aria-hidden
+            className={cn(
+              "size-3.5 shrink-0",
+              (!sortDirection || sortDirection === "none") && "opacity-50",
+            )}
+          />
+        </BaseUIButton.Button>
+      ) : (
+        children
+      ),
+    },
+  });
+}
+
+export interface TableCellProps extends BaseUI.useRender.ComponentProps<"td"> {
+  /**
+   * Pins the cell to the start or end edge while the table's container
+   * scrolls horizontally. Set the same value on the column's header.
+   */
+  sticky?: TableSticky;
+}
+
+export function TableCell(props: TableCellProps) {
+  const { render, sticky, ...restProps } = props;
+  const { size } = useTableContext();
+
+  return BaseUI.useRender({
+    defaultTagName: "td",
+    render,
+    props: {
+      "data-sticky": sticky,
+      ...mergeProps(restProps, {
+        className: cn(
+          "align-middle",
+          sizeStyles[size],
+          sticky && stickyStyles[sticky],
+        ),
+      }),
+    },
+  });
+}
+
+export type TableCaptionProps = BaseUI.useRender.ComponentProps<"caption">;
+
+export function TableCaption(props: TableCaptionProps) {
+  const { render, ...restProps } = props;
+
+  return BaseUI.useRender({
+    defaultTagName: "caption",
+    render,
+    props: mergeProps(restProps, {
+      className: tw("body-sm text-muted-fg mt-3"),
+    }),
+  });
+}
+
+export interface TableEmptyProps extends TableCellProps {
+  /** The number of columns the message spans. */
+  colSpan: number;
+  /** Props forwarded to the row wrapping the cell. */
+  rowProps?: TableRowProps;
+}
+
+/** A full-width row for an empty table. Render it inside `Table.Body`. */
+export function TableEmpty(props: TableEmptyProps) {
+  const { rowProps, ...restProps } = props;
+
+  return (
+    <TableRow
+      {...mergeProps(rowProps, {
+        className: tw("in-[tbody]:hover:bg-transparent"),
+      })}
+    >
+      <TableCell
+        {...mergeProps(restProps, {
+          className: tw("text-muted-fg py-8 text-center"),
+        })}
+      />
+    </TableRow>
+  );
+}
+
+Table.Header = TableHeader;
+Table.Body = TableBody;
+Table.Footer = TableFooter;
+Table.Row = TableRow;
+Table.Head = TableHead;
+Table.Cell = TableCell;
+Table.Caption = TableCaption;
+Table.Empty = TableEmpty;
