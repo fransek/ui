@@ -409,7 +409,10 @@ export const HorizontalScroll: Story = {
     await expect(firstColumn).toHaveAttribute("data-sticky", "start");
     await expect(getComputedStyle(firstColumn).position).toBe("sticky");
 
-    const container = canvas.getByRole("table").parentElement!;
+    let container = canvas.getByRole("table").parentElement!;
+    while (!/auto|scroll/.test(getComputedStyle(container).overflowX)) {
+      container = container.parentElement!;
+    }
     await expect(container.scrollWidth).toBeGreaterThan(container.clientWidth);
   },
 };

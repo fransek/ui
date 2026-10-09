@@ -3,6 +3,7 @@ import * as BaseUI from "@base-ui/react/use-render";
 import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
 import React from "react";
 import { cn, mergeProps, tw } from "../../lib/utils";
+import { ScrollArea, ScrollAreaProps } from "../scroll-area";
 
 const sizeStyles = {
   sm: tw("px-2 py-1.5"),
@@ -12,16 +13,21 @@ const sizeStyles = {
 
 export type TableSize = keyof typeof sizeStyles;
 
+// A sticky header draws its bottom edge on its cells, as `--table-header-edge`:
+// WebKit doesn't paint a box shadow on the `thead` itself. Header cells draw
+// the edge on their own, and sticky cells fold it into their shadow below.
+const headerEdgeStyles = tw("shadow-(--table-header-edge)");
+
 // Sticky cells are opaque so scrolled content doesn't show through. They paint
 // the row's (translucent) background, which the row exposes as
 // `--table-row-bg`, over the page background as an inset shadow: unlike a
 // gradient, a shadow transitions along with the row's hover color.
 const stickyStyles = {
   start: tw(
-    "bg-background sticky start-0 z-1 shadow-[inset_-1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)] transition-shadow rtl:shadow-[inset_1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)]",
+    "bg-background sticky start-0 z-1 shadow-[var(--table-header-edge,0_0_#0000),inset_-1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)] transition-shadow rtl:shadow-[var(--table-header-edge,0_0_#0000),inset_1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)]",
   ),
   end: tw(
-    "bg-background sticky end-0 z-1 shadow-[inset_1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)] transition-shadow rtl:shadow-[inset_-1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)]",
+    "bg-background sticky end-0 z-1 shadow-[var(--table-header-edge,0_0_#0000),inset_1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)] transition-shadow rtl:shadow-[var(--table-header-edge,0_0_#0000),inset_-1px_0_0_var(--color-border),inset_0_0_0_100vmax_var(--table-row-bg,transparent)]",
   ),
 };
 
@@ -49,8 +55,11 @@ export interface TableProps extends BaseUI.useRender.ComponentProps<"table"> {
   size?: TableSize;
   /** Shades every other body row. */
   striped?: boolean;
-  /** Props forwarded to the scroll container wrapping the table. */
-  containerProps?: React.ComponentProps<"div">;
+  /**
+   * Props forwarded to the `ScrollArea` wrapping the table. A max height or
+   * width set on it bounds the scrollable region.
+   */
+  containerProps?: ScrollAreaProps;
 }
 
 export function Table(props: TableProps) {
@@ -67,6 +76,9 @@ export function Table(props: TableProps) {
     [size, striped],
   );
 
+  const { viewportProps, contentProps, ...scrollAreaProps } =
+    containerProps ?? {};
+
   const table = BaseUI.useRender({
     defaultTagName: "table",
     render,
@@ -77,13 +89,21 @@ export function Table(props: TableProps) {
 
   return (
     <TableContext.Provider value={contextValue}>
-      <div
-        {...mergeProps(containerProps, {
-          className: tw("relative w-full overflow-auto"),
+      {/* A ScrollArea rather than an overflowing div: iOS paints native
+          scrollbars beneath sticky cells, while these scrollbars sit after an
+          isolated viewport and so stack above everything inside it. */}
+      <ScrollArea
+        orientation="both"
+        {...mergeProps(scrollAreaProps, { className: tw("w-full") })}
+        viewportProps={mergeProps(viewportProps, {
+          className: tw("isolate max-h-[inherit] rounded-[inherit]"),
+        })}
+        contentProps={mergeProps(contentProps, {
+          className: tw("data-has-overflow-x:pb-0 data-has-overflow-y:pr-0"),
         })}
       >
         {table}
-      </div>
+      </ScrollArea>
     </TableContext.Provider>
   );
 }
@@ -107,7 +127,7 @@ export function TableHeader(props: TableHeaderProps) {
       "data-sticky": sticky ? "" : undefined,
       ...mergeProps(restProps, {
         className: tw(
-          "data-sticky:bg-background data-sticky:sticky data-sticky:top-0 data-sticky:z-10 data-sticky:shadow-[inset_0_-1px_0_var(--color-border)]",
+          "data-sticky:bg-background data-sticky:sticky data-sticky:top-0 data-sticky:z-10 data-sticky:[--table-header-edge:inset_0_-1px_0_var(--color-border)]",
         ),
       }),
     },
@@ -219,6 +239,7 @@ export function TableHead(props: TableHeadProps) {
       ...mergeProps(restProps, {
         className: cn(
           "text-muted-fg text-left align-middle font-semibold whitespace-nowrap",
+          headerEdgeStyles,
           sizeStyles[size],
           sticky && stickyStyles[sticky],
         ),
