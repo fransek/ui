@@ -142,6 +142,20 @@ export const WithBackdrop: Story = {
   args: {
     backdrop: true,
   },
+  play: async ({ canvas, userEvent }) => {
+    const trigger = canvas.getByRole("button", { name: "Overview" });
+    await userEvent.click(trigger);
+    await screen.findByRole("link", { name: /Quick Start/ });
+
+    // The backdrop must not cover the trigger, or hovering it would make the
+    // pointer leave the trigger and close the menu again.
+    const { x, y, width, height } = trigger.getBoundingClientRect();
+    await expect(
+      trigger.contains(
+        document.elementFromPoint(x + width / 2, y + height / 2),
+      ),
+    ).toBe(true);
+  },
 };
 
 /**

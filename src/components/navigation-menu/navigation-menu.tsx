@@ -75,7 +75,7 @@ export function NavigationMenu(props: NavigationMenuProps) {
           <BaseUI.NavigationMenu.Backdrop
             {...mergeProps(backdropProps, {
               className: tw(
-                "fixed inset-0 bg-black/20 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0",
+                "pointer-events-none fixed inset-0 bg-black/20 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0",
               ),
             })}
           />
