@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
+import { expect, userEvent, within } from "storybook/test";
 import { Tabs } from "./tabs";
 
 const meta = {
@@ -79,4 +80,21 @@ export const CustomStyle: Story = {
       </Tabs.Panel>
     </Tabs>
   ),
+};
+
+export const Vertical: Story = {
+  args: {
+    orientation: "vertical",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const overview = canvas.getByRole("tab", { name: "Overview" });
+    await expect(canvas.getByRole("tablist")).toHaveAttribute(
+      "aria-orientation",
+      "vertical",
+    );
+    await userEvent.click(overview);
+    await userEvent.keyboard("{ArrowDown}");
+    await expect(canvas.getByRole("tab", { name: "Projects" })).toHaveFocus();
+  },
 };
