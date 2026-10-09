@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.21.0](https://github.com/fransek/ui/compare/v0.20.0...v0.21.0) (2026-10-09)
+
+
+### Features
+
+* add Combobox component ([#144](https://github.com/fransek/ui/issues/144)) ([ea079b2](https://github.com/fransek/ui/commit/ea079b2e57dbc23b5fef68b3681a277679e8bbf9))
+* add ContextMenu component ([#153](https://github.com/fransek/ui/issues/153)) ([4d193ed](https://github.com/fransek/ui/commit/4d193ed743a644d613930326fcb3687e3a24a811))
+* add Table and Pagination components ([#161](https://github.com/fransek/ui/issues/161)) ([0752f0f](https://github.com/fransek/ui/commit/0752f0f0167c289092d715fc28e44fa7799f59e1))
+* **avatar:** add Avatar and AvatarGroup components ([#159](https://github.com/fransek/ui/issues/159)) ([9a7b9b0](https://github.com/fransek/ui/commit/9a7b9b0c02361672e501bb0c9a8c7767b488a064))
+* **button-group:** add ButtonGroup component ([#146](https://github.com/fransek/ui/issues/146)) ([cb72001](https://github.com/fransek/ui/commit/cb7200161b472203a99c777f74647b7577d56fd6))
+* **button:** make button press effect optional via pressEffect prop ([#154](https://github.com/fransek/ui/issues/154)) ([3d01def](https://github.com/fransek/ui/commit/3d01def772c73798f3dad453b175296a4ae99828))
+* **checkbox,radio:** animate the indicators in and out ([#150](https://github.com/fransek/ui/issues/150)) ([73e1c91](https://github.com/fransek/ui/commit/73e1c9119520f31d2af32e14086a0edf7a1bcf49))
+* **menu:** add danger variant to menu items ([#148](https://github.com/fransek/ui/issues/148)) ([d767f07](https://github.com/fransek/ui/commit/d767f071bf3f102db3f26343aeedc422b2d0b1f7))
+* **theme:** add color-pair and popup utilities ([#149](https://github.com/fransek/ui/issues/149)) ([9feef55](https://github.com/fransek/ui/commit/9feef55b52f7e54b5505e2dacb5cdb5d72dec8ca))
+* **theme:** add highlight and inverse color pairs ([#151](https://github.com/fransek/ui/issues/151)) ([c86d7ff](https://github.com/fransek/ui/commit/c86d7ff8d8d203d9bc85b0cd81f3e82626093ebd))
+* **toggle:** add Toggle and ToggleGroup components ([#143](https://github.com/fransek/ui/issues/143)) ([e6e9c97](https://github.com/fransek/ui/commit/e6e9c97692dd2d076adbeb7e7ccc56a74864e583))
+* **toggle:** add variant prop ([#152](https://github.com/fransek/ui/issues/152)) ([8c66acd](https://github.com/fransek/ui/commit/8c66acd70006510ccee3903f962ce3b34fd84e67))
+
 ## [0.20.0](https://github.com/fransek/ui/compare/v0.19.0...v0.20.0) (2026-10-05)
 
 
