@@ -10,19 +10,9 @@ const meta = {
   component: Breadcrumb,
   render: (args) => (
     <Breadcrumb {...args}>
-      <Breadcrumb.List>
-        <Breadcrumb.Item>
-          <Breadcrumb.Link href="#">Home</Breadcrumb.Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Separator />
-        <Breadcrumb.Item>
-          <Breadcrumb.Link href="#">Components</Breadcrumb.Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Separator />
-        <Breadcrumb.Item>
-          <Breadcrumb.Page>Breadcrumb</Breadcrumb.Page>
-        </Breadcrumb.Item>
-      </Breadcrumb.List>
+      <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+      <Breadcrumb.Item href="#">Components</Breadcrumb.Item>
+      <Breadcrumb.Item>Breadcrumb</Breadcrumb.Item>
     </Breadcrumb>
   ),
   tags: ["autodocs"],
@@ -46,69 +36,37 @@ export const Basic: Story = {
 };
 
 /**
- * Pass `children` to `Breadcrumb.Separator` to replace the default chevron.
+ * Pass `separator` to replace the default chevron.
  */
 export const CustomSeparator: Story = {
+  args: {
+    separator: <Slash className="-rotate-12" />,
+  },
   render: (args) => (
     <Breadcrumb {...args}>
-      <Breadcrumb.List>
-        <Breadcrumb.Item>
-          <Breadcrumb.Link href="#" aria-label="Home">
-            <Home className="size-4" />
-          </Breadcrumb.Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Separator>
-          <Slash className="-rotate-12" />
-        </Breadcrumb.Separator>
-        <Breadcrumb.Item>
-          <Breadcrumb.Link href="#">Settings</Breadcrumb.Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Separator>
-          <Slash className="-rotate-12" />
-        </Breadcrumb.Separator>
-        <Breadcrumb.Item>
-          <Breadcrumb.Page>Profile</Breadcrumb.Page>
-        </Breadcrumb.Item>
-      </Breadcrumb.List>
+      <Breadcrumb.Item href="#" aria-label="Home">
+        <Home className="size-4" />
+      </Breadcrumb.Item>
+      <Breadcrumb.Item href="#">Settings</Breadcrumb.Item>
+      <Breadcrumb.Item>Profile</Breadcrumb.Item>
     </Breadcrumb>
   ),
 };
 
 /**
- * Collapse middle items into a `Breadcrumb.Ellipsis`, and render it as a
- * `Menu` trigger to reveal them.
+ * Collapse middle items into a `Breadcrumb.Ellipsis`, and pass it as the
+ * `trigger` of a `Menu` to reveal them.
  */
 export const Collapsed: Story = {
   render: (args) => (
     <Breadcrumb {...args}>
-      <Breadcrumb.List>
-        <Breadcrumb.Item>
-          <Breadcrumb.Link href="#">Home</Breadcrumb.Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Separator />
-        <Breadcrumb.Item>
-          <Menu
-            trigger={
-              <Breadcrumb.Ellipsis
-                label="Show hidden pages"
-                render={<button type="button" />}
-                className="hover:bg-hover hover:text-foreground focus-visible:focus-outline data-popup-open:bg-active rounded-md transition-colors outline-none"
-              />
-            }
-          >
-            <Menu.LinkItem href="#">Documentation</Menu.LinkItem>
-            <Menu.LinkItem href="#">Components</Menu.LinkItem>
-          </Menu>
-        </Breadcrumb.Item>
-        <Breadcrumb.Separator />
-        <Breadcrumb.Item>
-          <Breadcrumb.Link href="#">Navigation</Breadcrumb.Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Separator />
-        <Breadcrumb.Item>
-          <Breadcrumb.Page>Breadcrumb</Breadcrumb.Page>
-        </Breadcrumb.Item>
-      </Breadcrumb.List>
+      <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+      <Menu trigger={<Breadcrumb.Ellipsis label="Show hidden pages" />}>
+        <Menu.LinkItem href="#">Documentation</Menu.LinkItem>
+        <Menu.LinkItem href="#">Components</Menu.LinkItem>
+      </Menu>
+      <Breadcrumb.Item href="#">Navigation</Breadcrumb.Item>
+      <Breadcrumb.Item>Breadcrumb</Breadcrumb.Item>
     </Breadcrumb>
   ),
   play: async ({ canvas, userEvent }) => {
@@ -123,7 +81,7 @@ export const Collapsed: Story = {
 };
 
 /**
- * Pass `render` to `Breadcrumb.Link` to use a router's link component.
+ * Pass `render` to `Breadcrumb.Item` to use a router's link component.
  */
 export const RouterLink: Story = {
   render: (args) => {
@@ -134,17 +92,8 @@ export const RouterLink: Story = {
 
     return (
       <Breadcrumb {...args}>
-        <Breadcrumb.List>
-          <Breadcrumb.Item>
-            <Breadcrumb.Link render={<RouterLink to="#" />}>
-              Home
-            </Breadcrumb.Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Separator />
-          <Breadcrumb.Item>
-            <Breadcrumb.Page>Dashboard</Breadcrumb.Page>
-          </Breadcrumb.Item>
-        </Breadcrumb.List>
+        <Breadcrumb.Item render={<RouterLink to="#" />}>Home</Breadcrumb.Item>
+        <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
       </Breadcrumb>
     );
   },

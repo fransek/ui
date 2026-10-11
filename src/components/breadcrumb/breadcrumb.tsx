@@ -2,109 +2,115 @@ import * as BaseUI from "@base-ui/react/use-render";
 import { ChevronRight, MoreHorizontal } from "lucide-react";
 import React from "react";
 import { mergeProps, tw } from "../../lib/utils";
+import { Button, type ButtonProps } from "../button";
 
-export type BreadcrumbProps = BaseUI.useRender.ComponentProps<"nav">;
+const BreadcrumbContext = React.createContext<React.ReactNode>(null);
+
+export interface BreadcrumbProps extends BaseUI.useRender
+  .ComponentProps<"nav"> {
+  /**
+   * Placed between items.
+   * @default <ChevronRight />
+   */
+  separator?: React.ReactNode;
+  listProps?: React.ComponentProps<"ol">;
+}
 
 export function Breadcrumb(props: BreadcrumbProps) {
-  const { render, ...restProps } = props;
+  const {
+    render,
+    separator = <ChevronRight className="rtl:rotate-180" />,
+    listProps,
+    children,
+    ...restProps
+  } = props;
 
-  return BaseUI.useRender({
+  const element = BaseUI.useRender({
     defaultTagName: "nav",
     render,
-    props: { "aria-label": "Breadcrumb", ...restProps },
-  });
-}
-
-export type BreadcrumbListProps = BaseUI.useRender.ComponentProps<"ol">;
-
-export function BreadcrumbList(props: BreadcrumbListProps) {
-  const { render, ...restProps } = props;
-
-  return BaseUI.useRender({
-    defaultTagName: "ol",
-    render,
-    props: mergeProps(restProps, {
-      className: tw(
-        "body-sm text-muted-fg flex flex-wrap items-center gap-1.5 break-words",
+    props: {
+      "aria-label": "Breadcrumb",
+      ...restProps,
+      children: (
+        <ol
+          {...mergeProps(listProps ?? {}, {
+            className: tw(
+              "body-sm text-muted-fg flex flex-wrap items-center gap-1.5 wrap-break-word",
+            ),
+          })}
+        >
+          {children}
+        </ol>
       ),
-    }),
+    },
   });
+
+  return (
+    <BreadcrumbContext.Provider value={separator}>
+      {element}
+    </BreadcrumbContext.Provider>
+  );
 }
 
-export type BreadcrumbItemProps = BaseUI.useRender.ComponentProps<"li">;
+/** Wraps an item's content in a list item followed by the separator. */
+function ItemShell({ children }: { children: React.ReactNode }) {
+  const separator = React.useContext(BreadcrumbContext);
 
-export function BreadcrumbItem(props: BreadcrumbItemProps) {
-  const { render, ...restProps } = props;
+  return (
+    <li className="group/breadcrumb-item inline-flex items-center gap-1.5">
+      {children}
+      <span
+        aria-hidden
+        className="inline-flex items-center group-last/breadcrumb-item:hidden [&>svg]:size-3.5"
+      >
+        {separator}
+      </span>
+    </li>
+  );
+}
 
-  return BaseUI.useRender({
-    defaultTagName: "li",
-    render,
-    props: mergeProps(restProps, {
-      className: tw("inline-flex items-center gap-1.5"),
-    }),
-  });
+export interface BreadcrumbItemProps extends BaseUI.useRender
+  .ComponentProps<"a"> {
+  /**
+   * Whether the item is the current page, rendered as text rather than a
+   * link. Defaults to `true` when neither `href` nor `render` is given.
+   */
+  current?: boolean;
 }
 
 /**
- * A link to an ancestor page. Pass `render` to use a router's link component,
+ * A link to an ancestor page, or the current page when it has no `href`.
+ * Pass `render` to use a router's link component,
  * e.g. `render={<NextLink href="/docs" />}`.
  */
-export type BreadcrumbLinkProps = BaseUI.useRender.ComponentProps<"a">;
-
-export function BreadcrumbLink(props: BreadcrumbLinkProps) {
-  const { render, ...restProps } = props;
-
-  return BaseUI.useRender({
-    defaultTagName: "a",
+export function BreadcrumbItem(props: BreadcrumbItemProps) {
+  const {
     render,
-    props: mergeProps(restProps, {
-      className: tw(
-        "hover:text-foreground focus-visible:focus-outline rounded-sm transition-colors outline-none",
-      ),
-    }),
+    current = props.href === undefined && render === undefined,
+    ...restProps
+  } = props;
+
+  const element = BaseUI.useRender({
+    defaultTagName: current ? "span" : "a",
+    render,
+    props: current
+      ? {
+          "aria-current": "page",
+          ...mergeProps(restProps, {
+            className: tw("text-foreground font-medium"),
+          }),
+        }
+      : mergeProps(restProps, {
+          className: tw(
+            "hover:text-foreground focus-visible:focus-outline rounded-sm transition-colors focus-visible:outline-offset-1",
+          ),
+        }),
   });
+
+  return <ItemShell>{element}</ItemShell>;
 }
 
-/** The current page: the last item, rendered as text rather than a link. */
-export type BreadcrumbPageProps = BaseUI.useRender.ComponentProps<"span">;
-
-export function BreadcrumbPage(props: BreadcrumbPageProps) {
-  const { render, ...restProps } = props;
-
-  return BaseUI.useRender({
-    defaultTagName: "span",
-    render,
-    props: {
-      "aria-current": "page",
-      ...mergeProps(restProps, {
-        className: tw("text-foreground font-medium"),
-      }),
-    },
-  });
-}
-
-/** Placed between items. Defaults to a chevron; pass `children` to replace it. */
-export type BreadcrumbSeparatorProps = BaseUI.useRender.ComponentProps<"li">;
-
-export function BreadcrumbSeparator(props: BreadcrumbSeparatorProps) {
-  const { render, children, ...restProps } = props;
-
-  return BaseUI.useRender({
-    defaultTagName: "li",
-    render,
-    props: {
-      role: "presentation",
-      "aria-hidden": true,
-      ...mergeProps(restProps, {
-        className: tw("inline-flex items-center [&>svg]:size-3.5"),
-      }),
-      children: children ?? <ChevronRight className="rtl:rotate-180" />,
-    },
-  });
-}
-
-export interface BreadcrumbEllipsisProps extends BaseUI.useRender
-  .ComponentProps<"span"> {
+export interface BreadcrumbEllipsisProps extends ButtonProps {
   /**
    * The accessible name of the collapsed items.
    * @default "More"
@@ -112,30 +118,30 @@ export interface BreadcrumbEllipsisProps extends BaseUI.useRender
   label?: string;
 }
 
-/** Stands in for collapsed items, e.g. as the trigger of a `Menu`. */
+/**
+ * Stands in for collapsed items. Pass it as the `trigger` of a `Menu` to
+ * reveal them, e.g. `<Menu trigger={<Breadcrumb.Ellipsis />}>`.
+ */
 export function BreadcrumbEllipsis(props: BreadcrumbEllipsisProps) {
-  const { render, label = "More", children, ...restProps } = props;
+  const { label = "More", children, ...restProps } = props;
 
-  return BaseUI.useRender({
-    defaultTagName: "span",
-    render,
-    props: {
-      ...mergeProps(restProps, {
-        className: tw("inline-flex size-6 items-center justify-center"),
-      }),
-      children: children ?? (
-        <>
-          <MoreHorizontal aria-hidden className="size-4" />
-          <span className="sr-only">{label}</span>
-        </>
-      ),
-    },
-  });
+  return (
+    <ItemShell>
+      <Button
+        variant="ghost"
+        size="icon"
+        {...mergeProps(restProps, { className: tw("text-muted-fg h-5") })}
+      >
+        {children ?? (
+          <>
+            <MoreHorizontal aria-hidden className="size-4" />
+            <span className="sr-only">{label}</span>
+          </>
+        )}
+      </Button>
+    </ItemShell>
+  );
 }
 
-Breadcrumb.List = BreadcrumbList;
 Breadcrumb.Item = BreadcrumbItem;
-Breadcrumb.Link = BreadcrumbLink;
-Breadcrumb.Page = BreadcrumbPage;
-Breadcrumb.Separator = BreadcrumbSeparator;
 Breadcrumb.Ellipsis = BreadcrumbEllipsis;
