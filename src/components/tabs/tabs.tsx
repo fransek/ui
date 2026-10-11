@@ -26,7 +26,7 @@ export function TabsList(props: TabsListProps) {
     <BaseUI.Tabs.List
       {...mergeProps(restProps, {
         className: tw(
-          "relative z-1 -mb-px flex gap-1 data-[orientation=vertical]:mb-0 data-[orientation=vertical]:shrink-0 data-[orientation=vertical]:flex-col",
+          "relative z-1 -mb-px flex data-[orientation=horizontal]:gap-4 data-[orientation=vertical]:mb-0 data-[orientation=vertical]:shrink-0 data-[orientation=vertical]:flex-col",
         ),
       })}
     >
@@ -57,7 +57,7 @@ export function TabsTab(props: TabsTabProps) {
     <BaseUI.Tabs.Tab
       {...mergeProps(props, {
         className: tw(
-          "data-disabled:text-muted-fg text-body hover:text-primary-fg focus-visible:focus-outline data-active:text-primary-fg flex h-[calc(2rem+1px)] items-center justify-center rounded-sm bg-transparent px-2 py-0 leading-5 font-normal break-keep whitespace-nowrap transition-colors outline-none select-none data-[orientation=vertical]:justify-start",
+          "data-disabled:text-muted-fg text-body hover:text-primary-fg focus-visible:focus-outline data-active:text-primary-fg flex h-[calc(2rem+1px)] items-center justify-center gap-2 rounded-sm bg-transparent py-0 leading-5 font-normal break-keep whitespace-nowrap transition-colors outline-none select-none data-disabled:cursor-not-allowed data-[orientation=vertical]:justify-start data-[orientation=vertical]:px-3",
         ),
       })}
     />

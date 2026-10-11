@@ -59,11 +59,8 @@ export const WithDisabledTab: Story = {
 };
 
 export const CustomStyle: Story = {
-  parameters: {
-    layout: "centered",
-  },
   render: (args) => (
-    <Tabs {...args} className="card body-sm">
+    <Tabs {...args} className="card body-sm max-w-xl">
       <Tabs.List className="border-b">
         <Tabs.Tab value="overview">Overview</Tabs.Tab>
         <Tabs.Tab value="projects">Projects</Tabs.Tab>
