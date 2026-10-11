@@ -59,7 +59,7 @@ export function BreadcrumbLink(props: BreadcrumbLinkProps) {
     render,
     props: mergeProps(restProps, {
       className: tw(
-        "hover:text-foreground focus-visible:focus-outline rounded-sm underline-offset-2 transition-colors outline-none hover:underline",
+        "hover:text-foreground focus-visible:focus-outline rounded-sm transition-colors outline-none",
       ),
     }),
   });
