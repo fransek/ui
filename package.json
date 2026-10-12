@@ -132,6 +132,7 @@
     "recharts": "^3.10.1",
     "rollup": "^4.63.3",
     "rollup-plugin-postcss": "^4.0.2",
+    "shiki": "^4.5.0",
     "storybook": "^10.6.0",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3",
@@ -147,6 +148,7 @@
     "react-day-picker": "^9.0.0 || ^10.0.0",
     "react-dom": ">=19.0.0",
     "recharts": "^3.0.0",
+    "shiki": "^3.0.0 || ^4.0.0",
     "tailwind-merge": "^3.0.0",
     "tailwindcss": "^4.0.0"
   },
@@ -158,6 +160,9 @@
       "optional": true
     },
     "recharts": {
+      "optional": true
+    },
+    "shiki": {
       "optional": true
     }
   },
