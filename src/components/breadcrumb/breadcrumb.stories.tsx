@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Home, Slash } from "lucide-react";
 import React from "react";
 import { expect, screen, waitFor } from "storybook/test";
+import { Button } from "../button";
 import { Menu } from "../menu";
 import { Breadcrumb } from "./breadcrumb";
 
@@ -12,7 +13,7 @@ const meta = {
     <Breadcrumb {...args}>
       <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
       <Breadcrumb.Item href="#">Components</Breadcrumb.Item>
-      <Breadcrumb.Item>Breadcrumb</Breadcrumb.Item>
+      <Breadcrumb.Item current>Breadcrumb</Breadcrumb.Item>
     </Breadcrumb>
   ),
   tags: ["autodocs"],
@@ -48,28 +49,48 @@ export const CustomSeparator: Story = {
         <Home className="size-4" />
       </Breadcrumb.Item>
       <Breadcrumb.Item href="#">Settings</Breadcrumb.Item>
-      <Breadcrumb.Item>Profile</Breadcrumb.Item>
+      <Breadcrumb.Item current>Profile</Breadcrumb.Item>
     </Breadcrumb>
   ),
 };
 
 /**
- * Collapse middle items into a `Breadcrumb.Ellipsis`, and pass it as the
- * `trigger` of a `Menu` to reveal them.
+ * Collapse middle items behind a `Menu` whose trigger is a labelled `Button`
+ * wrapping `Breadcrumb.Ellipsis`.
  */
 export const Collapsed: Story = {
   render: (args) => (
     <Breadcrumb {...args}>
       <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-      <Menu trigger={<Breadcrumb.Ellipsis label="Show hidden pages" />}>
-        <Menu.LinkItem href="#">Documentation</Menu.LinkItem>
-        <Menu.LinkItem href="#">Components</Menu.LinkItem>
-      </Menu>
+      <Breadcrumb.Item>
+        <Menu
+          trigger={
+            <Button
+              size="icon"
+              variant="ghost"
+              aria-label="Show hidden pages"
+              className="p-0"
+            >
+              <Breadcrumb.Ellipsis />
+            </Button>
+          }
+        >
+          <Menu.LinkItem href="#">Documentation</Menu.LinkItem>
+          <Menu.LinkItem href="#">Components</Menu.LinkItem>
+        </Menu>
+      </Breadcrumb.Item>
       <Breadcrumb.Item href="#">Navigation</Breadcrumb.Item>
-      <Breadcrumb.Item>Breadcrumb</Breadcrumb.Item>
+      <Breadcrumb.Item current>Breadcrumb</Breadcrumb.Item>
     </Breadcrumb>
   ),
-  play: async ({ canvas, userEvent }) => {
+  play: async ({ canvas, canvasElement, userEvent }) => {
+    await expect(canvas.getByText("Breadcrumb")).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    await expect(
+      canvasElement.querySelectorAll('[aria-current="page"]'),
+    ).toHaveLength(1);
     await userEvent.click(
       canvas.getByRole("button", { name: "Show hidden pages" }),
     );
@@ -77,6 +98,53 @@ export const Collapsed: Story = {
       name: "Documentation",
     });
     await waitFor(() => expect(item).toBeVisible());
+  },
+};
+
+/**
+ * Without a `Menu`, `Breadcrumb.Ellipsis` is a decorative icon. Add visually
+ * hidden text so assistive technology knows pages were left out.
+ */
+export const CollapsedStatic: Story = {
+  render: (args) => (
+    <Breadcrumb {...args}>
+      <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+      <Breadcrumb.Item>
+        <Breadcrumb.Ellipsis />
+        <span className="sr-only">More pages</span>
+      </Breadcrumb.Item>
+      <Breadcrumb.Item current>Breadcrumb</Breadcrumb.Item>
+    </Breadcrumb>
+  ),
+  play: async ({ canvas, canvasElement }) => {
+    const items = canvas.getAllByRole("listitem");
+    await expect(items[1]).toHaveTextContent("More pages");
+    await expect(
+      canvasElement.querySelectorAll('[aria-current="page"]'),
+    ).toHaveLength(1);
+    await expect(canvas.getByText("Breadcrumb")).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+  },
+};
+
+/**
+ * An item can be both a link and the current page.
+ */
+export const CurrentLink: Story = {
+  render: (args) => (
+    <Breadcrumb {...args}>
+      <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+      <Breadcrumb.Item href="#" current>
+        Breadcrumb
+      </Breadcrumb.Item>
+    </Breadcrumb>
+  ),
+  play: async ({ canvas }) => {
+    await expect(
+      canvas.getByRole("link", { name: "Breadcrumb" }),
+    ).toHaveAttribute("aria-current", "page");
   },
 };
 
@@ -93,7 +161,7 @@ export const RouterLink: Story = {
     return (
       <Breadcrumb {...args}>
         <Breadcrumb.Item render={<RouterLink to="#" />}>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+        <Breadcrumb.Item current>Dashboard</Breadcrumb.Item>
       </Breadcrumb>
     );
   },

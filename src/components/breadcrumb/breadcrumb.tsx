@@ -1,8 +1,7 @@
 import * as BaseUI from "@base-ui/react/use-render";
-import { ChevronRight, MoreHorizontal } from "lucide-react";
+import { ChevronRight, MoreHorizontal, type LucideProps } from "lucide-react";
 import React from "react";
 import { mergeProps, tw } from "../../lib/utils";
-import { Button, type ButtonProps } from "../button";
 
 const BreadcrumbContext = React.createContext<React.ReactNode>(null);
 
@@ -72,74 +71,52 @@ function ItemShell({ children }: { children: React.ReactNode }) {
 export interface BreadcrumbItemProps extends BaseUI.useRender
   .ComponentProps<"a"> {
   /**
-   * Whether the item is the current page, rendered as text rather than a
-   * link. Defaults to `true` when neither `href` nor `render` is given.
+   * Whether the item is the current page (`aria-current="page"`).
+   * @default false
    */
   current?: boolean;
 }
 
 /**
- * A link to an ancestor page, or the current page when it has no `href`.
+ * A link to an ancestor page, or plain text when it has no `href`.
+ * Mark the last item `current`.
  * Pass `render` to use a router's link component,
  * e.g. `render={<NextLink href="/docs" />}`.
  */
 export function BreadcrumbItem(props: BreadcrumbItemProps) {
-  const {
-    render,
-    current = props.href === undefined && render === undefined,
-    ...restProps
-  } = props;
+  const isLink = props.href !== undefined || props.render !== undefined;
+  const { render, current = false, ...restProps } = props;
 
   const element = BaseUI.useRender({
-    defaultTagName: current ? "span" : "a",
+    defaultTagName: isLink ? "a" : "span",
     render,
-    props: current
-      ? {
-          "aria-current": "page",
-          ...mergeProps(restProps, {
-            className: tw("text-foreground font-medium"),
-          }),
-        }
-      : mergeProps(restProps, {
-          className: tw(
-            "hover:text-foreground focus-visible:focus-outline rounded-sm transition-colors focus-visible:outline-offset-1",
-          ),
-        }),
+    props: {
+      "aria-current": current ? "page" : undefined,
+      ...mergeProps(restProps, {
+        className: current
+          ? tw("text-foreground font-medium")
+          : isLink
+            ? tw(
+                "hover:text-foreground focus-visible:focus-outline rounded-sm transition-colors focus-visible:outline-offset-1",
+              )
+            : undefined,
+      }),
+    },
   });
 
   return <ItemShell>{element}</ItemShell>;
 }
 
-export interface BreadcrumbEllipsisProps extends ButtonProps {
-  /**
-   * The accessible name of the collapsed items.
-   * @default "More"
-   */
-  label?: string;
-}
+export type BreadcrumbEllipsisProps = LucideProps;
 
-/**
- * Stands in for collapsed items. Pass it as the `trigger` of a `Menu` to
- * reveal them, e.g. `<Menu trigger={<Breadcrumb.Ellipsis />}>`.
- */
+/** An icon marking collapsed items. Hidden from assistive technology. */
 export function BreadcrumbEllipsis(props: BreadcrumbEllipsisProps) {
-  const { label = "More", children, ...restProps } = props;
-
   return (
-    <ItemShell>
-      <Button
-        variant="ghost"
-        size="icon"
-        {...mergeProps(restProps, { className: tw("text-muted-fg h-5") })}
-      >
-        {children ?? (
-          <>
-            <MoreHorizontal aria-hidden className="size-4" />
-            <span className="sr-only">{label}</span>
-          </>
-        )}
-      </Button>
-    </ItemShell>
+    <MoreHorizontal
+      {...mergeProps(props, {
+        className: tw("text-muted-fg size-5"),
+      })}
+    />
   );
 }
 
