@@ -102,8 +102,9 @@ export const Collapsed: Story = {
 };
 
 /**
- * Without a `Menu`, `Breadcrumb.Ellipsis` is a decorative icon. Add visually
- * hidden text so assistive technology knows pages were left out.
+ * Without a `Menu`, `Breadcrumb.Ellipsis` is static. Its visually hidden
+ * `label` (default `"More pages"`) tells assistive technology that pages were
+ * left out.
  */
 export const CollapsedStatic: Story = {
   render: (args) => (
@@ -111,7 +112,6 @@ export const CollapsedStatic: Story = {
       <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
       <Breadcrumb.Item>
         <Breadcrumb.Ellipsis />
-        <span className="sr-only">More pages</span>
       </Breadcrumb.Item>
       <Breadcrumb.Item current>Breadcrumb</Breadcrumb.Item>
     </Breadcrumb>

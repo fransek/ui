@@ -107,16 +107,28 @@ export function BreadcrumbItem(props: BreadcrumbItemProps) {
   return <ItemShell>{element}</ItemShell>;
 }
 
-export type BreadcrumbEllipsisProps = LucideProps;
+export interface BreadcrumbEllipsisProps extends LucideProps {
+  /**
+   * Visually hidden text read by assistive technology. An `aria-label` on a
+   * wrapping `Button` takes precedence.
+   * @default "More pages"
+   */
+  label?: React.ReactNode;
+}
 
-/** An icon marking collapsed items. Hidden from assistive technology. */
+/** An icon marking collapsed items, with a visually hidden label. */
 export function BreadcrumbEllipsis(props: BreadcrumbEllipsisProps) {
+  const { label = "More pages", ...restProps } = props;
+
   return (
-    <MoreHorizontal
-      {...mergeProps(props, {
-        className: tw("text-muted-fg size-5"),
-      })}
-    />
+    <>
+      <MoreHorizontal
+        {...mergeProps(restProps, {
+          className: tw("text-muted-fg size-5"),
+        })}
+      />
+      <span className="sr-only">{label}</span>
+    </>
   );
 }
 
