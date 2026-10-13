@@ -14,8 +14,8 @@ const twMerge = extendTailwindMerge<"color-pair">({
     classGroups: {
       "color-pair": [
         "primary",
+        "primary-subtle",
         "secondary",
-        "tertiary",
         "muted",
         "success",
         "success-subtle",

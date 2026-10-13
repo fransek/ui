@@ -19,8 +19,8 @@ const meta = {
       control: "select",
       options: [
         "primary",
+        "primary-subtle",
         "secondary",
-        "tertiary",
         "muted",
         "danger",
         "danger-subtle",
@@ -110,8 +110,8 @@ export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
       <Avatar variant="primary" alt="Primary" />
+      <Avatar variant="primary-subtle" alt="Primary subtle" />
       <Avatar variant="secondary" alt="Secondary" />
-      <Avatar variant="tertiary" alt="Tertiary" />
       <Avatar variant="muted" alt="Muted" />
       <Avatar variant="danger" alt="Danger" />
       <Avatar variant="danger-subtle" alt="Danger Subtle" />

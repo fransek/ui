@@ -29,11 +29,11 @@ function SurfaceColors() {
         <div className="primary hover:bg-primary-hover rounded-lg p-2 transition-colors">
           primary
         </div>
+        <div className="primary-subtle hover:bg-primary-subtle-hover rounded-lg p-2 transition-colors">
+          primary-subtle
+        </div>
         <div className="secondary hover:bg-secondary-hover rounded-lg p-2 transition-colors">
           secondary
-        </div>
-        <div className="tertiary hover:bg-tertiary-hover rounded-lg p-2 transition-colors">
-          tertiary
         </div>
         <div className="muted hover:bg-muted-hover rounded-lg p-2 transition-colors">
           muted
@@ -77,8 +77,8 @@ function ForegroundColors() {
       </div>
       <div className="heading-xs grid grid-cols-2 gap-4 lg:grid-cols-4">
         <div className="text-primary-fg">primary-fg</div>
+        <div className="text-primary-subtle-fg">primary-subtle-fg</div>
         <div className="text-secondary-fg">secondary-fg</div>
-        <div className="text-tertiary-fg">tertiary-fg</div>
         <div className="text-muted-fg">muted-fg</div>
         <div className="text-success-fg">success-fg</div>
         <div className="text-success-subtle-fg">success-subtle-fg</div>

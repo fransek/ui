@@ -62,8 +62,8 @@ const pressStyles = tw(
 
 const variantStyles = {
   primary: tw("primary hover:bg-primary-hover"),
+  "primary-subtle": tw("primary-subtle hover:bg-primary-subtle-hover"),
   secondary: tw("secondary hover:bg-secondary-hover"),
-  tertiary: tw("tertiary hover:bg-tertiary-hover"),
   muted: tw("muted hover:bg-muted-hover"),
   danger: tw("danger hover:bg-danger-hover"),
   "danger-subtle": tw("danger-subtle hover:bg-danger-subtle-hover"),
