@@ -30,6 +30,7 @@ export function ToggleGroupItem<T extends string = string>(
   return (
     <Toggle
       size={size}
+      pressEffect={false}
       {...mergeProps(restProps, {
         className: cn(itemStyles, itemSizeStyles[size]),
       })}
@@ -38,7 +39,7 @@ export function ToggleGroupItem<T extends string = string>(
 }
 
 const itemStyles = cn(
-  "relative min-w-0 rounded-none group-data-[orientation=vertical]/toggle-group:w-full group-data-[orientation=vertical]/toggle-group:justify-start group-data-[orientation=horizontal]/toggle-group:first:rounded-l-full group-data-[orientation=vertical]/toggle-group:first:rounded-t-lg group-data-[orientation=horizontal]/toggle-group:last:rounded-r-full group-data-[orientation=vertical]/toggle-group:last:rounded-b-lg focus-visible:-outline-offset-2 not-data-disabled:not-aria-disabled:active:scale-none",
+  "relative min-w-0 rounded-none group-data-[orientation=vertical]/toggle-group:w-full group-data-[orientation=vertical]/toggle-group:justify-start group-data-[orientation=horizontal]/toggle-group:first:rounded-l-full group-data-[orientation=vertical]/toggle-group:first:rounded-t-lg group-data-[orientation=horizontal]/toggle-group:last:rounded-r-full group-data-[orientation=vertical]/toggle-group:last:rounded-b-lg focus-visible:-outline-offset-2",
   "after:absolute after:right-0 after:h-4 after:border-r after:opacity-20 group-data-[orientation=vertical]/toggle-group:after:inset-x-2 group-data-[orientation=vertical]/toggle-group:after:bottom-0 group-data-[orientation=vertical]/toggle-group:after:h-0 group-data-[orientation=vertical]/toggle-group:after:border-r-0 group-data-[orientation=vertical]/toggle-group:after:border-b last:after:hidden",
 );
 

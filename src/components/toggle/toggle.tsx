@@ -15,6 +15,8 @@ export interface ToggleProps<T extends string = string> extends Omit<
   variant?: ButtonVariant | ((state: BaseUI.Toggle.State) => ButtonVariant);
   size?: ButtonSize;
   compact?: boolean;
+  /** Scale the toggle down while it is pressed. Defaults to `true`. */
+  pressEffect?: boolean;
   /** Content of the toggle, or a function of its state to render different content when pressed. */
   children?:
     React.ReactNode | ((state: BaseUI.Toggle.State) => React.ReactNode);
@@ -25,6 +27,7 @@ export function Toggle<T extends string = string>(props: ToggleProps<T>) {
     variant,
     size = "md",
     compact,
+    pressEffect,
     children,
     render,
     ...restProps
@@ -62,6 +65,7 @@ export function Toggle<T extends string = string>(props: ToggleProps<T>) {
             variant: typeof variant === "function" ? variant(state) : variant,
             size,
             compact,
+            pressEffect,
           }),
       })}
     >
@@ -75,14 +79,17 @@ export const toggleStyles = ({
   variant,
   size = "md",
   compact,
+  pressEffect,
 }: {
   pressed: boolean;
   variant?: ButtonVariant;
   size?: ButtonSize;
   compact?: boolean;
+  pressEffect?: boolean;
 }) =>
   buttonStyles({
     variant: variant ?? (pressed ? "primary" : "secondary"),
     size,
     compact,
+    pressEffect,
   });
