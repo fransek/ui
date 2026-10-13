@@ -35,10 +35,14 @@ export const Basic: Story = {
     </CodeBlock>
   ),
   play: async ({ canvasElement }) => {
-    await waitFor(() =>
-      expect(canvasElement.querySelector("pre")).toHaveAttribute(
-        "data-highlighted",
-      ),
+    // The first highlight loads shiki's grammar and theme, which can take
+    // longer than waitFor's default 1s timeout on a cold start.
+    await waitFor(
+      () =>
+        expect(canvasElement.querySelector("pre")).toHaveAttribute(
+          "data-highlighted",
+        ),
+      { timeout: 5000 },
     );
     const pre = canvasElement.querySelector("pre")!;
     await expect(pre).toHaveTextContent('import { Button } from "@fransek/ui');
