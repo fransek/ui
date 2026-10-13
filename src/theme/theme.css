@@ -26,15 +26,15 @@
   --color-on-primary: var(--on-primary);
   --color-primary-fg: var(--primary-fg);
 
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-subtle-hover: var(--primary-subtle-hover);
+  --color-on-primary-subtle: var(--on-primary-subtle);
+  --color-primary-subtle-fg: var(--primary-subtle-fg);
+
   --color-secondary: var(--secondary);
   --color-secondary-hover: var(--secondary-hover);
   --color-on-secondary: var(--on-secondary);
   --color-secondary-fg: var(--secondary-fg);
-
-  --color-tertiary: var(--tertiary);
-  --color-tertiary-hover: var(--tertiary-hover);
-  --color-on-tertiary: var(--on-tertiary);
-  --color-tertiary-fg: var(--tertiary-fg);
 
   --color-muted: var(--muted);
   --color-muted-hover: var(--muted-hover);

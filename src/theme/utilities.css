@@ -2,13 +2,13 @@
   background-color: var(--color-primary);
   color: var(--color-on-primary);
 }
+@utility primary-subtle {
+  background-color: var(--color-primary-subtle);
+  color: var(--color-on-primary-subtle);
+}
 @utility secondary {
   background-color: var(--color-secondary);
   color: var(--color-on-secondary);
-}
-@utility tertiary {
-  background-color: var(--color-tertiary);
-  color: var(--color-on-tertiary);
 }
 @utility muted {
   background-color: var(--color-muted);

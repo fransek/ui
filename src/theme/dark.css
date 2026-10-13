@@ -19,15 +19,15 @@
   --on-primary: oklch(100% 0 0);
   --primary-fg: oklch(75% 0.15 280);
 
-  --secondary: oklch(50% 0.15 280 / 0.2);
-  --secondary-hover: oklch(50% 0.15 280 / 0.3);
-  --on-secondary: oklch(72% 0.15 280);
-  --secondary-fg: oklch(70% 0.08 280);
+  --primary-subtle: oklch(50% 0.15 280 / 0.2);
+  --primary-subtle-hover: oklch(50% 0.15 280 / 0.3);
+  --on-primary-subtle: oklch(72% 0.15 280);
+  --primary-subtle-fg: oklch(70% 0.08 280);
 
-  --tertiary: oklch(50% 0 0 / 0.2);
-  --tertiary-hover: oklch(50% 0 0 / 0.3);
-  --on-tertiary: oklch(90% 0 0);
-  --tertiary-fg: oklch(70% 0 0);
+  --secondary: oklch(50% 0 0 / 0.2);
+  --secondary-hover: oklch(50% 0 0 / 0.3);
+  --on-secondary: oklch(90% 0 0);
+  --secondary-fg: oklch(70% 0 0);
 
   --muted: oklch(39% 0 0);
   --muted-hover: oklch(44% 0 0);

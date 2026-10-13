@@ -182,7 +182,7 @@ export function TableRow(props: TableRowProps) {
       "data-selected": selected ? "" : undefined,
       ...mergeProps(restProps, {
         className: tw(
-          "border-b bg-(--table-row-bg) transition-colors in-[tbody]:hover:[--table-row-bg:var(--color-hover)] data-selected:[--table-row-bg:color-mix(in_oklab,var(--color-secondary)_50%,transparent)] data-selected:hover:[--table-row-bg:color-mix(in_oklab,var(--color-secondary-hover)_50%,transparent)]",
+          "border-b bg-(--table-row-bg) transition-colors in-[tbody]:hover:[--table-row-bg:var(--color-hover)] data-selected:[--table-row-bg:color-mix(in_oklab,var(--color-primary-subtle)_50%,transparent)] data-selected:hover:[--table-row-bg:color-mix(in_oklab,var(--color-primary-subtle-hover)_50%,transparent)]",
         ),
       }),
     },

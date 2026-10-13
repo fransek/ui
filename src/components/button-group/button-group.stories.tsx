@@ -23,8 +23,8 @@ export const SplitButton: Story = {
   },
   render: (args) => (
     <ButtonGroup {...args}>
-      <Button variant="tertiary">Save</Button>
-      <Button variant="tertiary" size="icon" aria-label="More save options">
+      <Button variant="secondary">Save</Button>
+      <Button variant="secondary" size="icon" aria-label="More save options">
         <ChevronDown className="size-5" />
       </Button>
     </ButtonGroup>
@@ -72,8 +72,8 @@ export const Sizes: Story = {
     <div className="flex flex-col items-start gap-4">
       {(["sm", "md", "lg"] as const).map((size) => (
         <ButtonGroup key={size} size={size} aria-label={`Size ${size}`}>
-          <Button variant="tertiary">Save</Button>
-          <Button variant="tertiary" size="icon" aria-label="More options">
+          <Button variant="secondary">Save</Button>
+          <Button variant="secondary" size="icon" aria-label="More options">
             <ChevronDown className="size-5" />
           </Button>
         </ButtonGroup>

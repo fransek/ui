@@ -10,7 +10,7 @@ export interface ToggleProps<T extends string = string> extends Omit<
 > {
   /**
    * Button variant, or a function of the toggle's state returning one.
-   * Defaults to `primary` when pressed and `tertiary` otherwise.
+   * Defaults to `primary` when pressed and `secondary` otherwise.
    */
   variant?: ButtonVariant | ((state: BaseUI.Toggle.State) => ButtonVariant);
   size?: ButtonSize;
@@ -82,7 +82,7 @@ export const toggleStyles = ({
   compact?: boolean;
 }) =>
   buttonStyles({
-    variant: variant ?? (pressed ? "primary" : "tertiary"),
+    variant: variant ?? (pressed ? "primary" : "secondary"),
     size,
     compact,
   });
