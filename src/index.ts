@@ -1,6 +1,7 @@
 export * from "./components/accordion";
 export * from "./components/autocomplete";
 export * from "./components/avatar";
+export * from "./components/breadcrumb";
 export * from "./components/button";
 export * from "./components/button-group";
 export * from "./components/calendar";
