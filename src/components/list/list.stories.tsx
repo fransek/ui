@@ -11,7 +11,7 @@ const meta = {
   title: "Components/List",
   component: List,
   parameters: {
-    layout: "centered",
+    layout: "padded",
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof List>;
@@ -29,7 +29,30 @@ const onAlanClick = fn();
 
 export const Basic: Story = {
   render: () => (
-    <List className="w-100">
+    <List className="max-w-100">
+      {people.map((person) => (
+        <List.Item key={person.email}>
+          <List.ItemContent>
+            <List.ItemTitle>{person.name}</List.ItemTitle>
+            <List.ItemDescription>{person.email}</List.ItemDescription>
+          </List.ItemContent>
+        </List.Item>
+      ))}
+    </List>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getAllByRole("listitem")).toHaveLength(3);
+    await expect(canvas.queryByRole("button")).toBeNull();
+    // Fills the available width, up to `max-w-100` (25rem).
+    await expect(canvas.getByRole("list").getBoundingClientRect().width).toBe(
+      400,
+    );
+  },
+};
+
+export const Mixed: Story = {
+  render: () => (
+    <List className="max-w-100">
       <List.Item>
         <List.ItemContent>
           <List.ItemTitle>Ada Lovelace</List.ItemTitle>
@@ -68,7 +91,7 @@ export const Basic: Story = {
 
 export const Interactive: Story = {
   render: () => (
-    <List className="w-100">
+    <List className="max-w-100">
       {people.map((person) => (
         <List.Item key={person.email}>
           <List.ItemButton>
@@ -104,7 +127,7 @@ export const Interactive: Story = {
 
 export const Links: Story = {
   render: () => (
-    <List className="w-100">
+    <List className="max-w-100">
       {people.map((person) => (
         <List.Item key={person.email}>
           <List.ItemLink href={`mailto:${person.email}`}>
@@ -127,7 +150,7 @@ export const Links: Story = {
 
 export const WithAvatar: Story = {
   render: () => (
-    <List className="w-100">
+    <List className="max-w-100">
       {people.map((person) => (
         <List.Item key={person.email} className="justify-start gap-3">
           <Avatar alt={person.name} />
@@ -146,7 +169,7 @@ export const WithAvatar: Story = {
 
 export const Ordered: Story = {
   render: () => (
-    <List render={<ol />} className="w-100">
+    <List render={<ol />} className="max-w-100">
       {people.map((person, index) => (
         <List.Item key={person.email} className="justify-start gap-3">
           <span className="text-body w-4 text-sm tabular-nums">
@@ -167,7 +190,7 @@ export const Ordered: Story = {
 
 export const InCard: Story = {
   render: () => (
-    <Card className="w-100">
+    <Card className="w-full max-w-100">
       <List>
         {people.map((person) => (
           <List.Item key={person.email}>

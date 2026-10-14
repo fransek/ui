@@ -12,7 +12,7 @@ export function List(props: ListProps) {
     defaultTagName: "ul",
     render,
     props: mergeProps(restProps, {
-      className: tw("divide-border flex flex-col divide-y"),
+      className: tw("divide-border flex w-full flex-col divide-y"),
     }),
   });
 }
