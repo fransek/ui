@@ -73,7 +73,13 @@ export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-col items-start gap-4">
       {(["sm", "md", "lg"] as const).map((size) => (
-        <Pagination key={size} {...args} size={size} defaultPage={5} />
+        <Pagination
+          key={size}
+          {...args}
+          aria-label={`Pagination (${size})`}
+          size={size}
+          defaultPage={5}
+        />
       ))}
     </div>
   ),

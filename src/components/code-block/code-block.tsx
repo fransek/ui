@@ -179,9 +179,12 @@ export function CodeBlockContent(props: CodeBlockContentProps) {
     <pre
       data-language={language}
       data-highlighted={tokens ? "" : undefined}
+      // Long lines scroll horizontally, so keyboard users must be able to
+      // focus the block to scroll it.
+      tabIndex={0}
       {...mergeProps(restProps, {
         className: tw(
-          "text-foreground overflow-x-auto py-3 font-mono text-sm leading-6",
+          "text-foreground focus-visible:focus-outline overflow-x-auto py-3 font-mono text-sm leading-6 focus-visible:-outline-offset-2",
         ),
       })}
     >

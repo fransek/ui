@@ -36,6 +36,7 @@ export const Basic: Story = {};
 export const WithoutLabel: Story = {
   args: {
     label: undefined,
+    "aria-label": "Storage used",
   },
 };
 

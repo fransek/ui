@@ -22,7 +22,10 @@ const preview: Preview = {
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
-      test: "todo",
+      test: "error",
+      // Base UI's focus guards are aria-hidden on purpose but stay tabbable so
+      // they can catch focus and redirect it, which axe flags.
+      context: { exclude: ["[data-base-ui-focus-guard]"] },
     },
   },
   decorators: [
