@@ -10,16 +10,16 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  render: (args) => (
-    <Collapsible {...args}>
-      <Collapsible.Trigger>Recovery keys</Collapsible.Trigger>
-      <Collapsible.Panel>
+  args: {
+    trigger: "Recovery keys",
+    children: (
+      <>
         <div>alien-bean-pasta</div>
         <div>wild-irish-burrito</div>
         <div>horse-battery-staple</div>
-      </Collapsible.Panel>
-    </Collapsible>
-  ),
+      </>
+    ),
+  },
 } satisfies Meta<typeof Collapsible>;
 
 export default meta;
