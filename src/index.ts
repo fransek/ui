@@ -21,6 +21,7 @@ export * from "./components/field";
 export * from "./components/fieldset";
 export * from "./components/info-popover";
 export * from "./components/input";
+export * from "./components/list";
 export * from "./components/menu";
 export * from "./components/menubar";
 export * from "./components/meter";
