@@ -30,7 +30,7 @@ export function ListItem(props: ListItemProps) {
     render,
     props: mergeProps(restProps, {
       className: tw(
-        "flex items-center justify-between gap-2 px-4 py-2 has-[>[data-list-item-action]]:p-0",
+        "flex items-center justify-between gap-4 px-4 py-2 has-[>[data-list-item-action]]:p-0",
       ),
     }),
   });
@@ -38,7 +38,7 @@ export function ListItem(props: ListItemProps) {
 
 // Shared by `ListItemButton` and `ListItemLink`: the action fills its row.
 export const listItemActionStyles = tw(
-  "hover:bg-hover active:bg-active focus-visible:focus-outline flex w-full cursor-pointer items-center justify-between gap-2 px-4 py-2 text-left transition-colors focus-visible:-outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60 data-disabled:hover:bg-transparent data-disabled:active:bg-transparent",
+  "hover:bg-hover active:bg-active focus-visible:focus-outline flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-2 text-left transition-colors focus-visible:-outline-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-60 data-disabled:hover:bg-transparent data-disabled:active:bg-transparent",
 );
 
 export type ListItemButtonProps = BaseUIButton.ButtonProps;
@@ -89,9 +89,7 @@ export function ListItemTitle(props: ListItemTitleProps) {
   return BaseUI.useRender({
     defaultTagName: "div",
     render,
-    props: mergeProps(restProps, {
-      className: tw("heading-xs text-foreground"),
-    }),
+    props: restProps,
   });
 }
 
@@ -103,7 +101,7 @@ export function ListItemDescription(props: ListItemDescriptionProps) {
   return BaseUI.useRender({
     defaultTagName: "div",
     render,
-    props: mergeProps(restProps, { className: tw("body-sm text-body") }),
+    props: mergeProps(restProps, { className: tw("body-sm text-muted-fg") }),
   });
 }
 

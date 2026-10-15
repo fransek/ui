@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import React from "react";
 import { expect, fn } from "storybook/test";
-import { cn } from "../../lib/utils";
 import { Avatar } from "../avatar";
 import { Button } from "../button";
 import { Card } from "../card";
@@ -37,7 +36,7 @@ const people = [
 
 export const Basic: Story = {
   render: () => (
-    <List className="max-w-100">
+    <List className="max-w-150">
       {people.map((person) => (
         <List.Item key={person.email}>
           <List.ItemContent>
@@ -51,16 +50,21 @@ export const Basic: Story = {
   play: async ({ canvas }) => {
     await expect(canvas.getAllByRole("listitem")).toHaveLength(3);
     await expect(canvas.queryByRole("button")).toBeNull();
-    // Fills the available width, up to `max-w-100` (25rem).
-    await expect(canvas.getByRole("list").getBoundingClientRect().width).toBe(
-      400,
+    // Fills the available width, up to `max-w-150` (37.5rem).
+    const list = canvas.getByRole("list");
+    const parent = list.parentElement!;
+    const { paddingLeft, paddingRight } = getComputedStyle(parent);
+    const available =
+      parent.clientWidth - parseFloat(paddingLeft) - parseFloat(paddingRight);
+    await expect(list.getBoundingClientRect().width).toBe(
+      Math.min(available, 600),
     );
   },
 };
 
 export const Interactive: Story = {
   render: () => (
-    <List className="max-w-100">
+    <List className="max-w-150">
       {people.map((person) => (
         <List.Item key={person.email}>
           <List.ItemButton>
@@ -96,7 +100,7 @@ export const Interactive: Story = {
 
 export const Links: Story = {
   render: () => (
-    <List className="max-w-100">
+    <List className="max-w-150">
       {people.map((person) => (
         <List.Item key={person.email}>
           <List.ItemLink href={`mailto:${person.email}`}>
@@ -119,7 +123,7 @@ export const Links: Story = {
 
 export const WithAvatar: Story = {
   render: () => (
-    <List className="max-w-100">
+    <List className="max-w-150">
       {people.map((person) => (
         <List.Item key={person.email} className="justify-start gap-3">
           <Avatar alt={person.name} />
@@ -138,7 +142,7 @@ export const WithAvatar: Story = {
 
 export const Ordered: Story = {
   render: () => (
-    <List render={<ol />} className="max-w-100">
+    <List render={<ol />} className="max-w-150">
       {people.map((person, index) => (
         <List.Item key={person.email} className="justify-start gap-3">
           <span className="text-body w-4 text-sm tabular-nums">
@@ -159,36 +163,15 @@ export const Ordered: Story = {
 
 const onAccountClick = fn();
 
-function SettingsIcon({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <span
-      className={cn(
-        "muted flex size-9 shrink-0 items-center justify-center rounded-lg",
-        className,
-      )}
-    >
-      {children}
-    </span>
-  );
-}
-
 export const SettingsMenu: Story = {
   render: () => {
     const notificationsTitleId = React.useId();
     return (
-      <Card className="max-w-100">
+      <Card className="max-w-150">
         <List>
           <List.Item>
             <List.ItemButton onClick={onAccountClick}>
-              <SettingsIcon>
-                <User className="size-5" />
-              </SettingsIcon>
+              <User className="text-secondary-fg size-5" />
               <List.ItemContent>
                 <List.ItemTitle>Account</List.ItemTitle>
                 <List.ItemDescription>
@@ -199,9 +182,7 @@ export const SettingsMenu: Story = {
             </List.ItemButton>
           </List.Item>
           <List.Item>
-            <SettingsIcon>
-              <Bell className="size-5" />
-            </SettingsIcon>
+            <Bell className="text-secondary-fg size-5" />
             <List.ItemContent>
               <List.ItemTitle id={notificationsTitleId}>
                 Notifications
@@ -214,9 +195,7 @@ export const SettingsMenu: Story = {
           </List.Item>
           <List.Item>
             <List.ItemButton>
-              <SettingsIcon>
-                <Palette className="size-5" />
-              </SettingsIcon>
+              <Palette className="text-secondary-fg size-5" />
               <List.ItemContent>
                 <List.ItemTitle>Appearance</List.ItemTitle>
               </List.ItemContent>
@@ -226,9 +205,7 @@ export const SettingsMenu: Story = {
           </List.Item>
           <List.Item>
             <List.ItemButton>
-              <SettingsIcon>
-                <Globe className="size-5" />
-              </SettingsIcon>
+              <Globe className="text-secondary-fg size-5" />
               <List.ItemContent>
                 <List.ItemTitle>Language</List.ItemTitle>
               </List.ItemContent>
@@ -238,9 +215,7 @@ export const SettingsMenu: Story = {
           </List.Item>
           <List.Item>
             <List.ItemButton>
-              <SettingsIcon className="danger-subtle">
-                <LogOut className="size-5" />
-              </SettingsIcon>
+              <LogOut className="text-danger-fg size-5" />
               <List.ItemContent>
                 <List.ItemTitle className="text-danger-fg">
                   Sign out
