@@ -33,9 +33,15 @@ function RefProbe({ merge }: { merge: "refs" | "props" | "none" }) {
 
   return (
     <div className="flex flex-col items-start gap-2">
-      {merge === "refs" && <input ref={mergedRef} readOnly />}
-      {merge === "props" && <input {...mergedProps} readOnly />}
-      {merge === "none" && <input {...spreadProps} readOnly />}
+      {merge === "refs" && (
+        <input ref={mergedRef} aria-label="Merged" readOnly />
+      )}
+      {merge === "props" && (
+        <input {...mergedProps} aria-label="Merged" readOnly />
+      )}
+      {merge === "none" && (
+        <input {...spreadProps} aria-label="Merged" readOnly />
+      )}
       <output data-testid="attachments">{attachments.current}</output>
       <output data-testid="object-ref">
         {objectRef.current ? "attached" : "detached"}

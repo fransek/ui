@@ -94,6 +94,11 @@ const meta = {
     </NavigationMenu>
   ),
   component: NavigationMenu,
+  args: {
+    // The popup is a `<nav>` too, so the root needs a name to tell the two
+    // landmarks apart.
+    "aria-label": "Main",
+  },
   parameters: {
     layout: "centered",
   },

@@ -21,6 +21,16 @@ const meta = {
   parameters: {
     layout: "centered",
     width: 400,
+    a11y: {
+      config: {
+        rules: [
+          // While the popup is open, Base UI hides everything outside the
+          // input and the popup from screen readers, including the label's
+          // info button, which stays tabbable.
+          { id: "aria-hidden-focus", enabled: false },
+        ],
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
