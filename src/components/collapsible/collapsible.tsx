@@ -5,11 +5,13 @@ import { mergeProps, tw } from "../../lib/utils";
 
 export interface CollapsibleProps extends BaseUI.CollapsibleRootProps {
   /** Content rendered inside the trigger button, before the chevron. */
-  trigger: React.ReactNode;
+  summary?: React.ReactNode;
+  /** Custom trigger */
+  trigger?: BaseUI.CollapsibleTriggerProps["render"];
   /** Props forwarded to the chevron icon. */
   iconProps?: React.ComponentPropsWithoutRef<"svg">;
   /** Props forwarded to the `Trigger`. */
-  triggerProps?: Omit<BaseUI.CollapsibleTriggerProps, "children">;
+  triggerProps?: Omit<BaseUI.CollapsibleTriggerProps, "children" | "render">;
   /** Props forwarded to the `Panel`. */
   panelProps?: Omit<BaseUI.CollapsiblePanelProps, "children">;
   /** Props forwarded to the padded element wrapping the panel's content. */
@@ -19,11 +21,12 @@ export interface CollapsibleProps extends BaseUI.CollapsibleRootProps {
 export function Collapsible(props: CollapsibleProps) {
   const {
     children,
-    trigger,
+    summary,
     iconProps,
     triggerProps,
     panelProps,
     contentProps,
+    trigger,
     ...restProps
   } = props;
 
@@ -33,22 +36,26 @@ export function Collapsible(props: CollapsibleProps) {
         className: tw("flex min-w-48 flex-col justify-center"),
       })}
     >
-      <BaseUI.Collapsible.Trigger
-        {...mergeProps(triggerProps, {
-          className: tw(
-            "group hover:not-data-disabled:bg-hover focus-visible:focus-outline active:not-data-disabled:bg-active disabled:text-muted-fg data-disabled:text-muted-fg flex h-8 items-center justify-between gap-2 rounded-lg pr-2 pl-3 text-sm leading-none font-normal whitespace-nowrap select-none focus-visible:outline-2 focus-visible:-outline-offset-1",
-          ),
-        })}
-      >
-        {trigger}
-        <ChevronRight
-          {...mergeProps(iconProps, {
+      {trigger ? (
+        <BaseUI.Collapsible.Trigger render={trigger} {...triggerProps} />
+      ) : summary ? (
+        <BaseUI.Collapsible.Trigger
+          {...mergeProps(triggerProps, {
             className: tw(
-              "size-4 shrink-0 transition-transform group-data-panel-open:rotate-90",
+              "group hover:not-data-disabled:bg-hover focus-visible:focus-outline active:not-data-disabled:bg-active disabled:text-muted-fg data-disabled:text-muted-fg flex h-8 items-center justify-between gap-2 rounded-lg pr-2 pl-3 text-sm leading-none font-normal whitespace-nowrap select-none focus-visible:outline-2 focus-visible:-outline-offset-1",
             ),
           })}
-        />
-      </BaseUI.Collapsible.Trigger>
+        >
+          {summary}
+          <ChevronRight
+            {...mergeProps(iconProps, {
+              className: tw(
+                "size-4 shrink-0 transition-transform group-data-panel-open:rotate-90",
+              ),
+            })}
+          />
+        </BaseUI.Collapsible.Trigger>
+      ) : null}
       <BaseUI.Collapsible.Panel
         {...mergeProps(panelProps, {
           className: tw(

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Eye, EyeOff } from "lucide-react";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
+import { Toggle } from "../toggle";
 import { Collapsible } from "./collapsible";
 
 const meta = {
@@ -11,7 +13,7 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    trigger: "Recovery keys",
+    summary: "Recovery keys",
     children: (
       <>
         <div>alien-bean-pasta</div>
@@ -59,5 +61,39 @@ export const Disabled: Story = {
     const trigger = canvas.getByRole("button", { name: "Recovery keys" });
     await userEvent.click(trigger);
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  },
+};
+
+export const CustomTrigger: Story = {
+  render: () => (
+    <Collapsible
+      trigger={
+        <Toggle variant="secondary">
+          {(state) => (
+            <>
+              {state.pressed ? (
+                <EyeOff className="size-5" />
+              ) : (
+                <Eye className="size-5" />
+              )}
+              Recovery keys
+            </>
+          )}
+        </Toggle>
+      }
+    >
+      <div>alien-bean-pasta</div>
+      <div>wild-irish-burrito</div>
+      <div>horse-battery-staple</div>
+    </Collapsible>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "Recovery keys" });
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect(trigger).toHaveAttribute("aria-pressed", "true");
+    await expect(canvas.getByText("alien-bean-pasta")).toBeVisible();
   },
 };
