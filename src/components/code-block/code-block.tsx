@@ -180,8 +180,10 @@ export function CodeBlockContent(props: CodeBlockContentProps) {
       data-language={language}
       data-highlighted={tokens ? "" : undefined}
       {...mergeProps(restProps, {
+        // Rounded to the container's inner edge, so the focus outline of the
+        // scrollable `pre` follows its corners. A header squares the top.
         className: tw(
-          "text-foreground overflow-x-auto py-3 font-mono text-sm leading-6",
+          "text-foreground overflow-x-auto rounded-b-[calc(var(--radius-lg)-1px)] py-3 font-mono text-sm leading-6 first:rounded-t-[calc(var(--radius-lg)-1px)]",
         ),
       })}
     >
