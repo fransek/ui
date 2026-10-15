@@ -85,6 +85,8 @@
 
   --animate-validating: validating 1.5s ease-in-out infinite;
   --animate-validating-message: validating-message 1.5s linear infinite;
+  --animate-progress-indeterminate: progress-indeterminate 1.5s ease-in-out
+    infinite;
 
   --shimmer-gradient: linear-gradient(
     105deg,
@@ -105,6 +107,15 @@
       border-color: color-mix(in oklab, var(--foreground) 40%, var(--primary));
       box-shadow: 0 0 4px 4px
         color-mix(in oklab, var(--primary) 15%, transparent);
+    }
+  }
+
+  @keyframes progress-indeterminate {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(300%);
     }
   }
 
