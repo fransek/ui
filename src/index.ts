@@ -12,6 +12,7 @@ export * from "./components/checkbox-group";
 export * from "./components/chip";
 export * from "./components/close-button";
 export * from "./components/code-block";
+export * from "./components/collapsible";
 export * from "./components/combobox";
 export * from "./components/context-menu";
 export * from "./components/date-picker";
