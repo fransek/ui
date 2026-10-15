@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Eye, EyeOff } from "lucide-react";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
-import { Toggle } from "../toggle";
+import { Button } from "../button";
 import { Collapsible } from "./collapsible";
 
 const meta = {
@@ -67,20 +67,16 @@ export const Disabled: Story = {
 export const CustomTrigger: Story = {
   render: () => (
     <Collapsible
-      trigger={
-        <Toggle variant="secondary">
-          {(state) => (
-            <>
-              {state.pressed ? (
-                <EyeOff className="size-5" />
-              ) : (
-                <Eye className="size-5" />
-              )}
-              Recovery keys
-            </>
+      trigger={(props, state) => (
+        <Button variant="secondary" {...props}>
+          {state.open ? (
+            <EyeOff className="size-5" />
+          ) : (
+            <Eye className="size-5" />
           )}
-        </Toggle>
-      }
+          Recovery keys
+        </Button>
+      )}
     >
       <div>alien-bean-pasta</div>
       <div>wild-irish-burrito</div>
@@ -93,7 +89,6 @@ export const CustomTrigger: Story = {
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
     await userEvent.click(trigger);
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
-    await expect(trigger).toHaveAttribute("aria-pressed", "true");
     await expect(canvas.getByText("alien-bean-pasta")).toBeVisible();
   },
 };
