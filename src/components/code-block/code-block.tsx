@@ -184,7 +184,7 @@ export function CodeBlockContent(props: CodeBlockContentProps) {
       tabIndex={0}
       {...mergeProps(restProps, {
         className: tw(
-          "text-foreground focus-visible:focus-outline overflow-x-auto py-3 font-mono text-sm leading-6 focus-visible:-outline-offset-2",
+          "text-foreground focus-visible:focus-outline overflow-x-auto rounded-b-lg py-3 font-mono text-sm leading-6 first:rounded-t-lg focus-visible:-outline-offset-2",
         ),
       })}
     >
