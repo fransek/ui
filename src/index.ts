@@ -36,6 +36,7 @@ export * from "./components/radio-group";
 export * from "./components/scroll-area";
 export * from "./components/select";
 export * from "./components/separator";
+export * from "./components/skeleton";
 export * from "./components/slider";
 export * from "./components/spinner";
 export * from "./components/switch";
