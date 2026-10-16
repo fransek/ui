@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.22.0](https://github.com/fransek/ui/compare/v0.21.0...v0.22.0) (2026-10-16)
+
+
+### Features
+
+* **collapsible:** add Collapsible component ([#174](https://github.com/fransek/ui/issues/174)) ([1273ffd](https://github.com/fransek/ui/commit/1273ffdf8d9b178474e8ae9aad60ce9535f339be))
+* **kbd:** add Kbd component ([#189](https://github.com/fransek/ui/issues/189)) ([cc114d6](https://github.com/fransek/ui/commit/cc114d65ec5db8b6fc480023cd4c6841bddd8a8f))
+* **list:** add List component suite ([#175](https://github.com/fransek/ui/issues/175)) ([1790306](https://github.com/fransek/ui/commit/1790306d20711e2ee32bcd629ed8c063a5242586))
+* **progress:** add Progress component ([#188](https://github.com/fransek/ui/issues/188)) ([dee9207](https://github.com/fransek/ui/commit/dee9207588d7ef659d722feb322a771ee0d350f6))
+* **separator:** add Separator component ([#191](https://github.com/fransek/ui/issues/191)) ([3b12a49](https://github.com/fransek/ui/commit/3b12a49b643884797f10d2bd327f486805ac630c))
+* **skeleton:** add Skeleton component ([#190](https://github.com/fransek/ui/issues/190)) ([56daa5f](https://github.com/fransek/ui/commit/56daa5f945e2c1941c35006c2b956765e1757b73))
+* **theme:** rename secondary token to primary-subtle and tertiary to secondary ([#171](https://github.com/fransek/ui/issues/171)) ([a86cf34](https://github.com/fransek/ui/commit/a86cf343364a4ca8698db38d98991629db97ae2d))
+
+
+### Bug Fixes
+
+* **toggle-group:** remove button press effect from toggle group items ([#173](https://github.com/fransek/ui/issues/173)) ([53899f2](https://github.com/fransek/ui/commit/53899f224ed9d5e5c6a338622404ad9f3fb7af63))
+
 ## [0.21.0](https://github.com/fransek/ui/compare/v0.20.0...v0.21.0) (2026-10-13)
 
 
