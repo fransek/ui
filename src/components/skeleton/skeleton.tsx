@@ -78,7 +78,7 @@ const shapeStyles = {
   rectangle: tw("rounded-md"),
   circle: tw("aspect-square rounded-full"),
   // One line box tall in total, like the text it stands in for.
-  text: tw("my-[calc((1lh_-_1em)/2)] h-[1em] w-full rounded-sm"),
+  text: tw("my-[calc((1lh-1em)/2)] h-[1em] w-full rounded-sm"),
 };
 
 export const skeletonStyles = ({
