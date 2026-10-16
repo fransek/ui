@@ -55,9 +55,16 @@
       @apply not-last:mb-6;
     }
     code,
-    samp,
-    kbd {
+    samp {
       @apply secondary body-sm rounded-md px-1.5 font-mono font-semibold;
+    }
+    /* Matches the Kbd component's default style (kbdStyles). */
+    kbd {
+      @apply secondary inline-flex h-5 min-w-5 items-center justify-center rounded px-1.5 font-sans text-xs font-medium whitespace-nowrap;
+      /* An outer kbd marks up a key combination, like KbdGroup. */
+      &:has(kbd) {
+        @apply h-auto min-w-0 gap-1 bg-transparent px-0 text-inherit;
+      }
     }
     pre {
       @apply secondary overflow-x-auto rounded-lg p-4 font-mono not-last:mb-6;
