@@ -112,13 +112,13 @@ function WrappingChildrenDemo() {
       <Switch label="Loading" checked={loading} onCheckedChange={setLoading} />
       <div aria-busy={loading} className="flex items-center gap-3">
         <Skeleton loading={loading} shape="circle">
-          <Avatar alt="Frans Ekman" />
+          <Avatar alt="Ada Lovelace" />
         </Skeleton>
         <Skeleton loading={loading}>
-          <span className="body">Frans Ekman</span>
+          <span className="body">Ada Lovelace</span>
         </Skeleton>
         <Skeleton loading={loading}>
-          <Button>Follow</Button>
+          <Button size="sm">Follow</Button>
         </Skeleton>
       </div>
     </div>
