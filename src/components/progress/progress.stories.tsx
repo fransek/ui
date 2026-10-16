@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect } from "storybook/test";
+import { tw } from "../../lib/utils";
 import { Button } from "../button";
 import { Progress } from "./progress";
 
@@ -25,6 +26,7 @@ const meta = {
     value: { control: "number" },
   },
   args: {
+    className: tw("w-56"),
     label: "Uploading files",
     value: 40,
   },
