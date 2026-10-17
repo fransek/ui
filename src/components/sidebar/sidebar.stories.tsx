@@ -361,8 +361,20 @@ export const Mobile: Story = {
       within(drawer).getByRole("link", { name: "Home" }),
     ).toBeVisible();
 
+    // The close button closes the drawer.
+    await userEvent.click(
+      within(drawer).getByRole("button", { name: "Close" }),
+    );
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog", { name: "Sidebar" })).toBeNull(),
+    );
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Toggle sidebar" }),
+    );
+    const reopened = await screen.findByRole("dialog", { name: "Sidebar" });
+
     // Following a link closes the drawer.
-    await userEvent.click(within(drawer).getByRole("link", { name: "Team" }));
+    await userEvent.click(within(reopened).getByRole("link", { name: "Team" }));
     await waitFor(() =>
       expect(screen.queryByRole("dialog", { name: "Sidebar" })).toBeNull(),
     );

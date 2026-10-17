@@ -209,6 +209,11 @@ export function Sidebar(props: SidebarProps) {
           "aria-label": ariaLabel,
           className: tw("bg-card p-0"),
         })}
+        // The close button comes before the content in the DOM, so a
+        // full-width header item would cover it without a stacking order.
+        closeButtonProps={mergeProps(drawerProps?.closeButtonProps, {
+          className: tw("z-10"),
+        })}
         contentProps={mergeProps(drawerProps?.contentProps, {
           className: tw("h-full gap-0"),
         })}
