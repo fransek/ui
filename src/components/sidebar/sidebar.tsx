@@ -5,7 +5,7 @@ import { Breakpoint, cn, mergeProps, tw, useMediaQuery } from "../../lib/utils";
 import { Button, ButtonProps } from "../button";
 import { Drawer, DrawerProps } from "../drawer";
 import { Separator, SeparatorProps } from "../separator";
-import { Tooltip, TooltipProps } from "../tooltip";
+import { Tooltip, TooltipProps, TooltipProvider } from "../tooltip";
 
 export type SidebarSide = "left" | "right";
 export type SidebarCollapsible = "offcanvas" | "icon" | "none";
@@ -256,12 +256,16 @@ export function Sidebar(props: SidebarProps) {
         <div
           {...mergeProps(innerProps, {
             className: cn(
-              "flex h-full w-(--sidebar-width) flex-col group-data-[collapsed=icon]/sidebar:w-12",
+              // Animates in step with the aside, so the content isn't clipped
+              // to the rail before the aside has finished shrinking.
+              "flex h-full w-(--sidebar-width) flex-col transition-[width] duration-200 ease-out group-data-[collapsed=icon]/sidebar:w-12 motion-reduce:transition-none",
               side === "right" && "ml-auto",
             ),
           })}
         >
-          {children}
+          {/* One provider for the rail's tooltips: once one is open, moving to
+              the next item shows its tooltip without the opening delay. */}
+          <TooltipProvider>{children}</TooltipProvider>
         </div>
       </aside>
     </SidebarCollapsedContext.Provider>
