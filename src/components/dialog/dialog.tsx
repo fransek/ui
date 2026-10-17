@@ -59,16 +59,12 @@ export function Dialog(props: DialogProps) {
           <BaseUI.Dialog.Portal {...portalProps}>
             <BaseUI.Dialog.Backdrop
               {...mergeProps(backdropProps, {
-                className: tw(
-                  "fixed inset-0 min-h-dvh bg-black opacity-20 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
-                ),
+                className: dialogBackdropStyles,
               })}
             />
             <BaseUI.Dialog.Popup
               {...mergeProps(popupProps, {
-                className: tw(
-                  "bg-background text-foreground fixed top-1/2 left-1/2 -mt-8 w-96 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border p-4 transition-all duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
-                ),
+                className: dialogPopupStyles,
               })}
             >
               <DialogClose
@@ -115,3 +111,13 @@ export function DialogClose(props: BaseUI.DialogCloseProps) {
 Dialog.Title = DialogTitle;
 Dialog.Description = DialogDescription;
 Dialog.Close = DialogClose;
+
+/** Backdrop classes shared by `Dialog` and `AlertDialog`. */
+export const dialogBackdropStyles = tw(
+  "fixed inset-0 min-h-dvh bg-black opacity-20 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
+);
+
+/** Popup classes shared by `Dialog` and `AlertDialog`. */
+export const dialogPopupStyles = tw(
+  "bg-background text-foreground fixed top-1/2 left-1/2 -mt-8 w-96 max-w-[calc(100vw-3rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border p-4 transition-all duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+);
