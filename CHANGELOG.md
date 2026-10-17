@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.23.0](https://github.com/fransek/ui/compare/v0.22.0...v0.23.0) (2026-10-17)
+
+
+### Features
+
+* **alert-dialog:** add AlertDialog component ([#194](https://github.com/fransek/ui/issues/194)) ([7216f8f](https://github.com/fransek/ui/commit/7216f8f50270ab5fe06d01a2361a72b03dd15db8))
+* **alert:** add Alert component ([#192](https://github.com/fransek/ui/issues/192)) ([405c414](https://github.com/fransek/ui/commit/405c41417d62c8dbd9ec545d4226d3e3cb6625bf))
+* **empty-state:** add EmptyState component ([#195](https://github.com/fransek/ui/issues/195)) ([c5ab8db](https://github.com/fransek/ui/commit/c5ab8db85b98042b48969782e7093625841f929f))
+* **otp-field:** add OTPField component ([#196](https://github.com/fransek/ui/issues/196)) ([36dab83](https://github.com/fransek/ui/commit/36dab83b97297e13bc07ecb9b54a00db340250de))
+* **sidebar:** add Sidebar component ([#197](https://github.com/fransek/ui/issues/197)) ([3a29dcb](https://github.com/fransek/ui/commit/3a29dcb0d8c1be2420549032ddc6dd394afcdc67))
+
 ## [0.22.0](https://github.com/fransek/ui/compare/v0.21.0...v0.22.0) (2026-10-16)
 
 
