@@ -32,6 +32,7 @@ export * from "./components/menubar";
 export * from "./components/meter";
 export * from "./components/navigation-menu";
 export * from "./components/number-field";
+export * from "./components/otp-field";
 export * from "./components/pagination";
 export * from "./components/popover";
 export * from "./components/progress";
