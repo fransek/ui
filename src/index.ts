@@ -20,6 +20,7 @@ export * from "./components/context-menu";
 export * from "./components/date-picker";
 export * from "./components/dialog";
 export * from "./components/drawer";
+export * from "./components/empty-state";
 export * from "./components/field";
 export * from "./components/fieldset";
 export * from "./components/info-popover";
