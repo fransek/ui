@@ -112,7 +112,7 @@ export const WithActions: Story = {
       </Alert.Description>
       <Alert.Actions>
         <Button size="sm">Publish</Button>
-        <Button size="sm" variant="ghost">
+        <Button size="sm" variant="danger-subtle">
           Discard
         </Button>
       </Alert.Actions>
@@ -137,7 +137,11 @@ export const Dismissible: Story = {
         <Alert.Close onClick={() => setOpen(false)} />
       </Alert>
     ) : (
-      <Button variant="outline" onClick={() => setOpen(true)}>
+      <Button
+        variant="outline"
+        onClick={() => setOpen(true)}
+        className="m-auto"
+      >
         Show tip
       </Button>
     );
@@ -164,6 +168,7 @@ export const Announced: Story = {
         <Button onClick={() => setError(true)}>Submit</Button>
         {error && (
           <Alert {...args} variant="danger" role="alert">
+            <Alert.Close onClick={() => setError(false)} />
             <Alert.Title>Couldn&apos;t submit the form</Alert.Title>
             <Alert.Description>
               Check your connection and retry.
