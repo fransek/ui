@@ -61,6 +61,12 @@ export const Validating: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
+
 /**
  * Items can also be plain strings — the string itself is matched against the
  * query and submitted as the value.

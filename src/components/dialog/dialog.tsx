@@ -12,6 +12,13 @@ export interface DialogProps
   portalProps?: BaseUI.DialogPortalProps;
   backdropProps?: BaseUI.DialogBackdropProps;
   popupProps?: BaseUI.DialogPopupProps;
+  /**
+   * Whether to render the built-in close button in the top-right corner.
+   * Turn it off when the content brings its own close action; Escape still
+   * closes the dialog.
+   * @default true
+   */
+  closeButton?: boolean;
   closeProps?: BaseUI.DialogCloseProps;
   closeButtonProps?: CloseButtonProps;
   closeButtonIconProps?: React.ComponentProps<typeof X>;
@@ -34,6 +41,7 @@ export function Dialog(props: DialogProps) {
     portalProps,
     backdropProps,
     popupProps,
+    closeButton = true,
     closeProps,
     closeButtonProps,
     closeButtonIconProps,
@@ -67,16 +75,18 @@ export function Dialog(props: DialogProps) {
                 className: dialogPopupStyles,
               })}
             >
-              <DialogClose
-                render={
-                  <CloseButton
-                    position="top-right"
-                    iconProps={closeButtonIconProps}
-                    {...closeButtonProps}
-                  />
-                }
-                {...closeProps}
-              />
+              {closeButton && (
+                <DialogClose
+                  render={
+                    <CloseButton
+                      position="top-right"
+                      iconProps={closeButtonIconProps}
+                      {...closeButtonProps}
+                    />
+                  }
+                  {...closeProps}
+                />
+              )}
               {typeof children === "function"
                 ? children(renderProps)
                 : children}
@@ -114,7 +124,7 @@ Dialog.Close = DialogClose;
 
 /** Backdrop classes shared by `Dialog` and `AlertDialog`. */
 export const dialogBackdropStyles = tw(
-  "fixed inset-0 min-h-dvh bg-black opacity-20 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
+  "fixed inset-0 min-h-dvh bg-black opacity-20 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute dark:opacity-70",
 );
 
 /** Popup classes shared by `Dialog` and `AlertDialog`. */

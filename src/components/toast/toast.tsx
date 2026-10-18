@@ -26,6 +26,13 @@ export interface ToastProviderProps extends BaseUI.ToastProviderProps {
    * @default "bottom-right"
    */
   position?: ToastPosition;
+  /**
+   * Whether each toast renders a close button in its top-right corner. Turn
+   * it off when toasts bring their own actions; a swipe or the timeout still
+   * dismisses them.
+   * @default true
+   */
+  closeButton?: boolean;
   portalProps?: BaseUI.ToastPortalProps;
   viewportProps?: BaseUI.ToastViewportProps;
   toastProps?: Omit<BaseUI.ToastRootProps, "toast">;
@@ -60,7 +67,7 @@ const baseViewportStyles = tw(
 
 // Shared stacking/animation variables and layout for every toast.
 const baseToastStyles = tw(
-  "bg-card text-foreground focus-visible:focus-outline absolute right-0 left-0 z-[calc(1000-var(--toast-index))] mx-auto h-(--height) w-full origin-center rounded-lg border bg-clip-padding p-4 pr-10 shadow-lg select-none [--gap:0.75rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))] [transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s] data-ending-style:opacity-0 data-expanded:h-(--toast-height) data-limited:opacity-0",
+  "bg-card text-foreground focus-visible:focus-outline absolute right-0 left-0 z-[calc(1000-var(--toast-index))] mx-auto h-(--height) w-full origin-center rounded-lg border bg-clip-padding p-4 shadow-lg select-none [--gap:0.75rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))] [transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s] data-ending-style:opacity-0 data-expanded:h-(--toast-height) data-limited:opacity-0",
 );
 
 // Bottom-anchored stacking maths (toasts grow upward from the bottom edge).
@@ -76,6 +83,7 @@ const topToastStyles = tw(
 export function ToastProvider(props: ToastProviderProps) {
   const {
     position = "bottom-right",
+    closeButton = true,
     portalProps,
     viewportProps,
     toastProps,
@@ -99,6 +107,7 @@ export function ToastProvider(props: ToastProviderProps) {
         >
           <ToastList
             isTop={isTop}
+            closeButton={closeButton}
             swipeDirection={swipeDirection}
             {...toastProps}
           />
@@ -110,8 +119,12 @@ export function ToastProvider(props: ToastProviderProps) {
 
 function ToastList({
   isTop,
+  closeButton,
   ...toastProps
-}: Omit<BaseUI.ToastRootProps, "toast"> & { isTop: boolean }) {
+}: Omit<BaseUI.ToastRootProps, "toast"> & {
+  isTop: boolean;
+  closeButton: boolean;
+}) {
   const { toasts } = BaseUI.Toast.useToastManager();
 
   return toasts.map((toast) => {
@@ -126,6 +139,7 @@ function ToastList({
           className: cn(
             baseToastStyles,
             isTop ? topToastStyles : bottomToastStyles,
+            closeButton && "pr-10",
           ),
         })}
       >
@@ -140,7 +154,9 @@ function ToastList({
             <BaseUI.Toast.Description className="text-body body-sm empty:hidden" />
           </div>
         </BaseUI.Toast.Content>
-        <BaseUI.Toast.Close render={<CloseButton position="top-right" />} />
+        {closeButton && (
+          <BaseUI.Toast.Close render={<CloseButton position="top-right" />} />
+        )}
       </BaseUI.Toast.Root>
     );
   });

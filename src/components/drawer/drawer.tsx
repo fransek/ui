@@ -37,6 +37,13 @@ export interface DrawerProps
   viewportProps?: BaseUI.DrawerViewportProps;
   popupProps?: BaseUI.DrawerPopupProps;
   contentProps?: BaseUI.DrawerContentProps;
+  /**
+   * Whether to render the built-in close button in the top-right corner.
+   * Turn it off when the content brings its own close action; Escape and a
+   * swipe still close the drawer.
+   * @default true
+   */
+  closeButton?: boolean;
   closeProps?: BaseUI.DrawerCloseProps;
   closeButtonProps?: CloseButtonProps;
   closeButtonIconProps?: React.ComponentProps<typeof X>;
@@ -102,6 +109,7 @@ export function Drawer(props: DrawerProps) {
     viewportProps,
     popupProps,
     contentProps,
+    closeButton = true,
     closeProps,
     closeButtonProps,
     closeButtonIconProps,
@@ -161,16 +169,18 @@ export function Drawer(props: DrawerProps) {
                   style: drawerVars,
                 })}
               >
-                <DrawerClose
-                  render={
-                    <CloseButton
-                      position="top-right"
-                      iconProps={closeButtonIconProps}
-                      {...closeButtonProps}
-                    />
-                  }
-                  {...closeProps}
-                />
+                {closeButton && (
+                  <DrawerClose
+                    render={
+                      <CloseButton
+                        position="top-right"
+                        iconProps={closeButtonIconProps}
+                        {...closeButtonProps}
+                      />
+                    }
+                    {...closeProps}
+                  />
+                )}
                 <BaseUI.Drawer.Content
                   {...mergeProps(contentProps, {
                     className: tw("mx-auto flex w-full flex-col gap-2"),

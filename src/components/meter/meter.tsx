@@ -51,11 +51,11 @@ export function Meter(props: MeterProps) {
         />
       )}
       <BaseUI.Meter.Track
-        {...mergeProps(trackProps, { className: trackStyles({ size }) })}
+        {...mergeProps(trackProps, { className: meterTrackStyles({ size }) })}
       >
         <BaseUI.Meter.Indicator
           {...mergeProps(indicatorProps, {
-            className: indicatorStyles({ variant }),
+            className: meterIndicatorStyles({ variant }),
           })}
         />
       </BaseUI.Meter.Track>
@@ -73,7 +73,7 @@ const trackSizeStyles = {
   lg: tw("h-3"),
 };
 
-export const trackStyles = ({
+export const meterTrackStyles = ({
   size = "md",
   extend,
 }: {
@@ -81,7 +81,9 @@ export const trackStyles = ({
   extend?: string;
 }) => cn(baseTrackStyles, trackSizeStyles[size], extend);
 
-const baseIndicatorStyles = tw("block h-full transition-[width] duration-500");
+const baseIndicatorStyles = tw(
+  "block h-full rounded-full transition-[width] duration-500",
+);
 
 const indicatorVariantStyles = {
   primary: tw("bg-primary"),
@@ -91,13 +93,19 @@ const indicatorVariantStyles = {
   warning: tw("bg-warning"),
 };
 
-export const indicatorStyles = ({
+export const meterIndicatorStyles = ({
   variant = "primary",
   extend,
 }: {
   variant?: MeterVariant;
   extend?: string;
 }) => cn(baseIndicatorStyles, indicatorVariantStyles[variant], extend);
+
+/** @deprecated Renamed to `meterTrackStyles`. */
+export const trackStyles = meterTrackStyles;
+
+/** @deprecated Renamed to `meterIndicatorStyles`. */
+export const indicatorStyles = meterIndicatorStyles;
 
 export type MeterSize = keyof typeof trackSizeStyles;
 export type MeterVariant = keyof typeof indicatorVariantStyles;

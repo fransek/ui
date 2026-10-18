@@ -43,7 +43,7 @@ export function Switch(props: SwitchProps) {
         <FieldLabel
           {...mergeProps(labelProps, {
             className: tw(
-              "text-foreground flex items-center gap-2 text-base font-normal",
+              "text-foreground flex items-center gap-2 text-base font-normal has-data-disabled:cursor-not-allowed has-data-disabled:opacity-60",
             ),
           })}
         >

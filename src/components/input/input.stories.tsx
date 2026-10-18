@@ -48,6 +48,12 @@ export const Validating: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
+
 export const WithButton: Story = {
   args: {
     label: "Search components",

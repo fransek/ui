@@ -300,7 +300,7 @@ export function Combobox<
           {...mergeProps(inputGroupProps, {
             className: cn(
               fieldControlStyles,
-              "has-[input:focus-visible]:focus-outline flex items-center gap-1 p-0 pr-2 data-disabled:opacity-60",
+              "has-[input:focus-visible]:focus-outline flex items-center gap-1 p-0 pr-2",
             ),
           })}
         >
