@@ -9,8 +9,14 @@ import { Input, InputProps } from "../input";
 
 export interface DatePickerProps extends InputProps {
   calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect">;
+  /** Props forwarded to the button that opens the calendar. */
+  triggerProps?: BaseUI.PopoverTriggerProps;
+  /** @deprecated Renamed to `triggerProps`. */
   popoverTriggerProps?: BaseUI.PopoverTriggerProps;
   popoverProps?: Omit<BaseUI.Popover.Root.Props, "children">;
+  portalProps?: BaseUI.PopoverPortalProps;
+  positionerProps?: BaseUI.PopoverPositionerProps;
+  popupProps?: BaseUI.PopoverPopupProps;
   format?: string;
 }
 
@@ -18,6 +24,10 @@ export function DatePicker(props: DatePickerProps) {
   const {
     calendarProps,
     popoverTriggerProps,
+    triggerProps = popoverTriggerProps,
+    portalProps,
+    positionerProps,
+    popupProps,
     popoverProps: { onOpenChange, ...popoverProps } = {},
     value,
     defaultValue,
@@ -84,17 +94,21 @@ export function DatePicker(props: DatePickerProps) {
                 <CalendarIcon className="size-4" />
               </Button>
             }
-            {...popoverTriggerProps}
+            {...triggerProps}
           />
-          <BaseUI.Popover.Portal>
+          <BaseUI.Popover.Portal {...portalProps}>
             <BaseUI.Popover.Positioner
-              className="z-10 outline-none"
               sideOffset={8}
               anchor={inputRef}
+              {...mergeProps(positionerProps, {
+                className: tw("z-10 outline-none"),
+              })}
             >
               <BaseUI.Popover.Popup
                 aria-label="Calendar"
-                className="popup popup-transition overflow-hidden"
+                {...mergeProps(popupProps, {
+                  className: tw("popup popup-transition overflow-hidden"),
+                })}
               >
                 <Calendar
                   mode="single"

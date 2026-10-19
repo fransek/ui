@@ -7,7 +7,10 @@ import { InfoPopover } from "../info-popover";
 
 export interface SliderProps
   extends Omit<BaseUI.SliderRootProps, "children">, FieldAttributes {
-  /** Whether to display the formatted value next to the label. Defaults to true. */
+  /**
+   * Whether to display the formatted value next to the label.
+   * @default true
+   */
   showValue?: boolean;
   fieldProps?: FieldProps;
   labelProps?: BaseUI.SliderLabelProps;

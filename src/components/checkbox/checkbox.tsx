@@ -8,6 +8,7 @@ import {
   Field,
   FieldItem,
   FieldLabel,
+  FieldLabelProps,
   FieldProps,
   useFieldContext,
 } from "../field";
@@ -16,9 +17,9 @@ import { InfoPopover } from "../info-popover";
 export interface CheckboxProps
   extends BaseUI.CheckboxRootProps, Omit<FieldAttributes, "label"> {
   label?: React.ReactNode;
-  labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
+  labelProps?: FieldLabelProps;
   indicatorProps?: BaseUI.CheckboxIndicatorProps;
-  iconProps?: React.SVGProps<SVGSVGElement>;
+  iconProps?: React.ComponentPropsWithoutRef<"svg">;
   fieldProps?: FieldProps;
 }
 

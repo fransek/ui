@@ -51,7 +51,8 @@ export interface ComboboxProps<
   items?: ComboboxItems<T>;
   /**
    * Rendered inside the popup when no item matches the query. Announced
-   * politely to screen readers. Defaults to "No results found."
+   * politely to screen readers.
+   * @default "No results found."
    */
   emptyMessage?: React.ReactNode;
   /**
@@ -59,7 +60,10 @@ export interface ComboboxProps<
    * readers. Useful for conveying the state of an asynchronously loaded list.
    */
   status?: React.ReactNode;
-  /** Whether to render a button that clears the selection. Defaults to `true`. */
+  /**
+   * Whether to render a button that clears the selection.
+   * @default true
+   */
   clearable?: boolean;
   /** Rendered inside the input, before the text. */
   leftAdornment?: React.ReactNode;

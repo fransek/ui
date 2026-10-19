@@ -281,6 +281,11 @@ export function MenuSeparator(props: MenuSeparatorProps) {
 
 export interface MenuSubmenuProps extends BaseUI.MenuSubmenuRootProps {
   /** The content of the item that opens the submenu. */
+  label?: React.ReactNode;
+  /**
+   * @deprecated Renamed to `label`. Elsewhere `trigger` is the element that
+   * opens a popup, not its content.
+   */
   trigger?: React.ReactNode;
   /** The variant of the item that opens the submenu. */
   variant?: MenuItemVariant;
@@ -295,6 +300,7 @@ export function MenuSubmenu(props: MenuSubmenuProps) {
   const {
     children,
     trigger,
+    label = trigger,
     variant,
     triggerProps,
     iconProps,
@@ -311,7 +317,7 @@ export function MenuSubmenu(props: MenuSubmenuProps) {
           className: menuItemClassName({ variant, extend: tw("w-full") }),
         })}
       >
-        <span className="flex-1">{trigger}</span>
+        <span className="flex-1">{label}</span>
         <ChevronRight
           {...mergeProps(iconProps, { className: tw("size-4 shrink-0") })}
         />

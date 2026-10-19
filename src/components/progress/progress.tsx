@@ -5,7 +5,11 @@ import { cn, mergeProps, tw } from "../../lib/utils";
 export interface ProgressProps extends BaseUI.ProgressRootProps {
   /** Label describing the task in progress. */
   label?: React.ReactNode;
-  /** Whether to display the formatted value next to the label. Defaults to true. Hidden while indeterminate. */
+  /**
+   * Whether to display the formatted value next to the label. Hidden while
+   * indeterminate.
+   * @default true
+   */
   showValue?: boolean;
   variant?: ProgressVariant;
   size?: ProgressSize;

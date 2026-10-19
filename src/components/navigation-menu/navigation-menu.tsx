@@ -1,4 +1,5 @@
 import * as BaseUI from "@base-ui/react/navigation-menu";
+import { useRender } from "@base-ui/react/use-render";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 import { cn, mergeProps, tw } from "../../lib/utils";
@@ -222,32 +223,37 @@ export function NavigationMenuLink(props: NavigationMenuLinkProps) {
   );
 }
 
-export type NavigationMenuLinkTitleProps = React.ComponentProps<"span">;
+export type NavigationMenuLinkTitleProps = useRender.ComponentProps<"span">;
 
 /** The title of a block link, displayed above its description. */
 export function NavigationMenuLinkTitle(props: NavigationMenuLinkTitleProps) {
-  return (
-    <span
-      {...mergeProps(props, {
-        className: tw("mb-1 block leading-5 font-medium"),
-      })}
-    />
-  );
+  const { render, ...restProps } = props;
+
+  return useRender({
+    defaultTagName: "span",
+    render,
+    props: mergeProps(restProps, {
+      className: tw("mb-1 block leading-5 font-medium"),
+    }),
+  });
 }
 
-export type NavigationMenuLinkDescriptionProps = React.ComponentProps<"span">;
+export type NavigationMenuLinkDescriptionProps =
+  useRender.ComponentProps<"span">;
 
 /** Secondary text of a block link, displayed below its title. */
 export function NavigationMenuLinkDescription(
   props: NavigationMenuLinkDescriptionProps,
 ) {
-  return (
-    <span
-      {...mergeProps(props, {
-        className: tw("text-muted-fg block leading-5"),
-      })}
-    />
-  );
+  const { render, ...restProps } = props;
+
+  return useRender({
+    defaultTagName: "span",
+    render,
+    props: mergeProps(restProps, {
+      className: tw("text-muted-fg block leading-5"),
+    }),
+  });
 }
 
 NavigationMenu.Item = NavigationMenuItem;

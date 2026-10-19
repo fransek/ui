@@ -10,6 +10,9 @@ export interface RadioGroupProps<T>
   extends BaseUI.RadioGroupProps<T>, FieldAttributes {
   fieldProps?: FieldProps;
   fieldsetProps?: BaseUIFieldset.FieldsetRootProps;
+  /** Props forwarded to the legend that renders `label`. */
+  legendProps?: BaseUIFieldset.FieldsetLegendProps;
+  /** @deprecated Renamed to `legendProps`, matching `Fieldset`. */
   fieldsetLegendProps?: BaseUIFieldset.FieldsetLegendProps;
 }
 
@@ -26,6 +29,7 @@ export function RadioGroup<T>(props: RadioGroupProps<T>) {
     invalid,
     fieldsetProps,
     fieldsetLegendProps,
+    legendProps = fieldsetLegendProps,
     ...restProps
   } = props;
 
@@ -47,7 +51,7 @@ export function RadioGroup<T>(props: RadioGroupProps<T>) {
         {label && (
           <div className="flex items-center gap-2">
             <BaseUIFieldset.Fieldset.Legend
-              {...mergeProps(fieldsetLegendProps, {
+              {...mergeProps(legendProps, {
                 className: tw("text-foreground text-sm font-semibold"),
               })}
             >

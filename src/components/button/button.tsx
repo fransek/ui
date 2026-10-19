@@ -8,6 +8,11 @@ export interface ButtonProps extends BaseUI.ButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   compact?: boolean;
+  /**
+   * Scale the button down while it is pressed. Never applies to `link`.
+   * @default true
+   */
+  pressEffect?: boolean;
   tooltip?: React.ReactNode;
   tooltipProps?: TooltipProps;
 }
@@ -21,6 +26,7 @@ export function Button(props: ButtonProps) {
     tooltip,
     tooltipProps,
     compact,
+    pressEffect,
     ...restProps
   } = props;
 
@@ -31,7 +37,7 @@ export function Button(props: ButtonProps) {
         typeof tooltip === "string" && size === "icon" ? tooltip : undefined
       }
       {...mergeProps(restProps, {
-        className: buttonStyles({ variant, size, compact }),
+        className: buttonStyles({ variant, size, compact, pressEffect }),
       })}
     >
       {children}

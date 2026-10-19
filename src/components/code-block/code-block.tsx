@@ -83,7 +83,10 @@ export function useHighlightedTokens(
 export interface CodeBlockProps extends BaseUI.useRender.ComponentProps<"div"> {
   /** The source code to display (and copy). */
   code: string;
-  /** Any language bundled with shiki. Defaults to `"text"`. */
+  /**
+   * Any language bundled with shiki.
+   * @default "text"
+   */
   language?: CodeBlockLanguage;
   /** Shiki themes used in light and dark mode. */
   themes?: CodeBlockThemes;

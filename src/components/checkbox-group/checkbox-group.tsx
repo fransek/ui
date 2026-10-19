@@ -11,6 +11,9 @@ export interface CheckboxGroupProps
   children?: React.ReactNode;
   fieldProps?: FieldProps;
   fieldsetProps?: BaseUIFieldset.FieldsetRootProps;
+  /** Props forwarded to the legend that renders `label`. */
+  legendProps?: BaseUIFieldset.FieldsetLegendProps;
+  /** @deprecated Renamed to `legendProps`, matching `Fieldset`. */
   fieldsetLegendProps?: BaseUIFieldset.FieldsetLegendProps;
 }
 
@@ -27,6 +30,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
     infoPopover,
     fieldsetProps,
     fieldsetLegendProps,
+    legendProps = fieldsetLegendProps,
     ...restProps
   } = props;
   return (
@@ -48,7 +52,7 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
           {label && (
             <div className="flex items-center gap-2">
               <BaseUIFieldset.Fieldset.Legend
-                {...mergeProps(fieldsetLegendProps, {
+                {...mergeProps(legendProps, {
                   className: tw("text-foreground text-sm font-semibold"),
                 })}
               >
