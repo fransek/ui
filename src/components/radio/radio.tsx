@@ -22,7 +22,9 @@ export function Radio(props: RadioProps) {
     <div className="flex items-center gap-2">
       <label
         {...mergeProps(labelProps, {
-          className: tw("flex items-center gap-2"),
+          className: tw(
+            "flex items-center gap-2 has-data-disabled:cursor-not-allowed has-data-disabled:opacity-60",
+          ),
         })}
       >
         <BaseUI.Radio.Root

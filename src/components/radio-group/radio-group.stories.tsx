@@ -51,3 +51,9 @@ export const Validating: Story = {
     isValidating: true,
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};

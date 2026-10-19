@@ -51,6 +51,12 @@ export const Validating: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
+
 /**
  * Pass an array of groups (each with a `label` heading and its own `items`) to
  * render grouped options.

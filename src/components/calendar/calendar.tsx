@@ -58,12 +58,12 @@ function Calendar(props: CalendarProps) {
         ),
         button_previous: cn(
           buttonStyles({ variant: "ghost", size: "icon" }),
-          "size-(--cell-size) p-0 select-none aria-disabled:opacity-50",
+          "size-(--cell-size) p-0 select-none aria-disabled:opacity-60",
           defaultClassNames.button_previous,
         ),
         button_next: cn(
           buttonStyles({ variant: "ghost", size: "icon" }),
-          "size-(--cell-size) p-0 select-none aria-disabled:opacity-50",
+          "size-(--cell-size) p-0 select-none aria-disabled:opacity-60",
           defaultClassNames.button_next,
         ),
         month_caption: cn(

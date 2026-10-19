@@ -44,3 +44,9 @@ export const Validating: Story = {
     defaultChecked: true,
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
