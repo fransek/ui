@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 
 import { Select } from "./select";
 
@@ -54,6 +55,18 @@ export const Validating: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+};
+
+/** `triggerProps` reach the trigger button, e.g. to give it its own `id`. */
+export const TriggerProps: Story = {
+  args: {
+    triggerProps: { id: "fruit-trigger" },
+  },
+  play: async ({ canvasElement }) => {
+    await expect(
+      canvasElement.querySelector("#fruit-trigger"),
+    ).toBeInTheDocument();
   },
 };
 

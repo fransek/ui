@@ -15,7 +15,10 @@ export interface ToggleProps<T extends string = string> extends Omit<
   variant?: ButtonVariant | ((state: BaseUI.Toggle.State) => ButtonVariant);
   size?: ButtonSize;
   compact?: boolean;
-  /** Scale the toggle down while it is pressed. Defaults to `true`. */
+  /**
+   * Scale the toggle down while it is pressed.
+   * @default true
+   */
   pressEffect?: boolean;
   /** Content of the toggle, or a function of its state to render different content when pressed. */
   children?:

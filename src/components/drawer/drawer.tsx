@@ -46,6 +46,7 @@ export interface DrawerProps
   closeButton?: boolean;
   closeProps?: BaseUI.DrawerCloseProps;
   closeButtonProps?: CloseButtonProps;
+  /** @deprecated Use `closeButtonProps={{ iconProps }}`. */
   closeButtonIconProps?: React.ComponentProps<typeof X>;
 }
 

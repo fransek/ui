@@ -43,7 +43,8 @@ export interface AutocompleteProps<T = unknown>
   items?: AutocompleteItems<T>;
   /**
    * Rendered inside the popup when no item matches the query. Announced
-   * politely to screen readers. Defaults to "No results found."
+   * politely to screen readers.
+   * @default "No results found."
    */
   emptyMessage?: React.ReactNode;
   /**
@@ -51,7 +52,10 @@ export interface AutocompleteProps<T = unknown>
    * readers. Useful for conveying the state of an asynchronously loaded list.
    */
   status?: React.ReactNode;
-  /** Whether to render a button that clears the input. Defaults to `true`. */
+  /**
+   * Whether to render a button that clears the input.
+   * @default true
+   */
   clearable?: boolean;
   /** Rendered inside the input, before the text. */
   leftAdornment?: React.ReactNode;

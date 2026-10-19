@@ -9,6 +9,9 @@ export interface InfoPopoverProps extends PopoverProps {
   children: React.ReactNode;
   fieldLabel?: React.ReactNode;
   buttonProps?: ButtonProps;
+  /** Props forwarded to the info icon. */
+  iconProps?: React.ComponentProps<typeof Info>;
+  /** @deprecated Renamed to `iconProps`. */
   infoIconProps?: React.ComponentProps<typeof Info>;
 }
 
@@ -20,6 +23,7 @@ export function InfoPopover(props: InfoPopoverProps) {
     positionerProps,
     buttonProps,
     infoIconProps,
+    iconProps = infoIconProps,
     arrowProps,
     ...restProps
   } = props;
@@ -40,7 +44,7 @@ export function InfoPopover(props: InfoPopoverProps) {
           {...mergeProps(buttonProps, { className: tw("-m-1 p-1") })}
         >
           <Info
-            {...mergeProps(infoIconProps, {
+            {...mergeProps(iconProps, {
               className: tw("text-muted-fg size-4"),
             })}
           />

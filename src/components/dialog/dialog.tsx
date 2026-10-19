@@ -21,6 +21,7 @@ export interface DialogProps
   closeButton?: boolean;
   closeProps?: BaseUI.DialogCloseProps;
   closeButtonProps?: CloseButtonProps;
+  /** @deprecated Use `closeButtonProps={{ iconProps }}`. */
   closeButtonIconProps?: React.ComponentProps<typeof X>;
 }
 

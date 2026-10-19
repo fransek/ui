@@ -2,13 +2,13 @@ import * as BaseUI from "@base-ui/react/switch";
 import React from "react";
 import { FieldAttributes } from "../../lib/types";
 import { mergeProps, tw } from "../../lib/utils";
-import { Field, FieldLabel, FieldProps } from "../field";
+import { Field, FieldLabel, FieldLabelProps, FieldProps } from "../field";
 import { InfoPopover } from "../info-popover";
 
 export interface SwitchProps
   extends BaseUI.SwitchRootProps, Omit<FieldAttributes, "label"> {
   label?: React.ReactNode;
-  labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
+  labelProps?: FieldLabelProps;
   thumbProps?: BaseUI.SwitchThumbProps;
   fieldProps?: FieldProps;
 }

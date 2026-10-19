@@ -5,13 +5,15 @@ import { cn, mergeProps, tw } from "../../lib/utils";
 export interface SkeletonProps extends BaseUI.useRender.ComponentProps<"div"> {
   /**
    * The placeholder's shape. `text` is one line tall at the current font
-   * size, `circle` suits avatars and icons. Defaults to "rectangle".
+   * size, `circle` suits avatars and icons.
+   * @default "rectangle"
    */
   shape?: SkeletonShape;
   /**
    * Whether the placeholder is shown. When false, `children` render as is.
    * When true, `children` stay in the layout but are hidden, so the
-   * placeholder takes their size. Defaults to true.
+   * placeholder takes their size.
+   * @default true
    */
   loading?: boolean;
 }
@@ -45,29 +47,34 @@ export function Skeleton(props: SkeletonProps) {
   return loading ? element : children;
 }
 
-export interface SkeletonTextProps extends React.ComponentProps<"div"> {
-  /** Number of lines to render. The last one is shorter. Defaults to 3. */
+export interface SkeletonTextProps extends BaseUI.useRender
+  .ComponentProps<"div"> {
+  /**
+   * Number of lines to render. The last one is shorter.
+   * @default 3
+   */
   lines?: number;
 }
 
 /** A block of `text` skeletons that stands in for a paragraph. */
 export function SkeletonText(props: SkeletonTextProps) {
-  const { lines = 3, ...restProps } = props;
+  const { render, lines = 3, ...restProps } = props;
 
-  return (
-    <div
-      aria-hidden
-      {...mergeProps(restProps, { className: tw("flex flex-col") })}
-    >
-      {Array.from({ length: lines }, (_, index) => (
+  return BaseUI.useRender({
+    defaultTagName: "div",
+    render,
+    props: {
+      "aria-hidden": true,
+      ...mergeProps(restProps, { className: tw("flex flex-col") }),
+      children: Array.from({ length: lines }, (_, index) => (
         <Skeleton
           key={index}
           shape="text"
           className={cn(lines > 1 && index === lines - 1 && "w-3/5")}
         />
-      ))}
-    </div>
-  );
+      )),
+    },
+  });
 }
 
 const baseSkeletonStyles = tw(

@@ -11,7 +11,7 @@ const meta = {
     <Menu {...args} trigger={<Button variant="outline">Open menu</Button>}>
       <Menu.Item>New file</Menu.Item>
       <Menu.Item>Open file</Menu.Item>
-      <Menu.Submenu trigger="Export as">
+      <Menu.Submenu label="Export as">
         <Menu.Item>PDF</Menu.Item>
         <Menu.Item>PNG</Menu.Item>
         <Menu.Item>SVG</Menu.Item>
@@ -108,7 +108,7 @@ export const Danger: Story = {
   render: (args) => (
     <Menu {...args} trigger={<Button variant="outline">Account</Button>}>
       <Menu.Item>Edit profile</Menu.Item>
-      <Menu.Submenu trigger="Remove data" variant="danger">
+      <Menu.Submenu label="Remove data" variant="danger">
         <Menu.Item variant="danger">Clear history</Menu.Item>
         <Menu.Item variant="danger">Clear cache</Menu.Item>
       </Menu.Submenu>

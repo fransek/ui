@@ -5,7 +5,10 @@ import { cn, mergeProps, tw } from "../../lib/utils";
 export interface MeterProps extends BaseUI.MeterRootProps {
   /** Label describing what the meter represents. */
   label?: React.ReactNode;
-  /** Whether to display the formatted value next to the label. Defaults to true. */
+  /**
+   * Whether to display the formatted value next to the label.
+   * @default true
+   */
   showValue?: boolean;
   variant?: MeterVariant;
   size?: MeterSize;

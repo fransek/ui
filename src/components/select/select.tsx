@@ -50,11 +50,20 @@ export interface SelectProps<T, Multiple extends boolean | undefined = false>
   groupProps?: BaseUI.SelectGroupProps;
   groupLabelProps?: BaseUI.SelectGroupLabelProps;
   placeholder?: React.ReactNode;
+  /** @deprecated Use `triggerProps={{ disabled }}`. */
   triggerDisabled?: BaseUI.SelectTriggerProps["disabled"];
+  /** @deprecated Use `triggerProps={{ id }}`. */
   triggerId?: BaseUI.SelectTriggerProps["id"];
+  /** @deprecated Use `triggerProps={{ name }}`. */
   triggerName?: BaseUI.SelectTriggerProps["name"];
+  /** @deprecated Use `triggerProps={{ value }}`. */
   triggerValue?: BaseUI.SelectTriggerProps["value"];
   fieldProps?: FieldProps;
+  /**
+   * Props forwarded to the trigger button. Use it for the trigger's own
+   * `disabled`, `id`, `name` and `value`, which on `Select` itself go to the
+   * root.
+   */
   triggerProps?: BaseUI.SelectTriggerProps;
   valueProps?: BaseUI.SelectValueProps;
   selectIconProps?: BaseUI.SelectIconProps;
@@ -110,6 +119,7 @@ export function Select<T, Multiple extends boolean | undefined = false>(
     triggerId,
     triggerName,
     triggerValue,
+    triggerProps,
     valueProps,
     selectIconProps,
     iconProps,
@@ -196,9 +206,11 @@ export function Select<T, Multiple extends boolean | undefined = false>(
           name={triggerName}
           value={triggerValue}
           {...mergeProps(restProps, {
-            className: tw(
-              "bg-field focus-visible:focus-outline data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating not-data-disabled:hover:border-muted-fg data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base shadow-sm transition-colors outline-none select-none data-disabled:cursor-not-allowed data-disabled:opacity-60",
-            ),
+            ...mergeProps(triggerProps, {
+              className: tw(
+                "bg-field focus-visible:focus-outline data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating not-data-disabled:hover:border-muted-fg data-popup-open:bg-card flex min-w-40 items-center justify-between gap-3 rounded-lg border p-2 text-base shadow-sm transition-colors outline-none select-none data-disabled:cursor-not-allowed data-disabled:opacity-60",
+              ),
+            }),
           })}
         >
           <BaseUI.Select.Value

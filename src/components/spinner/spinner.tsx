@@ -4,7 +4,10 @@ import { cn, mergeProps, tw } from "../../lib/utils";
 export interface SpinnerProps extends React.ComponentProps<"svg"> {
   size?: SpinnerSize;
   variant?: SpinnerVariant;
-  /** Accessible label announced to screen readers. Defaults to "Loading". */
+  /**
+   * Accessible label announced to screen readers.
+   * @default "Loading"
+   */
   label?: string;
   /** Optional caption rendered alongside the spinner. */
   text?: React.ReactNode;
@@ -13,19 +16,27 @@ export interface SpinnerProps extends React.ComponentProps<"svg"> {
    * Takes precedence over `text` when non-empty.
    */
   texts?: React.ReactNode[];
-  /** Milliseconds between `texts` transitions. Defaults to 2000. */
+  /**
+   * Milliseconds between `texts` transitions.
+   * @default 2000
+   */
   interval?: number;
   /**
    * Whether to restart from the first caption after the last one.
-   * When false, cycling stops on the last caption. Defaults to true.
+   * When false, cycling stops on the last caption.
+   * @default true
    */
   loopTexts?: boolean;
   /**
    * Milliseconds to wait before rendering the spinner. Avoids a flash of the
-   * spinner when loading usually resolves quickly. Defaults to 0.
+   * spinner when loading usually resolves quickly.
+   * @default 0
    */
   delay?: number;
-  /** Where to place the caption relative to the spinner. Defaults to "bottom". */
+  /**
+   * Where to place the caption relative to the spinner.
+   * @default "bottom"
+   */
   textPosition?: SpinnerTextPosition;
   /** Props forwarded to the wrapper element rendered when `text` is set. */
   containerProps?: React.ComponentProps<"div">;
