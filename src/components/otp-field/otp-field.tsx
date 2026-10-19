@@ -5,7 +5,7 @@ import { mergeProps, tw } from "../../lib/utils";
 import { Field, FieldProps } from "../field";
 
 export interface OTPFieldProps
-  extends BaseUI.OTPFieldRootProps, FieldAttributes {
+  extends Omit<BaseUI.OTPFieldRootProps, "mask">, FieldAttributes {
   fieldProps?: FieldProps;
   /** Props forwarded to every slot input. */
   inputProps?: BaseUI.OTPFieldInputProps;

@@ -19,7 +19,6 @@ const meta = {
     infoPopover: { control: "text" },
     invalid: { control: "boolean" },
     disabled: { control: "boolean" },
-    mask: { control: "boolean" },
     length: { control: "number" },
     groupSize: { control: "number" },
     validationType: {
@@ -96,16 +95,6 @@ export const Validating: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-  },
-};
-
-/** `mask` hides entered characters, like a password input. */
-export const Masked: Story = {
-  args: {
-    label: "PIN",
-    description: "Enter your 4-digit PIN.",
-    length: 4,
-    mask: true,
   },
 };
 
