@@ -19,7 +19,6 @@ const meta = {
     infoPopover: { control: "text" },
     invalid: { control: "boolean" },
     disabled: { control: "boolean" },
-    mask: { control: "boolean" },
     length: { control: "number" },
     groupSize: { control: "number" },
     validationType: {
@@ -96,32 +95,6 @@ export const Validating: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-  },
-};
-
-/** `mask` hides entered characters, like a password input. */
-export const Masked: Story = {
-  args: {
-    label: "PIN",
-    description: "Enter your 4-digit PIN.",
-    length: 4,
-    mask: true,
-  },
-  play: async ({ canvasElement, userEvent }) => {
-    const slots = Array.from(
-      canvasElement.querySelectorAll<HTMLInputElement>("input"),
-    );
-    await userEvent.click(slots[0]);
-    await userEvent.keyboard("12");
-
-    // The native text stays hidden so iOS can't echo the typed character;
-    // filled slots show a painted dot instead.
-    await expect(slots[0]).toHaveAttribute("type", "password");
-    await expect(getComputedStyle(slots[0]).color).toBe("rgba(0, 0, 0, 0)");
-    await expect(getComputedStyle(slots[0]).backgroundImage).toContain(
-      "radial-gradient",
-    );
-    await expect(getComputedStyle(slots[2]).backgroundImage).toBe("none");
   },
 };
 
