@@ -189,11 +189,11 @@ export function Combobox<
         key={getItemKey(item, index, itemToStringValue)}
         {...mergeProps(chipProps, {
           className: chipStyles({
-            variant: "secondary",
+            variant: "outline",
             size: "sm",
             removable: true,
             extend: tw(
-              "data-highlighted:focus-outline h-8 rounded-lg outline-none data-disabled:opacity-100",
+              "focus-visible:focus-outline h-8 rounded-lg outline-none data-disabled:opacity-100",
             ),
           }),
         })}
