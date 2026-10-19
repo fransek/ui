@@ -193,7 +193,7 @@ export function Combobox<
             size: "sm",
             removable: true,
             extend: tw(
-              "data-highlighted:focus-outline h-8 rounded-lg outline-none data-disabled:opacity-100",
+              "focus-visible:focus-outline h-8 rounded-lg outline-none data-disabled:opacity-100",
             ),
           }),
         })}
