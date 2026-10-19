@@ -1,7 +1,7 @@
 import * as BaseUI from "@base-ui/react/otp-field";
 import React from "react";
 import { FieldAttributes } from "../../lib/types";
-import { mergeProps, tw } from "../../lib/utils";
+import { cn, mergeProps, tw } from "../../lib/utils";
 import { Field, FieldProps } from "../field";
 
 export interface OTPFieldProps
@@ -78,8 +78,16 @@ export function OTPFieldInput(props: OTPFieldInputProps) {
   return (
     <BaseUI.OTPField.Input
       {...mergeProps(props, {
-        className: tw(
-          "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating focus-visible:focus-outline size-10 min-w-0 rounded-lg border text-center text-lg tabular-nums shadow-sm transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
+        className: cn(
+          tw(
+            "bg-field data-invalid:border-danger-fg data-validating:not-data-invalid:animate-validating focus-visible:focus-outline size-10 min-w-0 rounded-lg border text-center text-lg tabular-nums shadow-sm transition-colors data-disabled:cursor-not-allowed data-disabled:opacity-60",
+          ),
+          // `mask` renders password inputs. iOS echoes each typed character
+          // for a moment and draws its bullet off-center, so hide the native
+          // text and paint a centered dot on filled slots instead.
+          tw(
+            "[&[type=password]]:caret-foreground [&[type=password]]:text-transparent [&[type=password][data-filled]]:bg-[radial-gradient(circle,var(--color-foreground)_0.25rem,transparent_calc(0.25rem+0.5px))]",
+          ),
         ),
       })}
     />

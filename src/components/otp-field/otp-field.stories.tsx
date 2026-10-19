@@ -107,6 +107,22 @@ export const Masked: Story = {
     length: 4,
     mask: true,
   },
+  play: async ({ canvasElement, userEvent }) => {
+    const slots = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>("input"),
+    );
+    await userEvent.click(slots[0]);
+    await userEvent.keyboard("12");
+
+    // The native text stays hidden so iOS can't echo the typed character;
+    // filled slots show a painted dot instead.
+    await expect(slots[0]).toHaveAttribute("type", "password");
+    await expect(getComputedStyle(slots[0]).color).toBe("rgba(0, 0, 0, 0)");
+    await expect(getComputedStyle(slots[0]).backgroundImage).toContain(
+      "radial-gradient",
+    );
+    await expect(getComputedStyle(slots[2]).backgroundImage).toBe("none");
+  },
 };
 
 /** `validationType="alphanumeric"` accepts letters as well as digits. */
