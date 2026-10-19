@@ -184,7 +184,7 @@ export function Pagination(props: PaginationProps) {
             ) : (
               <li key={item}>
                 {button({
-                  variant: item === page ? "secondary" : "ghost",
+                  variant: item === page ? "primary-subtle" : "ghost",
                   "aria-label": getPageLabel(item),
                   "aria-current": item === page ? "page" : undefined,
                   onClick: () => goTo(item),
