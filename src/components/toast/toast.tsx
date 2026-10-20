@@ -8,9 +8,16 @@ import {
 } from "lucide-react";
 import React from "react";
 import { cn, mergeProps, tw } from "../../lib/utils";
+import { Button, ButtonProps } from "../button";
 import { CloseButton } from "../close-button";
+import { Spinner } from "../spinner";
 
-export type ToastType = "info" | "success" | "warning" | "danger";
+/**
+ * Sets the toast's icon. `loading` shows a spinner and keeps the toast open
+ * until it is updated; `toast.promise()` sets it (and `success` / `error`)
+ * for you.
+ */
+export type ToastType = "info" | "success" | "warning" | "danger" | "loading";
 
 export type ToastPosition =
   | "top-left"
@@ -38,19 +45,113 @@ export interface ToastProviderProps extends BaseUI.ToastProviderProps {
   toastProps?: Omit<BaseUI.ToastRootProps, "toast">;
 }
 
-const typeIcons: Record<ToastType, LucideIcon> = {
+export interface ToastAction extends Omit<ButtonProps, "children"> {
+  /** The button's text. */
+  label: React.ReactNode;
+  /**
+   * Whether clicking the button closes the toast after its `onClick` runs.
+   * @default true
+   */
+  closeOnClick?: boolean;
+}
+
+/** Design-system options accepted by `add`, `update` and `promise`. */
+export interface ToastOptions {
+  /**
+   * Replaces the type's default icon. Pass `null` or `false` to render no
+   * icon. The icon is decorative and hidden from assistive technology.
+   */
+  icon?: React.ReactNode;
+  /**
+   * Buttons rendered in a row below the description. They default to the
+   * `outline` variant at size `sm`. Screen readers only announce the title
+   * and description, so make sure each action can also be reached elsewhere.
+   */
+  actions?: ToastAction[];
+  /**
+   * Overrides the provider's `closeButton` for this toast.
+   */
+  closeButton?: boolean;
+}
+
+// Matches Base UI's default so untyped `toast.data` stays as loose as before.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyToastData = any;
+
+export type ToastObject<Data extends object = AnyToastData> =
+  BaseUI.ToastObject<Data> & ToastOptions;
+
+export type ToastAddOptions<Data extends object = AnyToastData> =
+  BaseUI.ToastManagerAddOptions<Data> & ToastOptions;
+
+export type ToastUpdateOptions<Data extends object = AnyToastData> =
+  BaseUI.ToastManagerUpdateOptions<Data> & ToastOptions;
+
+export interface ToastPromiseOptions<
+  Value,
+  Data extends object = AnyToastData,
+> {
+  loading: string | ToastUpdateOptions<Data>;
+  success:
+    | string
+    | ToastUpdateOptions<Data>
+    | ((result: Value) => string | ToastUpdateOptions<Data>);
+  error:
+    | string
+    | ToastUpdateOptions<Data>
+    | ((error: unknown) => string | ToastUpdateOptions<Data>);
+}
+
+interface ToastMethods<Data extends object> {
+  add: <T extends Data = Data>(options: ToastAddOptions<T>) => string;
+  close: (toastId?: string) => void;
+  update: <T extends Data = Data>(
+    toastId: string,
+    options:
+      | ToastUpdateOptions<T>
+      | ((prevToast: ToastObject<T>) => ToastUpdateOptions<T>),
+  ) => void;
+  promise: <Value, T extends Data = Data>(
+    promise: Promise<Value>,
+    options: ToastPromiseOptions<Value, T>,
+  ) => Promise<Value>;
+}
+
+export interface UseToastReturnValue<
+  Data extends object = AnyToastData,
+> extends ToastMethods<Data> {
+  toasts: ToastObject<Data>[];
+}
+
+export interface ToastManager<Data extends object = AnyToastData>
+  extends
+    Omit<BaseUI.ToastManager<Data>, keyof ToastMethods<Data>>,
+    ToastMethods<Data> {}
+
+const typeIcons: Record<Exclude<ToastType, "loading">, LucideIcon> = {
   info: Info,
   success: CircleCheck,
   warning: TriangleAlert,
   danger: CircleX,
 };
 
-const typeIconStyles: Record<ToastType, string> = {
+const typeIconStyles: Record<Exclude<ToastType, "loading">, string> = {
   info: tw("text-primary-fg"),
   success: tw("text-success-fg"),
   warning: tw("text-warning-fg"),
   danger: tw("text-danger-fg"),
 };
+
+function defaultIcon(type: string | undefined) {
+  // `toast.promise()` reports failures as `error`.
+  if (type === "error") type = "danger";
+  if (type === "loading") return <Spinner size="sm" />;
+  if (type && type in typeIcons) {
+    const Icon = typeIcons[type as keyof typeof typeIcons];
+    return <Icon className={typeIconStyles[type as keyof typeof typeIcons]} />;
+  }
+  return null;
+}
 
 const viewportPositionStyles: Record<ToastPosition, string> = {
   "top-left": tw("top-4 right-auto bottom-auto left-4"),
@@ -125,11 +226,13 @@ function ToastList({
   isTop: boolean;
   closeButton: boolean;
 }) {
-  const { toasts } = BaseUI.Toast.useToastManager();
+  const { toasts, close } = useToast();
 
   return toasts.map((toast) => {
-    const type = toast.type as ToastType | undefined;
-    const Icon = type ? typeIcons[type] : undefined;
+    const icon =
+      toast.icon === undefined ? defaultIcon(toast.type) : toast.icon;
+    const hasCloseButton = toast.closeButton ?? closeButton;
+    const hasActions = !!toast.actionProps || !!toast.actions?.length;
 
     return (
       <BaseUI.Toast.Root
@@ -139,22 +242,48 @@ function ToastList({
           className: cn(
             baseToastStyles,
             isTop ? topToastStyles : bottomToastStyles,
-            closeButton && "pr-10",
+            hasCloseButton && "pr-10",
           ),
         })}
       >
         <BaseUI.Toast.Content className="flex gap-3 overflow-hidden transition-opacity duration-250 data-behind:pointer-events-none data-behind:opacity-0 data-expanded:pointer-events-auto data-expanded:opacity-100">
-          {Icon && type && (
-            <Icon
-              className={cn("mt-0.5 size-5 shrink-0", typeIconStyles[type])}
-            />
+          {icon !== null && icon !== false && (
+            <span
+              aria-hidden="true"
+              className="flex h-5 shrink-0 items-center [&>svg]:size-5"
+            >
+              {icon}
+            </span>
           )}
-          <div className="flex min-w-0 flex-col gap-1">
+          <div className="flex min-w-0 flex-1 flex-col gap-1">
             <BaseUI.Toast.Title className="body-sm font-semibold empty:hidden" />
             <BaseUI.Toast.Description className="text-body body-sm empty:hidden" />
+            {hasActions && (
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <BaseUI.Toast.Action
+                  render={<Button variant="outline" size="sm" />}
+                />
+                {toast.actions?.map(
+                  ({ label, closeOnClick = true, onClick, ...action }, i) => (
+                    <Button
+                      key={i}
+                      variant="outline"
+                      size="sm"
+                      {...action}
+                      onClick={(event) => {
+                        onClick?.(event);
+                        if (closeOnClick) close(toast.id);
+                      }}
+                    >
+                      {label}
+                    </Button>
+                  ),
+                )}
+              </div>
+            )}
           </div>
         </BaseUI.Toast.Content>
-        {closeButton && (
+        {hasCloseButton && (
           <BaseUI.Toast.Close render={<CloseButton position="top-right" />} />
         )}
       </BaseUI.Toast.Root>
@@ -162,5 +291,18 @@ function ToastList({
   });
 }
 
-export const useToast = BaseUI.Toast.useToastManager;
-export const createToastManager = BaseUI.Toast.createToastManager;
+/**
+ * Returns the current toasts and the methods to add, update and close them.
+ * Must be called inside a `ToastProvider`.
+ */
+export function useToast<Data extends object = AnyToastData>() {
+  return BaseUI.Toast.useToastManager<Data>() as UseToastReturnValue<Data>;
+}
+
+/**
+ * Creates a toast manager for adding toasts from outside React. Pass it to
+ * `ToastProvider` through the `toastManager` prop.
+ */
+export function createToastManager<Data extends object = AnyToastData>() {
+  return BaseUI.Toast.createToastManager<Data>() as ToastManager<Data>;
+}
