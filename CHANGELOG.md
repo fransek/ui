@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.23.0](https://github.com/fransek/ui/compare/v0.22.0...v0.23.0) (2026-10-19)
+
+
+### Features
+
+* **alert-dialog:** add AlertDialog component ([#194](https://github.com/fransek/ui/issues/194)) ([7216f8f](https://github.com/fransek/ui/commit/7216f8f50270ab5fe06d01a2361a72b03dd15db8))
+* **alert:** add Alert component ([#192](https://github.com/fransek/ui/issues/192)) ([405c414](https://github.com/fransek/ui/commit/405c41417d62c8dbd9ec545d4226d3e3cb6625bf))
+* align component APIs ([#200](https://github.com/fransek/ui/issues/200)) ([09b48f3](https://github.com/fransek/ui/commit/09b48f3de23a92bf71c002138417fb997f83d6cd))
+* consistency pass across components ([#199](https://github.com/fransek/ui/issues/199)) ([636f65b](https://github.com/fransek/ui/commit/636f65b40bf4a7a71a7ac0e1be22c8c47dc39964))
+* **empty-state:** add EmptyState component ([#195](https://github.com/fransek/ui/issues/195)) ([c5ab8db](https://github.com/fransek/ui/commit/c5ab8db85b98042b48969782e7093625841f929f))
+* **otp-field:** add OTPField component ([#196](https://github.com/fransek/ui/issues/196)) ([36dab83](https://github.com/fransek/ui/commit/36dab83b97297e13bc07ecb9b54a00db340250de))
+* **sidebar:** add Sidebar component ([#197](https://github.com/fransek/ui/issues/197)) ([3a29dcb](https://github.com/fransek/ui/commit/3a29dcb0d8c1be2420549032ddc6dd394afcdc67))
+
+
+### Bug Fixes
+
+* **combobox:** show focus ring on keyboard-focused chips ([#202](https://github.com/fransek/ui/issues/202)) ([763b4b5](https://github.com/fransek/ui/commit/763b4b5d3eb97936219c6b4bfa437317cf256afc))
+* **otp-field:** remove the mask prop ([#203](https://github.com/fransek/ui/issues/203)) ([9ef3328](https://github.com/fransek/ui/commit/9ef332862442924a4b0a14ea7286e6ff26e97987))
+* **pagination:** use primary-subtle variant for the active page ([#201](https://github.com/fransek/ui/issues/201)) ([aa7cdd0](https://github.com/fransek/ui/commit/aa7cdd060d513a9aacb3f52431145582d58bcb94))
+
 ## [0.22.0](https://github.com/fransek/ui/compare/v0.21.0...v0.22.0) (2026-10-16)
 
 
