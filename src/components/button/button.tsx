@@ -34,7 +34,7 @@ export function Button(props: ButtonProps) {
     <BaseUI.Button
       focusableWhenDisabled
       aria-label={
-        typeof tooltip === "string" && size === "icon" ? tooltip : undefined
+        typeof tooltip === "string" && isIconSize(size) ? tooltip : undefined
       }
       {...mergeProps(restProps, {
         className: buttonStyles({ variant, size, compact, pressEffect }),
@@ -86,6 +86,7 @@ const variantStyles = {
 
 const sizeStyles = {
   icon: tw("p-1.5"),
+  "icon-sm": tw("rounded-full p-1"),
   sm: tw("min-w-16 px-2.5 py-1.5 text-xs font-normal"),
   md: tw("min-w-20 px-3 py-2 text-sm font-semibold"),
   lg: tw("min-w-24 px-4 py-2 text-base font-semibold"),
@@ -113,6 +114,8 @@ export const buttonStyles = ({
     compact && "min-w-0 px-1.5 py-0",
     extend,
   );
+
+const isIconSize = (size: ButtonSize) => size === "icon" || size === "icon-sm";
 
 export type ButtonVariant = keyof typeof variantStyles;
 export type ButtonSize = keyof typeof sizeStyles;

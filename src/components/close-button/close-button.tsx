@@ -13,7 +13,7 @@ export interface CloseButtonProps extends ButtonProps {
 
 export function CloseButton(props: CloseButtonProps) {
   const {
-    size = "icon",
+    size = "icon-sm",
     variant = "ghost",
     position,
     iconProps,
@@ -37,7 +37,7 @@ export function CloseButton(props: CloseButtonProps) {
       aria-label="Close"
       {...mergeProps(restProps, {
         className: cn(
-          "group hover:bg-hover rounded-full",
+          "group hover:bg-hover",
           position && "absolute",
           position && positionStyles[position],
         ),

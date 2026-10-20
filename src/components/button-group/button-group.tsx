@@ -4,7 +4,7 @@ import { cn, mergeProps, tw } from "../../lib/utils";
 import type { ButtonSize } from "../button";
 
 export type ButtonGroupOrientation = keyof typeof orientationStyles;
-export type ButtonGroupSize = Exclude<ButtonSize, "icon">;
+export type ButtonGroupSize = Exclude<ButtonSize, "icon" | "icon-sm">;
 
 export interface ButtonGroupProps extends BaseUI.useRender
   .ComponentProps<"div"> {
