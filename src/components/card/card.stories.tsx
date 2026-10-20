@@ -7,7 +7,6 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import React from "react";
-import { useMediaQuery } from "../../lib/utils";
 import { Button } from "../button";
 import { Card } from "./card";
 
@@ -50,7 +49,6 @@ export const WithImage: Story = {
   render: () => (
     <Card className="max-w-100">
       <Card.Image src="https://picsum.photos/800/400" alt="Card image" />
-      <Card.Close variant="secondary" />
       <Card.Content>
         <Card.Header>
           <Card.Title>Card Title</Card.Title>
@@ -69,7 +67,6 @@ export const WithImage: Story = {
 
 export const Responsive: Story = {
   render: () => {
-    const sm = useMediaQuery("sm");
     return (
       <Card className="max-w-100 sm:max-w-180 sm:flex-row">
         <Card.Image
@@ -82,7 +79,6 @@ export const Responsive: Story = {
           className="sm:hidden"
           alt="Card image"
         />
-        <Card.Close variant={sm ? "ghost" : "secondary"} />
         <Card.Content>
           <Card.Header>
             <Card.Title>Card Title</Card.Title>

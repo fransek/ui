@@ -84,6 +84,19 @@ export const IconButton: Story = {
   ),
 };
 
+export const SmallIconButton: Story = {
+  args: {
+    variant: "ghost",
+    size: "icon-sm",
+    tooltip: "Delete",
+  },
+  render: (args) => (
+    <Button {...args}>
+      <Trash className="size-4" />
+    </Button>
+  ),
+};
+
 export const Disabled: Story = {
   args: {
     variant: "primary",

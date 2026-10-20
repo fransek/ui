@@ -29,9 +29,3 @@ export const TopRight: Story = {
     </div>
   ),
 };
-
-export const CustomVariant: Story = {
-  args: {
-    variant: "secondary",
-  },
-};

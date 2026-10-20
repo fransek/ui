@@ -45,6 +45,9 @@ const itemStyles = cn(
 
 const itemSizeStyles = {
   icon: tw("py-2 group-data-[orientation=horizontal]/toggle-group:px-3"),
+  "icon-sm": tw(
+    "py-1.5 group-data-[orientation=horizontal]/toggle-group:px-2.5",
+  ),
   sm: tw("py-1.5 group-data-[orientation=horizontal]/toggle-group:px-4"),
   md: tw(
     "py-2 font-medium group-data-[orientation=horizontal]/toggle-group:px-6",
