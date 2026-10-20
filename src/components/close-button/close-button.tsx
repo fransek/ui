@@ -3,7 +3,7 @@ import React from "react";
 import { cn, mergeProps, tw } from "../../lib/utils";
 import { Button, ButtonProps } from "../button";
 
-export interface CloseButtonProps extends ButtonProps {
+export interface CloseButtonProps extends Omit<ButtonProps, "variant"> {
   /** The icon rendered inside the button. Defaults to a lucide `X`. */
   icon?: React.ReactNode;
   /** Props forwarded to the default `X` icon. Ignored when `icon` is set. */
@@ -14,15 +14,12 @@ export interface CloseButtonProps extends ButtonProps {
 export function CloseButton(props: CloseButtonProps) {
   const {
     size = "icon-sm",
-    variant = "ghost",
     position,
     iconProps,
     icon = (
       <X
         {...mergeProps(iconProps, {
-          className: tw(
-            "text-muted-fg group-hover:text-foreground size-4 transition-colors",
-          ),
+          className: tw("size-4"),
         })}
       />
     ),
@@ -33,11 +30,11 @@ export function CloseButton(props: CloseButtonProps) {
   return (
     <Button
       size={size}
-      variant={variant}
+      variant={"ghost"}
       aria-label="Close"
       {...mergeProps(restProps, {
         className: cn(
-          "group hover:bg-hover",
+          "text-muted-fg hover:text-foreground",
           position && "absolute",
           position && positionStyles[position],
         ),
