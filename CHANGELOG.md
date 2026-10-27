@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@fransek/ui?activeTab=versions
 
+## [0.24.0](https://github.com/fransek/ui/compare/v0.23.0...v0.24.0) (2026-10-27)
+
+
+### Features
+
+* **button:** add icon-sm size ([#205](https://github.com/fransek/ui/issues/205)) ([dae5715](https://github.com/fransek/ui/commit/dae57158e30572280b0de574e498b9e5ffa879ba))
+
 ## [0.23.0](https://github.com/fransek/ui/compare/v0.22.0...v0.23.0) (2026-10-19)
 
 
